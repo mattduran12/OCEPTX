@@ -1,0 +1,59 @@
+/* ----------------------------
+   Global page background & text
+----------------------------- */
+body {
+  background-color: #fdf3e7;   /* warm desert sand */
+  color: #3a2d2a;              /* deep earth brown */
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ----------------------------
+   Navbar background
+----------------------------- */
+.navbar {
+  background-color: #7a2e1d !important;  /* sunset terracotta */
+}
+
+/* Navbar brand/title text */
+.navbar-brand {
+  color: #fff3d6 !important;   /* soft sun glow */
+}
+
+/* Navbar links */
+.navbar-nav .nav-link {
+  color: #fff3d6 !important;
+  font-weight: 500;
+}
+
+/* Hover effect for navbar links */
+.navbar-nav .nav-link:hover {
+  color: #f4b942 !important;   /* golden sunset highlight */
+}
+
+/* ----------------------------
+   Dropdown menu
+----------------------------- */
+.dropdown-menu {
+  background-color: #5c1f14;   /* deeper dusk red */
+  border: none;
+}
+
+.dropdown-item {
+  color: #fff3d6;
+}
+
+.dropdown-item:hover {
+  background-color: #9c3f2b;  /* warm sunset gradient tone */
+  color: #ffffff;
+}
+
+/* ----------------------------
+   Optional: links in body text
+----------------------------- */
+a {
+  color: #9c3f2b;
+}
+
+a:hover {
+  color: #f4b942;
+}
