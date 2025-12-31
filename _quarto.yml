@@ -1,0 +1,26 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Open Criminology: El Paso, Texas"
+  navbar:
+    background: primary
+    search: true
+    left:
+      - text: "About"
+        href: about.qmd
+      - text: "Research"
+        menu:
+        - text: "Driving While Intoxicated (DWI)"
+          href: dwi.qmd
+      - text: "Contact Author"
+        href: https://mattduran12.github.io
+
+format:
+  html:
+    theme: cosmo
+    css: styles2.css
+    toc: false
+
+editor: visual
