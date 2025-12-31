@@ -1,9 +1,10 @@
 ---
-title: "Open Criminology: El Paso, Texas"
+title: ""
 about:
   template: jolla
   image: logo.png
-  image-width: 300px
+  image-width: 800px
+  image-shape: rectangle
 ---
 
 ::: {hero-header}
