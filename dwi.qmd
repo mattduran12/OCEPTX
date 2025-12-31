@@ -19,9 +19,7 @@ citation-location: margin
 
 # How many people drink and drive in El Paso, Texas?
 
-
-![The Drunk Driving Iceberg](iceberg.png){width=250 fig-align="left"}
-
+![The Drunk Driving Iceberg](iceberg.png){width="250" fig-align="left"}
 
     In the year 2023, over 700,000 people were arrested in the United States for driving under the influence.[^1] Although the number seems high, most people recognize DWI arrests only show the people who were caught---the tip of the iceberg. But just how much of the iceberg are we seeing? In total, how many people drink and drive? According to a national survey that same year, an estimated 15.6 million people admitted they drove under the influence.[^2] That means law enforcement agencies arrested about 4.8% of the offending population. Keep in mind, however, that the 15.6 million people who admitted to drunk driving are being counted only once (they were asked if they ever drank and drove, not how many times they did it during the year). Data from another national survey was able uncover the frequency of drunk driving, estimating the total number of drunk driving episodes in a year could be as high as 256 million.[^3] Using this number changes the proportion of people arrested for drunk driving, from 4.8% to less than one percent (0.29%). As a country, we know the iceberg is more of an ice mountain, and if we use DWI arrests as our measure of how big it is, we are severely underestimating the magnitude of the problem.
 
