@@ -9,11 +9,9 @@ website:
     search: true
     left:
       - text: "About"
-        href: _about.qmd
       - text: "Research"
         menu:
         - text: "Driving While Intoxicated (DWI)"
-          href: _dwi.qmd
       - text: "Contact Author"
         href: https://mattduran12.github.io
 
