@@ -3,12 +3,12 @@ title: ""
 about:
   template: jolla
   image: logo.png
-  image-width: 400px
+  image-width: 420px
   image-shape: rectangle
 ---
 
 ::: {hero-header}
-*This website is in it's early stages. Major additions will beready in about 3 months.*
+*This website is in it's early stages. Major additions coming in the next 3 months.*
 :::
 
 
