@@ -3,13 +3,11 @@ project:
   output-dir: docs
 
 website:
-  title: ""
+  title: "OCEPTX"
   navbar:
     background: primary
     search: true
     left:
-      - text: "Home"
-        href: index.qmd
       - text: "About"
         href: about.qmd
       - text: "Research"
@@ -27,7 +25,4 @@ format:
 
 editor: source
 
-execute:
-  freeze: false
-  cache: false
   
