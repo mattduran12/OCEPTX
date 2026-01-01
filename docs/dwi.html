@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -31,15 +31,17 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a15d73d78b60001a46d4b0b4891de4ad.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -82,7 +84,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -101,7 +103,7 @@ window.Quarto = {
 <link rel="stylesheet" href="styles2.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -123,7 +125,7 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-research">    
         <li>
-    <a class="dropdown-item" href="./dwi.html">
+    <a class="dropdown-item" href="./_dwi.qmd">
  <span class="dropdown-text">Driving While Intoxicated (DWI)</span></a>
   </li>  
     </ul>
@@ -149,7 +151,12 @@ window.Quarto = {
    
   <ul>
   <li><a href="#how-many-people-drink-and-drive-in-el-paso-texas" id="toc-how-many-people-drink-and-drive-in-el-paso-texas" class="nav-link active" data-scroll-target="#how-many-people-drink-and-drive-in-el-paso-texas">How many people drink and drive in El Paso, Texas?</a></li>
-  <li><a href="#alcohol-related-crash-trends-in-el-paso-texas" id="toc-alcohol-related-crash-trends-in-el-paso-texas" class="nav-link" data-scroll-target="#alcohol-related-crash-trends-in-el-paso-texas">Alcohol-Related Crash Trends in El Paso, Texas</a></li>
+  <li><a href="#measuring-dwi-in-el-paso" id="toc-measuring-dwi-in-el-paso" class="nav-link" data-scroll-target="#measuring-dwi-in-el-paso">Measuring DWI in El Paso</a>
+  <ul class="collapse">
+  <li><a href="#self-report-data" id="toc-self-report-data" class="nav-link" data-scroll-target="#self-report-data">Self-Report Data</a></li>
+  <li><a href="#vehicle-crash-data" id="toc-vehicle-crash-data" class="nav-link" data-scroll-target="#vehicle-crash-data">Vehicle Crash Data</a></li>
+  <li><a href="#roadside-specimen-testing" id="toc-roadside-specimen-testing" class="nav-link" data-scroll-target="#roadside-specimen-testing">Roadside Specimen Testing</a></li>
+  </ul></li>
   <li><a href="#characteristics-of-people-who-drank-and-crashed" id="toc-characteristics-of-people-who-drank-and-crashed" class="nav-link" data-scroll-target="#characteristics-of-people-who-drank-and-crashed">Characteristics of People Who Drank and Crashed</a></li>
   <li><a href="#did-social-media-shaming-deter-drunk-driving" id="toc-did-social-media-shaming-deter-drunk-driving" class="nav-link" data-scroll-target="#did-social-media-shaming-deter-drunk-driving">Did Social Media Shaming Deter Drunk Driving?</a></li>
   </ul>
@@ -190,17 +197,49 @@ window.Quarto = {
 <figcaption>The Drunk Driving Iceberg</figcaption>
 </figure>
 </div>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;In the year 2023, over 700,000 people were arrested in the United States for driving under the influence.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Although the number seems high, most people recognize DWI arrests only show the people who were caught—the tip of the iceberg. But just how much of the iceberg are we seeing? In total, how many people drink and drive? According to a national survey that same year, an estimated 15.6 million people admitted they drove under the influence.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> That means law enforcement agencies arrested about 4.8% of the offending population. Keep in mind, however, that the 15.6 million people who admitted to drunk driving are being counted only once (they were asked if they ever drank and drove, not how many times they did it during the year). Data from another national survey was able uncover the frequency of drunk driving, estimating the total number of drunk driving episodes in a year could be as high as 256 million.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Using this number changes the proportion of people arrested for drunk driving, from 4.8% to less than one percent (0.29%). As a country, we know the iceberg is more of an ice mountain, and if we use DWI arrests as our measure of how big it is, we are severely underestimating the magnitude of the problem.</p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;There were 752,449 people arrested for driving under the influence. Arrest counts can be found on the Federal Bureau of Investigation’s <a href="https://cde.ucr.cjis.gov/">Crime Data Explorer</a>.</p></div><div id="fn2"><p><sup>2</sup>&nbsp;The survey is called the National Survey on Drug Use and Health. The survey item measuring drunk driving is <em>During the past 12 months, have you driven a vehicle while under the influence of alcohol?</em>. The data can now be quiered online using <a href="https://datatools.samhsa.gov/das/nsduh/2023/nsduh-2023-ds0001/crosstab?row=DRVINALCO2&amp;weight=ANALWT2_C">this link</a>.</p></div><div id="fn3"><p><sup>3</sup>&nbsp;The estimate comes from a <a href="https://www.cdc.gov/impaired-driving/facts/index.html">report</a> by the Centers for Disease Control and Prevention (CDC)</p></div></div><p>&nbsp;&nbsp;&nbsp;&nbsp;Turning now to the sun city, how does El Paso compare to these national estimates? How many El Pasoans drove drunk last year? How many times? Does the El Paso Police Department (EPPD) arrest 1, 4, or 8% of the people drunk driving in the city? The answer is no one knows. <strong>There has never been a city-wide effort to estimate the prevalence of drunk driving.</strong> That means the DWI arrests reported each week by the EPPD do not tell us just how much of the iceberg we are seeing. So what does DWI arrests tell us?</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;In the year 2023, over 700,000 people were arrested in the United States for driving under the influence.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Although the number seems high, most people recognize DWI arrests only represent people who were caught—the tip of the iceberg. But just how much of the iceberg are we seeing? In total, how many people drink and drive? According to a national survey that same year, an estimated 15.6 million people admitted they drove under the influence.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> That means law enforcement agencies arrested about 4.8% of the offending population. Keep in mind, however, that the 15.6 million people who admitted to drunk driving are being counted only once (they were asked if they ever drank and drove, not how many times they did it during the year). Data from another national survey was able uncover the frequency of drunk driving, estimating the total number of drunk driving episodes in a year could be as high as 256 million.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Using this number changes the proportion of people arrested for drunk driving, from 4.8% to less than one percent (0.29%). As a country, we know the iceberg is more of a colossal ice mountain, and if we use DWI arrests as our measure of how big it is, we are severely underestimating the magnitude of the problem.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;There were 752,449 people arrested for driving under the influence. Arrest counts can be found on the Federal Bureau of Investigation’s <a href="https://cde.ucr.cjis.gov/">Crime Data Explorer</a>.</p></div><div id="fn2"><p><sup>2</sup>&nbsp;The survey is called the National Survey on Drug Use and Health. The survey item measuring drunk driving is <em>During the past 12 months, have you driven a vehicle while under the influence of alcohol?</em>. The data can now be quiered online using <a href="https://datatools.samhsa.gov/das/nsduh/2023/nsduh-2023-ds0001/crosstab?row=DRVINALCO2&amp;weight=ANALWT2_C">this link</a>.</p></div><div id="fn3"><p><sup>3</sup>&nbsp;The estimate comes from a <a href="https://www.cdc.gov/impaired-driving/facts/index.html">report</a> by the Centers for Disease Control and Prevention (CDC)</p></div></div><p>&nbsp;&nbsp;&nbsp;&nbsp;Turning now to the Sun City, how does El Paso compare to these national estimates? How many El Pasoans drove drunk last year? How many times? Does the El Paso Police Department (EPPD) arrest 1, 4, or 8% of the people drunk driving in the city? The answer is no one knows. <strong>There has never been a city-wide effort to estimate the prevalence of drunk driving.</strong> That means the DWI arrests reported each week by the EPPD do not tell us just how much of the iceberg we are seeing. So what does DWI arrests tell us?</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;DWI arrests tell us more about the response to the problem than the problem itself. Changes in arrests reflect changes in enforcement activity, not the behavior we seek to change. Understanding the difference between DWI arrests and DWI behavior is important, as both are often confused with one another. To help explain the difference, take the following example: imagine a police department doubled their capacity for DWI arrests, increasing from 30 arrests in one week to 60 arrests the following week. Does this increase mean twice as many people were out drinking and driving? Not necessarily. In fact, DWI arrests is not the right information we need to answer this question because we have no idea how many people were actually out drinking and driving. What we do know in this example is the police department doubled their number of arrests in one week. The reasons for the increase might be explained by increased staffing or having patrol officers dedicating more time to traffic enforcement. In these cases, the offending population could have remained the same, while the enforcement activity by the department increased. On the other hand, if DWI arrests decreased from 60 to 45, again, it would not necessarily mean that less people were drunk driving. The decrease may be explained by the same reasons just mentioned.</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;By now, it should be clear that DWI behavior is the problem we are concerned with changing; we hope that fewer people will be driving intoxicated. But if DWI arrests is not a good measure of the problem, what is? Well, the survey mentioned earlier proposes one solution: just ask people if and how often they drive drunk. Now, you might be thinking, <em>Hold on. I don’t remember being asked by someone if I drove drunk last year. Those survey numbers can’t be correct; how do they know?</em> The answer might sound unusual: the researchers who administered the survey didn’t actually ask all 300 million Americans about drunk driving; they only asked about 70,000 (You read that right). The reason they do not survey everyone is because it’s expensive, and they don’t have to (it’s not because they’re lazy or stubborn). Researchers only need to use a little bit of statistics to figure out how many people in a population are needed to obtain what is called a <em>representative sample</em>: a group of people that reflect the population they are interested in studying. For example, when the presidential election approaches, many voters have already made up their mind on who to vote for. Rather than wait, some researcher companies, such as Gallup, will randomly select a group of people in a city or state and ask if they are voting for candidate A or candidate B. The results of their survey give a proportion (e.g., 46% said candidate A and 54% said candidate B). Using a simple statistical technique, the researchers calculate what is called a <em>margin of error</em> to show how certain or trustworthy their estimate is (looks something like this: <span class="math inline">\(\pm\)</span> 2%). If their margin of error calculated to plus and minus 2 percent, then they would make the following statement: “We estimate that 44 to 48% of the population will vote for candidate A, and 52 to 56% of the population will vote for candidate B”. Pretty cool right?</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;Surveying 70,000 people is appropriate for estimating a variety of characteristics across an entire country. For a city of less than 700,000 people, however, far less people are needed. Although the minimum size of the sample is determined by several factors and requires careful planning, it is not unusual for researchers to find they only need 600 people to make useful estimations. For example, imagine a city-wide survey was conducted in El Paso, and the researchers asked participants about their drunk driving behavior, as well as other questions that could be useful. At the end of that effort, we can have the ability to say “This is our estimate of how many people admitted to DWI in the year 2026.” Conducting this kind of survey on a yearly basis gives us data over time, which tells us not only how big the problem is but how it is changing. Although conducting a survey would require a little bit of funding, the effort would give us, as a city, a more objective measure of the DWI problem. No longer would the DWI problem be a myth, but a studied problem that we know is either getting worse, staying the same, or hopefully getting better.</p>
 </section>
-<section id="alcohol-related-crash-trends-in-el-paso-texas" class="level1">
-<h1>Alcohol-Related Crash Trends in El Paso, Texas</h1>
+<section id="measuring-dwi-in-el-paso" class="level1">
+<h1>Measuring DWI in El Paso</h1>
+<p>In this section, I describe three strategies for measuring the prevalence of drunk driving: self-report survey data, vehicle crash data, and roadside specimen testing.</p>
+<section id="self-report-data" class="level2">
+<h2 class="anchored" data-anchor-id="self-report-data">Self-Report Data</h2>
+<p>As mentioned earlier, several national efforts use self-report data to measure the scope of social problems, DWI being one of them. Two concerns with this approach, however, are <em>social desirability bias</em> and <em>measurement error</em>. Social desirability bias is the idea that people tend to behave or present themselves in a manner that is viewed favorably by others (cite). In this case, a person who regularly drinks and drives may choose to under report their behavior if asked in-person by an interviewer (cite). If enough people biased their responses this way, then the prevalence of drunk driving in a jurisdiction is arguably underestimated (i.e., more people drink and drive than what the data suggests). While anonymous online surveys typically circumvent this problem, face-to-face interviews have to tread carefully or even get a little creative with how they ask potentially sensitive questions (cite).</p>
+<p>The other concern, measurement error, is the intuitive idea that some people may not remember how many beers they had in the past thirty days (Can you remember with confidence how many cups of coffee you drank in the past thirty days?). This criticism is a big one because there is a plausible argument that the data is untrustworthy. However, prior researchers have developed ways to minimize this problem: by using multiple items that tap into the behaviors they are trying to estimate (cite). In brief, this means that instead of using one question, five similarly worded questions are used to measure the same behavior. If these five questions are answered in a similar manner, then one can make the argument that they are reliably tapping into the behavior they purport to measure. A statistician can calculate reliability metrics to show how well the questions are doing and even identify ones that are not being answered in a consistent manner. To address memory recall, some surveys will incorporate “anchoring” to (e.g., “I want you to take a moment to recall a time you [drove while intoxicated]. The following questions are about that time”).</p>
+<p>Altogether, directly asking someone about their drinking behavior will always be a <em>subjective</em> measurement of the problem, but with careful planning, it can have reliability and validity. An important step is to <strong>pilot test the survey instrument</strong> and analyze the data to see what questions need to be addressed before the survey is rolled out.</p>
+</section>
+<section id="vehicle-crash-data" class="level2">
+<h2 class="anchored" data-anchor-id="vehicle-crash-data">Vehicle Crash Data</h2>
+<p>The second method of measuring DWI in a jurisdiction is to use vehicle crash data. Vehicle crash data are reports systematically collected by law enforcement agencies in the event of a single or multiple vehicle-involved collision. Although not all vehicle accidents get reported (cite the statute for damage conditions), those resulting in injury or death have been collected for several decades. Moreover, the ultimate outcome of DWI—what everyone is trying to prevent—is the drunk driver who crashes. This means <em>vehicle crash data is one of the most objective, readily available measures of the DWI problem.</em> Historically, we can look back to as early as the 1970s to see how prevalent traffic fatalities involving alcohol were and compare them to today.</p>
+<p><strong>?@fig-crash-history</strong> shows the rate of traffic fatalities and alcohol-involved traffic fatalities in El Paso, Texas from XXXX to 2023. The data from 2003 to 2023 are available at the [agency’s] website (link). For the data prior to 2003, I reviewed archived motor vehicle reports located online at [UNT library].</p>
+<p>As we can see, [describe the trends].</p>
+</section>
+<section id="roadside-specimen-testing" class="level2">
+<h2 class="anchored" data-anchor-id="roadside-specimen-testing">Roadside Specimen Testing</h2>
+<div class="cell" data-fig-margin="true">
+<div class="cell-output-display">
+<div id="fig-crash-trends" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-crash-trends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="dwi_files/figure-html/fig-crash-trends-1.png" class="img-fluid figure-img" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-crash-trends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Homicide and alcohol-related traffic fatalities in El Paso
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>As shown in <a href="#fig-crash-trends" class="quarto-xref">Figure&nbsp;1</a>, alcohol-related traffic fatalities and homicide rates follow different long-term patterns across the United States, Texas, and El Paso.</p>
+</section>
 </section>
 <section id="characteristics-of-people-who-drank-and-crashed" class="level1">
 <h1>Characteristics of People Who Drank and Crashed</h1>
+<p>[Check back ]</p>
 </section>
 <section id="did-social-media-shaming-deter-drunk-driving" class="level1">
 <h1>Did Social Media Shaming Deter Drunk Driving?</h1>
@@ -211,239 +250,243 @@ window.Quarto = {
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -451,185 +494,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 
 
