@@ -8,7 +8,7 @@ about:
 ---
 
 ::: {hero-header}
-*This website is in it's early stages. Major additions coming in the next 3 months.*
+*evidence-based research on crime in the borderland*
 :::
 
 
