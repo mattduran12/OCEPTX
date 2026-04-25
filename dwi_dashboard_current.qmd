@@ -2,6 +2,7 @@
 title: "El Paso Drunk Driving Surveillance Dashboard"
 format:
   dashboard:
+    logo: logo.png
     theme: darkly
     css: styles2.css
     orientation: rows
@@ -13,7 +14,7 @@ execute:
 
 Welcome to the El Paso Drunk Driving Surveillance Dashboard!
 
-This dashboard updates once a month with new data on alcohol-related crashes in El Paso, Texas.
+This dashboard was created by the El Paso Crime Lab and updates once a month with new data on alcohol-related crashes in El Paso, Texas.
 
 ```{r}
 

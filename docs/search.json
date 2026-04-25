@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "OCEPTX",
+    "title": "El Paso Crime Lab",
     "section": "",
     "text": "This website is in it’s early stages. Major additions coming in the next 3 months.\n\n\n Loading…"
   },
@@ -47,5 +47,54 @@
     "title": "How many people drink and drive in El Paso, Texas?",
     "section": "Roadside Specimen Testing",
     "text": "Roadside Specimen Testing\n\n\n\n\n\n\n\n\nFigure 1: Homicide and alcohol-related traffic fatalities in El Paso\n\n\n\n\n\nAs shown in Figure 1, alcohol-related traffic fatalities and homicide rates follow different long-term patterns across the United States, Texas, and El Paso."
+  },
+  {
+    "objectID": "dwi_dashboard_current.html",
+    "href": "dwi_dashboard_current.html",
+    "title": "El Paso Drunk Driving Surveillance Dashboard",
+    "section": "",
+    "text": "Welcome to the El Paso Drunk Driving Surveillance Dashboard!\nThis dashboard was created by the El Paso Crime Lab and updates once a month with new data on alcohol-related crashes in El Paso, Texas."
+  },
+  {
+    "objectID": "dwi_dashboard_current.html#row",
+    "href": "dwi_dashboard_current.html#row",
+    "title": "El Paso Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row\n\n\n$icon\n[1] \"car-front-fill\"\n\n$color\n[1] \"primary\"\n\n$value\n[1] 176\n\n\n\n\n$icon\n[1] \"bandaid\"\n\n$color\n[1] \"primary\"\n\n$value\n[1] 99\n\n\n\n\n$icon\n[1] \"hospital\"\n\n$color\n[1] \"danger\"\n\n$value\n[1] 5"
+  },
+  {
+    "objectID": "dwi_dashboard_current.html#row-1",
+    "href": "dwi_dashboard_current.html#row-1",
+    "title": "El Paso Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row\n\nColumn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nColumn"
+  },
+  {
+    "objectID": "dwi_dashboard_current.html#row-2",
+    "href": "dwi_dashboard_current.html#row-2",
+    "title": "El Paso Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row\n\n\n$icon\n[1] \"moisture\"\n\n$color\n[1] \"danger\"\n\n$value\n[1] \"0.17 ± 0.1\"\n\n\n\n\n$icon\n[1] \"gender-male\"\n\n$color\n[1] \"primary\"\n\n$value\n[1] \"74.2%\"\n\n\n\n\n$icon\n[1] \"person-fill\"\n\n$color\n[1] \"primary\"\n\n$value\n[1] \"34.4 ± 13\""
+  },
+  {
+    "objectID": "dwi_dashboard_current.html#row-3",
+    "href": "dwi_dashboard_current.html#row-3",
+    "title": "El Paso Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row\n\nColumn\n\n\n\n\n\n\n\n\nColumn"
+  },
+  {
+    "objectID": "dwi_dashboard_current.html#row-4",
+    "href": "dwi_dashboard_current.html#row-4",
+    "title": "El Paso Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row\n\nColumn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nColumn\n\n\n\n\n\n\n\n\nStreet Name\nCrash Count\nPercent (%)\n\n\n\n\nIH0010\n25\n14.20\n\n\nSH0020\n11\n6.25\n\n\nSL0375\n9\n5.11\n\n\nUS0062\n6\n3.41\n\n\nFM0659\n5\n2.84\n\n\nADRIANA CT\n4\n2.27\n\n\nAIRWAY BLVD\n4\n2.27\n\n\nMONTWOOD DR\n4\n2.27\n\n\nSL0478\n4\n2.27\n\n\nTROWBRIDGE DR\n4\n2.27\n\n\nGEORGE DIETER DR\n3\n1.70\n\n\nN GATEWAY BLVD\n3\n1.70\n\n\nPEBBLE HILLS BLVD\n3\n1.70\n\n\nSUN VALLEY DR\n3\n1.70\n\n\nE YANDELL DR\n2\n1.14"
+  },
+  {
+    "objectID": "dwi_dashboard_current.html#about-data",
+    "href": "dwi_dashboard_current.html#about-data",
+    "title": "El Paso Drunk Driving Surveillance Dashboard",
+    "section": "About Data",
+    "text": "About Data\nLast updated: March 2026.\nThis dashboard only displays crash data classified as alcohol-related in the city of El Paso, Texas. Crashes involving any person reported with a contributing factor of “Under the Influence of Alcohol”, “Had Been Drinking”, or had a blood alcohol test above 0 are classified as alcohol-related. Data for these crashes can be easily downloaded using the TxDOT-Authored Filter, located in the Crash Query Tool.\nAlcohol-related crashes are the main outcome in this analysis because they show where and when alcohol is directly involved in traffic incidents. Focusing on this measure helps separate these crashes from other types of accidents, giving a clearer picture of impaired driving in El Paso. By looking specifically at alcohol-related crashes, we can better understand the groups of people most affected and identify the places and times where risk is highest. This information can then be used to target prevention efforts, enforcement, and education more effectively."
   }
 ]

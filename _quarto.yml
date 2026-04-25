@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "OCEPTX"
+  title: "El Paso Crime Lab"
   navbar:
     background: primary
     search: true
