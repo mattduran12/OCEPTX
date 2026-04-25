@@ -19,7 +19,9 @@ website:
 format:
   html:
     theme: cosmo
-    css: styles2.css
+    css: 
+      -styles2.css
+      -styles_valueboxes.css
     toc: false
 
 editor: source
