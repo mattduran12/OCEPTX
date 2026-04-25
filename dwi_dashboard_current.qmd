@@ -1,5 +1,5 @@
 ---
-title: "The El Paso Drunk Driving Dashboard"
+title: "El Paso Drunk Driving Surveillance Dashboard"
 format:
   dashboard:
     theme: darkly
@@ -11,7 +11,9 @@ execute:
   message: false
 ---
 
-Welcome to the El Paso, Texas Drunk Driving Dashboard. This dashboard displays vehicle crash data collected by the Texas Department of Public Safety. All calculations are done by the author. Please see the "About Dashboard" page for detailed information about calculations.
+Welcome to the El Paso Drunk Driving Surveillance Dashboard!
+
+This dashboard updates once a month with new data on alcohol-related crashes in El Paso, Texas.
 
 ```{r}
 
@@ -316,7 +318,7 @@ p3 <- ggplot(dow_data, aes(x = Day.of.Week, y = n)) +
   ) +
   labs(
     x = "",
-    y = "Alcohol-Related Crashes"
+    y = "Total Alcohol-Related Crashes"
   )
 
 ggplotly(p3)
@@ -326,40 +328,42 @@ ggplotly(p3)
 ``` {r}
 #| title: Hour of Crash (YTD)
 hour_data <- crash_level %>%
-  filter(City == "El Paso",
-         Crash.Year == 2026) %>%
-  mutate(hour = as.numeric(substr(Hour.of.Day, 1, 2))) %>%
-  count(hour)
+  filter(
+    City == "El Paso",
+    Crash.Year == 2026
+  ) %>%
+  mutate(
+    hour = as.numeric(substr(Hour.of.Day, 1, 2)),
+    time_block = case_when(
+      hour >= 0 & hour <= 5 ~ "00:00–05:59",
+      hour >= 6 & hour <= 11 ~ "06:00–11:59",
+      hour >= 12 & hour <= 17 ~ "12:00–17:59",
+      hour >= 18 & hour <= 23 ~ "18:00–23:59",
+      TRUE ~ "Unknown"
+    )
+  ) %>%
+  count(time_block)
 
-avg_hour <- mean(hour_data$n, na.rm = TRUE)
+avg_block <- mean(hour_data$n, na.rm = TRUE)
 
-p4 <- ggplot(hour_data, aes(x = hour, y = n)) +
+p4 <- ggplot(hour_data, aes(x = time_block, y = n)) +
 
-  # bars
   geom_col(fill = "steelblue") +
 
-  # average line
   geom_hline(
-    aes(yintercept = avg_hour, color = "Average"),
-    linewidth = 1.2,
-    linetype = "dashed"
+    yintercept = avg_block,
+    color = "orange",
+    linetype = "dashed",
+    linewidth = 1.2
   ) +
-
-  # legend mapping
-  scale_color_manual(
-    values = c("Average" = "orange"),
-    name = ""
-  ) +
-
-  scale_x_continuous(breaks = 0:23) +
 
   theme_minimal() +
   theme(
-    legend.position = "top"
+    legend.position = "none"
   ) +
   labs(
-    x = "Hour (24-Hour Format)",
-    y = "Alcohol-Related Crashes"
+    x = "",
+    y = "Total Alcohol-Related Crashes"
   )
 
 ggplotly(p4)
@@ -520,7 +524,7 @@ drivers %>%
     orientation = "h",
     marker = list(color = "steelblue")
   ) %>%
-  layout(xaxis = list(title = ""), yaxis = list(title = ""))
+  layout(xaxis = list(title = "Total Drivers"), yaxis = list(title = ""))
 
 ```
 
@@ -546,7 +550,7 @@ drivers %>%
     orientation = "h",
     marker = list(color = "steelblue")
   ) %>%
-  layout(xaxis = list(title = ""), yaxis = list(title = ""))
+  layout(xaxis = list(title = "Total Drivers"), yaxis = list(title = ""))
 ```
 
 ``` {r}
@@ -570,7 +574,7 @@ drivers %>%
     marker = list(color = "steelblue")
   ) %>%
   layout(
-    xaxis = list(title = ""),
+    xaxis = list(title = "Total Drivers"),
     yaxis = list(title = "")
   )
 ```
@@ -612,10 +616,9 @@ leaflet(map_data) %>%
 ```
 
 ```{r}
-#| title: Fatal Crashes (YTD)
+#| title: Fatal Crashes (Since 2016)
 map_data <- crash_level %>%
   filter(City == "El Paso",
-         Crash.Year == 2026,
          Fatal.Crash.Flag == 1) %>%
   mutate(
     Latitude = as.numeric(Latitude),
@@ -667,6 +670,14 @@ top_10_streets %>%
 ```
 
 
+# Technical Details
 
+## About Data
+
+Last updated: **March 2026**.
+
+This dashboard only displays crash data classified as alcohol-related in the city of El Paso, Texas. Crashes involving any person reported with a contributing factor of "Under the Influence of Alcohol", "Had Been Drinking", or had a blood alcohol test above 0 are classified as alcohol-related. Data for these crashes can be easily downloaded using the TxDOT-Authored Filter, located in the [Crash Query Tool](https://cris.dot.state.tx.us/public/Query/app/home). 
+
+Alcohol-related crashes are the main outcome in this analysis because they show where and when alcohol is directly involved in traffic incidents. Focusing on this measure helps separate these crashes from other types of accidents, giving a clearer picture of impaired driving in El Paso. By looking specifically at alcohol-related crashes, we can better understand the groups of people most affected and identify the places and times where risk is highest. This information can then be used to target prevention efforts, enforcement, and education more effectively.
 
 

@@ -9,9 +9,9 @@ website:
     search: true
     left:
       - text: "About"
-      - text: "Research"
+      - text: "Dashboards"
         menu:
-        - text: "Driving While Intoxicated (DWI)"
+        - text: "Driving While Intoxicated"
           href: dwi_dashboard_current.html
       - text: "Contact Author"
         href: https://mattduran12.github.io
