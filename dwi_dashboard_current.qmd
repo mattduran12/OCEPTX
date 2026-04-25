@@ -2,9 +2,8 @@
 title: "The El Paso Drunk Driving Dashboard"
 format:
   dashboard:
-    theme:
-      light: flatly
-      dark: darkly
+    theme: darkly
+    css: styles2.css
     orientation: rows
 execute:
   echo: false
@@ -18,7 +17,7 @@ Welcome to the El Paso, Texas Drunk Driving Dashboard. This dashboard displays v
 
 rm(list = ls())
 
-suppressMessages(library(DT))
+suppressMessages(library(gt))
 suppressMessages(library(quarto))
 suppressMessages(library(rsconnect))
 suppressMessages(library(shiny))
@@ -278,7 +277,7 @@ ggplotly(p)
 ### Column {.tabset}
 
 ``` {r}
-#| title: Day of Crash
+#| title: Day of Crash (YTD)
 dow_data <- crash_level %>%
   filter(City == "El Paso",
          Crash.Year == 2026) %>%
@@ -325,7 +324,7 @@ ggplotly(p3)
 ```
 
 ``` {r}
-#| title: Hour of Crash
+#| title: Hour of Crash (YTD)
 hour_data <- crash_level %>%
   filter(City == "El Paso",
          Crash.Year == 2026) %>%
@@ -646,25 +645,25 @@ leaflet(map_data) %>%
 ### Column {width=25%}
 
 ``` {r}
-#| title: Streets with most alcohol-related crashes (YTD)
+#| title: Crash Locations (YTD)
 top_10_streets <- crash_level %>%
-  filter(City == "El Paso",
-         Crash.Year == 2026) %>%
+  filter(
+    City == "El Paso",
+    Crash.Year == 2026
+  ) %>%
   count(Street.Name, sort = TRUE) %>%
   mutate(
-    percent = paste0(round((n / sum(n) * 100), 2), "%")
+    percent = round(n / sum(n) * 100, 2)
   ) %>%
-  slice_head(n = 15)
-
-datatable(
-  top_10_streets,
-  colnames = c("Name", "Count", "Percent"),
-  options = list(
-    pageLength = 15,
-    searching = TRUE,
-    dom = "tip"   # keeps search box, table info, pagination
+  slice_head(n = 15) %>%
+  rename(
+    "Street Name" = Street.Name,
+    "Crash Count" = n,
+    "Percent (%)" = percent
   )
-)
+
+top_10_streets %>%
+  gt()
 ```
 
 
