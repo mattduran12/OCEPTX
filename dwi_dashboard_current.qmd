@@ -10,9 +10,6 @@ execute:
   echo: false
   warning: false
   message: false
-project:
-  type: website
-  output-dir: docs
 ---
 
 Welcome to the El Paso, Texas Drunk Driving Dashboard. This dashboard displays vehicle crash data collected by the Texas Department of Public Safety. All calculations are done by the author. Please see the "About Dashboard" page for detailed information about calculations.

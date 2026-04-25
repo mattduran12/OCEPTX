@@ -12,7 +12,7 @@ website:
       - text: "Research"
         menu:
         - text: "Driving While Intoxicated (DWI)"
-          href: dwi_dashboard_current.html
+          href: dwi_dashboard_current.qmd
       - text: "Contact Author"
         href: https://mattduran12.github.io
 
