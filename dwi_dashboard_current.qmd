@@ -63,91 +63,40 @@ all_cities$City <- recode(all_cities$City,
   "LAREDO" = "Laredo"
 )
 
+# drop current month, since its incomplete
+all_cities <- all_cities %>%
+  mutate(
+    Crash.Date = mdy(Crash.Date)
+  ) %>%
+  filter(
+    !(year(Crash.Date) == year(Sys.Date()) &
+      month(Crash.Date) == month(Sys.Date()))
+  )
+
 person_level <- all_cities
 
 vehicle_level <- all_cities %>%
   distinct(Crash.ID, Unit.Number, .keep_all = TRUE)
 
 crash_level <- all_cities %>%
-  distinct(Crash.ID, .keep_all = TRUE) %>%
-  mutate(Crash.Date = mdy(Crash.Date))
+  distinct(Crash.ID, .keep_all = TRUE) 
 ```
 
 # Trends
 
-``` {r}
-# all crashes for first page
-elpaso_allcrashes <- read_csv(
-  "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/Drunk Driving dashboard/data/elpaso_allcrashes_2016_2026.csv",   show_col_types = FALSE
-)
-
-# flag crashes that were alcohol involved
-elpaso_allcrashes <- elpaso_allcrashes %>%
-  mutate(
-    alcohol_flag = if_else(
-      str_detect(`Contributing Factors`, "HAD BEEN DRINKING|UNDER THE INFLUENCE OF ALCOHOL"),
-      1, 0,
-      missing = 0
-    )
-  )
-
-# clean dates
-elpaso_allcrashes <- elpaso_allcrashes %>%
-  mutate(Crash.Date = mdy(`Crash Date`))
-
-# gets previous current month and year before
-latest_month <- elpaso_allcrashes %>%
-  summarise(max_date = max(Crash.Date, na.rm = TRUE)) %>%
-  pull(max_date) %>%
-  floor_date("month")
-
-prev_month <- latest_month %m-% months(1)
-
-prev_year_month <- prev_month %m-% years(1)
-
-# calculate % current month vs last year
-current_month_data <- elpaso_allcrashes %>%
-  filter(floor_date(Crash.Date, "month") == prev_month)
-
-last_year_month_data <- elpaso_allcrashes %>%
-  filter(floor_date(Crash.Date, "month") == prev_year_month)
-
-current_pct_alc <- mean(current_month_data$alcohol_flag, na.rm = TRUE) * 100
-last_year_pct_alc <- mean(last_year_month_data$alcohol_flag, na.rm = TRUE) * 100
-
-pct_change_alc <- ((current_pct_alc - last_year_pct_alc) / last_year_pct_alc) * 100
-
-# same but for fatalities
-fatality_data <- elpaso_allcrashes %>%
-  filter(`Fatal Crash Flag` == 1)
-
-current_pct_fatal_alc <- mean(fatality_data$alcohol_flag, na.rm = TRUE) * 100
-
-# YTD
-ytd_start <- floor_date(latest_month, "year")
-
-ytd_alc_fatalities <- elpaso_allcrashes %>%
-  filter(
-    Crash.Date >= ytd_start,
-    `Fatal Crash Flag` == 1,
-    alcohol_flag == 1
-  ) %>%
-  nrow()
-
-```
 
 ## Row {height=30%}
 
 ```{r}
 #| content: valuebox
-#| title: "YTD Total Alcohol-Related Crashes"
-ytd_alcohol_crashes <- elpaso_allcrashes %>%
-  mutate(
-    year = lubridate::year(Crash.Date)
+#| title: "Total Alcohol-Related Crashes (YTD)"
+ytd_alcohol_crashes <- crash_level %>%
+  filter(
+    City == "El Paso",
+    Crash.Year == 2026
   ) %>%
-  filter(year == max(year, na.rm = TRUE)) %>%
   summarise(
-    ytd_alcohol_crashes = sum(alcohol_flag == 1, na.rm = TRUE)
+    ytd_alcohol_crashes = n_distinct(Crash.ID)
   ) %>%
   pull(ytd_alcohol_crashes)
 
@@ -159,12 +108,12 @@ list(
 
 ```{r}
 #| content: valuebox
-#| title: "YTD Total People Injured in Alcohol-Related Crashes"
+#| title: "Total People Injured in Alcohol-Related Crashes (YTD)"
 
 person_level <- person_level %>%
   mutate(
     injured = if_else(
-      str_detect(Person.Injury.Severity, "A - SUSPECTED SERIOUS INJURY|B - SUSPECTED MINOR INJURY|C - POSSIBLE INJURY|K - FATAL INJURY"),
+      str_detect(Person.Injury.Severity, "A - SUSPECTED SERIOUS INJURY|B - SUSPECTED MINOR INJURY|C - POSSIBLE INJURY"),
       1, 0,
       missing = 0
     )
@@ -187,7 +136,7 @@ list(
 
 ```{r}
 #| content: valuebox
-#| title: "YTD Total Alcohol-Related Traffic Fatalities"
+#| title: "Total Alcohol-Related Traffic Fatalities (YTD)"
 person_level <- person_level %>%
   mutate(
     fatal = if_else(
@@ -217,28 +166,25 @@ list(
 
 ``` {r}
 #| title: Crashes
-monthly_counts <- elpaso_allcrashes %>%
+monthly_counts <- crash_level %>%
   mutate(
     month = floor_date(Crash.Date, "month"),
-    Crash.ID = `Crash ID`
   ) %>%
   group_by(month) %>%
   summarise(
-    total_crashes = n_distinct(Crash.ID),
-    alcohol_crashes = sum(alcohol_flag == 1, na.rm = TRUE),
-    alcohol_pct = (alcohol_crashes / total_crashes) * 100,
+    alcohol_crashes = n_distinct(Crash.ID),
     .groups = "drop"
   ) %>%
   arrange(month) %>%
   mutate(
-    alcohol_ma = zoo::rollmean(alcohol_pct, k = 12, fill = NA, align = "center")
+    alcohol_ma = zoo::rollmean(alcohol_crashes, k = 12, fill = NA, align = "center")
   )
 
 p <- ggplot(monthly_counts, aes(x = month)) +
 
   # observed
   geom_line(
-    aes(y = alcohol_pct, color = "Total Alcohol-Related Crashes"),
+    aes(y = alcohol_crashes, color = "Total Alcohol-Related Crashes"),
     linewidth = 0.8
   ) +
 
@@ -257,7 +203,7 @@ p <- ggplot(monthly_counts, aes(x = month)) +
 
   labs(
     x = "",
-    y = "Alcohol-Related Crashes (%)",
+    y = "Total crashes",
     color = ""
   ) +
 
@@ -274,7 +220,6 @@ ggplotly(p)
 monthly_counts <- person_level %>%
   filter(City == "El Paso") %>%
   mutate(
-    Crash.Date = mdy(Crash.Date),
     month = floor_date(Crash.Date, "month")
   ) %>%
   group_by(month) %>%
@@ -334,13 +279,13 @@ ggplotly(p)
 
 ``` {r}
 #| title: Day of Crash
-dow_data <- elpaso_allcrashes %>%
-  filter(alcohol_flag == 1) %>%
-  filter(`Crash Year` == 2026) %>%
-  count(`Day of Week`) %>%
+dow_data <- crash_level %>%
+  filter(City == "El Paso",
+         Crash.Year == 2026) %>%
+  count(Day.of.Week) %>%
   mutate(
     Day.of.Week = factor(
-      tools::toTitleCase(tolower(`Day of Week`)),
+      tools::toTitleCase(tolower(Day.of.Week)),
       levels = c("Sunday", "Monday", "Tuesday", "Wednesday",
                  "Thursday", "Friday", "Saturday")
     )
@@ -381,10 +326,10 @@ ggplotly(p3)
 
 ``` {r}
 #| title: Hour of Crash
-hour_data <- elpaso_allcrashes %>%
-  filter(alcohol_flag == 1) %>%
-  filter(`Crash Year` == 2026) %>%
-  mutate(hour = as.numeric(substr(`Crash Time`, 1, 2))) %>%
+hour_data <- crash_level %>%
+  filter(City == "El Paso",
+         Crash.Year == 2026) %>%
+  mutate(hour = as.numeric(substr(Hour.of.Day, 1, 2))) %>%
   count(hour)
 
 avg_hour <- mean(hour_data$n, na.rm = TRUE)
@@ -422,36 +367,213 @@ ggplotly(p4)
 ```
 
 
-# Involved Drivers
+# Drivers
+
+``` {r}
+# drivers object with BACs
+drivers <- person_level %>%
+  mutate(
+    driver_flag = case_when(
+      Person.Type %in% c(
+        "1 - DRIVER",
+        "5 - DRIVER OF MOTORCYCLE TYPE VEHICLE"
+      ) ~ 1,
+      TRUE ~ 0
+    ),
+
+    bac_value = as.numeric(Person.Blood.Alcohol.Content.Test.Result),
+
+    bac_result = case_when(
+      !is.na(bac_value) & bac_value > 0 ~ 1,
+      TRUE ~ 0
+    )
+  ) %>%
+  filter(
+    City == "El Paso",
+    Crash.Year == 2026,
+    driver_flag == 1,
+    bac_result == 1
+  )
+```
+
+## Row {height=30%}
 
 ```{r}
 #| content: valuebox
-#| title: "Average Age"
+#| title: "Average BAC (YTD)"
+bac_stats <- drivers %>%
+  summarise(
+    mean_bac = mean(bac_value, na.rm = TRUE),
+    sd_bac = sd(bac_value, na.rm = TRUE)
+  )
 list(
-  icon = "cake2",
-  color = "primary",
-  value = 21
+  icon = "moisture",
+  color = "danger",
+  value = paste0(
+    round(bac_stats$mean_bac, 2),
+    " ± ",
+    round(bac_stats$sd_bac, 2)
+  )
 )
 ```
 
 ```{r}
 #| content: valuebox
-#| title: "Percent Male"
+#| title: "Male Drivers (YTD)"
+male_pct <- drivers %>%
+  mutate(
+    male = if_else(Person.Gender == "1 - MALE", 1, 0)
+  ) %>%
+  summarise(
+    pct_male = mean(male, na.rm = TRUE) * 100
+  ) %>%
+  pull(pct_male)
+
 list(
   icon = "gender-male",
   color = "primary",
-  value = "92%"
+  value = paste0(round(male_pct, 1), "%")
 )
 ```
 
 ```{r}
 #| content: valuebox
-#| title: "Average BAC"
+#| title: "Average Driver Age (YTD)"
+
+age_stats <- drivers %>%
+  mutate(
+    age_num = as.numeric(Person.Age)
+  ) %>%
+  summarise(
+    mean_age = mean(age_num, na.rm = TRUE),
+    sd_age = sd(age_num, na.rm = TRUE)
+  )
+
 list(
-  icon = "cup-straw",
+  icon = "person-fill",
   color = "primary",
-  value = 0.085
+  value = paste0(
+    round(age_stats$mean_age, 1),
+    " ± ",
+    round(age_stats$sd_age, 1)
+  )
 )
+```
+
+## Row { height=70%}
+
+### Column
+
+```{r}
+#| title: Drivers Over the Legal Limit (YTD)
+
+
+drivers %>%
+  mutate(
+    bac_group = if_else(
+      bac_value >= 0.08,
+      "0.08+ (Over legal limit)",
+      "<0.08"
+    )
+  ) %>%
+  count(bac_group) %>%
+  plot_ly(
+    labels = ~bac_group,
+    values = ~n,
+    type = "pie",
+    textinfo = "label+percent",
+    marker = list(
+      colors = c("maroon", "lightgray")
+    )
+  )
+
+```
+
+
+### Column {.tabset}
+
+```{r}
+#| title: Vehicle Color
+drivers %>%
+  mutate(
+    color = case_when(
+      grepl("BLK", Vehicle.Color) ~ "Black",
+      grepl("WHI", Vehicle.Color) ~ "White",
+      grepl("GRY", Vehicle.Color) ~ "Gray",
+      grepl("RED", Vehicle.Color) ~ "Red",
+      grepl("BLU", Vehicle.Color) ~ "Blue",
+      grepl("GRN", Vehicle.Color) ~ "Green",
+      grepl("SIL", Vehicle.Color) ~ "Silver",
+      grepl("TAN", Vehicle.Color) ~ "Tan",
+      grepl("MAR", Vehicle.Color) ~ "Maroon",
+      grepl("YEL", Vehicle.Color) ~ "Yellow",
+      grepl("GLD", Vehicle.Color) ~ "Gold",
+      grepl("PLE", Vehicle.Color) ~ "Purple",
+      grepl("BGE", Vehicle.Color) ~ "Beige",
+      TRUE ~ "Other"
+    )
+  ) %>%
+  count(color) %>%
+  plot_ly(
+    x = ~n,
+    y = ~fct_reorder(color, n),
+    type = "bar",
+    orientation = "h",
+    marker = list(color = "steelblue")
+  ) %>%
+  layout(xaxis = list(title = ""), yaxis = list(title = ""))
+
+```
+
+``` {r}
+#| title: Vehicle Body Style
+drivers %>%
+  mutate(
+    body = case_when(
+      grepl("MC", Vehicle.Body.Style) ~ "Motorcycle",
+      grepl("P2", Vehicle.Body.Style) ~ "Passenger Car (2-door)",
+      grepl("P4", Vehicle.Body.Style) ~ "Passenger Car (4-door)",
+      grepl("PK", Vehicle.Body.Style) ~ "Pickup",
+      grepl("SV", Vehicle.Body.Style) ~ "SUV",
+      grepl("TR", Vehicle.Body.Style) ~ "Truck",
+      TRUE ~ "Other"
+    )
+  ) %>%
+  count(body) %>%
+  plot_ly(
+    x = ~n,
+    y = ~fct_reorder(body, n),
+    type = "bar",
+    orientation = "h",
+    marker = list(color = "steelblue")
+  ) %>%
+  layout(xaxis = list(title = ""), yaxis = list(title = ""))
+```
+
+``` {r}
+#| title: Vehicle Make
+drivers %>%
+  mutate(
+    make = case_when(
+      Vehicle.Make %in% c("FORD","CHEVROLET","DODGE","GMC") ~ Vehicle.Make,
+      Vehicle.Make %in% c("TOYOTA","HONDA","NISSAN","HYUNDAI","KIA","MAZDA","SUBARU","VOLKSWAGEN","LEXUS") ~ Vehicle.Make,
+      TRUE ~ NA_character_
+    ),
+    make = str_to_title(make)
+  ) %>%
+  filter(!is.na(make)) %>%
+  count(make) %>%
+  plot_ly(
+    x = ~n,
+    y = ~fct_reorder(make, n),
+    type = "bar",
+    orientation = "h",
+    marker = list(color = "steelblue")
+  ) %>%
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list(title = "")
+  )
 ```
 
 # Map
@@ -461,7 +583,7 @@ list(
 ### Column {.tabset width=75%}
 
 ```{r}
-#| title: YTD Crashes
+#| title: Crashes (YTD)
 map_data <- crash_level %>%
   filter(City == "El Paso",
          Crash.Year == 2026) %>%
@@ -491,7 +613,7 @@ leaflet(map_data) %>%
 ```
 
 ```{r}
-#| title: YTD Fatal Crashes
+#| title: Fatal Crashes (YTD)
 map_data <- crash_level %>%
   filter(City == "El Paso",
          Crash.Year == 2026,
@@ -546,9 +668,6 @@ datatable(
 ```
 
 
-# About Dashboard
-
-# Quiz
 
 
 
