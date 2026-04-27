@@ -5,6 +5,7 @@ format:
     theme: default
     css: styles2.css
     orientation: rows
+    scrolling: true
 execute:
   echo: false
   warning: false
@@ -86,7 +87,7 @@ crash_level <- all_cities %>%
 # Trends
 
 
-## Row {height=30%}
+## Row {height="200px"}
 
 ```{r}
 #| content: valuebox
@@ -161,7 +162,7 @@ list(
 ```
 
 
-## Row {height=70%}
+## Row {height="350px"}
 
 ### Column {.tabset}
 
@@ -369,6 +370,73 @@ p4 <- ggplot(hour_data, aes(x = time_block, y = n)) +
 ggplotly(p4)
 ```
 
+
+## Row {height="400px"}
+
+``` {r}
+#| title: ¡Cinco De Mayo!
+
+crash_data <- crash_level %>%
+  filter(City == "El Paso",
+         Crash.Year != 2020) %>%
+  mutate(
+    date = as.Date(Crash.Date),
+    year = Crash.Year,
+    cinco = as.Date(paste0(year, "-05-05")),
+    days_from_cinco = as.numeric(date - cinco)
+  )
+
+window_data <- crash_data %>%
+  filter(days_from_cinco >= -7 & days_from_cinco <= 7)
+
+
+plot_data <- window_data %>%
+  group_by(year, days_from_cinco) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  group_by(days_from_cinco) %>%
+  summarise(avg_crashes = mean(n), .groups = "drop") %>%
+  mutate(is_cinco = ifelse(days_from_cinco == 0, "Cinco de Mayo", "Other Days"))
+
+
+# Highlight Cinco de Mayo point
+plot_data <- plot_data %>%
+  mutate(is_cinco = ifelse(days_from_cinco == 0, "Cinco de Mayo", "Other Days"))
+
+p <- ggplot(plot_data, aes(x = days_from_cinco, y = avg_crashes)) +
+
+geom_point(data = subset(plot_data, days_from_cinco %in% 1:3),
+           color = "red", size = 4) +  
+  geom_smooth(se = FALSE, method = "loess", span = 0.3,
+              color = "#2C3E50", size = 1) +
+  
+  geom_point(aes(color = is_cinco), size = 3) +
+  
+  geom_vline(xintercept = 0, linetype = "dashed",
+             color = "#C0392B", size = 1) +
+  
+  scale_color_manual(values = c(
+    "Cinco de Mayo" = "#34495E",
+    "Other Days" = "#34495E"
+  )) +
+  
+  scale_x_continuous(breaks = seq(-7, 7, by = 1)) +
+  
+  labs(
+    title = "Do Crashes Increase Around Cinco de Mayo in El Paso?",
+    x = "Days from May 5th",
+    y = "Average Number of Crashes"
+  ) +
+  
+  theme_minimal(base_size = 10) +
+  theme(
+    plot.title = element_text(size = 15),
+    legend.position = "none"
+  )
+
+ggplotly(p)
+
+
+```
 
 # Drivers
 
@@ -689,7 +757,7 @@ A crash is defined as alcohol-related if involved drivers or individuals were re
 
 - Averages for crashes and fatal crashes were calculated using a 12-month moving average. This technique results in a smooth line, allowing the viewer to see if a trend is increasing or decreasing over a period of time.
 - Injuries include people who were classified as having a suspected serious injury, suspected minor injury, or possible injury.
-
+- For the Cinco de Mayo analysis, total crashes between 2016 and 2025 were averaged each day during a 15-day period (7 days before and 7 days after May 5th). Crash data in the year 2020 was excluded from analysis.
 :::
 
 # Quiz
