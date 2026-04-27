@@ -2,8 +2,7 @@
 title: "El Paso Drunk Driving Surveillance Dashboard"
 format:
   dashboard:
-    logo: logo.png
-    theme: darkly
+    theme: default
     css: styles2.css
     orientation: rows
 execute:
@@ -414,9 +413,7 @@ list(
   icon = "moisture",
   color = "danger",
   value = paste0(
-    round(bac_stats$mean_bac, 2),
-    " ± ",
-    round(bac_stats$sd_bac, 2)
+    round(bac_stats$mean_bac, 2)
   )
 )
 ```
@@ -457,9 +454,7 @@ list(
   icon = "person-fill",
   color = "primary",
   value = paste0(
-    round(age_stats$mean_age, 1),
-    " ± ",
-    round(age_stats$sd_age, 1)
+    round(age_stats$mean_age, 1)
   )
 )
 ```
@@ -682,3 +677,200 @@ This dashboard only displays crash data classified as alcohol-related in the cit
 Alcohol-related crashes are the main outcome in this analysis because they show where and when alcohol is directly involved in traffic incidents. Focusing on this measure helps separate these crashes from other types of accidents, giving a clearer picture of impaired driving in El Paso. By looking specifically at alcohol-related crashes, we can better understand the groups of people most affected and identify the places and times where risk is highest. This information can then be used to target prevention efforts, enforcement, and education more effectively.
 
 
+# Quiz
+
+::: {.column width="100%"}
+
+::: {.card title="Drunk Driving Quiz" style="min-height:780px; margin:0 auto;"}
+
+<div id="quizApp">
+
+  <h4 id="introStats">Loading stats...</h4>
+  <h4 id="avgStats"></h4>
+
+  <button onclick="startQuiz()" id="startBtn">Start Quiz</button>
+
+  <p id="tagline" style="font-style: italic;"></p>
+
+  <hr>
+
+  <div id="quizBox" style="display:none"></div>
+
+</div>
+
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw4TekPtUfV08eUUU9TbRu0QdeUl9_mondBZS0c179w-eQQb4YliAQwwUHyODuErsYA/exec";
+
+let qIndex = 0;
+let score = 0;
+
+/* ---------------- QUIZ ---------------- */
+const quiz = [
+
+  {
+    q: "When are alcohol-related crashes most likely to happen in El Paso?",
+    a: ["Weekday mornings", "Weekends (Saturday and Sunday)", "Midday during the week"],
+    correct: "Weekends (Saturday and Sunday)",
+    explanation: "Crash data shows that alcohol-related crashes in El Paso are most common on weekends."
+  },
+
+  {
+    q: "What time of day do alcohol-related crashes most often occur?",
+    a: ["6:00 AM to 12:00 PM", "12:00 PM to 6:00 PM", "6:00 PM to 6:00 AM"],
+    correct: "6:00 PM to 6:00 AM",
+    explanation: "Most alcohol-related crashes happen at night and early morning hours, when visibility is lower and alcohol consumption is more common."
+  },
+
+  {
+    q: "Since 2016, what has happened to alcohol-related crashes in El Paso?",
+    a: ["They have increased steadily", "They have decreased overall", "They have stayed exactly the same"],
+    correct: "They have decreased overall",
+    explanation: "Overall trends show a decline in alcohol-related crashes since 2016. There was a sharp drop during COVID-19, followed by a return toward normal levels, and then a continued downward trend."
+  },
+
+  {
+    q: "What is the legal blood alcohol concentration (BAC) limit for driving in Texas?",
+    a: ["0.05%", "0.08%", "0.10%"],
+    correct: "0.08%",
+    explanation: "In Texas, it is illegal to drive with a BAC of 0.08% or higher. This level indicates significant impairment in reaction time and judgment."
+  },
+
+  {
+    q: "On average, what BAC level do drivers involved in alcohol-related crashes in El Paso have?",
+    a: ["About 0.08% (legal limit)", "About 0.10%", "About 0.16% (more than twice the legal limit)"],
+    correct: "About 0.16% (more than twice the legal limit)",
+    explanation: "The data shows that many drivers involved in alcohol-related crashes have very high BAC levels—around 0.16%—which is more than twice the legal limit and associated with severe impairment."
+  }
+
+];
+
+/* ---------------- STATS ---------------- */
+function loadStats() {
+
+  fetch(SCRIPT_URL)
+    .then(r => r.text())
+    .then(t => {
+
+      const data = JSON.parse(t);
+      data.shift();
+
+      const scores = data
+        .map(r => Number(r[3]))   // COLUMN D
+        .filter(v => !isNaN(v));
+
+      const count = scores.length;
+
+      const avg = count
+        ? (scores.reduce((a,b)=>a+b,0)/count).toFixed(1)
+        : 0;
+
+      document.getElementById("introStats").innerHTML =
+        `${count} people have taken this quiz.`;
+
+      document.getElementById("avgStats").innerHTML =
+        `Average score: ${avg}%`;
+
+      document.getElementById("tagline").innerHTML =
+        "Take the quiz to see how you compare.";
+    });
+}
+
+/* ---------------- START ---------------- */
+function startQuiz() {
+  document.getElementById("startBtn").style.display = "none";
+  document.getElementById("quizBox").style.display = "block";
+  loadQuestion();
+}
+
+/* ---------------- LOAD QUESTION ---------------- */
+function loadQuestion() {
+
+  const q = quiz[qIndex];
+  const box = document.getElementById("quizBox");
+
+  box.innerHTML = `
+    <h4>Question ${qIndex + 1} of ${quiz.length}</h4>
+    <p>${q.q}</p>
+    <div id="answers"></div>
+    <p id="feedback"></p>
+    <button id="nextBtn" style="display:none" onclick="nextQuestion()">Next</button>
+  `;
+
+  const answersDiv = document.getElementById("answers");
+
+  q.a.forEach(choice => {
+
+    const btn = document.createElement("button");
+    btn.innerText = choice;
+
+    btn.onclick = () => {
+
+      const buttons = answersDiv.querySelectorAll("button");
+      buttons.forEach(b => b.disabled = true);
+
+      if (choice === q.correct) {
+        score++;
+        btn.style.backgroundColor = "#c8f7c5";
+
+        document.getElementById("feedback").innerHTML =
+          `
+          <span style="color:green;"><b>Correct</b></span><br><br>
+          ${q.explanation}
+          `;
+      } else {
+        btn.style.backgroundColor = "#f7c5c5";
+
+        buttons.forEach(b => {
+          if (b.innerText === q.correct) {
+            b.style.backgroundColor = "#c8f7c5";
+          }
+        });
+
+          document.getElementById("feedback").innerHTML =
+          `
+          <b>Correct answer:</b> ${q.correct}<br><br>
+          ${q.explanation}
+          `;
+      }
+
+      document.getElementById("nextBtn").style.display = "inline-block";
+    };
+
+    answersDiv.appendChild(btn);
+  });
+}
+
+/* ---------------- NEXT ---------------- */
+function nextQuestion() {
+
+  qIndex++;
+
+  if (qIndex < quiz.length) {
+    loadQuestion();
+  } else {
+    finishQuiz();
+  }
+}
+
+/* ---------------- FINISH ---------------- */
+function finishQuiz() {
+
+  const percent = Math.round((score / quiz.length) * 100);
+
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      timestamp: new Date().toISOString(),
+      score: percent
+    })
+  });
+
+  document.getElementById("quizBox").innerHTML =
+    `<h3>Finished</h3>
+     <p>Your score: <b>${percent}%</b></p>`;
+}
+
+/* ---------------- INIT ---------------- */
+document.addEventListener("DOMContentLoaded", loadStats);
+</script>
