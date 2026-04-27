@@ -13,7 +13,7 @@ execute:
 
 Welcome to the El Paso Drunk Driving Surveillance Dashboard!
 
-This dashboard was created by the El Paso Crime Lab and updates once a month with new data on alcohol-related crashes in El Paso, Texas.
+This dashboard displays data on **alcohol-related vehicle crashes** in El Paso, Texas and is updated on a monthly basis.
 
 ```{r}
 
@@ -90,7 +90,7 @@ crash_level <- all_cities %>%
 
 ```{r}
 #| content: valuebox
-#| title: "Total Alcohol-Related Crashes (YTD)"
+#| title: "Total Crashes (YTD)"
 ytd_alcohol_crashes <- crash_level %>%
   filter(
     City == "El Paso",
@@ -109,7 +109,7 @@ list(
 
 ```{r}
 #| content: valuebox
-#| title: "Total People Injured in Alcohol-Related Crashes (YTD)"
+#| title: "Total People Injured (YTD)"
 
 person_level <- person_level %>%
   mutate(
@@ -137,7 +137,7 @@ list(
 
 ```{r}
 #| content: valuebox
-#| title: "Total Alcohol-Related Traffic Fatalities (YTD)"
+#| title: "Total Fatalities (YTD)"
 person_level <- person_level %>%
   mutate(
     fatal = if_else(
