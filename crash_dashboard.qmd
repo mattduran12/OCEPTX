@@ -1,5 +1,5 @@
 ---
-title: "El Paso Alcohol-Related Crash Dashboard"
+title: "Alcohol-Related Crash Dashboard"
 format:
   dashboard:
     theme: default
@@ -11,7 +11,7 @@ execute:
   message: false
 ---
 
-Welcome to the El Paso Alcohol-Related Crash Dashboard!
+Welcome to the Alcohol-Related Crash Dashboard!
 
 This dashboard displays data on alcohol-related vehicle crashes in El Paso, Texas and is updated on a monthly basis.
 
@@ -672,23 +672,20 @@ top_10_streets %>%
 
 ::: {.card title="About This Dashboard"}
 
-Last updated: March 2026
+Last updated: **March 2026**
 
-All data can be downloaded at the Texas Department of Transportation's (TXDOT) website, using the TXDOT-authored filter in the
-[Crash Query Tool](https://cris.dot.state.tx.us/public/Query/app/home). This dashboard specifically shows data on crashes classified as alcohol-related and that occurred in the city of El Paso.
+Crash data is downloaded from the Texas Department of Transportation's (TXDOT) website using the 
+[Crash Query Tool](https://cris.dot.state.tx.us/public/Query/app/home). All crash data in this dashboard represent those classified as alcohol-related and that occurred in the city of El Paso.
 
 :::
 
 ::: {.card title="Technical Details"}
 
-#### Definition of Alcohol-Related Crash
+**Definition of Alcohol-Related Crash**
 
-A crash is defined as alcohol-related crashes if involved drivers or individuals were reported as:
-- "Under the Influence of Alcohol"
-- "Had Been Drinking"
-- had a BAC greater than 0
+A crash is defined as alcohol-related if involved drivers or individuals were reported as "Under the Influence of Alcohol", "Had Been Drinking", or were reported to have a BAC greater than 0.
 
-#### Trends Page
+**Trends Page**
 
 - Averages for crashes and fatal crashes were calculated using a 12-month moving average. This technique results in a smooth line, allowing the viewer to see if a trend is increasing or decreasing over a period of time.
 - Injuries include people who were classified as having a suspected serious injury, suspected minor injury, or possible injury.
@@ -892,3 +889,4 @@ function finishQuiz() {
 /* ---------------- INIT ---------------- */
 document.addEventListener("DOMContentLoaded", loadStats);
 </script>
+
