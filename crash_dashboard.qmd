@@ -1,5 +1,5 @@
 ---
-title: "El Paso Drunk Driving Surveillance Dashboard"
+title: "El Paso Alcohol-Related Crash Dashboard"
 format:
   dashboard:
     theme: default
@@ -11,9 +11,9 @@ execute:
   message: false
 ---
 
-Welcome to the El Paso Drunk Driving Surveillance Dashboard!
+Welcome to the El Paso Alcohol-Related Crash Dashboard!
 
-This dashboard displays data on **alcohol-related vehicle crashes** in El Paso, Texas and is updated on a monthly basis.
+This dashboard displays data on alcohol-related vehicle crashes in El Paso, Texas and is updated on a monthly basis.
 
 ```{r}
 
@@ -185,20 +185,20 @@ p <- ggplot(monthly_counts, aes(x = month)) +
 
   # observed
   geom_line(
-    aes(y = alcohol_crashes, color = "Total Alcohol-Related Crashes"),
+    aes(y = alcohol_crashes, color = "Total crashes"),
     linewidth = 0.8
   ) +
 
   # moving average
   geom_line(
-    aes(y = alcohol_ma, color = "Moving Average"),
+    aes(y = alcohol_ma, color = "Average"),
     linewidth = 1.2
   ) +
 
   scale_color_manual(
     values = c(
-      "Total Alcohol-Related Crashes" = "grey70",
-      "Moving Average" = "black"
+      "Total crashes" = "grey70",
+      "Average" = "black"
     )
   ) +
 
@@ -240,20 +240,20 @@ p <- ggplot(monthly_counts, aes(x = month)) +
 
   # observed total fatalities (grey)
   geom_line(
-    aes(y = alcohol_fatal_crashes, color = "Total Alcohol-Related Traffic Fatalities"),
+    aes(y = alcohol_fatal_crashes, color = "Total fatalities"),
     linewidth = 1
   ) +
 
   # alcohol fatalities 12-mo moving average (maroon)
   geom_line(
-    aes(y = alcohol_fatal_ma, color = "Moving Average"),
+    aes(y = alcohol_fatal_ma, color = "Average"),
     linewidth = 1.2
   ) +
 
   scale_color_manual(
     values = c(
-      "Total Alcohol-Related Traffic Fatalities" = "grey70",
-      "Moving Average" = "maroon"
+      "Total fatalities" = "grey70",
+      "Average" = "maroon"
     )
   ) +
 
@@ -318,7 +318,7 @@ p3 <- ggplot(dow_data, aes(x = Day.of.Week, y = n)) +
   ) +
   labs(
     x = "",
-    y = "Total Alcohol-Related Crashes"
+    y = "Total crashes"
   )
 
 ggplotly(p3)
@@ -363,7 +363,7 @@ p4 <- ggplot(hour_data, aes(x = time_block, y = n)) +
   ) +
   labs(
     x = "",
-    y = "Total Alcohol-Related Crashes"
+    y = "Total crashes"
   )
 
 ggplotly(p4)
@@ -439,7 +439,7 @@ list(
 
 ```{r}
 #| content: valuebox
-#| title: "Average Driver Age (YTD)"
+#| title: "Average Age (YTD)"
 
 age_stats <- drivers %>%
   mutate(
@@ -570,7 +570,7 @@ drivers %>%
     marker = list(color = "steelblue")
   ) %>%
   layout(
-    xaxis = list(title = "Total Drivers"),
+    xaxis = list(title = "Total drivers"),
     yaxis = list(title = "")
   )
 ```
@@ -666,16 +666,34 @@ top_10_streets %>%
 ```
 
 
-# Technical Details
+# About
 
-## About Data
+## Row {height=50%}
 
-Last updated: **March 2026**.
+::: {.card title="About This Dashboard"}
 
-This dashboard only displays crash data classified as alcohol-related in the city of El Paso, Texas. Crashes involving any person reported with a contributing factor of "Under the Influence of Alcohol", "Had Been Drinking", or had a blood alcohol test above 0 are classified as alcohol-related. Data for these crashes can be easily downloaded using the TxDOT-Authored Filter, located in the [Crash Query Tool](https://cris.dot.state.tx.us/public/Query/app/home). 
+Last updated: March 2026
 
-Alcohol-related crashes are the main outcome in this analysis because they show where and when alcohol is directly involved in traffic incidents. Focusing on this measure helps separate these crashes from other types of accidents, giving a clearer picture of impaired driving in El Paso. By looking specifically at alcohol-related crashes, we can better understand the groups of people most affected and identify the places and times where risk is highest. This information can then be used to target prevention efforts, enforcement, and education more effectively.
+All data can be downloaded at the Texas Department of Transportation's (TXDOT) website, using the TXDOT-authored filter in the
+[Crash Query Tool](https://cris.dot.state.tx.us/public/Query/app/home). This dashboard specifically shows data on crashes classified as alcohol-related and that occurred in the city of El Paso.
 
+:::
+
+::: {.card title="Technical Details"}
+
+#### Definition of Alcohol-Related Crash
+
+A crash is defined as alcohol-related crashes if involved drivers or individuals were reported as:
+- "Under the Influence of Alcohol"
+- "Had Been Drinking"
+- had a BAC greater than 0
+
+#### Trends Page
+
+- Averages for crashes and fatal crashes were calculated using a 12-month moving average. This technique results in a smooth line, allowing the viewer to see if a trend is increasing or decreasing over a period of time.
+- Injuries include people who were classified as having a suspected serious injury, suspected minor injury, or possible injury.
+
+:::
 
 # Quiz
 
@@ -772,7 +790,7 @@ function loadStats() {
         `Average score: ${avg}%`;
 
       document.getElementById("tagline").innerHTML =
-        "Take the quiz to see how you compare.";
+        "";
     });
 }
 

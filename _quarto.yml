@@ -8,12 +8,12 @@ website:
     background: primary
     search: true
     left:
-      - text: "About"
       - text: "Dashboards"
         menu:
         - text: "Driving While Intoxicated"
-          href: dwi_dashboard_current.html
-      - text: "Contact Author"
+          href: crash_dashboard.html
+    right:
+      - text: "Contact"
         href: https://mattduran12.github.io
 
 format:
