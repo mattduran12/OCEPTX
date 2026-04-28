@@ -164,7 +164,7 @@ list(
 ## Row {.tabset height="400px"}
 
 ``` {r}
-#| title: Crashes
+#| title: Crash Trends
 monthly_counts <- crash_level %>%
   filter(City == "El Paso") %>%   # 🔴 THIS IS THE KEY FIX
   mutate(
@@ -216,7 +216,7 @@ ggplotly(p)
 ```
 
 ``` {r}
-#| title: Fatalities
+#| title: Fatality Trends
 monthly_counts <- person_level %>%
   filter(City == "El Paso") %>%
   mutate(
@@ -275,9 +275,150 @@ p <- ggplot(monthly_counts, aes(x = month)) +
 ggplotly(p)
 ```
 
+``` {r}
+#| title: Crashes by Month
+monthly_year <- crash_level %>%
+  filter(City == "El Paso") %>%
+  mutate(
+    date = as.Date(Crash.Date),
+    year = year(date),
+    month_num = month(date)
+  ) %>%
+  group_by(year, month_num) %>%
+  summarise(
+    monthly_crashes = n_distinct(Crash.ID),
+    .groups = "drop"
+  )
+
+# ----------------------------
+# Step 2: Average by month-of-year
+# ----------------------------
+monthly_avg <- monthly_year %>%
+  group_by(month_num) %>%
+  summarise(
+    avg_crashes = mean(monthly_crashes),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    month_name = factor(month.abb[month_num], levels = month.abb)
+  )
+
+# ----------------------------
+# Step 3: overall mean line
+# ----------------------------
+overall_avg <- mean(monthly_avg$avg_crashes)
+
+# ----------------------------
+# Step 4: ggplot base
+# ----------------------------
+p <- ggplot(monthly_avg, aes(x = month_name, y = avg_crashes)) +
+
+  geom_col(fill = "steelblue") +
+
+  geom_hline(
+   aes(yintercept = overall_avg, color = "Average"),
+    linetype = "dashed",
+    linewidth = 1
+  ) +
+  scale_color_manual(
+    values = c("Average" = "orange"),
+    name = ""
+  ) +
+
+  labs(
+    x = "",
+    y = "Total crashes"
+  ) +
+
+  theme_minimal() +
+
+  theme(
+    legend.position = "top",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+# ----------------------------
+# Step 5: Plotly conversion
+# ----------------------------
+ggplotly(p)
+```
+
+``` {r}
+#| title: Fatalities by Month
+monthly_fatal_year <- person_level %>%
+  filter(City == "El Paso") %>%
+  mutate(
+    date = Crash.Date,
+    year = year(date),
+    month_num = month(date)
+  ) %>%
+  group_by(year, month_num) %>%
+  summarise(
+    monthly_fatalities = sum(fatal == 1, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+# ----------------------------
+# Step 2: Average fatalities by month-of-year
+# ----------------------------
+monthly_fatal_avg <- monthly_fatal_year %>%
+  group_by(month_num) %>%
+  summarise(
+    avg_fatalities = mean(monthly_fatalities),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    month_name = factor(month.abb[month_num], levels = month.abb)
+  )
+
+# ----------------------------
+# Step 3: overall mean line
+# ----------------------------
+overall_avg <- mean(monthly_fatal_avg$avg_fatalities)
+
+# ----------------------------
+# Step 4: ggplot
+# ----------------------------
+p <- ggplot(monthly_fatal_avg, aes(x = month_name, y = avg_fatalities)) +
+
+  geom_col(fill = "steelblue") +
+
+  geom_hline(
+    aes(yintercept = overall_avg, color = "Average"),
+    linetype = "dashed",
+    linewidth = 1
+  ) +
+  # fake mapping for legend consistency
+  scale_color_manual(
+    values = c("Average" = "orange"),
+    name = ""
+  ) +
+
+  theme_minimal() +
+  theme(
+    legend.position = "top"
+  ) +
+  labs(
+    x = "",
+    y = "Total fatalities"
+  ) +
+
+  theme_minimal(base_size = 12) +
+
+  theme(
+    legend.position = "top",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+# ----------------------------
+# Step 5: Plotly
+# ----------------------------
+ggplotly(p)
+```
+
 ## Row {height="350px"}
 
-### Column
+### Column {.tabset}
 
 ``` {r}
 #| title: Holiday Crash Patterns
@@ -374,7 +515,7 @@ ggplotly(p) %>%
 ### Column {.tabset}
 
 ``` {r}
-#| title: Day of Crash (YTD)
+#| title: Crashes by Day of Week (YTD)
 dow_data <- crash_level %>%
   filter(City == "El Paso",
          Crash.Year == 2026) %>%
@@ -421,7 +562,7 @@ ggplotly(p3)
 ```
 
 ``` {r}
-#| title: Hour of Crash (YTD)
+#| title: Crashes by Hour (YTD)
 hour_data <- crash_level %>%
   filter(
     City == "El Paso",
@@ -446,15 +587,19 @@ p4 <- ggplot(hour_data, aes(x = time_block, y = n)) +
   geom_col(fill = "steelblue") +
 
   geom_hline(
-    yintercept = avg_block,
-    color = "orange",
+    aes(yintercept = avg_block, color = "Average"),
     linetype = "dashed",
     linewidth = 1.2
+  ) +
+  # fake mapping for legend consistency
+  scale_color_manual(
+    values = c("Average" = "orange"),
+    name = ""
   ) +
 
   theme_minimal() +
   theme(
-    legend.position = "none"
+    legend.position = "top"
   ) +
   labs(
     x = "",
