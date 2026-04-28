@@ -14,7 +14,7 @@ execute:
 
 Welcome to the Alcohol-Related Crash Dashboard!
 
-This dashboard displays data on alcohol-related vehicle crashes in El Paso, Texas and is updated on a monthly basis.
+This dashboard displays data on alcohol-related vehicle crashes in El Paso, Texas and is updated once a month.
 
 ```{r}
 
@@ -416,202 +416,7 @@ p <- ggplot(monthly_fatal_avg, aes(x = month_name, y = avg_fatalities)) +
 ggplotly(p)
 ```
 
-## Row {height="350px"}
-
-### Column {.tabset}
-
-
-``` {r}
-#| title: Holiday Crashes (Cinco de Mayo)
-
-crash_data <- crash_level %>%
-  filter(City == "El Paso",
-         Crash.Year != 2020) %>%
-  mutate(
-    date = as.Date(Crash.Date),   # FIX 1: ensure proper date type
-    year = Crash.Year,
-    cinco = as.Date(paste0(year, "-05-05")),
-    days_from_cinco = as.numeric(date - cinco)
-  )
-
-window_data <- crash_data %>%
-  filter(days_from_cinco >= -7 & days_from_cinco <= 7) %>%
-  mutate(
-    is_cinco = ifelse(days_from_cinco == 0,
-                      "Cinco de Mayo",
-                      "Other Days")   # FIX 2: create BEFORE grouping
-  )
-
-plot_data <- window_data %>%
-  group_by(year, days_from_cinco, is_cinco) %>%
-  summarise(daily_crashes = n(), .groups = "drop") %>%
-  group_by(days_from_cinco, is_cinco) %>%
-  summarise(avg_crashes = mean(daily_crashes), .groups = "drop")
-
-
-# Create indicator for Cinco
-plot_data <- plot_data %>%
-  mutate(is_cinco = ifelse(days_from_cinco == 0, "Cinco de Mayo", "Other Days"))
-
-# Base ggplot
-p <- ggplot(plot_data, aes(x = days_from_cinco, y = avg_crashes)) +
-
-  geom_smooth(se = FALSE, method = "loess", span = 0.3,
-              color = "#2C3E50", size = 1) +
-  
-  geom_point(aes(color = is_cinco), size = 3) +
-  
-  geom_vline(xintercept = 0, linetype = "dashed",
-             color = "#C0392B", size = 1) +
-  
-  scale_color_manual(values = c(
-    "Cinco de Mayo" = "#34495E",
-    "Other Days" = "#34495E"
-  )) +
-  
-  scale_x_continuous(breaks = seq(-7, 7, by = 1)) +
-  
-  labs(
-    x = "Days from May 5th",
-    y = "Average Number of Crashes"
-  ) +
-  
-  theme_minimal(base_size = 10) +
-  theme(
-    plot.title = element_text(size = 15),
-    legend.position = "none"
-  )
-
-# Get y-bounds for shading
-y_min <- min(plot_data$avg_crashes, na.rm = TRUE)
-y_max <- max(plot_data$avg_crashes, na.rm = TRUE)
-
-# Convert to plotly + add shaded region
-ggplotly(p) %>%
-  add_ribbons(
-    x = seq(1, 3, length.out = 50),
-    ymin = y_min,
-    ymax = y_max,
-    fillcolor = "rgba(255, 0, 0, 0.08)",
-    line = list(width = 0),
-    inherit = FALSE,
-    showlegend = FALSE
-  ) %>%
-  # Highlight -6 day (single-day window)
-  add_ribbons(
-    x = seq(-6 - 0.5, -6 + 0.5, length.out = 50),
-    ymin = y_min,
-    ymax = y_max,
-    fillcolor = "rgba(255, 0, 0, 0.08)",
-    line = list(width = 0),
-    inherit = FALSE,
-    showlegend = FALSE
-  )
-
-```
-
-``` {r}
-#| title: Holiday Crashes (Memorial Day)
-
-# ----------------------------
-# 1. Base data
-# ----------------------------
-base <- crash_level %>%
-  filter(
-    City == "El Paso",
-    Crash.Year != 2020
-  ) %>%
-  mutate(
-    date = as.Date(Crash.Date),
-    year = Crash.Year
-  )
-
-# ----------------------------
-# 2. Memorial Day (last Monday in May)
-# ----------------------------
-memorial <- base %>%
-  distinct(year) %>%
-  mutate(
-    memorial_day = as.Date(paste0(year, "-05-31")) -
-      (wday(as.Date(paste0(year, "-05-31")), week_start = 1) - 1)
-  )
-
-# ----------------------------
-# 3. Event time
-# ----------------------------
-event_data <- base %>%
-  left_join(memorial, by = "year") %>%
-  mutate(event_time = as.numeric(date - memorial_day)) %>%
-  filter(event_time >= -7, event_time <= 7)
-
-# ----------------------------
-# 4. Aggregate: average across years
-# ----------------------------
-plot_data <- event_data %>%
-  group_by(year, event_time) %>%
-  summarise(crashes = n_distinct(Crash.ID), .groups = "drop") %>%
-  group_by(event_time) %>%
-  summarise(avg_crashes = mean(crashes), .groups = "drop")
-
-p <- ggplot(plot_data, aes(x = event_time, y = avg_crashes)) +
-
-  geom_smooth(se = FALSE, method = "loess", span = 0.3,
-              color = "#2C3E50", size = 1) +
-  
-  geom_point(size = 3) +
-  
-  geom_vline(xintercept = 0, linetype = "dashed",
-             color = "#C0392B", size = 1) +
-  
-  scale_x_continuous(breaks = seq(-7, 7, by = 1)) +
-  
-  labs(
-    x = "Days from Memorial Day",
-    y = "Average Number of Crashes"
-  ) +
-  
-  theme_minimal(base_size = 10) +
-  theme(
-    plot.title = element_text(size = 15),
-    legend.position = "none"
-  )
-
-# ----------------------------
-# Y bounds for shading
-# ----------------------------
-y_min <- min(plot_data$avg_crashes, na.rm = TRUE)
-y_max <- max(plot_data$avg_crashes, na.rm = TRUE)
-
-# ----------------------------
-# Convert to Plotly + shaded regions
-# ----------------------------
-ggplotly(p) %>%
-
-  # Ribbon at -2 days
-  add_ribbons(
-    x = seq(-2 - 0.5, -2 + 0.5, length.out = 50),
-    ymin = y_min,
-    ymax = y_max,
-    fillcolor = "rgba(255, 0, 0, 0.08)",
-    line = list(width = 0),
-    inherit = FALSE,
-    showlegend = FALSE
-  ) %>%
-
-  # Ribbon at +5 days
-  add_ribbons(
-    x = seq(5 - 0.5, 5 + 0.5, length.out = 50),
-    ymin = y_min,
-    ymax = y_max,
-    fillcolor = "rgba(255, 0, 0, 0.08)",
-    line = list(width = 0),
-    inherit = FALSE,
-    showlegend = FALSE
-  )
-```
-
-
-### Column {.tabset}
+## Row {height="400px"}
 
 ``` {r}
 #| title: Crashes by Day of Week (YTD)
@@ -708,6 +513,473 @@ p4 <- ggplot(hour_data, aes(x = time_block, y = n)) +
 ggplotly(p4)
 ```
 
+# Holidays
+
+## Row {height="250px"}
+
+```{r}
+#| title: New Year's Day
+
+base <- crash_level %>%
+  filter(City == "El Paso", Crash.Year != 2020) %>%
+  mutate(
+    date = as.Date(Crash.Date),
+    year = Crash.Year   # 🔥 FIX: required
+  )
+
+# ----------------------------
+# 1. Build explicit event window per year
+# ----------------------------
+ny_window <- base %>%
+  distinct(year) %>%
+  mutate(
+    holiday = as.Date(paste0(year, "-01-01"))
+  ) %>%
+  tidyr::expand_grid(event_time = -7:7) %>%
+  mutate(date = holiday + event_time)
+
+# ----------------------------
+# 2. Join crashes to window
+# ----------------------------
+data <- ny_window %>%
+  left_join(
+    base %>% select(date, Crash.ID),
+    by = "date"
+  )
+
+# ----------------------------
+# 3. Aggregate
+# ----------------------------
+plot_data <- data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups = "drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes, na.rm = TRUE), .groups = "drop")
+
+# ----------------------------
+# 4. Plot
+# ----------------------------
+p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
+  geom_smooth(se = FALSE, method = "loess", span = 0.3,
+              color = "#2C3E50", size = 1) +
+  geom_point(size = 3, color = "#34495E") +
+  geom_vline(xintercept = 0, linetype = "dashed",
+             color = "#C0392B", size = 1) +
+  scale_x_continuous(breaks = -7:7, limits = c(-7, 7)) +
+  labs(x = "Days from New Year's Day", y = "Average Crashes") +
+  theme_minimal(base_size = 10)
+
+y_min <- min(plot_data$avg_crashes, na.rm = TRUE)
+y_max <- max(plot_data$avg_crashes, na.rm = TRUE)
+
+ggplotly(p) %>%
+  layout(xaxis = list(range = c(-7, 7))) %>%
+  add_ribbons(
+    x = seq(-0.5, 0.5, length.out = 50),
+    ymin = y_min, ymax = y_max,
+    fillcolor = "rgba(255,0,0,0.08)",
+    line = list(width = 0),
+    inherit = FALSE,
+    showlegend = FALSE
+  )
+```
+
+``` {r}
+#| title: Superbowl 
+
+superbowl <- base %>%
+  distinct(year) %>%
+  mutate(
+    feb1 = as.Date(paste0(year, "-02-01")),
+    holiday = feb1 + (7 - wday(feb1)) + 7
+  )
+
+data <- base %>%
+  left_join(superbowl, by="year") %>%
+  mutate(event_time = as.numeric(date - holiday)) %>%
+  filter(event_time >= -7 & event_time <= 7)
+
+plot_data <- data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups="drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes), .groups="drop")
+
+p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
+  geom_smooth(se=FALSE, method="loess", span=0.3,
+              color="#2C3E50", size=1) +
+  geom_point(size=3, color="#34495E") +
+  geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
+  scale_x_continuous(breaks=-7:7) +
+  labs(x="Days from Superbowl", y="Average Crashes") +
+  theme_minimal(base_size=10)
+
+ggplotly(p) %>%
+  add_ribbons(x = seq(0 - 0.5, 0 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) %>%
+  add_ribbons(x = seq(-7 - 0.5, -6 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) %>%
+  add_ribbons(x = seq(7 - 0.5, 7 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) 
+```
+
+## Row {height="250px"}
+
+```{r}
+#| title: St. Patrick's Day
+
+data <- base %>%
+  mutate(
+    holiday = as.Date(paste0(year, "-03-17")),
+    event_time = as.numeric(date - holiday)
+  ) %>%
+  filter(event_time >= -7 & event_time <= 7)
+
+plot_data <- data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups="drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes), .groups="drop")
+
+p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
+  geom_smooth(se=FALSE, method="loess", span=0.3,
+              color="#2C3E50", size=1) +
+  geom_point(size=3, color="#34495E") +
+  geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
+  scale_x_continuous(breaks=-7:7) +
+  labs(x="Days from Saint Patrick's Day", y="Average Crashes") +
+  theme_minimal(base_size=10)
+
+ggplotly(p) %>%
+  add_ribbons(x = seq(-4 - 0.5, -4 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) %>%
+  add_ribbons(x = seq(-1 - 0.5, -1 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) %>%
+  add_ribbons(x = seq(1 - 0.5, 1 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) %>%
+  add_ribbons(x = seq(4 - 0.5, 4 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) 
+```
+
+``` {r}
+#| title: Memorial Day
+
+memorial <- base %>%
+  distinct(year) %>%
+  mutate(
+    memorial_day = as.Date(paste0(year, "-05-31")) -
+      (wday(as.Date(paste0(year, "-05-31")), week_start = 1) - 1)
+  )
+
+data <- base %>%
+  left_join(memorial, by="year") %>%
+  mutate(event_time = as.numeric(date - memorial_day)) %>%
+  filter(event_time >= -7 & event_time <= 7)
+
+plot_data <- data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups="drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes), .groups="drop")
+
+p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
+  geom_smooth(se=FALSE, method="loess", span=0.3,
+              color="#2C3E50", size=1) +
+  geom_point(size=3, color="#34495E") +
+  geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
+  scale_x_continuous(breaks=-7:7) +
+  labs(x="Days from Memorial Day", y="Average Crashes") +
+  theme_minimal(base_size=10)
+
+ggplotly(p) %>%
+  add_ribbons(x = seq(-2 - 0.5, -2 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) %>%
+  add_ribbons(x = seq(5 - 0.5, 5 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) 
+```
+
+## Row {height="250px"}
+
+
+``` {r}
+#| title: Cinco de Mayo
+
+data <- base %>%
+  mutate(
+    holiday = as.Date(paste0(year, "-05-05")),
+    event_time = as.numeric(date - holiday)
+  ) %>%
+  filter(event_time >= -7 & event_time <= 7)
+
+plot_data <- data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups="drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes), .groups="drop")
+
+p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
+  geom_smooth(se=FALSE, method="loess", span=0.3,
+              color="#2C3E50", size=1) +
+  geom_point(size=3, color="#34495E") +
+  geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
+  scale_x_continuous(breaks=-7:7) +
+  labs(x="Days from May 5", y="Average Crashes") +
+  theme_minimal(base_size=10)
+
+ggplotly(p) %>%
+  add_ribbons(x = seq(-6 - 0.5, -6 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) %>%
+  add_ribbons(x = seq(1 - 0.5, 3 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0))
+
+```
+
+``` {r}
+#| title: Independence Day
+
+data <- base %>%
+  mutate(
+    holiday = as.Date(paste0(year, "-07-04")),
+    event_time = as.numeric(date - holiday)
+  ) %>%
+  filter(event_time >= -7 & event_time <= 7)
+
+plot_data <- data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups="drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes), .groups="drop")
+
+p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
+  geom_smooth(se=FALSE, method="loess", span=0.3,
+              color="#2C3E50", size=1) +
+  geom_point(size=3, color="#34495E") +
+  geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
+  scale_x_continuous(breaks=-7:7) +
+  labs(x="Days from July 4", y="Average Crashes") +
+  theme_minimal(base_size=10)
+
+ggplotly(p) %>%
+  add_ribbons(x = seq(-4 - 0.5, -4 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) %>%
+  add_ribbons(x = seq(0 - 0.5, 1 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) %>%
+  add_ribbons(x = seq(3 - 0.5, 3 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0))
+```
+
+## Row {height="250px"}
+
+``` {r}
+#| title: Labor Day
+
+labor <- base %>%
+  distinct(year) %>%
+  mutate(
+    sept1 = as.Date(paste0(year, "-09-01")),
+    holiday = sept1 + (8 - wday(sept1, week_start=1)) %% 7
+  )
+
+data <- base %>%
+  left_join(labor, by="year") %>%
+  mutate(event_time = as.numeric(date - holiday)) %>%
+  filter(event_time >= -7 & event_time <= 7)
+
+plot_data <- data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups="drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes), .groups="drop")
+
+p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
+  geom_smooth(se=FALSE, method="loess", span=0.3,
+              color="#2C3E50", size=1) +
+  geom_point(size=3, color="#34495E") +
+  geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
+  scale_x_continuous(breaks=-7:7) +
+  labs(x="Days from Labor Day", y="Average Crashes") +
+  theme_minimal(base_size=10)
+
+ggplotly(p) %>%
+  add_ribbons(x = seq(-3 - 0.5, 0 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) %>%
+  add_ribbons(x = seq(5 - 0.5, 6 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0))
+```
+
+``` {r}
+#| title: Halloween
+
+data <- base %>%
+  mutate(
+    holiday = as.Date(paste0(year, "-10-31")),
+    event_time = as.numeric(date - holiday)
+  ) %>%
+  filter(event_time >= -7 & event_time <= 7)
+
+plot_data <- data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups="drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes), .groups="drop")
+
+p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
+  geom_smooth(se=FALSE, method="loess", span=0.3,
+              color="#2C3E50", size=1) +
+  geom_point(size=3, color="#34495E") +
+  geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
+  scale_x_continuous(breaks=-7:7) +
+  labs(x="Days from October 31", y="Average Crashes") +
+  theme_minimal(base_size=10)
+
+ggplotly(p) %>%
+  add_ribbons(x = seq(-4 - 0.5, -4 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) %>%
+  add_ribbons(x = seq(-2 - 0.5, -2 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) %>%
+  add_ribbons(x = seq(4 - 0.5, 4 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) %>%
+  add_ribbons(x = seq(6 - 0.5, 6 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0))
+```
+
+## Row {height="250px"}
+
+``` {r}
+#| title: Thanksgiving
+
+thanksgiving <- base %>%
+  distinct(year) %>%
+  mutate(
+    nov1 = as.Date(paste0(year, "-11-01")),
+    holiday = nov1 + (4 - wday(nov1) + 7) %% 7 + 21
+  )
+
+data <- base %>%
+  left_join(thanksgiving, by="year") %>%
+  mutate(event_time = as.numeric(date - holiday)) %>%
+  filter(event_time >= -7 & event_time <= 7)
+
+plot_data <- data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups="drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes), .groups="drop")
+
+p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
+  geom_smooth(se=FALSE, method="loess", span=0.3,
+              color="#2C3E50", size=1) +
+  geom_point(size=3, color="#34495E") +
+  geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
+  scale_x_continuous(breaks=-7:7) +
+  labs(x="Days from Thanksgiving", y="Average Crashes") +
+  theme_minimal(base_size=10)
+
+ggplotly(p) %>%
+  add_ribbons(x = seq(-3 - 0.5, -3 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0)) %>%
+  add_ribbons(x = seq(2 - 0.5, 3 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0))
+```
+
+``` {r}
+#| title: Christmas
+
+data <- base %>%
+  mutate(
+    holiday = as.Date(paste0(year, "-12-25")),
+    event_time = as.numeric(date - holiday)
+  ) %>%
+  filter(event_time >= -7 & event_time <= 7)
+
+plot_data <- data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups="drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes), .groups="drop")
+
+p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
+  geom_smooth(se=FALSE, method="loess", span=0.3,
+              color="#2C3E50", size=1) +
+  geom_point(size=3, color="#34495E") +
+  geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
+  scale_x_continuous(breaks=-7:7) +
+  labs(x="Days from December 25", y="Average Crashes") +
+  theme_minimal(base_size=10)
+
+ggplotly(p) %>%
+  add_ribbons(x = seq(4 - 0.5, 4 + 0.5, length.out = 50),
+              ymin = min(plot_data$avg_crashes),
+              ymax = max(plot_data$avg_crashes),
+              fillcolor = "rgba(255,0,0,0.08)",
+              line = list(width = 0))
+```
 
 # Drivers
 
@@ -1011,14 +1283,10 @@ top_10_streets %>%
 
 ::: {.card title="About This Dashboard"}
 
-Last updated: **March 2026**
+Last Updated: March 2026
 
 Crash data is downloaded from the Texas Department of Transportation's (TXDOT) website using the 
 [Crash Query Tool](https://cris.dot.state.tx.us/public/Query/app/home). All crash data in this dashboard represent those classified as alcohol-related and that occurred in the city of El Paso.
-
-:::
-
-::: {.card title="Technical Details"}
 
 **Definition of Alcohol-Related Crash**
 
@@ -1028,14 +1296,19 @@ A crash is defined as alcohol-related if involved drivers or individuals were re
 
 Injuries include people who were classified as having a suspected serious injury, suspected minor injury, or possible injury. Fatalities are defined as any motor vehicle traffic injury crash that results in the death of one or more persons within 30 days of the incident.
 
+:::
+
+::: {.card title="Technical Details"}
+
 **Calculation of Moving Average**
 
-- Averages for crashes and fatal crashes between 2016 and *Present* were calculated using a 12-month moving average. This technique results in a smooth line, allowing the viewer to see if a trend is increasing or decreasing.
+Averages for crashes and fatal crashes between 2016 and *Present* were calculated using a 12-month moving average. This technique results in a smooth line, allowing the viewer to see if a trend is increasing or decreasing.
 
 **Holiday Analyses**
 
-- For the Cinco de Mayo analysis, total crashes from 2016 to 2025 were averaged by day across a 15-day event window (7 days before and 7 days after May 5th). Crash data from 2020 were excluded to avoid COVID-19–related disruptions in traffic patterns.
-- Memorial Day was calculated separately for each year as the last Monday in May to account for its shifting calendar date. Each crash was then assigned an event time indicating the number of days before or after Memorial Day in its respective year. These event-time values were restricted to a ±7-day window and averaged across 2016–2025 (excluding 2020) to estimate typical crash patterns surrounding the holiday.
+Holiday crash statistics were calculated by aligning crash data to each holiday. For fixed-date holidays (e.g., New Year’s Day, Independence Day, Halloween, Christmas, and St. Patrick’s Day), each crash was assigned an event time based on the number of days before or after the calendar date of the holiday within each year. For shifting holidays (e.g., Super Bowl and Memorial Day), the holiday date was first computed for each year and then used as the reference point for event-time calculation.
+
+In all cases, crashes were restricted to a ±7-day window around the holiday and then aggregated across years (2016–2025), excluding 2020 to avoid COVID-19-related disruptions. Average daily crash counts were then computed for each relative day to identify typical patterns before and after each holiday.
 :::
 
 # Quiz
