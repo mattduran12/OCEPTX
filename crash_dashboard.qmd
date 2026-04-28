@@ -984,7 +984,7 @@ ggplotly(p) %>%
 # Drivers
 
 ``` {r}
-# drivers object with BACs
+# drivers object with BACs only
 drivers <- person_level %>%
   mutate(
     driver_flag = case_when(
@@ -1006,16 +1006,32 @@ drivers <- person_level %>%
     City == "El Paso",
     Crash.Year == 2026,
     driver_flag == 1,
-    bac_result == 1
   )
 ```
 
 ## Row {height=30%}
 
+``` {r}
+#| content: valuebox
+#| title: "Total Intoxicated Drivers (YTD)"
+
+total_intox_drivers <- drivers %>%
+  filter(bac_value >= 0.08 & bac_result == 1) %>%
+  summarise(n = n()) %>%
+  pull(n)
+
+list(
+  icon = "emoji-dizzy",
+  color = "primary",
+  value = format(total_intox_drivers, big.mark = ",")
+)
+```
+
 ```{r}
 #| content: valuebox
-#| title: "Average BAC (YTD)"
+#| title: "Average BAC Result (YTD)"
 bac_stats <- drivers %>%
+  filter(bac_result == 1) %>%
   summarise(
     mean_bac = mean(bac_value, na.rm = TRUE),
     sd_bac = sd(bac_value, na.rm = TRUE)
@@ -1031,28 +1047,10 @@ list(
 
 ```{r}
 #| content: valuebox
-#| title: "Male Drivers (YTD)"
-male_pct <- drivers %>%
-  mutate(
-    male = if_else(Person.Gender == "1 - MALE", 1, 0)
-  ) %>%
-  summarise(
-    pct_male = mean(male, na.rm = TRUE) * 100
-  ) %>%
-  pull(pct_male)
-
-list(
-  icon = "gender-male",
-  color = "primary",
-  value = paste0(round(male_pct, 1), "%")
-)
-```
-
-```{r}
-#| content: valuebox
 #| title: "Average Age (YTD)"
 
 age_stats <- drivers %>%
+  filter(bac_value>=0.08 & bac_result==1) %>%
   mutate(
     age_num = as.numeric(Person.Age)
   ) %>%
@@ -1065,36 +1063,139 @@ list(
   icon = "person-fill",
   color = "primary",
   value = paste0(
-    round(age_stats$mean_age, 1)
+    round(age_stats$mean_age, 0)
   )
 )
 ```
 
 ## Row { height=70%}
 
-### Column
+### Column {.tabset}
+
+``` {r}
+#| title: Intoxicated Driver's Zipcode (YTD)
+zip_top10 <- drivers %>%
+  filter(bac_value >= 0.08 & bac_result == 1,
+         !is.na(Driver.Zip.Code)) %>%
+  group_by(Driver.Zip.Code) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  arrange(desc(n)) %>%
+  slice_head(n = 10)
+
+zip_top10 <- zip_top10 %>%
+  mutate(
+    pct = n / sum(n),
+    label_full = paste0(Driver.Zip.Code, "\n", n, " (", scales::percent(pct), ")")
+  )
+
+
+plot_ly(
+  data = zip_top10,
+  type = "treemap",
+  labels = ~label_full,
+  parents = rep("", nrow(zip_top10)),
+  values = ~n,
+  textinfo = "label",
+  marker = list(
+    colors = rep("#f4b942", nrow(zip_top10))
+  ),
+  hovertemplate = paste(
+    "ZIP: %{label}<br>",
+    "Drivers: %{value}<br>",
+    "<extra></extra>"
+  )
+)
+
+```
 
 ```{r}
-#| title: Drivers Over the Legal Limit (YTD)
+#| title: Intoxicated Driver Demographics (YTD)
 
-
-drivers %>%
+drivers_clean <- drivers %>%
   mutate(
-    bac_group = if_else(
-      bac_value >= 0.08,
-      "0.08+ (Over legal limit)",
-      "<0.08"
+    Person.Ethnicity = case_when(
+      
+      # Missing / unknown categories
+      Person.Ethnicity %in% c("No Data", "99 - UNKNOWN", "UNKNOWN", "", NA) ~ NA_character_,
+      
+      # Special cases
+      Person.Ethnicity == "95 - AUTONOMOUS" ~ "Autonomous",
+      Person.Ethnicity == "98 - OTHER" ~ "Other",
+      
+      # Race/Ethnicity categories
+      grepl("A - ASIAN", Person.Ethnicity) ~ "Asian",
+      grepl("B - BLACK", Person.Ethnicity) ~ "Black",
+      grepl("H - HISPANIC", Person.Ethnicity) ~ "Hispanic",
+      grepl("I - AMER", Person.Ethnicity) ~ "American Indian/Alaska Native",
+      grepl("W - WHITE", Person.Ethnicity) ~ "White",
+      
+      # Fallback
+      TRUE ~ NA_character_
+    ),
+    
+    Person.Gender = case_when(
+      Person.Gender %in% c("99 - UNKNOWN", "UNKNOWN", "No Data", "") ~ NA_character_,
+      Person.Gender == "1 - MALE" ~ "Male",
+      Person.Gender == "2 - FEMALE" ~ "Female",
+      TRUE ~ NA_character_
     )
+  )
+
+demo_table <- drivers_clean %>%
+  filter(bac_value >= 0.08 & bac_result == 1) %>%
+  filter(!is.na(Person.Ethnicity), !is.na(Person.Gender)) %>%
+  
+  mutate(
+    Person.Gender = factor(Person.Gender, levels = c("Female", "Male")),
+    
+    Person.Age = as.numeric(Person.Age)  # convert from character
   ) %>%
-  count(bac_group) %>%
-  plot_ly(
-    labels = ~bac_group,
-    values = ~n,
-    type = "pie",
-    textinfo = "label+percent",
-    marker = list(
-      colors = c("maroon", "lightgray")
-    )
+  
+  group_by(Person.Ethnicity, Person.Gender) %>%
+  summarise(
+    avg_bac = mean(bac_value, na.rm = TRUE),
+    avg_age = mean(Person.Age, na.rm = TRUE),
+    n = n(),
+    .groups = "drop"
+  ) %>%
+  
+  mutate(
+    avg_bac = round(avg_bac, 2),
+    avg_age = round(avg_age, 0)
+  ) %>%
+  
+  arrange(desc(n)) %>%
+  
+  rename(
+    "Race/Ethnicity" = Person.Ethnicity,
+    "Gender" = Person.Gender,
+    "Average Age" = avg_age,
+    "Average BAC" = avg_bac,
+    "Count" = n
+  )
+
+demo_table %>%
+  gt() %>%
+  
+  
+  # Zebra striping
+  opt_row_striping() %>%
+  
+  # Make header row slightly bolder + cleaner
+  tab_style(
+    style = list(
+      cell_text(weight = "bold")
+    ),
+    locations = cells_column_labels()
+  ) %>%
+  
+  # Light spacing + clean look
+  tab_options(
+    table.font.size = "small",
+    column_labels.font.weight = "bold",
+    column_labels.border.bottom.width = px(2),
+    table.border.top.style = "none",
+    table.border.bottom.style = "solid"
   )
 
 ```
@@ -1104,7 +1205,8 @@ drivers %>%
 
 ```{r}
 #| title: Vehicle Color
-drivers %>%
+plot_data <- drivers %>%
+  filter(bac_value >= 0.08 & bac_result == 1) %>%
   mutate(
     color = case_when(
       grepl("BLK", Vehicle.Color) ~ "Black",
@@ -1124,20 +1226,32 @@ drivers %>%
     )
   ) %>%
   count(color) %>%
-  plot_ly(
-    x = ~n,
-    y = ~fct_reorder(color, n),
-    type = "bar",
-    orientation = "h",
-    marker = list(color = "steelblue")
-  ) %>%
-  layout(xaxis = list(title = "Total Drivers"), yaxis = list(title = ""))
+  mutate(
+    pct = n / sum(n),
+    label = paste0(n, " (", scales::percent(pct), ")")
+  )
+plot_ly(
+  data = plot_data,
+  x = ~n,
+  y = ~fct_reorder(color, n),
+  type = "bar",
+  orientation = "h",
+  marker = list(color = "steelblue"),
+  text = ~label,
+  textposition = "outside"
+) %>%
+  layout(
+    xaxis = list(title = "Total intoxicated drivers"),
+    yaxis = list(title = ""),
+    margin = list(r = 100)
+  )
 
 ```
 
 ``` {r}
 #| title: Vehicle Body Style
-drivers %>%
+plot_data <- drivers %>%
+  filter(bac_value >= 0.08 & bac_result == 1) %>%
   mutate(
     body = case_when(
       grepl("MC", Vehicle.Body.Style) ~ "Motorcycle",
@@ -1149,40 +1263,66 @@ drivers %>%
       TRUE ~ "Other"
     )
   ) %>%
-  count(body) %>%
-  plot_ly(
-    x = ~n,
-    y = ~fct_reorder(body, n),
-    type = "bar",
-    orientation = "h",
-    marker = list(color = "steelblue")
-  ) %>%
-  layout(xaxis = list(title = "Total Drivers"), yaxis = list(title = ""))
+  filter(!is.na(body)) %>%
+  count(body)
+
+plot_data <- plot_data %>%
+  mutate(
+    pct = n / sum(n),
+    label = paste0(n, " (", scales::percent(pct), ")")
+  )
+
+plot_ly(
+  data = plot_data,
+  x = ~n,
+  y = ~fct_reorder(body, n),
+  type = "bar",
+  orientation = "h",
+  text = ~label,
+  textposition = "outside",
+  marker = list(color = "steelblue")
+) %>%
+  layout(
+    xaxis = list(title = "Total intoxicated drivers"),
+    yaxis = list(title = "")
+  )
+
 ```
 
 ``` {r}
 #| title: Vehicle Make
-drivers %>%
+
+plot_data <- drivers %>%
+  filter(bac_value >= 0.08 & bac_result == 1) %>%
+  
   mutate(
-    make = case_when(
-      Vehicle.Make %in% c("FORD","CHEVROLET","DODGE","GMC") ~ Vehicle.Make,
-      Vehicle.Make %in% c("TOYOTA","HONDA","NISSAN","HYUNDAI","KIA","MAZDA","SUBARU","VOLKSWAGEN","LEXUS") ~ Vehicle.Make,
-      TRUE ~ NA_character_
-    ),
-    make = str_to_title(make)
+    make = Vehicle.Make,
+    make = str_to_sentence(str_to_lower(make))  # robust sentence case
   ) %>%
-  filter(!is.na(make)) %>%
+  
+  filter(!is.na(make), make != "") %>%
+  
   count(make) %>%
-  plot_ly(
-    x = ~n,
-    y = ~fct_reorder(make, n),
-    type = "bar",
-    orientation = "h",
-    marker = list(color = "steelblue")
-  ) %>%
+  
+  mutate(
+    pct = n / sum(n),
+    label = paste0(n, " (", scales::percent(pct), ")")
+  )
+
+plot_ly(
+  data = plot_data,
+  x = ~n,
+  y = ~fct_reorder(make, n),
+  type = "bar",
+  orientation = "h",
+  marker = list(color = "steelblue"),
+  text = ~label,
+  textposition = "outside"
+) %>%
   layout(
-    xaxis = list(title = "Total drivers"),
-    yaxis = list(title = "")
+    xaxis = list(title = "Total intoxicated drivers"),
+    yaxis = list(title = ""),
+    margin = list(r = 120)
   )
 ```
 
@@ -1190,7 +1330,7 @@ drivers %>%
 
 ## Row {height=100%}
 
-### Column {.tabset width=75%}
+### Column {.tabset width=70%}
 
 ```{r}
 #| title: Crashes (YTD)
@@ -1252,7 +1392,7 @@ leaflet(map_data) %>%
   )
 ```
 
-### Column {width=25%}
+### Column {.tabset width=30%}
 
 ``` {r}
 #| title: Crash Locations (YTD)
@@ -1276,6 +1416,27 @@ top_10_streets %>%
   gt()
 ```
 
+``` {r}
+#| title: Fatal Crash Locations (YTD)
+top_fatal_streets <- crash_level %>%
+  filter(
+    City == "El Paso",
+    Crash.Year == 2026,
+    Fatal.Crash.Flag == 1
+  ) %>%
+  count(Street.Name, sort = TRUE) %>%
+  mutate(
+    percent = round(n / sum(n) * 100, 2)
+  ) %>%
+  rename(
+    "Street Name" = Street.Name,
+    "Fatal Crashes" = n,
+    "Percent (%)" = percent
+  )
+
+top_fatal_streets %>%
+  gt()
+```
 
 # About
 
@@ -1285,16 +1446,20 @@ top_10_streets %>%
 
 Last Updated: March 2026
 
-Crash data is downloaded from the Texas Department of Transportation's (TXDOT) website using the 
+Crash data is downloaded from the Texas Department of Transportation (TXDOT) website using the 
 [Crash Query Tool](https://cris.dot.state.tx.us/public/Query/app/home). All crash data in this dashboard represent those classified as alcohol-related and that occurred in the city of El Paso.
 
 **Definition of Alcohol-Related Crash**
 
-A crash is defined as alcohol-related if involved drivers or individuals were reported as "Under the Influence of Alcohol", "Had Been Drinking", or were reported to have a BAC greater than 0.
+A crash is defined as alcohol-related if involved drivers or individuals were reported as "Under the Influence of Alcohol", "Had Been Drinking", or were reported to have a blood alcohol content (BAC) greater than 0.
 
 **Definition of Injury/Fatality**
 
 Injuries include people who were classified as having a suspected serious injury, suspected minor injury, or possible injury. Fatalities are defined as any motor vehicle traffic injury crash that results in the death of one or more persons within 30 days of the incident.
+
+**Definition of Intoxicated Driver**
+
+An intoxicated driver is a person who's BAC test returned a value of 0.08g/dL or greater.
 
 :::
 
@@ -1309,6 +1474,10 @@ Averages for crashes and fatal crashes between 2016 and *Present* were calculate
 Holiday crash statistics were calculated by aligning crash data to each holiday. For fixed-date holidays (e.g., New Year’s Day, Independence Day, Halloween, Christmas, and St. Patrick’s Day), each crash was assigned an event time based on the number of days before or after the calendar date of the holiday within each year. For shifting holidays (e.g., Super Bowl and Memorial Day), the holiday date was first computed for each year and then used as the reference point for event-time calculation.
 
 In all cases, crashes were restricted to a ±7-day window around the holiday and then aggregated across years (2016–2025), excluding 2020 to avoid COVID-19-related disruptions. Average daily crash counts were then computed for each relative day to identify typical patterns before and after each holiday.
+
+**Missing Data**
+
+Missing data in the driver characteristics (such as gender and race/ethnicity) was minimal. Observations with missing or unknown values in these fields were excluded from analysis to ensure consistency and interpretability of demographic comparisons.
 :::
 
 # Quiz
