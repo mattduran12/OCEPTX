@@ -1,55 +1,15 @@
-/* ----------------------------
-   Global page background & text
------------------------------ */
-body {
+/* =================================================
+   DESERT WARM THEME (LIGHT MODE DEFAULT)
+================================================= */
+
+/* Page + base layout */
+html, body {
   background-color: #fdf3e7;   /* warm desert sand */
   color: #3a2d2a;              /* deep earth brown */
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
-/* ----------------------------
-   Navbar background
------------------------------ */
-.navbar {
-  background-color: #7a2e1d !important;  /* sunset terracotta */
-}
-
-/* Navbar brand/title text */
-.navbar-brand {
-  color: #fff3d6 !important;   /* soft sun glow */
-}
-
-/* Navbar links */
-.navbar-nav .nav-link {
-  color: #fff3d6 !important;
-  font-weight: 500;
-}
-
-/* Hover effect for navbar links */
-.navbar-nav .nav-link:hover {
-  color: #f4b942 !important;   /* golden sunset highlight */
-}
-
-/* ----------------------------
-   Dropdown menu
------------------------------ */
-.dropdown-menu {
-  background-color: #5c1f14;   /* deeper dusk red */
-  border: none;
-}
-
-.dropdown-item {
-  color: #fff3d6;
-}
-
-.dropdown-item:hover {
-  background-color: #9c3f2b;  /* warm sunset gradient tone */
-  color: #ffffff;
-}
-
-/* ----------------------------
-   Optional: links in body text
------------------------------ */
+/* Links */
 a {
   color: #9c3f2b;
 }
@@ -58,7 +18,38 @@ a:hover {
   color: #f4b942;
 }
 
-/* Value box styles */
+/* Navbar */
+.navbar {
+  background-color: #7a2e1d !important;  /* terracotta */
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+  color: #fff3d6 !important;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #f4b942 !important;
+}
+
+/* Dropdown */
+.dropdown-menu {
+  background-color: #5c1f14;
+  border: none;
+}
+
+.dropdown-item {
+  color: #fff3d6;
+}
+
+.dropdown-item:hover {
+  background-color: #9c3f2b;
+  color: #ffffff;
+}
+
+/* =================================================
+   VALUE BOXES
+================================================= */
 
 .value-box {
   height: 100% !important;
@@ -80,3 +71,74 @@ a:hover {
   font-size: 1.2rem !important;
 }
 
+/* =================================================
+   TABLES (LIGHT MODE)
+================================================= */
+
+table, .reactable, .gt_table {
+  background-color: #fffaf3;
+  color: #3a2d2a;
+}
+
+th {
+  background-color: #f2e3d5;
+  color: #3a2d2a;
+}
+
+tr:hover td {
+  background-color: #f7e6d2;
+}
+
+/* =================================================
+   DARK MODE (QUARTO + BOOTSTRAP SAFE)
+================================================= */
+
+/* 🔥 CRITICAL: full page + dashboard container fix */
+[data-bs-theme="dark"] html,
+[data-bs-theme="dark"] body,
+[data-bs-theme="dark"] .quarto-dashboard-container {
+  background-color: #1f1a18 !important;  /* desert night */
+  color: #f1e7dc !important;
+}
+
+/* Navbar dark */
+[data-bs-theme="dark"] .navbar {
+  background-color: #3a1a12 !important;
+}
+
+/* Links */
+[data-bs-theme="dark"] a {
+  color: #f4b942;
+}
+
+[data-bs-theme="dark"] a:hover {
+  color: #ffd27a;
+}
+
+/* =================================================
+   TABLES (DARK MODE FIX)
+================================================= */
+
+[data-bs-theme="dark"] table,
+[data-bs-theme="dark"] .reactable,
+[data-bs-theme="dark"] .gt_table {
+  background-color: #2b2321 !important;
+  color: #f1e7dc !important;
+}
+
+/* headers */
+[data-bs-theme="dark"] th {
+  background-color: #3a1f1a !important;
+  color: #ffffff !important;
+}
+
+/* cells */
+[data-bs-theme="dark"] td {
+  background-color: #2b2321 !important;
+  color: #f1e7dc !important;
+}
+
+/* hover */
+[data-bs-theme="dark"] tr:hover td {
+  background-color: #3a2a26 !important;
+}

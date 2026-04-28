@@ -1,9 +1,11 @@
 ---
-title: "Alcohol-Related Crash Dashboard"
+title: "Drunk Driving Surveillance Dashboard"
 format:
   dashboard:
-    theme: default
-    css: styles2.css
+    theme:
+      dark: darkly
+      light: default
+    css: styles3.css
     orientation: rows
     scrolling: true
 execute:
@@ -12,14 +14,16 @@ execute:
   message: false
 ---
 
-Welcome to the Alcohol-Related Crash Dashboard!
+Welcome to the Drunk Driving Surveillance Dashboard!
 
-This dashboard displays data on alcohol-related vehicle crashes in El Paso, Texas and is updated once a month.
+This dashboard displays data on alcohol-related vehicle crashes in El Paso, Texas and is updated every month.
 
 ```{r}
 
 rm(list = ls())
 
+suppressMessages(library(reactable))
+suppressMessages(library(DT))
 suppressMessages(library(gt))
 suppressMessages(library(quarto))
 suppressMessages(library(rsconnect))
@@ -177,7 +181,7 @@ monthly_counts <- crash_level %>%
   ) %>%
   arrange(month) %>%
   mutate(
-    ma_12 = zoo::rollmean(crashes, k = 12, fill = NA, align = "center")
+    ma_12 = zoo::rollmean(crashes, k = 12, fill = NA, align = "right")
   )
 
 p <- ggplot(monthly_counts, aes(x = month)) +
@@ -454,7 +458,8 @@ p3 <- ggplot(dow_data, aes(x = Day.of.Week, y = n)) +
 
   theme_minimal() +
   theme(
-    legend.position = "top"
+    legend.position = "top",
+    axis.text.x = element_text(angle = 45, hjust = 1)
   ) +
   labs(
     x = "",
@@ -474,12 +479,26 @@ hour_data <- crash_level %>%
   ) %>%
   mutate(
     hour = as.numeric(substr(Hour.of.Day, 1, 2)),
+    
     time_block = case_when(
-      hour >= 0 & hour <= 5 ~ "00:00–05:59",
-      hour >= 6 & hour <= 11 ~ "06:00–11:59",
-      hour >= 12 & hour <= 17 ~ "12:00–17:59",
-      hour >= 18 & hour <= 23 ~ "18:00–23:59",
+      hour >= 0  & hour <= 2  ~ "12–3 AM",
+      hour >= 3  & hour <= 5  ~ "3–6 AM",
+      hour >= 6  & hour <= 8  ~ "6–9 AM",
+      hour >= 9  & hour <= 11 ~ "9 AM–12 PM",
+      hour >= 12 & hour <= 14 ~ "12–3 PM",
+      hour >= 15 & hour <= 17 ~ "3–6 PM",
+      hour >= 18 & hour <= 20 ~ "6–9 PM",
+      hour >= 21 & hour <= 23 ~ "9 PM–12 AM",
       TRUE ~ "Unknown"
+    ),
+    
+    # enforce order
+    time_block = factor(
+      time_block,
+      levels = c(
+        "12–3 AM", "3–6 AM", "6–9 AM", "9 AM–12 PM",
+        "12–3 PM", "3–6 PM", "6–9 PM", "9 PM–12 AM"
+      )
     )
   ) %>%
   count(time_block)
@@ -487,24 +506,26 @@ hour_data <- crash_level %>%
 avg_block <- mean(hour_data$n, na.rm = TRUE)
 
 p4 <- ggplot(hour_data, aes(x = time_block, y = n)) +
-
+  
   geom_col(fill = "steelblue") +
-
+  
   geom_hline(
     aes(yintercept = avg_block, color = "Average"),
     linetype = "dashed",
     linewidth = 1.2
   ) +
-  # fake mapping for legend consistency
+  
   scale_color_manual(
     values = c("Average" = "orange"),
     name = ""
   ) +
-
+  
   theme_minimal() +
   theme(
-    legend.position = "top"
+    legend.position = "top",
+    axis.text.x = element_text(angle = 45, hjust = 1)
   ) +
+  
   labs(
     x = "",
     y = "Total crashes"
@@ -1174,29 +1195,36 @@ demo_table <- drivers_clean %>%
     "Count" = n
   )
 
-demo_table %>%
-  gt() %>%
+reactable(
+  demo_table,
   
+  # Pagination (optional but recommended)
+  defaultPageSize = 10,
   
-  # Zebra striping
-  opt_row_striping() %>%
+  # Styling
+  striped = TRUE,
+  highlight = TRUE,
   
-  # Make header row slightly bolder + cleaner
-  tab_style(
-    style = list(
-      cell_text(weight = "bold")
+  # Column formatting
+  columns = list(
+    `Average BAC` = colDef(
+      format = colFormat(digits = 2)
     ),
-    locations = cells_column_labels()
-  ) %>%
+    `Average Age` = colDef(
+      format = colFormat(digits = 0)
+    ),
+    Count = colDef(
+      align = "center"
+    )
+  ),
   
-  # Light spacing + clean look
-  tab_options(
-    table.font.size = "small",
-    column_labels.font.weight = "bold",
-    column_labels.border.bottom.width = px(2),
-    table.border.top.style = "none",
-    table.border.bottom.style = "solid"
-  )
+  # Default sorting (optional)
+  defaultSorted = list(Count = "desc"),
+  
+  # General table options
+  bordered = FALSE,
+  compact = TRUE
+)
 
 ```
 
@@ -1363,9 +1391,10 @@ leaflet(map_data) %>%
 ```
 
 ```{r}
-#| title: Fatal Crashes (Since 2016)
+#| title: Fatal Crashes (YTD)
 map_data <- crash_level %>%
   filter(City == "El Paso",
+         Crash.Year == 2026,
          Fatal.Crash.Flag == 1) %>%
   mutate(
     Latitude = as.numeric(Latitude),
@@ -1396,24 +1425,52 @@ leaflet(map_data) %>%
 
 ``` {r}
 #| title: Crash Locations (YTD)
-top_10_streets <- crash_level %>%
+top_streets <- crash_level %>%
   filter(
     City == "El Paso",
     Crash.Year == 2026
   ) %>%
   count(Street.Name, sort = TRUE) %>%
   mutate(
+    Street.Name = case_when(
+      str_detect(Street.Name, " ") ~ str_to_title(str_to_lower(Street.Name)),
+      TRUE ~ Street.Name
+    ),
+    
+    # Optional: clean common suffixes to standard casing
+    Street.Name = str_replace_all(Street.Name, "\\bDr\\b", "Dr"),
+    Street.Name = str_replace_all(Street.Name, "\\bBlvd\\b", "Blvd"),
+    Street.Name = str_replace_all(Street.Name, "\\bCt\\b", "Ct"),
+    Street.Name = str_replace_all(Street.Name, "\\bRd\\b", "Rd"),
+    Street.Name = str_replace_all(Street.Name, "\\bSt\\b", "St"),
+    Street.Name = str_replace_all(Street.Name, "\\bAve\\b", "Ave"),
+    
     percent = round(n / sum(n) * 100, 2)
   ) %>%
-  slice_head(n = 15) %>%
   rename(
     "Street Name" = Street.Name,
     "Crash Count" = n,
     "Percent (%)" = percent
   )
 
-top_10_streets %>%
-  gt()
+reactable(
+  top_streets,
+  defaultPageSize = 15,
+  striped = TRUE,
+  highlight = TRUE,
+  searchable = TRUE,
+  defaultSorted = list(`Crash Count` = "desc"),
+  columns = list(
+    `Street Name` = colDef(minWidth = 200),
+    `Crash Count` = colDef(align = "center"),
+    `Percent (%)` = colDef(
+      format = colFormat(digits = 2),
+      align = "center"
+    )
+  ),
+  compact = TRUE,
+  bordered = FALSE
+)
 ```
 
 ``` {r}
@@ -1426,6 +1483,22 @@ top_fatal_streets <- crash_level %>%
   ) %>%
   count(Street.Name, sort = TRUE) %>%
   mutate(
+    Street.Name = case_when(
+      str_detect(Street.Name, " ") ~ str_to_title(str_to_lower(Street.Name)),
+      TRUE ~ Street.Name
+    ),
+    
+    # Preserve directional abbreviations
+    Street.Name = str_replace_all(Street.Name, "\\b(N|S|E|W|NE|NW|SE|SW)\\b", toupper),
+    
+    # Preserve street suffix casing
+    Street.Name = str_replace_all(Street.Name, "\\bDr\\b", "Dr"),
+    Street.Name = str_replace_all(Street.Name, "\\bBlvd\\b", "Blvd"),
+    Street.Name = str_replace_all(Street.Name, "\\bCt\\b", "Ct"),
+    Street.Name = str_replace_all(Street.Name, "\\bRd\\b", "Rd"),
+    Street.Name = str_replace_all(Street.Name, "\\bSt\\b", "St"),
+    Street.Name = str_replace_all(Street.Name, "\\bAve\\b", "Ave"),
+    
     percent = round(n / sum(n) * 100, 2)
   ) %>%
   rename(
@@ -1434,8 +1507,28 @@ top_fatal_streets <- crash_level %>%
     "Percent (%)" = percent
   )
 
-top_fatal_streets %>%
-  gt()
+reactable(
+  top_fatal_streets,
+  
+  defaultPageSize = 10,
+  striped = TRUE,
+  highlight = TRUE,
+  searchable = TRUE,
+  
+  defaultSorted = list(`Fatal Crashes` = "desc"),
+  
+  columns = list(
+    `Street Name` = colDef(minWidth = 220),
+    `Fatal Crashes` = colDef(align = "center"),
+    `Percent (%)` = colDef(
+      format = colFormat(digits = 2),
+      align = "center"
+    )
+  ),
+  
+  compact = TRUE,
+  bordered = FALSE
+)
 ```
 
 # About
@@ -1460,6 +1553,10 @@ Injuries include people who were classified as having a suspected serious injury
 **Definition of Intoxicated Driver**
 
 An intoxicated driver is a person who's BAC test returned a value of 0.08g/dL or greater.
+
+**Acronyms**
+
+BAC = Blood alcohol content; YTD = Year to date
 
 :::
 
