@@ -161,38 +161,36 @@ list(
 )
 ```
 
-
-## Row {height="350px"}
-
-### Column {.tabset}
+## Row {.tabset height="400px"}
 
 ``` {r}
 #| title: Crashes
 monthly_counts <- crash_level %>%
+  filter(City == "El Paso") %>%   # 🔴 THIS IS THE KEY FIX
   mutate(
-    month = floor_date(Crash.Date, "month"),
+    month = floor_date(Crash.Date, "month")
   ) %>%
   group_by(month) %>%
   summarise(
-    alcohol_crashes = n_distinct(Crash.ID),
+    crashes = n_distinct(Crash.ID),
     .groups = "drop"
   ) %>%
   arrange(month) %>%
   mutate(
-    alcohol_ma = zoo::rollmean(alcohol_crashes, k = 12, fill = NA, align = "center")
+    ma_12 = zoo::rollmean(crashes, k = 12, fill = NA, align = "center")
   )
 
 p <- ggplot(monthly_counts, aes(x = month)) +
 
   # observed
   geom_line(
-    aes(y = alcohol_crashes, color = "Total crashes"),
+    aes(y = crashes, color = "Total crashes"),
     linewidth = 0.8
   ) +
 
   # moving average
   geom_line(
-    aes(y = alcohol_ma, color = "Average"),
+    aes(y = ma_12, color = "Average"),
     linewidth = 1.2
   ) +
 
@@ -276,6 +274,102 @@ p <- ggplot(monthly_counts, aes(x = month)) +
 
 ggplotly(p)
 ```
+
+## Row {height="350px"}
+
+### Column
+
+``` {r}
+#| title: Holiday Crash Patterns
+
+crash_data <- crash_level %>%
+  filter(City == "El Paso",
+         Crash.Year != 2020) %>%
+  mutate(
+    date = as.Date(Crash.Date),   # FIX 1: ensure proper date type
+    year = Crash.Year,
+    cinco = as.Date(paste0(year, "-05-05")),
+    days_from_cinco = as.numeric(date - cinco)
+  )
+
+window_data <- crash_data %>%
+  filter(days_from_cinco >= -7 & days_from_cinco <= 7) %>%
+  mutate(
+    is_cinco = ifelse(days_from_cinco == 0,
+                      "Cinco de Mayo",
+                      "Other Days")   # FIX 2: create BEFORE grouping
+  )
+
+plot_data <- window_data %>%
+  group_by(year, days_from_cinco, is_cinco) %>%
+  summarise(daily_crashes = n(), .groups = "drop") %>%
+  group_by(days_from_cinco, is_cinco) %>%
+  summarise(avg_crashes = mean(daily_crashes), .groups = "drop")
+
+
+# Create indicator for Cinco
+plot_data <- plot_data %>%
+  mutate(is_cinco = ifelse(days_from_cinco == 0, "Cinco de Mayo", "Other Days"))
+
+# Base ggplot
+p <- ggplot(plot_data, aes(x = days_from_cinco, y = avg_crashes)) +
+
+  geom_smooth(se = FALSE, method = "loess", span = 0.3,
+              color = "#2C3E50", size = 1) +
+  
+  geom_point(aes(color = is_cinco), size = 3) +
+  
+  geom_vline(xintercept = 0, linetype = "dashed",
+             color = "#C0392B", size = 1) +
+  
+  scale_color_manual(values = c(
+    "Cinco de Mayo" = "#34495E",
+    "Other Days" = "#34495E"
+  )) +
+  
+  scale_x_continuous(breaks = seq(-7, 7, by = 1)) +
+  
+  labs(
+    title = "Do Crashes Increase Around Cinco de Mayo in El Paso?",
+    x = "Days from May 5th",
+    y = "Average Number of Crashes"
+  ) +
+  
+  theme_minimal(base_size = 10) +
+  theme(
+    plot.title = element_text(size = 15),
+    legend.position = "none"
+  )
+
+# Get y-bounds for shading
+y_min <- min(plot_data$avg_crashes, na.rm = TRUE)
+y_max <- max(plot_data$avg_crashes, na.rm = TRUE)
+
+# Convert to plotly + add shaded region
+ggplotly(p) %>%
+  add_ribbons(
+    x = seq(1, 3, length.out = 50),
+    ymin = y_min,
+    ymax = y_max,
+    fillcolor = "rgba(255, 0, 0, 0.08)",
+    line = list(width = 0),
+    inherit = FALSE,
+    showlegend = FALSE
+  ) %>%
+  # Highlight -6 day (single-day window)
+  add_ribbons(
+    x = seq(-6 - 0.5, -6 + 0.5, length.out = 50),
+    ymin = y_min,
+    ymax = y_max,
+    fillcolor = "rgba(255, 0, 0, 0.08)",
+    line = list(width = 0),
+    inherit = FALSE,
+    showlegend = FALSE
+  )
+
+```
+
+
 
 ### Column {.tabset}
 
@@ -370,73 +464,6 @@ p4 <- ggplot(hour_data, aes(x = time_block, y = n)) +
 ggplotly(p4)
 ```
 
-
-## Row {height="400px"}
-
-``` {r}
-#| title: ¡Cinco De Mayo!
-
-crash_data <- crash_level %>%
-  filter(City == "El Paso",
-         Crash.Year != 2020) %>%
-  mutate(
-    date = as.Date(Crash.Date),
-    year = Crash.Year,
-    cinco = as.Date(paste0(year, "-05-05")),
-    days_from_cinco = as.numeric(date - cinco)
-  )
-
-window_data <- crash_data %>%
-  filter(days_from_cinco >= -7 & days_from_cinco <= 7)
-
-
-plot_data <- window_data %>%
-  group_by(year, days_from_cinco) %>%
-  summarise(n = n(), .groups = "drop") %>%
-  group_by(days_from_cinco) %>%
-  summarise(avg_crashes = mean(n), .groups = "drop") %>%
-  mutate(is_cinco = ifelse(days_from_cinco == 0, "Cinco de Mayo", "Other Days"))
-
-
-# Highlight Cinco de Mayo point
-plot_data <- plot_data %>%
-  mutate(is_cinco = ifelse(days_from_cinco == 0, "Cinco de Mayo", "Other Days"))
-
-p <- ggplot(plot_data, aes(x = days_from_cinco, y = avg_crashes)) +
-
-geom_point(data = subset(plot_data, days_from_cinco %in% 1:3),
-           color = "red", size = 4) +  
-  geom_smooth(se = FALSE, method = "loess", span = 0.3,
-              color = "#2C3E50", size = 1) +
-  
-  geom_point(aes(color = is_cinco), size = 3) +
-  
-  geom_vline(xintercept = 0, linetype = "dashed",
-             color = "#C0392B", size = 1) +
-  
-  scale_color_manual(values = c(
-    "Cinco de Mayo" = "#34495E",
-    "Other Days" = "#34495E"
-  )) +
-  
-  scale_x_continuous(breaks = seq(-7, 7, by = 1)) +
-  
-  labs(
-    title = "Do Crashes Increase Around Cinco de Mayo in El Paso?",
-    x = "Days from May 5th",
-    y = "Average Number of Crashes"
-  ) +
-  
-  theme_minimal(base_size = 10) +
-  theme(
-    plot.title = element_text(size = 15),
-    legend.position = "none"
-  )
-
-ggplotly(p)
-
-
-```
 
 # Drivers
 
