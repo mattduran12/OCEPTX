@@ -420,8 +420,9 @@ ggplotly(p)
 
 ### Column {.tabset}
 
+
 ``` {r}
-#| title: Holiday Crash Patterns
+#| title: Holiday Crashes (Cinco de Mayo)
 
 crash_data <- crash_level %>%
   filter(City == "El Paso",
@@ -471,7 +472,6 @@ p <- ggplot(plot_data, aes(x = days_from_cinco, y = avg_crashes)) +
   scale_x_continuous(breaks = seq(-7, 7, by = 1)) +
   
   labs(
-    title = "Do Crashes Increase Around Cinco de Mayo in El Paso?",
     x = "Days from May 5th",
     y = "Average Number of Crashes"
   ) +
@@ -510,6 +510,105 @@ ggplotly(p) %>%
 
 ```
 
+``` {r}
+#| title: Holiday Crashes (Memorial Day)
+
+# ----------------------------
+# 1. Base data
+# ----------------------------
+base <- crash_level %>%
+  filter(
+    City == "El Paso",
+    Crash.Year != 2020
+  ) %>%
+  mutate(
+    date = as.Date(Crash.Date),
+    year = Crash.Year
+  )
+
+# ----------------------------
+# 2. Memorial Day (last Monday in May)
+# ----------------------------
+memorial <- base %>%
+  distinct(year) %>%
+  mutate(
+    memorial_day = as.Date(paste0(year, "-05-31")) -
+      (wday(as.Date(paste0(year, "-05-31")), week_start = 1) - 1)
+  )
+
+# ----------------------------
+# 3. Event time
+# ----------------------------
+event_data <- base %>%
+  left_join(memorial, by = "year") %>%
+  mutate(event_time = as.numeric(date - memorial_day)) %>%
+  filter(event_time >= -7, event_time <= 7)
+
+# ----------------------------
+# 4. Aggregate: average across years
+# ----------------------------
+plot_data <- event_data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups = "drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes), .groups = "drop")
+
+p <- ggplot(plot_data, aes(x = event_time, y = avg_crashes)) +
+
+  geom_smooth(se = FALSE, method = "loess", span = 0.3,
+              color = "#2C3E50", size = 1) +
+  
+  geom_point(size = 3) +
+  
+  geom_vline(xintercept = 0, linetype = "dashed",
+             color = "#C0392B", size = 1) +
+  
+  scale_x_continuous(breaks = seq(-7, 7, by = 1)) +
+  
+  labs(
+    x = "Days from Memorial Day",
+    y = "Average Number of Crashes"
+  ) +
+  
+  theme_minimal(base_size = 10) +
+  theme(
+    plot.title = element_text(size = 15),
+    legend.position = "none"
+  )
+
+# ----------------------------
+# Y bounds for shading
+# ----------------------------
+y_min <- min(plot_data$avg_crashes, na.rm = TRUE)
+y_max <- max(plot_data$avg_crashes, na.rm = TRUE)
+
+# ----------------------------
+# Convert to Plotly + shaded regions
+# ----------------------------
+ggplotly(p) %>%
+
+  # Ribbon at -2 days
+  add_ribbons(
+    x = seq(-2 - 0.5, -2 + 0.5, length.out = 50),
+    ymin = y_min,
+    ymax = y_max,
+    fillcolor = "rgba(255, 0, 0, 0.08)",
+    line = list(width = 0),
+    inherit = FALSE,
+    showlegend = FALSE
+  ) %>%
+
+  # Ribbon at +5 days
+  add_ribbons(
+    x = seq(5 - 0.5, 5 + 0.5, length.out = 50),
+    ymin = y_min,
+    ymax = y_max,
+    fillcolor = "rgba(255, 0, 0, 0.08)",
+    line = list(width = 0),
+    inherit = FALSE,
+    showlegend = FALSE
+  )
+```
 
 
 ### Column {.tabset}
@@ -925,11 +1024,18 @@ Crash data is downloaded from the Texas Department of Transportation's (TXDOT) w
 
 A crash is defined as alcohol-related if involved drivers or individuals were reported as "Under the Influence of Alcohol", "Had Been Drinking", or were reported to have a BAC greater than 0.
 
-**Trends Page**
+**Definition of Injury/Fatality**
 
-- Averages for crashes and fatal crashes were calculated using a 12-month moving average. This technique results in a smooth line, allowing the viewer to see if a trend is increasing or decreasing over a period of time.
-- Injuries include people who were classified as having a suspected serious injury, suspected minor injury, or possible injury.
-- For the Cinco de Mayo analysis, total crashes between 2016 and 2025 were averaged each day during a 15-day period (7 days before and 7 days after May 5th). Crash data in the year 2020 was excluded from analysis.
+Injuries include people who were classified as having a suspected serious injury, suspected minor injury, or possible injury. Fatalities are defined as any motor vehicle traffic injury crash that results in the death of one or more persons within 30 days of the incident.
+
+**Calculation of Moving Average**
+
+- Averages for crashes and fatal crashes between 2016 and *Present* were calculated using a 12-month moving average. This technique results in a smooth line, allowing the viewer to see if a trend is increasing or decreasing.
+
+**Holiday Analyses**
+
+- For the Cinco de Mayo analysis, total crashes from 2016 to 2025 were averaged by day across a 15-day event window (7 days before and 7 days after May 5th). Crash data from 2020 were excluded to avoid COVID-19–related disruptions in traffic patterns.
+- Memorial Day was calculated separately for each year as the last Monday in May to account for its shifting calendar date. Each crash was then assigned an event time indicating the number of days before or after Memorial Day in its respective year. These event-time values were restricted to a ±7-day window and averaged across 2016–2025 (excluding 2020) to estimate typical crash patterns surrounding the holiday.
 :::
 
 # Quiz
