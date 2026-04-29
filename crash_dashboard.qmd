@@ -16,7 +16,7 @@ execute:
 
 Welcome to the Drunk Driving Surveillance Dashboard!
 
-This dashboard displays data on alcohol-related vehicle crashes in El Paso, Texas and is updated every month.
+This dashboard displays data on alcohol-related vehicle crashes in El Paso, Texas and is updated every month. 
 
 ```{r}
 
@@ -219,6 +219,7 @@ p <- ggplot(monthly_counts, aes(x = month)) +
 ggplotly(p)
 ```
 
+
 ``` {r}
 #| title: Fatality Trends
 monthly_counts <- person_level %>%
@@ -279,6 +280,78 @@ p <- ggplot(monthly_counts, aes(x = month)) +
 ggplotly(p)
 ```
 
+
+``` {r}
+#| title: Injury Trends
+
+injury_monthly <- person_level %>%
+  filter(
+    City == "El Paso",
+    !Person.Injury.Severity %in% c(
+      "99 - UNKNOWN",
+      "95 - AUTONOMOUS",
+      "N - NOT INJURED",
+      "K - FATAL INJURY"
+    ),
+    !is.na(Person.Injury.Severity)
+  ) %>%
+  
+  mutate(
+    month = floor_date(Crash.Date, "month"),
+    
+    injury = case_when(
+      grepl("A - SUSPECTED SERIOUS INJURY", Person.Injury.Severity) ~ "Suspected Serious Injury (Average)",
+      grepl("B - SUSPECTED MINOR INJURY", Person.Injury.Severity) ~ "Suspected Minor Injury (Average)",
+      grepl("C - POSSIBLE INJURY", Person.Injury.Severity) ~ "Possible Injury (Average)",
+      TRUE ~ "Other"
+    )
+  ) %>%
+  
+  group_by(month, injury) %>%
+  summarise(
+    n = n(),
+    .groups = "drop"
+  ) %>%
+  arrange(month) %>%
+  
+  group_by(injury) %>%
+  mutate(
+    ma12 = zoo::rollmean(n, k = 12, fill = NA, align = "right")
+  ) %>%
+  ungroup()
+
+# ----------------------------
+# Step 2: plot (MA only)
+# ----------------------------
+p <- ggplot(injury_monthly, aes(x = month, y = ma12, color = injury)) +
+
+  geom_line(linewidth = 1.2, na.rm = TRUE) +
+
+  scale_color_manual(
+    values = c(
+      "Suspected Serious Injury (Average)" = "#D1495B",  # blue
+      "Suspected Minor Injury (Average)"   = "#F77F00",  # orange
+      "Possible Injury (Average)"          = "#F2C14E"   # green
+    ),
+    labels = function(x) paste0("(Average) ", x)
+  ) +
+
+  labs(
+    x = "",
+    y = "Total people injured",
+    color = ""
+  ) +
+
+  theme_minimal() +
+  theme(
+    legend.position = "right"
+  )
+
+ggplotly(p)
+
+```
+
+
 ``` {r}
 #| title: Crashes by Month
 monthly_year <- crash_level %>%
@@ -294,36 +367,65 @@ monthly_year <- crash_level %>%
     .groups = "drop"
   )
 
-# ----------------------------
-# Step 2: Average by month-of-year
-# ----------------------------
+
 monthly_avg <- monthly_year %>%
   group_by(month_num) %>%
   summarise(
     avg_crashes = mean(monthly_crashes),
     .groups = "drop"
   ) %>%
+  
   mutate(
+    pct = avg_crashes / sum(avg_crashes),
     month_name = factor(month.abb[month_num], levels = month.abb)
+  )
+
+overall_avg <- mean(monthly_avg$avg_crashes)
+# ----------------------------
+# Step 2: Average by month-of-year
+# ----------------------------
+monthly_avg <- monthly_avg %>%
+  mutate(
+    label = paste0(
+      round(avg_crashes, 0),
+      "\n(",
+      sprintf("%.1f", pct * 100),
+      "%)"
+    )
   )
 
 # ----------------------------
 # Step 3: overall mean line
 # ----------------------------
-overall_avg <- mean(monthly_avg$avg_crashes)
+
 
 # ----------------------------
 # Step 4: ggplot base
 # ----------------------------
-p <- ggplot(monthly_avg, aes(x = month_name, y = avg_crashes)) +
+p <- ggplot(monthly_avg, aes(
+  x = month_name,
+  y = avg_crashes,
+  text = paste0(
+    "Month: ", month_name,
+    "<br>Crashes: ", round(avg_crashes, 0),
+    "<br>Percent: ", sprintf("%.1f%%", pct * 100)
+  )
+)) +
 
   geom_col(fill = "steelblue") +
 
+geom_text(
+  aes(y = avg_crashes + 8, label = label),
+  size = 3.5
+) +
+geom_col(fill = "steelblue", width = 0.5) +
+
   geom_hline(
-   aes(yintercept = overall_avg, color = "Average"),
+    aes(yintercept = overall_avg, color = "Average"),
     linetype = "dashed",
     linewidth = 1
   ) +
+
   scale_color_manual(
     values = c("Average" = "orange"),
     name = ""
@@ -331,7 +433,7 @@ p <- ggplot(monthly_avg, aes(x = month_name, y = avg_crashes)) +
 
   labs(
     x = "",
-    y = "Total crashes"
+    y = "Average crashes"
   ) +
 
   theme_minimal() +
@@ -372,7 +474,14 @@ monthly_fatal_avg <- monthly_fatal_year %>%
     .groups = "drop"
   ) %>%
   mutate(
-    month_name = factor(month.abb[month_num], levels = month.abb)
+    month_name = factor(month.abb[month_num], levels = month.abb),
+    pct = avg_fatalities / sum(avg_fatalities),
+    label = paste0(
+      round(avg_fatalities, 1),
+      "<br>(",
+      sprintf("%.1f", pct * 100),
+      "%)"
+    )
   )
 
 # ----------------------------
@@ -383,28 +492,35 @@ overall_avg <- mean(monthly_fatal_avg$avg_fatalities)
 # ----------------------------
 # Step 4: ggplot
 # ----------------------------
-p <- ggplot(monthly_fatal_avg, aes(x = month_name, y = avg_fatalities)) +
+p <- ggplot(monthly_fatal_avg, aes(
+  x = month_name,
+  y = avg_fatalities,
+  text = label
+)) +
 
-  geom_col(fill = "steelblue") +
+  geom_col(fill = "steelblue", width = 0.5) +
 
+  geom_text(
+    aes(y = avg_fatalities + max(avg_fatalities) * 0.1, label = label),
+    size = 3.5
+  ) +
+scale_y_continuous(
+  limits = c(0, max(monthly_fatal_avg$avg_fatalities, na.rm = TRUE) * 1.3)
+) +  
   geom_hline(
     aes(yintercept = overall_avg, color = "Average"),
     linetype = "dashed",
     linewidth = 1
   ) +
-  # fake mapping for legend consistency
+
   scale_color_manual(
     values = c("Average" = "orange"),
     name = ""
   ) +
 
-  theme_minimal() +
-  theme(
-    legend.position = "top"
-  ) +
   labs(
     x = "",
-    y = "Total fatalities"
+    y = "Average fatalities"
   ) +
 
   theme_minimal(base_size = 12) +
@@ -434,33 +550,51 @@ dow_data <- crash_level %>%
       levels = c("Sunday", "Monday", "Tuesday", "Wednesday",
                  "Thursday", "Friday", "Saturday")
     )
+  ) %>%
+  mutate(
+    pct = n / sum(n),
+    label = paste0(
+      n,
+      "<br>(",
+      sprintf("%.1f", pct * 100),
+      "%)"
+    )
   )
 
 avg_val <- mean(dow_data$n, na.rm = TRUE)
 
-p3 <- ggplot(dow_data, aes(x = Day.of.Week, y = n)) +
+p3 <- ggplot(dow_data, aes(
+  x = Day.of.Week,
+  y = n,
+  text = label
+)) +
 
-  # bars
-  geom_col(fill = "steelblue") +
+  geom_col(fill = "steelblue", width = 0.5) +
 
-  # average line
+  geom_text(
+    aes(y = n + max(n) * 0.1, label = label),
+    size = 3.5
+  ) +
+
   geom_hline(
     aes(yintercept = avg_val, color = "Average"),
     linewidth = 1.2,
     linetype = "dashed"
   ) +
 
-  # fake mapping for legend consistency
   scale_color_manual(
     values = c("Average" = "orange"),
     name = ""
   ) +
-
+scale_y_continuous(
+  limits = c(0, max(dow_data$n, na.rm = TRUE) * 1.3)
+) +
   theme_minimal() +
   theme(
     legend.position = "top",
     axis.text.x = element_text(angle = 45, hjust = 1)
   ) +
+
   labs(
     x = "",
     y = "Total crashes"
@@ -472,6 +606,18 @@ ggplotly(p3)
 
 ``` {r}
 #| title: Crashes by Hour (YTD)
+# ----------------------------
+# Step 1: Define correct order
+# ----------------------------
+time_levels <- c(
+  "12am – 3am", "3am – 6am", "6am – 9am", "9am – 12pm",
+  "12pm – 3pm", "3pm – 6pm", "6pm – 9pm", "9pm – 12am"
+)
+
+
+# ----------------------------
+# Step 2: Build hourly data
+# ----------------------------
 hour_data <- crash_level %>%
   filter(
     City == "El Paso",
@@ -479,59 +625,88 @@ hour_data <- crash_level %>%
   ) %>%
   mutate(
     hour = as.numeric(substr(Hour.of.Day, 1, 2)),
-    
+
     time_block = case_when(
-      hour >= 0  & hour <= 2  ~ "12–3 AM",
-      hour >= 3  & hour <= 5  ~ "3–6 AM",
-      hour >= 6  & hour <= 8  ~ "6–9 AM",
-      hour >= 9  & hour <= 11 ~ "9 AM–12 PM",
-      hour >= 12 & hour <= 14 ~ "12–3 PM",
-      hour >= 15 & hour <= 17 ~ "3–6 PM",
-      hour >= 18 & hour <= 20 ~ "6–9 PM",
-      hour >= 21 & hour <= 23 ~ "9 PM–12 AM",
-      TRUE ~ "Unknown"
-    ),
-    
-    # enforce order
-    time_block = factor(
-      time_block,
-      levels = c(
-        "12–3 AM", "3–6 AM", "6–9 AM", "9 AM–12 PM",
-        "12–3 PM", "3–6 PM", "6–9 PM", "9 PM–12 AM"
-      )
+      hour >= 0  & hour <= 2  ~ "12am – 3am",
+      hour >= 3  & hour <= 5  ~ "3am – 6am",
+      hour >= 6  & hour <= 8  ~ "6am – 9am",
+      hour >= 9  & hour <= 11 ~ "9am – 12pm",
+      hour >= 12 & hour <= 14 ~ "12pm – 3pm",
+      hour >= 15 & hour <= 17 ~ "3pm – 6pm",
+      hour >= 18 & hour <= 20 ~ "6pm – 9pm",
+      hour >= 21 & hour <= 23 ~ "9pm – 12am",
+      TRUE ~ NA_character_
     )
   ) %>%
-  count(time_block)
 
+  # count crashes per block
+  count(time_block) %>%
+
+  # force full structure (adds zeros)
+  complete(time_block = time_levels, fill = list(n = 0)) %>%
+
+  # enforce correct order
+  mutate(
+    time_block = factor(time_block, levels = time_levels),
+    pct = n / sum(n),
+    label = paste0(
+      n,
+      "<br>(",
+      sprintf("%.1f", pct * 100),
+      "%)"
+    )
+  )
+
+# ----------------------------
+# Step 3: overall mean line
+# ----------------------------
 avg_block <- mean(hour_data$n, na.rm = TRUE)
 
-p4 <- ggplot(hour_data, aes(x = time_block, y = n)) +
-  
-  geom_col(fill = "steelblue") +
-  
+# ----------------------------
+# Step 4: ggplot
+# ----------------------------
+p4 <- ggplot(hour_data, aes(
+  x = time_block,
+  y = n,
+  text = label
+)) +
+
+  geom_col(fill = "steelblue", width = 0.5) +
+
+  geom_text(
+    aes(y = n + max(n) * 0.1, label = label),
+    size = 3.5
+  ) +
+
   geom_hline(
     aes(yintercept = avg_block, color = "Average"),
     linetype = "dashed",
     linewidth = 1.2
   ) +
-  
+
   scale_color_manual(
     values = c("Average" = "orange"),
     name = ""
   ) +
-  
-  theme_minimal() +
-  theme(
-    legend.position = "top",
-    axis.text.x = element_text(angle = 45, hjust = 1)
-  ) +
-  
+scale_y_continuous(
+  limits = c(0, max(hour_data$n, na.rm = TRUE) * 1.3)
+) +
   labs(
     x = "",
     y = "Total crashes"
+  ) +
+
+  theme_minimal() +
+  theme(
+    legend.position = "top",
+    axis.text.x = element_text(angle = 30, hjust = 1)
   )
 
-ggplotly(p4)
+# ----------------------------
+# Step 5: Plotly
+# ----------------------------
+ggplotly(p4, tooltip = "text")
+
 ```
 
 # Holidays
@@ -1054,8 +1229,7 @@ list(
 bac_stats <- drivers %>%
   filter(bac_result == 1) %>%
   summarise(
-    mean_bac = mean(bac_value, na.rm = TRUE),
-    sd_bac = sd(bac_value, na.rm = TRUE)
+    mean_bac = mean(bac_value, na.rm = TRUE)
   )
 list(
   icon = "moisture",
@@ -1094,7 +1268,7 @@ list(
 ### Column {.tabset}
 
 ``` {r}
-#| title: Intoxicated Driver's Zipcode (YTD)
+#| title: Driver's Zipcode (YTD)
 zip_top10 <- drivers %>%
   filter(bac_value >= 0.08 & bac_result == 1,
          !is.na(Driver.Zip.Code)) %>%
@@ -1130,7 +1304,7 @@ plot_ly(
 ```
 
 ```{r}
-#| title: Intoxicated Driver Demographics (YTD)
+#| title: Driver's Demographics (YTD)
 
 drivers_clean <- drivers %>%
   mutate(
@@ -1168,8 +1342,7 @@ demo_table <- drivers_clean %>%
   
   mutate(
     Person.Gender = factor(Person.Gender, levels = c("Female", "Male")),
-    
-    Person.Age = as.numeric(Person.Age)  # convert from character
+    Person.Age = as.numeric(Person.Age)
   ) %>%
   
   group_by(Person.Ethnicity, Person.Gender) %>%
@@ -1181,6 +1354,8 @@ demo_table <- drivers_clean %>%
   ) %>%
   
   mutate(
+    pct = scales::percent(n / sum(n), accuracy = 0.1),
+    
     avg_bac = round(avg_bac, 2),
     avg_age = round(avg_age, 0)
   ) %>%
@@ -1189,41 +1364,38 @@ demo_table <- drivers_clean %>%
   
   rename(
     "Race/Ethnicity" = Person.Ethnicity,
-    "Gender" = Person.Gender,
+    "Sex" = Person.Gender,
     "Average Age" = avg_age,
     "Average BAC" = avg_bac,
-    "Count" = n
+    "Count" = n,
+    "Percent" = pct
   )
+
 
 reactable(
   demo_table,
-  
-  # Pagination (optional but recommended)
+
   defaultPageSize = 10,
-  
-  # Styling
+  searchable = TRUE,
+
   striped = TRUE,
   highlight = TRUE,
-  
-  # Column formatting
+  compact = TRUE,
+
   columns = list(
-    `Average BAC` = colDef(
-      format = colFormat(digits = 2)
-    ),
-    `Average Age` = colDef(
-      format = colFormat(digits = 0)
-    ),
+    `Average BAC` = colDef(format = colFormat(digits = 2)),
+    `Average Age` = colDef(format = colFormat(digits = 0)),
+
     Count = colDef(
+      align = "center"
+    ),
+
+    Percent = colDef(
       align = "center"
     )
   ),
-  
-  # Default sorting (optional)
-  defaultSorted = list(Count = "desc"),
-  
-  # General table options
-  bordered = FALSE,
-  compact = TRUE
+
+  defaultSorted = list(Count = "desc")
 )
 
 ```
@@ -1231,8 +1403,77 @@ reactable(
 
 ### Column {.tabset}
 
+``` {r}
+#| title: Driver's Vehicle Information (YTD)
+
+vehicle_table <- drivers %>%
+  
+  # keep BAC filter
+  filter(bac_value >= 0.08 & bac_result == 1) %>%
+  
+  # only remove No Data for Make + Model
+  filter(
+    !Vehicle.Make %in% c("No Data", "No data", "", NA),
+    !Vehicle.Model.Name %in% c("No Data", "No data", "", NA),
+    !is.na(Vehicle.Make),
+    !is.na(Vehicle.Model.Name)
+  ) %>%
+  
+  mutate(
+
+    # Make cleanup
+    make = case_when(
+      toupper(Vehicle.Make) %in% c("GMC", "BMW") ~ toupper(Vehicle.Make),
+      TRUE ~ str_to_title(tolower(Vehicle.Make))
+    ),
+
+    # Model cleanup
+    model = Vehicle.Model.Name %>%
+      str_remove("\\s*\\(.*\\)") %>%
+      str_to_sentence()
+  ) %>%
+  
+  # ----------------------------
+  # Group only Make + Model
+  # ----------------------------
+  group_by(make, model) %>%
+  summarise(
+    n = n(),
+    .groups = "drop"
+  ) %>%
+  
+  # Percent of total
+  mutate(
+    pct = scales::percent(n / sum(n), accuracy = 0.1)
+  ) %>%
+  
+  arrange(desc(n))
+
+reactable(
+  vehicle_table,
+
+  searchable = TRUE,
+  sortable = TRUE,
+  pagination = TRUE,
+  defaultPageSize = 10,
+
+  columns = list(
+
+    make = colDef(name = "Make"),
+    model = colDef(name = "Model"),
+
+    n = colDef(name = "Count"),
+
+    pct = colDef(name = "Percent")
+  ),
+
+  defaultSorted = list(n = "desc")
+)
+
+```
+
 ```{r}
-#| title: Vehicle Color
+#| title: Driver's Vehicle Color (YTD)
 plot_data <- drivers %>%
   filter(bac_value >= 0.08 & bac_result == 1) %>%
   mutate(
@@ -1268,91 +1509,19 @@ plot_ly(
   text = ~label,
   textposition = "outside"
 ) %>%
-  layout(
-    xaxis = list(title = "Total intoxicated drivers"),
-    yaxis = list(title = ""),
-    margin = list(r = 100)
-  )
+layout(
+  xaxis = list(
+    title = "Total intoxicated drivers",
+    range = c(0, max(plot_data$n) * 1.15)  # 👈 key fix
+  ),
+  yaxis = list(title = ""),
+  margin = list(r = 120)  # optional extra breathing room
+)
 
 ```
 
-``` {r}
-#| title: Vehicle Body Style
-plot_data <- drivers %>%
-  filter(bac_value >= 0.08 & bac_result == 1) %>%
-  mutate(
-    body = case_when(
-      grepl("MC", Vehicle.Body.Style) ~ "Motorcycle",
-      grepl("P2", Vehicle.Body.Style) ~ "Passenger Car (2-door)",
-      grepl("P4", Vehicle.Body.Style) ~ "Passenger Car (4-door)",
-      grepl("PK", Vehicle.Body.Style) ~ "Pickup",
-      grepl("SV", Vehicle.Body.Style) ~ "SUV",
-      grepl("TR", Vehicle.Body.Style) ~ "Truck",
-      TRUE ~ "Other"
-    )
-  ) %>%
-  filter(!is.na(body)) %>%
-  count(body)
 
-plot_data <- plot_data %>%
-  mutate(
-    pct = n / sum(n),
-    label = paste0(n, " (", scales::percent(pct), ")")
-  )
 
-plot_ly(
-  data = plot_data,
-  x = ~n,
-  y = ~fct_reorder(body, n),
-  type = "bar",
-  orientation = "h",
-  text = ~label,
-  textposition = "outside",
-  marker = list(color = "steelblue")
-) %>%
-  layout(
-    xaxis = list(title = "Total intoxicated drivers"),
-    yaxis = list(title = "")
-  )
-
-```
-
-``` {r}
-#| title: Vehicle Make
-
-plot_data <- drivers %>%
-  filter(bac_value >= 0.08 & bac_result == 1) %>%
-  
-  mutate(
-    make = Vehicle.Make,
-    make = str_to_sentence(str_to_lower(make))  # robust sentence case
-  ) %>%
-  
-  filter(!is.na(make), make != "") %>%
-  
-  count(make) %>%
-  
-  mutate(
-    pct = n / sum(n),
-    label = paste0(n, " (", scales::percent(pct), ")")
-  )
-
-plot_ly(
-  data = plot_data,
-  x = ~n,
-  y = ~fct_reorder(make, n),
-  type = "bar",
-  orientation = "h",
-  marker = list(color = "steelblue"),
-  text = ~label,
-  textposition = "outside"
-) %>%
-  layout(
-    xaxis = list(title = "Total intoxicated drivers"),
-    yaxis = list(title = ""),
-    margin = list(r = 120)
-  )
-```
 
 # Map
 
@@ -1552,7 +1721,7 @@ Injuries include people who were classified as having a suspected serious injury
 
 **Definition of Intoxicated Driver**
 
-An intoxicated driver is a person who's BAC test returned a value of 0.08g/dL or greater.
+Driver and vehicle characteristics in these graphs represent intoxicated drivers. An intoxicated driver is defined as a person who's BAC test result returned a value of 0.08g/dL or greater.
 
 **Acronyms**
 
@@ -1574,7 +1743,7 @@ In all cases, crashes were restricted to a ±7-day window around the holiday and
 
 **Missing Data**
 
-Missing data in the driver characteristics (such as gender and race/ethnicity) was minimal. Observations with missing or unknown values in these fields were excluded from analysis to ensure consistency and interpretability of demographic comparisons.
+A small amount of data for driver characteristics (such as gender and race/ethnicity) and vehicle characteristics is missing. Observations with missing or unknown values in these fields were excluded.
 :::
 
 # Quiz
