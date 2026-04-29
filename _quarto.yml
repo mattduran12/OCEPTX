@@ -10,7 +10,7 @@ website:
     left:
       - text: "Dashboards"
         menu:
-        - text: "Driving While Intoxicated"
+        - text: "Drunk Driving Surveillance Dashboard"
           href: crash_dashboard.html
     right:
       - text: "Contact"
