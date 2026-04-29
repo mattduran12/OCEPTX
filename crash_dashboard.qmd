@@ -3,8 +3,8 @@ title: "Drunk Driving Surveillance Dashboard"
 format:
   dashboard:
     theme:
-      dark: darkly
       light: default
+      dark: darkly
     css: styles3.css
     orientation: rows
     scrolling: true
