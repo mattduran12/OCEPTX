@@ -18,6 +18,14 @@ Welcome to the Drunk Driving Surveillance Dashboard!
 
 This dashboard displays data on alcohol-related vehicle crashes in El Paso, Texas and is updated every month. 
 
+- [Monthly Brief](#monthly-brief) — Latest monthly summary of crashes, injuries, and fatalities
+- [About this Dashboard](#about-this-dashboard) — Data sources, definitions, and technical details 
+- [Trends](#trends) — Yearly trend patterns and year-to-date totals
+- [Holidays](#holidays) — Crash patterns around major holidays and event periods  
+- [Drivers](#drivers) — Driver-level characteristics, risk indicators, and year-to-date totals 
+- [Map](#map) — Geographic distribution of alcohol-related crashes  
+- [Quiz](#quiz) — How well do you know the data in El Paso? Take the quiz and find out!
+
 ```{r}
 
 rm(list = ls())
@@ -88,8 +96,323 @@ crash_level <- all_cities %>%
   distinct(Crash.ID, .keep_all = TRUE) 
 ```
 
-# Trends
+# Monthly Brief
 
+```{r}
+# ----------------------------
+# REPORTING MONTH (DATA LAGS 1 MONTH)
+# ----------------------------
+report_date <- Sys.Date() %m-% months(1)
+report_month <- format(report_date, "%B %Y")
+report_year <- year(report_date)
+prev_year <- report_year - 1
+
+# ----------------------------
+# MONTHLY DATA
+# ----------------------------
+this_month <- crash_level %>%
+  filter(
+    City == "El Paso",
+    year(Crash.Date) == report_year,
+    month(Crash.Date) == month(report_date)
+  )
+
+last_month <- crash_level %>%
+  filter(
+    City == "El Paso",
+    year(Crash.Date) == year(report_date %m-% months(1)),
+    month(Crash.Date) == month(report_date %m-% months(1))
+  )
+
+# ----------------------------
+# METRICS
+# ----------------------------
+crashes_now <- n_distinct(this_month$Crash.ID)
+crashes_prev <- n_distinct(last_month$Crash.ID)
+
+# ----------------------------
+# INJURIES (MATCH YOUR CLEAN LOGIC)
+# ----------------------------
+injuries_now <- person_level %>%
+  filter(
+    City == "El Paso",
+    year(Crash.Date) == report_year,
+    month(Crash.Date) == month(report_date),
+    !Person.Injury.Severity %in% c(
+      "99 - UNKNOWN",
+      "95 - AUTONOMOUS",
+      "N - NOT INJURED",
+      "K - FATAL INJURY"
+    ),
+    !is.na(Person.Injury.Severity)
+  ) %>%
+  summarise(n = n()) %>%
+  pull(n)
+
+injuries_prev <- person_level %>%
+  filter(
+    City == "El Paso",
+    year(Crash.Date) == year(report_date %m-% months(1)),
+    month(Crash.Date) == month(report_date %m-% months(1)),
+    !Person.Injury.Severity %in% c(
+      "99 - UNKNOWN",
+      "95 - AUTONOMOUS",
+      "N - NOT INJURED",
+      "K - FATAL INJURY"
+    ),
+    !is.na(Person.Injury.Severity)
+  ) %>%
+  summarise(n = n()) %>%
+  pull(n)
+
+# ----------------------------
+# FATALITIES (KEEP CONSISTENT)
+# ----------------------------
+fatal_now <- person_level %>%
+  filter(
+    City == "El Paso",
+    year(Crash.Date) == report_year,
+    month(Crash.Date) == month(report_date),
+    Person.Injury.Severity == "K - FATAL INJURY"
+  ) %>%
+  summarise(n = n()) %>%
+  pull(n)
+
+fatal_prev <- person_level %>%
+  filter(
+    City == "El Paso",
+    year(Crash.Date) == year(report_date %m-% months(1)),
+    month(Crash.Date) == month(report_date %m-% months(1)),
+    Person.Injury.Severity == "K - FATAL INJURY"
+  ) %>%
+  summarise(n = n()) %>%
+  pull(n)
+
+# % changes
+pct_change_crash <- ifelse(crashes_prev == 0, NA, (crashes_now - crashes_prev)/crashes_prev*100)
+pct_change_injury <- ifelse(injuries_prev == 0, NA, (injuries_now - injuries_prev)/injuries_prev*100)
+pct_change_fatal <- ifelse(fatal_prev == 0, NA, (fatal_now - fatal_prev)/fatal_prev*100)
+
+fmt <- function(x) ifelse(is.na(x), "N/A", paste0(round(x,1), "%"))
+
+# ----------------------------
+# MONTHLY SERIES (CURRENT VS PRIOR YEAR)
+# ----------------------------
+build_monthly <- function(df, value){
+  df %>%
+    mutate(
+      year = year(Crash.Date),
+      month = month(Crash.Date)
+    ) %>%
+    filter(year %in% c(report_year, prev_year)) %>%
+    group_by(year, month) %>%
+    summarise(val = {{value}}, .groups="drop") %>%
+    complete(year, month = 1:12, fill = list(val = 0)) %>%
+    mutate(
+      month_lab = factor(month.abb[month], levels = month.abb),
+      year = factor(year)
+    )
+}
+
+# crashes
+crash_plot_data <- build_monthly(crash_level %>% filter(City=="El Paso"),
+                                n_distinct(Crash.ID))
+
+# fatalities
+fatal_plot_data <- build_monthly(
+  person_level %>%
+    filter(City=="El Paso",
+           Person.Injury.Severity == "K - FATAL INJURY"),
+  n()
+)
+
+# injuries
+injury_plot_data <- build_monthly(
+  person_level %>%
+    filter(
+      City=="El Paso",
+      !Person.Injury.Severity %in% c(
+        "99 - UNKNOWN",
+        "95 - AUTONOMOUS",
+        "N - NOT INJURED",
+        "K - FATAL INJURY"
+      ),
+      !is.na(Person.Injury.Severity)
+    ),
+  n()
+)
+
+# ----------------------------
+# DIRECTION LABELS
+# ----------------------------
+dir_crash <- case_when(
+  is.na(pct_change_crash) ~ "",
+  pct_change_crash > 0 ~ "increase",
+  pct_change_crash < 0 ~ "decrease",
+  TRUE ~ "no change"
+)
+
+dir_fatal <- case_when(
+  is.na(pct_change_fatal) ~ "",
+  pct_change_fatal > 0 ~ "increase",
+  pct_change_fatal < 0 ~ "decrease",
+  TRUE ~ "no change"
+)
+
+dir_injury <- case_when(
+  is.na(pct_change_injury) ~ "",
+  pct_change_injury > 0 ~ "increase",
+  pct_change_injury < 0 ~ "decrease",
+  TRUE ~ "no change"
+)
+```
+
+## Row {height="400px"}
+
+::: {.card}
+
+## Quick Facts
+
+In **`r report_month`**, there were:
+
+- **`r crashes_now`** alcohol-related crashes, representing a **`r fmt(pct_change_crash)`** `r dir_crash` compared to the previous month  
+- **`r fatal_now`** fatalities associated with alcohol-related crashes, representing a **`r fmt(pct_change_fatal)`** `r dir_fatal` compared to the previous month  
+- **`r injuries_now`** people injured in alcohol-related crashes, representing a **`r fmt(pct_change_injury)`** `r dir_injury` compared to the previous month 
+
+:::
+
+### Column {.tabset}
+
+``` {r}
+# remove future months for current year only
+filter_future <- function(df){
+  df %>%
+    filter(
+      !(year == report_year & month > month(report_date))
+    )
+}
+
+crash_plot_data  <- filter_future(crash_plot_data)
+fatal_plot_data  <- filter_future(fatal_plot_data)
+injury_plot_data <- filter_future(injury_plot_data)
+```
+
+``` {r}
+#| title: Crashes
+
+p1 <- ggplot(crash_plot_data,
+             aes(x = month_lab, y = val, fill = year)) +
+  geom_col(position = position_dodge(width = 0.9)) +
+  geom_text(
+    aes(label = val, y = val + 1),   # 👈 key fix
+    position = position_dodge(width = 0.9),
+    size = 3
+  ) +
+  scale_y_continuous(
+    limits = c(0, max(crash_plot_data$val, na.rm = TRUE) * 1.1)
+  ) +
+  labs(title = "Total Alcohol-Related Crashes",
+       x = "", y = "Total crashes", fill = "") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+ggplotly(p1)
+```
+
+``` {r}
+#| title: Fatalities
+
+# FATALITIES
+p2 <- ggplot(fatal_plot_data,
+             aes(x = month_lab, y = val, fill = year)) +
+  geom_col(position = position_dodge(width = 0.9)) +
+  geom_text(
+    aes(label = val, y = val * 1.05),   # 👈 key fix
+    position = position_dodge(width = 0.9),
+    size = 3
+  ) +
+  scale_y_continuous(
+    limits = c(0, max(fatal_plot_data$val, na.rm = TRUE) * 1.1)
+  ) +
+  labs(title = "Total Alcohol-Related Traffic Fatalities",
+       x = "", y = "Total fatalities", fill = "") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+ggplotly(p2)
+
+```
+
+``` {r}
+#| title: Injuries
+# INJURIES
+p3 <- ggplot(injury_plot_data,
+             aes(x = month_lab, y = val, fill = year)) +
+  geom_col(position = position_dodge(width = 0.9)) +
+  geom_text(
+    aes(label = val, y = val + 1),   # 👈 key fix
+    position = position_dodge(width = 0.9),
+    size = 3
+  ) +
+  scale_y_continuous(
+    limits = c(0, max(injury_plot_data$val, na.rm = TRUE) * 1.1)
+  ) +
+  labs(title = "Total People Injured in Alcohol-Related Crashes",
+       x = "", y = "Total people injured", fill = "") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+ggplotly(p3)
+```
+
+
+# About this Dashboard
+
+## Row {height=50%}
+
+::: {.card title="About This Dashboard"}
+
+Last Updated: March 2026
+
+Crash data is downloaded from the Texas Department of Transportation (TXDOT) website using the 
+[Crash Query Tool](https://cris.dot.state.tx.us/public/Query/app/home). All crash data in this dashboard represent those classified as alcohol-related and that occurred in the city of El Paso.
+
+**Definition of Alcohol-Related Crash**
+
+A crash is defined as alcohol-related if involved drivers or individuals were reported as "Under the Influence of Alcohol", "Had Been Drinking", or were reported to have a blood alcohol content (BAC) greater than 0.
+
+**Definition of Injury/Fatality**
+
+Injuries include people who were classified as having a suspected serious injury, suspected minor injury, or possible injury. Fatalities are defined as any motor vehicle traffic injury crash that results in the death of one or more persons within 30 days of the incident.
+
+**Definition of Intoxicated Driver**
+
+Driver and vehicle characteristics in these graphs represent intoxicated drivers. An intoxicated driver is defined as a person who's BAC test result returned a value of 0.08g/dL or greater.
+
+**Acronyms**
+
+BAC = Blood alcohol content; YTD = Year to date
+
+:::
+
+::: {.card title="Technical Details"}
+
+**Calculation of Moving Average**
+
+The line graphs on the [Trends](#trends) page show 12-month moving averages for crashes, fatalities, and injuries between 2016 and *Present*. This technique results in a smooth line, allowing the viewer to see if a trend is increasing or decreasing.
+
+**Holiday Analyses**
+
+[Holidays](#holidays) statistics were calculated by aligning crash data to each holiday. For fixed-date holidays (e.g., New Year’s Day, Independence Day, Halloween, Christmas, and St. Patrick’s Day), each crash was assigned an event time based on the number of days before or after the calendar date of the holiday within each year. For shifting holidays (e.g., Super Bowl and Memorial Day), the holiday date was first computed for each year and then used as the reference point for event-time calculation.
+
+In all cases, crashes were restricted to a ±7-day window around the holiday and then aggregated across years (2016–2025), excluding 2020 to avoid COVID-19-related disruptions. Average daily crash counts were then computed for each relative day to identify typical patterns before and after each holiday.
+
+**Missing Data**
+
+A small amount of data for [Drivers](#drivers) characteristics (e.g., gender, race/ethnicity, vehicle color) is missing. Observations with missing or unknown values in these fields were excluded.
+:::
+
+# Trends
 
 ## Row {height="200px"}
 
@@ -415,7 +738,7 @@ p <- ggplot(monthly_avg, aes(
   geom_col(fill = "steelblue") +
 
 geom_text(
-  aes(y = avg_crashes + 8, label = label),
+  aes(y = avg_crashes + 7, label = label),
   size = 3.5
 ) +
 geom_col(fill = "steelblue", width = 0.5) +
@@ -1700,51 +2023,7 @@ reactable(
 )
 ```
 
-# About
 
-## Row {height=50%}
-
-::: {.card title="About This Dashboard"}
-
-Last Updated: March 2026
-
-Crash data is downloaded from the Texas Department of Transportation (TXDOT) website using the 
-[Crash Query Tool](https://cris.dot.state.tx.us/public/Query/app/home). All crash data in this dashboard represent those classified as alcohol-related and that occurred in the city of El Paso.
-
-**Definition of Alcohol-Related Crash**
-
-A crash is defined as alcohol-related if involved drivers or individuals were reported as "Under the Influence of Alcohol", "Had Been Drinking", or were reported to have a blood alcohol content (BAC) greater than 0.
-
-**Definition of Injury/Fatality**
-
-Injuries include people who were classified as having a suspected serious injury, suspected minor injury, or possible injury. Fatalities are defined as any motor vehicle traffic injury crash that results in the death of one or more persons within 30 days of the incident.
-
-**Definition of Intoxicated Driver**
-
-Driver and vehicle characteristics in these graphs represent intoxicated drivers. An intoxicated driver is defined as a person who's BAC test result returned a value of 0.08g/dL or greater.
-
-**Acronyms**
-
-BAC = Blood alcohol content; YTD = Year to date
-
-:::
-
-::: {.card title="Technical Details"}
-
-**Calculation of Moving Average**
-
-Averages for crashes and fatal crashes between 2016 and *Present* were calculated using a 12-month moving average. This technique results in a smooth line, allowing the viewer to see if a trend is increasing or decreasing.
-
-**Holiday Analyses**
-
-Holiday crash statistics were calculated by aligning crash data to each holiday. For fixed-date holidays (e.g., New Year’s Day, Independence Day, Halloween, Christmas, and St. Patrick’s Day), each crash was assigned an event time based on the number of days before or after the calendar date of the holiday within each year. For shifting holidays (e.g., Super Bowl and Memorial Day), the holiday date was first computed for each year and then used as the reference point for event-time calculation.
-
-In all cases, crashes were restricted to a ±7-day window around the holiday and then aggregated across years (2016–2025), excluding 2020 to avoid COVID-19-related disruptions. Average daily crash counts were then computed for each relative day to identify typical patterns before and after each holiday.
-
-**Missing Data**
-
-A small amount of data for driver characteristics (such as gender and race/ethnicity) and vehicle characteristics is missing. Observations with missing or unknown values in these fields were excluded.
-:::
 
 # Quiz
 
@@ -1767,7 +2046,6 @@ A small amount of data for driver characteristics (such as gender and race/ethni
 
 </div>
 
-
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw4TekPtUfV08eUUU9TbRu0QdeUl9_mondBZS0c179w-eQQb4YliAQwwUHyODuErsYA/exec";
 
@@ -1778,24 +2056,24 @@ let score = 0;
 const quiz = [
 
   {
-    q: "When are alcohol-related crashes most likely to happen in El Paso?",
-    a: ["Weekday mornings", "Weekends (Saturday and Sunday)", "Midday during the week"],
+    q: "What day(s) of the week do alcohol-related crashes most often occur?",
+    a: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Weekends (Saturday and Sunday)"],
     correct: "Weekends (Saturday and Sunday)",
-    explanation: "Crash data shows that alcohol-related crashes in El Paso are most common on weekends."
+    explanation: "About 50% of all alcohol-related crashes in El Paso occur on the weekend."
   },
 
   {
     q: "What time of day do alcohol-related crashes most often occur?",
-    a: ["6:00 AM to 12:00 PM", "12:00 PM to 6:00 PM", "6:00 PM to 6:00 AM"],
-    correct: "6:00 PM to 6:00 AM",
-    explanation: "Most alcohol-related crashes happen at night and early morning hours, when visibility is lower and alcohol consumption is more common."
+    a: ["10:00 AM to 12:00 PM", "12:00 PM to 6:00 PM", "9:00 PM to 3:00 AM"],
+    correct: "9:00 PM to 3:00 AM",
+    explanation: "More than half of all alcohol-related crashes in El Paso occur during late-night and early morning hours."
   },
 
   {
-    q: "Since 2016, what has happened to alcohol-related crashes in El Paso?",
-    a: ["They have increased steadily", "They have decreased overall", "They have stayed exactly the same"],
-    correct: "They have decreased overall",
-    explanation: "Overall trends show a decline in alcohol-related crashes since 2016. There was a sharp drop during COVID-19, followed by a return toward normal levels, and then a continued downward trend."
+    q: "Since 2016, the total number of alcohol-related crashes in El Paso has decreased.",
+    a: ["True", "False"],
+    correct: "True",
+    explanation: "Overall trends show a decline in alcohol-related crashes since 2016. The highest number of alcohol-related crashes recorded was in September 2017."
   },
 
   {
@@ -1809,7 +2087,21 @@ const quiz = [
     q: "On average, what BAC level do drivers involved in alcohol-related crashes in El Paso have?",
     a: ["About 0.08% (legal limit)", "About 0.10%", "About 0.16% (more than twice the legal limit)"],
     correct: "About 0.16% (more than twice the legal limit)",
-    explanation: "The data shows that many drivers involved in alcohol-related crashes have very high BAC levels—around 0.16%—which is more than twice the legal limit and associated with severe impairment."
+    explanation: "The data shows that many drivers involved in alcohol-related crashes have very high BAC levels—around 0.16%, which is more than twice the legal limit and associated with severe impairment."
+  },
+
+  {
+    q: "On which holiday do crashes sharply increase in El Paso?",
+    a: ["Memorial Day", "Christmas", "New Years Day"],
+    correct: "New Years Day",
+    explanation: "The data shows the average number of crashes on New Years Day doubles compared to the previous day."
+  },
+
+  {
+    q: "Which street has the most alcohol-related traffic fatalities in El Paso?",
+    a: ["Mesa Street", "Zaragoza Road", "I-10"],
+    correct: "I-10",
+    explanation: "The majority of crashes and fatalities occur along I-10 in El Paso, likely due to higher speeds and increased crash severity when alcohol is involved."
   }
 
 ];
@@ -1825,7 +2117,7 @@ function loadStats() {
       data.shift();
 
       const scores = data
-        .map(r => Number(r[3]))   // COLUMN D
+        .map(r => Number(r[3]))
         .filter(v => !isNaN(v));
 
       const count = scores.length;
@@ -1839,9 +2131,6 @@ function loadStats() {
 
       document.getElementById("avgStats").innerHTML =
         `Average score: ${avg}%`;
-
-      document.getElementById("tagline").innerHTML =
-        "";
     });
 }
 
@@ -1883,10 +2172,7 @@ function loadQuestion() {
         btn.style.backgroundColor = "#c8f7c5";
 
         document.getElementById("feedback").innerHTML =
-          `
-          <span style="color:green;"><b>Correct</b></span><br><br>
-          ${q.explanation}
-          `;
+          `<span style="color:green;"><b>Correct</b></span><br><br>${q.explanation}`;
       } else {
         btn.style.backgroundColor = "#f7c5c5";
 
@@ -1896,11 +2182,8 @@ function loadQuestion() {
           }
         });
 
-          document.getElementById("feedback").innerHTML =
-          `
-          <b>Correct answer:</b> ${q.correct}<br><br>
-          ${q.explanation}
-          `;
+        document.getElementById("feedback").innerHTML =
+          `<b>Correct answer:</b> ${q.correct}<br><br>${q.explanation}`;
       }
 
       document.getElementById("nextBtn").style.display = "inline-block";
@@ -1912,7 +2195,6 @@ function loadQuestion() {
 
 /* ---------------- NEXT ---------------- */
 function nextQuestion() {
-
   qIndex++;
 
   if (qIndex < quiz.length) {
@@ -1943,4 +2225,3 @@ function finishQuiz() {
 /* ---------------- INIT ---------------- */
 document.addEventListener("DOMContentLoaded", loadStats);
 </script>
-
