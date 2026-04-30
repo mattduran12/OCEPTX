@@ -18,6 +18,8 @@ Welcome to the Drunk Driving Surveillance Dashboard!
 
 This dashboard displays data on alcohol-related vehicle crashes in El Paso, Texas and is updated every month. 
 
+<u>Navigation Links</u>
+
 - [Monthly Brief](#monthly-brief) — Latest monthly summary of crashes, injuries, and fatalities
 - [About this Dashboard](#about-this-dashboard) — Data sources, definitions, and technical details 
 - [Trends](#trends) — Yearly trend patterns and year-to-date totals
@@ -265,6 +267,9 @@ dir_injury <- case_when(
   pct_change_injury < 0 ~ "decrease",
   TRUE ~ "no change"
 )
+
+
+
 ```
 
 ## Row {height="400px"}
@@ -273,11 +278,11 @@ dir_injury <- case_when(
 
 ## Quick Facts
 
-In **`r report_month`**, there were:
+In **`r report_month`**:
 
-- **`r crashes_now`** alcohol-related crashes, representing a **`r fmt(pct_change_crash)`** `r dir_crash` compared to the previous month  
-- **`r fatal_now`** fatalities associated with alcohol-related crashes, representing a **`r fmt(pct_change_fatal)`** `r dir_fatal` compared to the previous month  
-- **`r injuries_now`** people injured in alcohol-related crashes, representing a **`r fmt(pct_change_injury)`** `r dir_injury` compared to the previous month 
+- **Crashes:** This month recorded `r crashes_now` alcohol-related crashes (**`r fmt(pct_change_crash)`** `r dir_crash` vs. last month)  
+- **Fatalities:** There were `r fatal_now` fatalities linked to alcohol-related crashes (**`r fmt(pct_change_fatal)`** `r dir_fatal` vs. last month)
+- **Injuries:** A total of `r injuries_now` people were injured in alcohol-related crashes (**`r fmt(pct_change_injury)`** `r dir_injury` vs. last month)
 
 :::
 
@@ -316,7 +321,7 @@ p1 <- ggplot(crash_plot_data,
   theme_minimal() +
   theme(legend.position = "bottom")
 
-ggplotly(p1)
+ggplotly(p1) 
 ```
 
 ``` {r}
@@ -339,7 +344,7 @@ p2 <- ggplot(fatal_plot_data,
   theme_minimal() +
   theme(legend.position = "bottom")
 
-ggplotly(p2)
+ggplotly(p2) 
 
 ```
 
@@ -362,7 +367,7 @@ p3 <- ggplot(injury_plot_data,
   theme_minimal() +
   theme(legend.position = "bottom")
 
-ggplotly(p3)
+ggplotly(p3) 
 ```
 
 
@@ -370,46 +375,90 @@ ggplotly(p3)
 
 ## Row {height=50%}
 
-::: {.card title="About This Dashboard"}
+::: {.card title="**About This Dashboard**"}
 
-Last Updated: March 2026
+Last Update: March 2026
+
+The Drunk Driving Surveillance Dashboard provides monthly, city-level data on alcohol-related motor vehicle crashes in El Paso, Texas. It is designed as a public-facing resource for journalists, policymakers, and researchers seeking timely and transparent information on impaired driving trends.
 
 Crash data is downloaded from the Texas Department of Transportation (TXDOT) website using the 
-[Crash Query Tool](https://cris.dot.state.tx.us/public/Query/app/home). All crash data in this dashboard represent those classified as alcohol-related and that occurred in the city of El Paso.
+[Crash Records Information System (CRIS) Query Tool](https://cris.dot.state.tx.us/public/Query/app/home). All crash data in this dashboard represent those reported by law enforcement, were classified as alcohol-related, and occurred in the city of El Paso.
 
-**Definition of Alcohol-Related Crash**
+<u>Definition of Alcohol-Related Crash</u>
 
 A crash is defined as alcohol-related if involved drivers or individuals were reported as "Under the Influence of Alcohol", "Had Been Drinking", or were reported to have a blood alcohol content (BAC) greater than 0.
 
-**Definition of Injury/Fatality**
+<u>Definition of Injury/Fatality</u>
 
 Injuries include people who were classified as having a suspected serious injury, suspected minor injury, or possible injury. Fatalities are defined as any motor vehicle traffic injury crash that results in the death of one or more persons within 30 days of the incident.
 
-**Definition of Intoxicated Driver**
+<u>Definition of Intoxicated Driver</u>
 
 Driver and vehicle characteristics in these graphs represent intoxicated drivers. An intoxicated driver is defined as a person who's BAC test result returned a value of 0.08g/dL or greater.
 
-**Acronyms**
+<u>Acronyms</u>
 
 BAC = Blood alcohol content; YTD = Year to date
 
 :::
 
-::: {.card title="Technical Details"}
+::: {.card title="**For Media**"}
 
-**Calculation of Moving Average**
+<u>How to Cite This Dashboard</u>
+
+When referencing this dashboard, please use the following citation:
+
+El Paso Crime Lab. *Drunk Driving Surveillance Dashboard: El Paso, Texas* (2026). [www.epcrimelab.org/crash_dashboard.html]
+
+<u>Suggested Language</u>
+
+- “Crash data on alcohol-related crashes in El Paso show…”
+- “Local data on impaired driving trends indicate…”
+
+<u>Key Notes for Reporting</u>
+
+- Data reflect alcohol-related crashes, not arrests or enforcement activity  
+- Trends are based on official crash records from TXDOT
+- Monthly updates may revise prior counts as data are finalized  
+
+<u>Using Figures and Charts</u>
+
+All figures in this dashboard are interactive and downloadable.
+
+- To expand a figure, click the “Expand” button located at the bottom-right corner of each chart. Charts can easily be resized by adjusting the size of your internet browsing window.  
+- To download a figure, hover over the chart and click the camera icon to save it as an image  
+- Charts may be used in media coverage with attribution. *Data Source: TXDOT CRIS Query Tool | Figure created by El Paso Crime Lab*  
+
+
+<u>Contact</u>
+
+For questions or data clarification, please contact:  
+mduran29@asu.edu
+
+:::
+
+::: {.card title="**Technical Details**"}
+
+<u>Calculation of Moving Average</u>
 
 The line graphs on the [Trends](#trends) page show 12-month moving averages for crashes, fatalities, and injuries between 2016 and *Present*. This technique results in a smooth line, allowing the viewer to see if a trend is increasing or decreasing.
 
-**Holiday Analyses**
+<u>Holiday Analyses</u>
 
 [Holidays](#holidays) statistics were calculated by aligning crash data to each holiday. For fixed-date holidays (e.g., New Year’s Day, Independence Day, Halloween, Christmas, and St. Patrick’s Day), each crash was assigned an event time based on the number of days before or after the calendar date of the holiday within each year. For shifting holidays (e.g., Super Bowl and Memorial Day), the holiday date was first computed for each year and then used as the reference point for event-time calculation.
 
 In all cases, crashes were restricted to a ±7-day window around the holiday and then aggregated across years (2016–2025), excluding 2020 to avoid COVID-19-related disruptions. Average daily crash counts were then computed for each relative day to identify typical patterns before and after each holiday.
 
-**Missing Data**
+<u>Missing Data</u>
 
 A small amount of data for [Drivers](#drivers) characteristics (e.g., gender, race/ethnicity, vehicle color) is missing. Observations with missing or unknown values in these fields were excluded.
+
+<u>Limitations</u>
+
+Not all alcohol-involved crashes are identified in official records. In many cases, alcohol use may go undetected or unreported, particularly when testing is not conducted or impairment is not clearly observed. As a result, these data likely underestimate the true number of alcohol-related crashes—a gap often referred to as the “dark figure” of impaired driving.
+
+Despite this limitation, crash data remain one of the most reliable and policy-relevant indicators of drunk driving. Unlike arrest data, which are influenced by enforcement practices, crash records capture real-world harm—injuries and fatalities—providing a consistent basis for tracking trends over time and understanding the public safety impact of impaired driving.
+
 :::
 
 # Trends
@@ -539,7 +588,7 @@ p <- ggplot(monthly_counts, aes(x = month)) +
     legend.position = "top"
   )
 
-ggplotly(p)
+ggplotly(p) 
 ```
 
 
@@ -600,7 +649,7 @@ p <- ggplot(monthly_counts, aes(x = month)) +
     legend.position = "top"
   )
 
-ggplotly(p)
+ggplotly(p) 
 ```
 
 
@@ -670,7 +719,7 @@ p <- ggplot(injury_monthly, aes(x = month, y = ma12, color = injury)) +
     legend.position = "right"
   )
 
-ggplotly(p)
+ggplotly(p) 
 
 ```
 
@@ -769,7 +818,7 @@ geom_col(fill = "steelblue", width = 0.5) +
 # ----------------------------
 # Step 5: Plotly conversion
 # ----------------------------
-ggplotly(p)
+ggplotly(p) 
 ```
 
 ``` {r}
@@ -856,7 +905,7 @@ scale_y_continuous(
 # ----------------------------
 # Step 5: Plotly
 # ----------------------------
-ggplotly(p)
+ggplotly(p) 
 ```
 
 ## Row {height="400px"}
@@ -923,7 +972,7 @@ scale_y_continuous(
     y = "Total crashes"
   )
 
-ggplotly(p3)
+ggplotly(p3) 
 
 ```
 
@@ -1028,7 +1077,7 @@ scale_y_continuous(
 # ----------------------------
 # Step 5: Plotly
 # ----------------------------
-ggplotly(p4, tooltip = "text")
+ggplotly(p4, tooltip = "text") 
 
 ```
 
@@ -1100,7 +1149,7 @@ ggplotly(p) %>%
     line = list(width = 0),
     inherit = FALSE,
     showlegend = FALSE
-  )
+  ) 
 ```
 
 ``` {r}
@@ -1148,7 +1197,7 @@ ggplotly(p) %>%
               ymin = min(plot_data$avg_crashes),
               ymax = max(plot_data$avg_crashes),
               fillcolor = "rgba(255,0,0,0.08)",
-              line = list(width = 0)) 
+              line = list(width = 0))  
 ```
 
 ## Row {height="250px"}
@@ -1198,7 +1247,7 @@ ggplotly(p) %>%
               ymin = min(plot_data$avg_crashes),
               ymax = max(plot_data$avg_crashes),
               fillcolor = "rgba(255,0,0,0.08)",
-              line = list(width = 0)) 
+              line = list(width = 0))  
 ```
 
 ``` {r}
@@ -1241,7 +1290,7 @@ ggplotly(p) %>%
               ymin = min(plot_data$avg_crashes),
               ymax = max(plot_data$avg_crashes),
               fillcolor = "rgba(255,0,0,0.08)",
-              line = list(width = 0)) 
+              line = list(width = 0))  
 ```
 
 ## Row {height="250px"}
@@ -1282,7 +1331,7 @@ ggplotly(p) %>%
               ymin = min(plot_data$avg_crashes),
               ymax = max(plot_data$avg_crashes),
               fillcolor = "rgba(255,0,0,0.08)",
-              line = list(width = 0))
+              line = list(width = 0)) 
 
 ```
 
@@ -1326,7 +1375,7 @@ ggplotly(p) %>%
               ymin = min(plot_data$avg_crashes),
               ymax = max(plot_data$avg_crashes),
               fillcolor = "rgba(255,0,0,0.08)",
-              line = list(width = 0))
+              line = list(width = 0)) 
 ```
 
 ## Row {height="250px"}
@@ -1371,7 +1420,7 @@ ggplotly(p) %>%
               ymin = min(plot_data$avg_crashes),
               ymax = max(plot_data$avg_crashes),
               fillcolor = "rgba(255,0,0,0.08)",
-              line = list(width = 0))
+              line = list(width = 0)) 
 ```
 
 ``` {r}
@@ -1419,7 +1468,7 @@ ggplotly(p) %>%
               ymin = min(plot_data$avg_crashes),
               ymax = max(plot_data$avg_crashes),
               fillcolor = "rgba(255,0,0,0.08)",
-              line = list(width = 0))
+              line = list(width = 0)) 
 ```
 
 ## Row {height="250px"}
@@ -1464,7 +1513,7 @@ ggplotly(p) %>%
               ymin = min(plot_data$avg_crashes),
               ymax = max(plot_data$avg_crashes),
               fillcolor = "rgba(255,0,0,0.08)",
-              line = list(width = 0))
+              line = list(width = 0)) 
 ```
 
 ``` {r}
@@ -1497,7 +1546,7 @@ ggplotly(p) %>%
               ymin = min(plot_data$avg_crashes),
               ymax = max(plot_data$avg_crashes),
               fillcolor = "rgba(255,0,0,0.08)",
-              line = list(width = 0))
+              line = list(width = 0)) 
 ```
 
 # Drivers
@@ -1622,7 +1671,7 @@ plot_ly(
     "Drivers: %{value}<br>",
     "<extra></extra>"
   )
-)
+) 
 
 ```
 
@@ -1839,7 +1888,7 @@ layout(
   ),
   yaxis = list(title = ""),
   margin = list(r = 120)  # optional extra breathing room
-)
+) 
 
 ```
 

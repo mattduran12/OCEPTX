@@ -8,6 +8,8 @@ website:
     background: primary
     search: true
     left:
+      - text: "About"
+        href: index.html
       - text: "Research on Drunk Driving"
         href: research_drunkdriving.html
     right:

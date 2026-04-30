@@ -16,9 +16,9 @@ format:
 
 ## About Us
 
-The El Paso Crime Lab is a research-driven initiative focused on producing, analyzing, and sharing knowledge about crime and public safety in the El Paso region. The Lab functions as a hub for data analysis, applied research, and public-facing insights that support informed decision-making.
+The El Paso Crime Lab is a research-focused organization studying crime and public safety in the El Paso region. It produces and shares intelligence products grounded in rigorous methodology to support evidence-based policy and decision-making.
 
-We engage in a range of applied research and data-focused activities, including:
+We engage in a range of applied research activities, including:
 
 - **Survey development and analysis**  
   Designing, administering, and analyzing surveys to better understand community experiences, perceptions of safety, and underreported dimensions of crime.

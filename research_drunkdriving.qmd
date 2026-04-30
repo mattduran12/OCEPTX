@@ -1,11 +1,13 @@
 ---
-title: ""
+title: "Research on Drunk Driving"
 format:
   html:
     grid:
       margin-width: 180px
       body-width: 780px
     theme: cosmo
+    title-block: false
+
 ---
 
 <style>
@@ -64,7 +66,7 @@ View Dashboard
 ::: {.g-col-12 .g-col-md-6}
 
 **Opinion Article:**  
-This article explores why arrest data can be misleading when trying to understand drunk driving trends, and why researchers often rely on alternative measures instead. This article also includes a line graph comparing the rate of alcohol-involved crashes in El Paso to other Texas cities.
+This article explores why arrest data can be misleading when trying to understand drunk driving trends, and why researchers often rely on alcohol-involved crash rates instead. This article also includes a graph comparing the rate of alcohol-involved crashes in El Paso to other Texas cities.
 
 <br>
 
