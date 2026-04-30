@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "index.html#about-us",
+    "href": "index.html#about-us",
+    "title": "El Paso Crime Lab",
+    "section": "About Us",
+    "text": "About Us\nThe El Paso Crime Lab is a research-focused organization studying crime and public safety in the El Paso region. It produces and shares intelligence products grounded in rigorous methodology to support evidence-based policy and decision-making.\nWe engage in a range of applied research activities, including:\n\nSurvey development and analysis\nDesigning, administering, and analyzing surveys to better understand community experiences, perceptions of safety, and underreported dimensions of crime.\nProgram and policy evaluation\nAssessing the impact of interventions, enforcement strategies, and public policies using quasi-experimental and statistical methods.\nCrime data analysis and visualization\nIdentifying trends and patterns in crime and public safety outcomes using administrative and observational data.\nReport and policy brief production\nTranslating research findings into clear, actionable summaries for stakeholders and community partners.\nData integration and management\nCombining data from multiple sources to support comprehensive analyses of crime and related social outcomes."
+  },
+  {
+    "objectID": "index.html#open-access-mission",
+    "href": "index.html#open-access-mission",
+    "title": "El Paso Crime Lab",
+    "section": "Open Access Mission",
+    "text": "Open Access Mission\nA central goal of the El Paso Crime Lab is transparency. By making data and research publicly accessible, the Lab promotes open dialogue and supports evidence-based approaches to criminal justice policy. This work helps bridge the gap between academic research and real-world decision-making in the El Paso community."
+  },
+  {
+    "objectID": "index.html#contact-information",
+    "href": "index.html#contact-information",
+    "title": "El Paso Crime Lab",
+    "section": "Contact Information",
+    "text": "Contact Information\nFor questions, data requests, or collaboration opportunities, please contact:\nMatthew J. Durán\nemail: mduran29@asu.edu\nwebsite: https://mattduran12.github.io"
+  },
+  {
+    "objectID": "research_drunkdriving.html",
+    "href": "research_drunkdriving.html",
+    "title": "Research on Drunk Driving",
+    "section": "",
+    "text": "Overview:\nThe Drunk Driving Surveillance Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 indicators covering crash trends, geographic patterns, and driver and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.\n\n View Dashboard"
+  },
+  {
+    "objectID": "research_drunkdriving.html#drunk-driving-surveillance-dashboard",
+    "href": "research_drunkdriving.html#drunk-driving-surveillance-dashboard",
+    "title": "Research on Drunk Driving",
+    "section": "",
+    "text": "Overview:\nThe Drunk Driving Surveillance Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 indicators covering crash trends, geographic patterns, and driver and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.\n\n View Dashboard"
+  },
+  {
+    "objectID": "research_drunkdriving.html#in-the-media",
+    "href": "research_drunkdriving.html#in-the-media",
+    "title": "Research on Drunk Driving",
+    "section": "In the Media",
+    "text": "In the Media\n\n\n\nOpinion Article:\nThis article explores why arrest data can be misleading when trying to understand drunk driving trends, and why researchers often rely on alcohol-involved crash rates instead. This article also includes a graph comparing the rate of alcohol-involved crashes in El Paso to other Texas cities.\n\n Read Article"
+  },
+  {
+    "objectID": "research_drunkdriving.html#working-papers-reports",
+    "href": "research_drunkdriving.html#working-papers-reports",
+    "title": "Research on Drunk Driving",
+    "section": "Working Papers & Reports",
+    "text": "Working Papers & Reports\n\n\nDoes Public Shaming Deter Drunk Driving?\n\n\n\nSummary:\nThis study evaluates the impact of a social media campaign in El Paso that publicly shared booking photos of individuals arrested for driving while intoxicated (DWI). Using time-series analysis, this study attempts to isolate the campaign’s effect on alcohol-related crashes.\nThe findings highlight the potential and implications of social-media deterrence strategies. Recommendations for improving the strategy are provided.\n\n Download Paper (PDF)"
+  }
+]
