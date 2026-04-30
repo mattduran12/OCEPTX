@@ -6,11 +6,13 @@ format:
       margin-width: 180px
       body-width: 780px
     theme: cosmo
-    title-block: false
 
 ---
 
 <style>
+.quarto-title-block {
+  display: none;
+}
 .project-block {
   padding: 1.5rem 0;
   border-bottom: 1px solid #e9ecef;
@@ -30,6 +32,9 @@ img {
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 </style>
+
+
+
 
 
 ## Drunk Driving Surveillance Dashboard
@@ -59,6 +64,39 @@ View Dashboard
 
 ---
 
+## Working Papers & Reports
+
+---
+
+### Does Public Shaming Deter Drunk Driving?
+
+::: {.project-block}
+::: {.grid .align-items-center}
+::: {.g-col-12 .g-col-md-6}
+
+**Summary:**  
+This study evaluates the impact of a social media campaign in El Paso that publicly shared booking photos of individuals arrested for driving while intoxicated (DWI). Using time-series analysis, this study attempts to isolate the campaign’s effect on alcohol-related crashes.
+
+The findings highlight the potential and implications of social-media deterrence strategies. Recommendations for improving the strategy are provided.
+
+<br>
+
+<a href="dwi_friday_study.html" class="btn btn-primary">
+Read Paper
+</a>
+
+:::
+
+::: {.g-col-12 .g-col-md-6}
+
+![](dwi_study.jpg)
+
+:::
+:::
+:::
+
+---
+
 ## In the Media
 
 ::: {.project-block}
@@ -79,39 +117,6 @@ Read Article
 ::: {.g-col-12 .g-col-md-6}
 
 ![](opinion_article.jpg)
-
-:::
-:::
-:::
-
----
-
-## Working Papers & Reports
-
----
-
-### Does Public Shaming Deter Drunk Driving?
-
-::: {.project-block}
-::: {.grid .align-items-center}
-::: {.g-col-12 .g-col-md-6}
-
-**Summary:**  
-This study evaluates the impact of a social media campaign in El Paso that publicly shared booking photos of individuals arrested for driving while intoxicated (DWI). Using time-series analysis, this study attempts to isolate the campaign’s effect on alcohol-related crashes.
-
-The findings highlight the potential and implications of social-media deterrence strategies. Recommendations for improving the strategy are provided.
-
-<br>
-
-<a href="dwi_friday_study.html" class="btn btn-primary">
-Read Article
-</a>
-
-:::
-
-::: {.g-col-12 .g-col-md-6}
-
-![](dwi_study.jpg)
 
 :::
 :::
