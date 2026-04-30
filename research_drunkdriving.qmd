@@ -64,7 +64,7 @@ View Dashboard
 ::: {.g-col-12 .g-col-md-6}
 
 **Opinion Article:**  
-This piece explores how crime prevention strategies are communicated to the public and how media narratives shape perceptions of safety and deterrence in El Paso. It reflects on the role of transparency, messaging, and public engagement in addressing drunk driving and related harms.
+This article explores why arrest data can be misleading when trying to understand drunk driving trends and why researchers often rely on alternative measures instead. This article also includes a line graph comparing the rate of alcohol-involved crashes to other Texas cities.
 
 <br>
 
@@ -86,8 +86,6 @@ Read Article
 
 ## Working Papers & Reports
 
-The El Paso Crime Lab produces applied research and technical reports that examine crime trends, public safety issues, and policy impacts in the region. These reports translate data into clear, evidence-based insights for policymakers, practitioners, and the public.
-
 ---
 
 ### Does Public Shaming Deter Drunk Driving?
@@ -97,13 +95,13 @@ The El Paso Crime Lab produces applied research and technical reports that exami
 ::: {.g-col-12 .g-col-md-6}
 
 **Summary:**  
-This study evaluates the impact of a social media campaign in El Paso that publicly shared booking photos of individuals arrested for driving while intoxicated (DWI). Using Bayesian structural time-series methods and multiple comparison groups, the analysis isolates the campaign’s effect on alcohol-related crashes.
+This study evaluates the impact of a social media campaign in El Paso that publicly shared booking photos of individuals arrested for driving while intoxicated (DWI). Using Bayesian structural time-series methods and multiple comparison groups, the analysis attempts to isolate the campaign’s effect on alcohol-related crashes.
 
-Results suggest the campaign was associated with reductions in alcohol-related crashes, particularly among drivers aged 31 and older. The findings highlight both the potential and limits of public-facing deterrence strategies.
+The findings highlight both the potential and limits of public-facing deterrence strategies.
 
 <br>
 
-<a href="reports/dwi_study.pdf" download class="btn btn-primary">
+<a href="dwi_study.pdf" download class="btn btn-primary">
 Download Paper (PDF)
 </a>
 
