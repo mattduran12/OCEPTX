@@ -18,15 +18,6 @@ Welcome to the Drunk Driving Surveillance Dashboard!
 
 This dashboard displays data on alcohol-related vehicle crashes in El Paso, Texas and is updated every month. 
 
-<u>Navigation Links</u>
-
-- [Monthly Brief](#monthly-brief) — Latest monthly summary of crashes, injuries, and fatalities
-- [About this Dashboard](#about-this-dashboard) — Data sources, definitions, and technical details 
-- [Trends](#trends) — Yearly trend patterns and year-to-date totals
-- [Holidays](#holidays) — Crash patterns around major holidays and event periods  
-- [Drivers](#drivers) — Driver-level characteristics, risk indicators, and year-to-date totals 
-- [Map](#map) — Geographic distribution of alcohol-related crashes  
-- [Quiz](#quiz) — How well do you know the data in El Paso? Take the quiz and find out!
 
 ```{r}
 
@@ -247,19 +238,7 @@ dir_injury <- case_when(
 
 ```
 
-## Row {height="200px"}
-
-::: {.card}
-In **`r report_month`**:
-
-- Alcohol-Related Crashes: This month recorded **`r crashes_now`** alcohol-related crashes (**`r fmt(pct_change_crash)`** `r dir_crash` vs. last month)  
-- People Injured in an Alcohol-Related Crashes: A total of **`r injuries_now`** people were injured (**`r fmt(pct_change_injury)`** `r dir_injury` vs. last month)
-
-- Alcohol-Related Traffic Fatalities: There were **`r fatal_now`** fatalities linked to alcohol-related crashes (**`r fmt(pct_change_fatal)`** `r dir_fatal` vs. last month)
-
-:::
-
-## Row {.tabset height=400px}
+## Row {.tabset height=70%}
 
 ``` {r}
 # remove future months for current year only
@@ -342,6 +321,36 @@ p2 <- ggplot(fatal_plot_data,
 ggplotly(p2) 
 
 ```
+
+
+## Row {height=30%}
+
+### Column 
+
+::: {.card title="**Monthly Summary**"}
+In **`r report_month`**:
+
+- Alcohol-Related Crashes: This month recorded **`r crashes_now`** alcohol-related crashes (**`r fmt(pct_change_crash)`** `r dir_crash` vs. last month)  
+- People Injured in an Alcohol-Related Crashes: A total of **`r injuries_now`** people were injured (**`r fmt(pct_change_injury)`** `r dir_injury` vs. last month)
+
+- Alcohol-Related Traffic Fatalities: There were **`r fatal_now`** fatalities linked to alcohol-related crashes (**`r fmt(pct_change_fatal)`** `r dir_fatal` vs. last month)
+
+:::
+
+### Column
+
+::: {.card title="**Navigation Links**"}
+
+- [Monthly Brief](#monthly-brief) — Latest monthly summary of crashes, injuries, and fatalities
+- [About this Dashboard](#about-this-dashboard) — Data sources, definitions, and technical details 
+- [Trends](#trends) — Yearly trend patterns and year-to-date totals
+- [Holidays](#holidays) — Crash patterns around major holidays and event periods  
+- [Drivers](#drivers) — Driver-level characteristics, risk indicators, and year-to-date totals 
+- [Map](#map) — Geographic distribution of alcohol-related crashes  
+- [Quiz](#quiz) — How well do you know the data in El Paso? Take the quiz and find out!
+
+:::
+
 
 
 # About this Dashboard
@@ -532,7 +541,7 @@ p <- ggplot(monthly_counts, aes(x = month)) +
 
   # observed
   geom_line(
-    aes(y = crashes, color = "Total crashes"),
+    aes(y = crashes, color = "Total alcohol-involved crashes"),
     linewidth = 0.8
   ) +
 
@@ -544,7 +553,7 @@ p <- ggplot(monthly_counts, aes(x = month)) +
 
   scale_color_manual(
     values = c(
-      "Total crashes" = "grey70",
+      "Total alcohol-involved crashes" = "grey70",
       "Average" = "black"
     )
   ) +
@@ -597,7 +606,7 @@ p <- ggplot(injury_monthly, aes(x = month)) +
 
   # observed
   geom_line(
-    aes(y = injuries, color = "Total injuries"),
+    aes(y = injuries, color = "Total people injured in alcohol-involved crashes"),
     linewidth = 0.8
   ) +
 
@@ -609,7 +618,7 @@ p <- ggplot(injury_monthly, aes(x = month)) +
 
   scale_color_manual(
     values = c(
-      "Total injuries" = "grey70",  # yellow
+      "Total people injured in alcohol-involved crashes" = "grey70",  # yellow
       "Average"        = "#F77F00"   # orange
     )
   ) +
@@ -659,7 +668,7 @@ p <- ggplot(monthly_counts, aes(x = month)) +
 
   # observed total fatalities (grey)
   geom_line(
-    aes(y = alcohol_fatal_crashes, color = "Total fatalities"),
+    aes(y = alcohol_fatal_crashes, color = "Total alcohol-involved fatalities"),
     linewidth = 1
   ) +
 
@@ -671,7 +680,7 @@ p <- ggplot(monthly_counts, aes(x = month)) +
 
   scale_color_manual(
     values = c(
-      "Total fatalities" = "grey70",
+      "Total alcohol-involved fatalities" = "grey70",
       "Average" = "maroon"
     )
   ) +
