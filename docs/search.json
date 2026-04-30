@@ -19,5 +19,54 @@
     "title": "Contact",
     "section": "",
     "text": "For questions, data requests, or collaboration opportunities, please use the form below.\n\nName \nEmail \nMessage\n\n\n Send Message"
+  },
+  {
+    "objectID": "dwi_friday_study.html",
+    "href": "dwi_friday_study.html",
+    "title": "Does Public Shaming Deter Drunk Driving?",
+    "section": "",
+    "text": "Disclaimer: This study is under peer-review and subject to revisions."
+  },
+  {
+    "objectID": "dwi_friday_study.html#footnotes",
+    "href": "dwi_friday_study.html#footnotes",
+    "title": "El Paso Crime Lab",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nFatality counts were obtained from archived Motor Vehicle Traffic Accident reports by the Texas Department of Transportation (https://digital.library.unt.edu/explore/collections/).↩︎\nCounts were obtained from Federal Bureau of Investigation (2025), National Highway Traffic Safety Administration (2025), and online reports from the Texas Department of Transportation (2025a). Rates were calculated using linear interpolation of decennial census data.↩︎\nThe community social media account is a form of citizen journalism, where any Instagram user can send videos, photos, or messages to the account manager, who then shares the content via a permanent or temporary public post. As of July 2025, the EPPD’s Facebook and Instagram accounts are followed by, respectively, over 85,000 and 39,000 users. The community account currently shows over 600,000 followers.↩︎\nAll initial comments (excluding replies) made between June 22, 2024, and July 5, 2025, were collected from 51 DWI Friday posts, resulting in a total of 9,484 comments. Weekly comment counts ranged from 93 to 332 (M = 186.24; SD = 54.50). To ensure fair representation across weeks, a stratified simple random sample with proportional allocation (5%) was drawn from each week, yielding the reported sample size.↩︎\nEnforcement activity, specifically total DWI arrests by the El Paso Police Department, was initially considered but presented an endogeneity problem for this analysis. Presumably, people involved in an alcohol-related crash are subsequently arrested for DWI. This appeared to be the case in this study, which showed monthly alcohol-related crashes and DWI arrests were positively correlated. Analyses not reported here found no substantial differences when DWI arrests were included in the analysis.↩︎\nUnder Section 550.026 of the Texas Transportation Code, a vehicle collision is required to be reported to law enforcement if the operator of a vehicle involved is injured, or the damage to a vehicle renders it unable to be normally and safely driven. These reporting requirements can be expanded by municipalities (see Section 550.067 of the Texas Transportation Code), which was the case in the study jurisdiction. According to Chapter 12.16 of the City of El Paso’s Code of Ordinances, drivers involved in an accident in the city of El Paso are required to report it to the police department if damage to the vehicle or property appears to meet or exceed one thousand dollars.↩︎\nData was obtained from a Freedom of Information Act request filed with the city of El Paso.↩︎\nThe results did not differ when using estimates of annual vehicle miles traveled for urban populations (&gt; 5,000 residents) in El Paso County.↩︎\nThe inclusion of non-alcohol-related crashes broadly represents exogenous factors not captured in the analysis. For instance, increased usage of rideshare services (e.g., Lyft and Uber) could have plausibly impacted both alcohol-related crashes and all other types of vehicle crashes (e.g., Arif Khan et al., 2022).↩︎\nUnder a frequentist approach, a significance test below the 5% alpha level is interpreted to mean that, assuming the null hypothesis of no effect is true, there is a 5% probability of obtaining a result at least as extreme as the one observed. Bayesian analyses can be set up to yield similar inferential statements, but they offer greater flexibility by allowing decision-makers to focus directly on probabilities tied to their interest. Rather than thinking in the dichotomous terms required by the Fisher–Neyman framework of statistical significance, a police chief or city official might instead want to know the probability an intervention produced at least a 10% reduction (for guidance on applying Bayesian analyses to policy-decisions, see Mourtgos, 2025).↩︎"
+  },
+  {
+    "objectID": "dwi_friday_study.html#appendix",
+    "href": "dwi_friday_study.html#appendix",
+    "title": "Does Public Shaming Deter Drunk Driving?",
+    "section": "Appendix",
+    "text": "Appendix"
+  },
+  {
+    "objectID": "research_drunkdriving.html",
+    "href": "research_drunkdriving.html",
+    "title": "Research on Drunk Driving",
+    "section": "",
+    "text": "Overview:\nThe Drunk Driving Surveillance Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 indicators covering crash trends, geographic patterns, and driver and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.\n\n View Dashboard"
+  },
+  {
+    "objectID": "research_drunkdriving.html#drunk-driving-surveillance-dashboard",
+    "href": "research_drunkdriving.html#drunk-driving-surveillance-dashboard",
+    "title": "Research on Drunk Driving",
+    "section": "",
+    "text": "Overview:\nThe Drunk Driving Surveillance Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 indicators covering crash trends, geographic patterns, and driver and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.\n\n View Dashboard"
+  },
+  {
+    "objectID": "research_drunkdriving.html#in-the-media",
+    "href": "research_drunkdriving.html#in-the-media",
+    "title": "Research on Drunk Driving",
+    "section": "In the Media",
+    "text": "In the Media\n\n\n\nOpinion Article:\nThis article explores why arrest data can be misleading when trying to understand drunk driving trends, and why researchers often rely on alcohol-involved crash rates instead. This article also includes a graph comparing the rate of alcohol-involved crashes in El Paso to other Texas cities.\n\n Read Article"
+  },
+  {
+    "objectID": "research_drunkdriving.html#working-papers-reports",
+    "href": "research_drunkdriving.html#working-papers-reports",
+    "title": "Research on Drunk Driving",
+    "section": "Working Papers & Reports",
+    "text": "Working Papers & Reports\n\n\nDoes Public Shaming Deter Drunk Driving?\n\n\n\nSummary:\nThis study evaluates the impact of a social media campaign in El Paso that publicly shared booking photos of individuals arrested for driving while intoxicated (DWI). Using time-series analysis, this study attempts to isolate the campaign’s effect on alcohol-related crashes.\nThe findings highlight the potential and implications of social-media deterrence strategies. Recommendations for improving the strategy are provided.\n\n Read Article"
   }
 ]

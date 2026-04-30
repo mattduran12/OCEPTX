@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Matthew Durán">
+<meta name="dcterms.date" content="2026-04-30">
+
+<title>Does Public Shaming Deter Drunk Driving? – El Paso Crime Lab</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-b62580194b4cd6d3c1174a38bcd7db1b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles2.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">El Paso Crime Lab</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./research_drunkdriving.html"> 
+<span class="menu-text">Research on Drunk Driving</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./subscribe.html"> 
+<span class="menu-text">Subscribe for Updates</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./contact.html"> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">What’s on this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#prior-research-on-dwi-prevention" id="toc-prior-research-on-dwi-prevention" class="nav-link" data-scroll-target="#prior-research-on-dwi-prevention">Prior Research on DWI Prevention</a></li>
+  <li><a href="#the-dwi-friday-initiative" id="toc-the-dwi-friday-initiative" class="nav-link" data-scroll-target="#the-dwi-friday-initiative">The DWI Friday Initiative</a>
+  <ul>
+  <li><a href="#setting" id="toc-setting" class="nav-link" data-scroll-target="#setting">Setting</a></li>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a></li>
+  <li><a href="#target-population" id="toc-target-population" class="nav-link" data-scroll-target="#target-population">Target population</a></li>
+  </ul></li>
+  <li><a href="#theoretical-framework" id="toc-theoretical-framework" class="nav-link" data-scroll-target="#theoretical-framework">Theoretical Framework</a></li>
+  <li><a href="#current-study" id="toc-current-study" class="nav-link" data-scroll-target="#current-study">Current Study</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul>
+  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources">Data Sources</a></li>
+  <li><a href="#outcome-series" id="toc-outcome-series" class="nav-link" data-scroll-target="#outcome-series">Outcome-series</a></li>
+  <li><a href="#control-series" id="toc-control-series" class="nav-link" data-scroll-target="#control-series">Control-series</a></li>
+  </ul></li>
+  <li><a href="#analytic-strategy" id="toc-analytic-strategy" class="nav-link" data-scroll-target="#analytic-strategy">Analytic Strategy</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
+  <ul>
+  <li><a href="#additional-analyses" id="toc-additional-analyses" class="nav-link" data-scroll-target="#additional-analyses">Additional Analyses</a></li>
+  </ul></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a>
+  <ul>
+  <li><a href="#summary-of-findings" id="toc-summary-of-findings" class="nav-link" data-scroll-target="#summary-of-findings">Summary of Findings</a></li>
+  <li><a href="#policy-implications" id="toc-policy-implications" class="nav-link" data-scroll-target="#policy-implications">Policy Implications</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Does Public Shaming Deter Drunk Driving?</h1>
+<p class="subtitle lead">A Controlled Interrupted Time-Series Study</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Matthew Durán </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 30, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>Disclaimer: This study is under peer-review and subject to revisions.</em></p>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<p>Beginning in the 1980s and continuing through the late 1990s, alcohol-related traffic deaths declined in the United States. The percentage of deaths involving a drunk driver was 48% in 1982 and fell to 30% by 1997, where it has remained for over twenty five years <span class="citation" data-cites="nhtsa2023">(<a href="#ref-nhtsa2023" role="doc-biblioref">National Highway Traffic Safety Administration 2023</a>)</span>. Understanding what caused the decline is challenging given the legal and social changes that co-occurred <span class="citation" data-cites="williams2006">(<a href="#ref-williams2006" role="doc-biblioref">A. F. Williams 2006</a>)</span>. Between 1981 to 1986, over 700 laws aimed at drunk driving were introduced, more than 400 citizen groups were founded, and news stories about drunk driving increased fifty-fold <span class="citation" data-cites="hingson1988">(<a href="#ref-hingson1988" role="doc-biblioref">Hingson, Howland, and Levenson 1988</a>)</span>. As <span class="citation" data-cites="wagenaar1995">Wagenaar et al. (<a href="#ref-wagenaar1995" role="doc-biblioref">1995</a>)</span> concluded from an attempted meta-analysis: “[its] impossible to distinguish the separate contribution of each intervention” (p.&nbsp;312). While some evaluations attempted to parse out the effects (e.g., <span class="citation" data-cites="west1989">(<a href="#ref-west1989" role="doc-biblioref">West et al. 1989</a>)</span>), most studies focused on legal mechanisms, such as lowering blood alcohol concentration (e.g., <span class="citation" data-cites="zwerling1999">(<a href="#ref-zwerling1999" role="doc-biblioref">Zwerling and Jones 1999</a>)</span>), and increasing the minimum drinking age (e.g., <span class="citation" data-cites="cook1984 mccornac1982 williams1983">(<a href="#ref-cook1984" role="doc-biblioref">Cook and Tauchen 1984</a>; <a href="#ref-mccornac1982" role="doc-biblioref">McCornac 1982</a>; <a href="#ref-williams1983" role="doc-biblioref">A. F. Williams et al. 1983</a>)</span>), to name a few.</p>
+<p>This emphasis on formal legal responses has overshadowed the role of community norms and social pressures that also contribute to crime prevention. Exploring community approaches holds particular promise: they align with broader movements encouraging communities to share responsibility for crime control with government <span class="citation" data-cites="garland2001 clear2000">(<a href="#ref-garland2001" role="doc-biblioref">Garland 2001</a>; <a href="#ref-clear2000" role="doc-biblioref">Clear and Karp 2000</a>)</span>, and they may offer new avenues for prevention strategies now that driving while intoxicated (DWI) legislation has largely stabilized nationwide. The current policy environment is therefore well-positioned to estimate the effect of community-based interventions. One avenue is to examine the impact of mass media campaigns on drunk driving, an area of research where most evaluations were conducted more than two decades ago and have yet to include social media campaigns <span class="citation" data-cites="elder2004 tay2005 yadav2015">(<a href="#ref-elder2004" role="doc-biblioref">Elder et al. 2004</a>; <a href="#ref-tay2005" role="doc-biblioref">Tay 2005</a>; <a href="#ref-yadav2015" role="doc-biblioref">Yadav and Kobayashi 2015</a>)</span>.</p>
+<p>The current study adds to the DWI prevention literature by documenting the impact of a city-wide, social media campaign implemented in a single jurisdiction. Every week for one year, booking photos of people recently arrested for driving while intoxicated (DWI) were shared to social media by a police department and community group. To assess the impact the campaign had on drunk driving, a controlled interrupted time-series design is used to compare the rates of alcohol-involved vehicle crashes before and during the first year of the program. The findings show both the potential for community-based strategies, as well as the potential risks when community groups leverage police practices.</p>
+</section>
+<section id="prior-research-on-dwi-prevention" class="level3">
+<h3 class="anchored" data-anchor-id="prior-research-on-dwi-prevention">Prior Research on DWI Prevention</h3>
+<p>The study of DWI prevention began around the latter half of the 20th century, when quasi-experimental designs debuted in policy evaluation research (e.g., <span class="citation" data-cites="berk1983 campbell1968 ross1970">(<a href="#ref-berk1983" role="doc-biblioref">Berk and Rauma 1983</a>; <a href="#ref-campbell1968" role="doc-biblioref">Campbell and Ross 1968</a>; <a href="#ref-ross1970" role="doc-biblioref">Ross, Campbell, and Glass 1970</a>)</span>). These circumstances gave rise to innovative methods for examining the deterrent effect of legal sanctions where randomization was not possible (<span class="citation" data-cites="ross1983 ross1984 west1989">(<a href="#ref-ross1983" role="doc-biblioref">Ross and McCleary 1983</a>; <a href="#ref-ross1984" role="doc-biblioref">Ross 1984</a>; <a href="#ref-west1989" role="doc-biblioref">West et al. 1989</a>)</span>). One of the earliest pieces to provide methodological guidance was published by <span class="citation" data-cites="ross1983">Ross and McCleary (<a href="#ref-ross1983" role="doc-biblioref">1983</a>)</span> in the journal Accident Analysis &amp; Prevention. The authors reviewed the methods used to evaluate drunk driving interventions and advocated that alcohol-related accidents are a key indicator for measuring drunk driving behavior but failed to capture the entire incidence, what is commonly referred to as the “dark figure” problem in criminal justice research. Although using traffic accidents plausibly underestimates drunk driving, Ross &amp; McCleary argued crash data was most appropriate for prevention evaluations. A similar conclusion was echoed in the Problem-Oriented Policing Guide No.&nbsp;36 on Drunk Driving, where alcohol-related vehicle crashes were described as one of the key harms that DWI prevention strategies aim to reduce <span class="citation" data-cites="scott2006">(<a href="#ref-scott2006" role="doc-biblioref">Scott et al. 2006</a>)</span>.</p>
+<p>Within the transportation literature, a related body of work evaluated the effects of mass media campaigns on drunk driving. Two systematic reviews yielded similar conclusions: that campaigns paired with additional prevention efforts show the strongest reductions in drunk driving outcomes <span class="citation" data-cites="elder2004 tay2005">(<a href="#ref-elder2004" role="doc-biblioref">Elder et al. 2004</a>; <a href="#ref-tay2005" role="doc-biblioref">Tay 2005</a>)</span>. The theories of change in this literature lack attention, although the work by Tay &amp; Ozanne (2002) is an exception. Tay &amp; Ozanne discussed the importance of analyzing message content in media campaigns. According to their review, prevention strategies using fear-based content often assume the content arouses fear in viewers and changes behavior; however, this is not always tested in evaluations and may show differential effects across a population (also see <span class="citation" data-cites="fradella2000">Fradella (<a href="#ref-fradella2000" role="doc-biblioref">2000</a>)</span>).</p>
+<p>A glaring challenge in the DWI prevention literature is inferring causal inference given the presence of plausible alternative explanations (<span class="citation" data-cites="ross1983">(<a href="#ref-ross1983" role="doc-biblioref">Ross and McCleary 1983</a>)</span>). Indeed, several other factors theoretically influence the rate of traffic accidents in a jurisdiction. With respect to crashes that are alcohol-related, several studies demonstrated that enforcement activity <span class="citation" data-cites="ohara2022">(<a href="#ref-ohara2022" role="doc-biblioref">O’Hara, Paschall, and Herd 2022</a>)</span>, public transit usage <span class="citation" data-cites="fell2020">(<a href="#ref-fell2020" role="doc-biblioref">Fell et al. 2020</a>)</span>, fuel price <span class="citation" data-cites="chi2011 naqvi2020">(<a href="#ref-chi2011" role="doc-biblioref">Chi et al. 2011</a>; <a href="#ref-naqvi2020" role="doc-biblioref">Naqvi, Quddus, and Enoch 2020</a>)</span>, and alcohol sales <span class="citation" data-cites="gruenewald1995">(<a href="#ref-gruenewald1995" role="doc-biblioref">Gruenewald and Ponicki 1995</a>)</span> are correlated. Given that virtually all city-wide DWI prevention evaluations rely on quasi-experimental designs, the incorporation of these exogenous factors is vital to minimize bias.</p>
+</section>
+<section id="the-dwi-friday-initiative" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="the-dwi-friday-initiative">The DWI Friday Initiative</h3>
+<section id="setting" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="setting">Setting</h4>
+<p>The setting for the current study is El Paso, the sixth largest city in the state of Texas with a population of 678,815 people in an area of about 257.4 square miles <span class="citation" data-cites="uscensus2020">(<a href="#ref-uscensus2020" role="doc-biblioref">U.S. Census Bureau 2020</a>)</span>. El Paso is located along the southern border, adjacent to Las Cruces, New Mexico and contains four land ports of entry into Ciudad Juarez, Chihuahua, Mexico. A large military installation is located in the city with a population of 11,260 <span class="citation" data-cites="uscensus2020">(<a href="#ref-uscensus2020" role="doc-biblioref">U.S. Census Bureau 2020</a>)</span>. As for socioeconomic demographics, the majority of El Pasoans identify as Hispanic (81.25%) and nearly half (47.97%) are adherents of the Catholic Church <span class="citation" data-cites="grammich2023">(<a href="#ref-grammich2023" role="doc-biblioref">Grammich et al. 2023</a>)</span>. In 2024, the estimated median household income was $59,932, and the employment rate was 57.9%.</p>
+<p>With respect to alcohol-related vehicle crashes, El Paso, like other major cities in Texas, experienced a significant decline in the early 1990s. The rate of traffic fatalities was 17.14 deaths per 100,000 people in 1992 and fell to 8.31 in 2003, decreasing by over 50%.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Since 2003, about one-third of traffic fatalities involve alcohol as a contributing factor. The prevalence of alcohol-related traffic fatalities is nearly as prevalent as homicide in the city and is considered one of the most pressing issues facing the region <span class="citation" data-cites="kfox14_2025">(<a href="#ref-kfox14_2025" role="doc-biblioref">KFOX14 2025</a>)</span>. Figure 1 illustrates these trends over a twenty-year period in the United States, state of Texas, and city of El Paso.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Fatality counts were obtained from archived Motor Vehicle Traffic Accident reports by the Texas Department of Transportation (https://digital.library.unt.edu/explore/collections/).</p></div><div id="fn2"><p><sup>2</sup>&nbsp;Counts were obtained from Federal Bureau of Investigation (2025), National Highway Traffic Safety Administration (2025), and online reports from the Texas Department of Transportation (2025a). Rates were calculated using linear interpolation of decennial census data.</p></div></div><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dwi_study_f1.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 1. Rates of homicide and alcohol-related vehicle fatalities from 2003 to 2023.</figcaption>
+</figure>
+</div>
+</section>
+<section id="implementation" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="implementation">Implementation</h4>
+<p>On June 21, 2024, the El Paso Police Department (EPPD) began the “DWI Friday” initiative <span class="citation" data-cites="luna2024">(<a href="#ref-luna2024" role="doc-biblioref">Luna 2024</a>)</span>. Each Friday evening, the EPPD uploaded booking photos of individuals charged with DWI on their official Facebook and Instagram accounts. The individuals featured were all arrested by officers of the department during the week prior to the post. Below each booking photo, the arrestee’s name and alcohol-related charge were displayed. With the exception of Thanksgiving weekend, the EPPD consistently published DWI Friday posts since the initiative began. Over the course of 52 weeks, 1,221 individual photos were shared online.</p>
+<p>The coverage and delivery of the campaign circulated through local news outlets but was systematically shared by a local community group recognized throughout the study jurisdiction for its cultural significance and ability to prompt official action <span class="citation" data-cites="mata2023 moorevilla2025">(<a href="#ref-mata2023" role="doc-biblioref">Mata 2023</a>; <a href="#ref-moorevilla2025" role="doc-biblioref">Moore and Villa 2025</a>)</span>. Each week immediately following the EPPD’s posts, all booking photos were obtained and reuploaded to the community group’s Instagram account, which could only be accessed on a computer or mobile device connected to the internet.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Figure 2 provides a rendition of a typical DWI Friday post created by the community group. Upon accessing the post, viewers were presented with 2 x 3 arrangements of booking photos, along with a real-time list of comments made by Instagram users.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;The community social media account is a form of citizen journalism, where any Instagram user can send videos, photos, or messages to the account manager, who then shares the content via a permanent or temporary public post. As of July 2025, the EPPD’s Facebook and Instagram accounts are followed by, respectively, over 85,000 and 39,000 users. The community account currently shows over 600,000 followers.</p></div></div><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dwi_study_f2.png" width="250" class="figure-img"></p>
+<figcaption>Figure 2. Recreation of a weekly DWI Friday post</figcaption>
+</figure>
+</div>
+<p>An important distinction between the EPPD’s practice and the posts by the community social media account is the temporal access of photos and ability for viewers to read comments. The EPPD made arrest photos available for only 24 hours each week and without public commenting, while the community group uploaded photos permanently and facilitated a public forum. This implementation decision significantly increased the level of exposure and determined the context in which viewers would come to interpret the campaign. During the first year, the community group’s posts garnered over half a million user-likes and over 16,000 user-comments. It is important to note not all viewers clicked the “like” button. Given that no data is publicly available to assess the duration and frequency of exposure to the weekly posts, exposure to the initiative is likely underestimated but nevertheless observable using these metrics.</p>
+<p>Additionally, the geographic residency of people who viewed the weekly posts is not publicly available, however, evidence from the comments suggests a substantial proportion of users are or were local residents in the study jurisdiction. A representative sample of 474 comments across 51 weekly posts from the community group was dichotomously coded for users who explicitly stated they recognized a person in the arrest photo.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> The analysis showed about 10.76% (95% CI: 8.26%, 13.90%) of all comments explicitly state the user recognized a person in the photo (e.g., “Someone I know every week”, “I finally recognize someone!”, “That’s my neighbor”, “Damn, I know three guys on this list”).</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;All initial comments (excluding replies) made between June 22, 2024, and July 5, 2025, were collected from 51 DWI Friday posts, resulting in a total of 9,484 comments. Weekly comment counts ranged from 93 to 332 (M = 186.24; SD = 54.50). To ensure fair representation across weeks, a stratified simple random sample with proportional allocation (5%) was drawn from each week, yielding the reported sample size.</p></div></div><p>In addition to recognizing those who were arrested, users’ comments exhibited a range of reactions to DWI Friday. Some users found the photos and comments entertaining. For example, the top comment in one week’s post contained 111 user-likes: “Literally, the best hour of the week. Here for the comments”. Other users expressed humor, sometimes generally (e.g., 235 user-likes: “yall catch everyone except my ex every week”) or towards specific people in the photos. For instance, the name of an arrested person who appeared to have strabismus (i.e., misalignment of the eyes) appeared in twenty-five comments one week (e.g., 921 user-likes: “I don’t think [Name] could drive sober even if he wanted too”, 438 user-likes: “[Name] didn’t see that coming”). Additionally, some comments drew on a more empathetic tone (e.g., 212 likes: “We’ve all been down in life…we should pray for their recoveries”).</p>
+</section>
+<section id="target-population" class="level4">
+<h4 class="anchored" data-anchor-id="target-population">Target population</h4>
+<p>Although the campaign was implemented city-wide, the delivery and timing of DWI Friday posts likely focused exposure to a subset of the population, specifically young adults between the ages 18 to 49 with access to social media. According to estimates from the Pew Research Center, about 76% of Americans between the ages of 18 to 29 use Instagram, followed by 66% of Americans between the ages of 30 to 49 <span class="citation" data-cites="pewresearch2024">(<a href="#ref-pewresearch2024" role="doc-biblioref">Pew Research Center 2024</a>)</span>. The overrepresentation of young adults as Instagram users resembles the overrepresentation of young adults in El Paso who were involved in alcohol-related crashes. A descriptive analysis of crash data shows the average age of drivers in El Paso who crashed with a blood alcohol content over the legal limit was 33.38 years (SD = 12.86) <span class="citation" data-cites="txdot2025b">(<a href="#ref-txdot2025b" role="doc-biblioref">Texas Department of Transportation 2025</a>)</span>. As for the timing of the initiative, releasing posts during Friday evenings may have impacted decision-making within hours before viewers began drinking and driving, as weekends accounted for 63.57% of all alcohol-related vehicle crashes, and over 85.77% occurred between 6:00 p.m. and 5:00 a.m in 2024 <span class="citation" data-cites="txdot2025b">(<a href="#ref-txdot2025b" role="doc-biblioref">Texas Department of Transportation 2025</a>)</span>.</p>
+</section>
+</section>
+<section id="theoretical-framework" class="level3">
+<h3 class="anchored" data-anchor-id="theoretical-framework">Theoretical Framework</h3>
+<p>Deterrence theory is a reasonable theoretical backdrop for understanding how DWI Friday may prevent would-be offenders from drunk driving. One of the core tenents of crime prevention in the theory is to enhance the severity of consequences. Enhancing consequences is thought to persuade or deter people from engaging in a proscribed behavior. With regards to DWI prevention, prior research suggests the deterrent effect of enhancing legal sanctions is mixed <span class="citation" data-cites="evans1991 mccarthy1987">(<a href="#ref-evans1991" role="doc-biblioref">Evans, Neville, and Graham 1991</a>; <a href="#ref-mccarthy1987" role="doc-biblioref">McCarthy and Oesterle 1987</a>)</span>. An alternative pathway less examined is enhancing the severity of consequences through non-legal mechanisms.</p>
+<p>Criminologists Harold Grasmick &amp; Robert Bursik (1990) argued that in addition to the state’s threat of legal punishment, people in community serve as another potential source for deterrence. Grasmick &amp; Bursik termed this source, “significant others”, and defined them as people whose opinions are valued by a would-be offender (e.g., parents, mentors, close friends). If a would-be offender were to violate social norms, including legal ones, “they run the risk of being embarrassed or suffering a loss of respect” from these significant others <span class="citation" data-cites="grasmick1990 grasmick1991">(<a href="#ref-grasmick1990" role="doc-biblioref">Grasmick and Bursik 1990</a>; <a href="#ref-grasmick1991" role="doc-biblioref">Grasmick, Bursik Jr, and Kinsey 1991, 236</a>, emphasis added)</span>. In the parlance of deterrence theory, it is level of perceived embarrassment that enhances the consequences of committing a crime, and thus increases the likelihood of being deterred. The other deterrent mechanism described by the scholars is shame, which, unlike embarrassment, occurs without others present. Shame is a reflective punishment put on by the would-be offender themselves, defined as “a self-imposed sanction [that] occurs when [a person] violates norms they have internalized” (p.&nbsp;43). According to Grasmick &amp; Bursik, embarrassment and shame both foster the internalization of social norms and weigh into the would-be offender’s decision-making. So long as the perceived consequences outweigh the perceived benefit of committing the crime, the would-be offender is generally deterred.</p>
+<p>Grasmick &amp; Bursik’s (1990) general deterrence model closely aligns with other influential theorists during that time. In <em>Crime, Shame, and Reintegration</em>, Braithwaite (1989) emphasized the role of shaming as a preferable alternative to coercive legal sanctions, describing it as a “route to freely chosen compliance” (p.&nbsp;10) <span class="citation" data-cites="braithwaite1989">(<a href="#ref-braithwaite1989" role="doc-biblioref">Braithwaite 1989</a>)</span>. Unlike Grasmick and Bursik, Braithwaite distinguished between two forms of shaming: disintegrative and reintegrative. Both express social disapproval, but disintegrative shaming focuses on the person, effectively stigmatizing them, whereas reintegrative shaming focuses on the behavior and preserves the offender’s social bonds to society. Another notable contribution comes from Williams and Hawkins (1986), who underscored the critical role of information networks <span class="citation" data-cites="williams1986">(<a href="#ref-williams1986" role="doc-biblioref">K. R. Williams and Hawkins 1986</a>)</span>. They argued that community awareness of a wrongdoing is a necessary precondition for informal social control processes to be activated. Overall, these concepts related to shaming emphasize the role that perceptions and community members have on crime prevention, and they provide an appropriate backdrop for assessing media campaigns that use shame or embarrassment as a method of enhancing punishment.</p>
+<p>When applied to DWI Friday, a perceptual deterrence model shows two pathways a person can be generally deterred from drunk driving. The first pathway operates through perceived social consequences of significant others. Upon seeing the post, the would-be offender recognizes that the public dissemination of arrest photos increases the chance that significant others will find out. Significant others—and their perceived disapproval— increase feelings of embarrassment (i.e., enhance the severity of consequences) and thus reduce the likelihood of engaging in drunk driving. The second pathway operates through self-disapproval (i.e., shame). The mere act of viewing the post and comments reinforces the viewer’s sense of law-abiding norms in the community, which eventually become their own. This internalization goes on to foster self-disapproval of the act and may even affect the viewer’s perception of being caught <span class="citation" data-cites="piquero1998">(<a href="#ref-piquero1998" role="doc-biblioref">Piquero and Paternoster 1998</a>)</span>.</p>
+<p>The weekly exposure schedule of DWI Friday is another important feature of the campaign. One possibility is the perceived fear of social consequences and internalization of norms grows stronger with every exposure, thereby moving more people to not drink and drive. The other possibility is the perceived fear of social disapproval eventually “loses its sting” and deters fewer people as time passes. Nagin (1998) called attention to this possibility in his discussion of deterrence effects, theorizing that the novelty or fact that so few are punished is what makes the punishment severe <span class="citation" data-cites="nagin1998">(<a href="#ref-nagin1998" role="doc-biblioref">Nagin 1998</a>)</span>. According to Nagin’s logic, any deterrent effect from the campaign would eventually wane over time, as viewers become more desensitized to the perceived consequences.</p>
+</section>
+<section id="current-study" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="current-study">Current Study</h3>
+<p>This study estimates the deterrent effect of the DWI Friday social media campaign on drunk driving. It is important to note that the campaign was not implemented as a randomized experiment. Consequently, any observed reductions in alcohol-related crashes cannot, on their own, be attributed conclusively. To address this limitation, publicly available data on five correlates of alcohol-related vehicle accidents were used. These include gross alcohol sales, public transportation usage, and broader indicators of economic activity.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Integrating these variables into a multi-variate analysis importantly controls for their potential influence, which yields a less biased estimate of the campaign’s effect <span class="citation" data-cites="shadish2002">(<a href="#ref-shadish2002" role="doc-biblioref">Shadish 2002</a>)</span>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;Enforcement activity, specifically total DWI arrests by the El Paso Police Department, was initially considered but presented an endogeneity problem for this analysis. Presumably, people involved in an alcohol-related crash are subsequently arrested for DWI. This appeared to be the case in this study, which showed monthly alcohol-related crashes and DWI arrests were positively correlated. Analyses not reported here found no substantial differences when DWI arrests were included in the analysis.</p></div></div></section>
+<section id="methods" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="methods">Methods</h3>
+<section id="data-sources" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="data-sources">Data Sources</h4>
+<p>To evaluate the campaign, data from several sources were obtained. To assess the incidence of drunk driving, I queried the Texas Department of Transportation’s Crash Records Information System to obtain all vehicle collision records that occurred in the city of El Paso between January 1, 2021 and July 31, 2025. These records represent all reportable vehicle collisions systematically collected by Texas law enforcement agencies.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> All records included information such as the time and day a crash occurred, how many vehicles were involved, and the age of the drivers. The remaining sources were used to account for plausibly related measures affecting drunk driving: public transportation usage in the study jurisdiction;<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> mean monthly retail gasoline prices reported in the state of Texas <span class="citation" data-cites="eia2025">(<a href="#ref-eia2025" role="doc-biblioref">U.S. Energy Information Administration 2025</a>)</span>; the monthly unemployment rate in El Paso <span class="citation" data-cites="bls2025">(<a href="#ref-bls2025" role="doc-biblioref">U.S. Bureau of Labor Statistics 2025</a>)</span>; and finally, the total gross alcohol sales recorded by the Texas Alcohol Beverage Commission <span class="citation" data-cites="tabc2025">(<a href="#ref-tabc2025" role="doc-biblioref">Texas Alcoholic Beverage Commission 2025</a>)</span>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;Under Section 550.026 of the Texas Transportation Code, a vehicle collision is required to be reported to law enforcement if the operator of a vehicle involved is injured, or the damage to a vehicle renders it unable to be normally and safely driven. These reporting requirements can be expanded by municipalities (see Section 550.067 of the Texas Transportation Code), which was the case in the study jurisdiction. According to Chapter 12.16 of the City of El Paso’s Code of Ordinances, drivers involved in an accident in the city of El Paso are required to report it to the police department if damage to the vehicle or property appears to meet or exceed one thousand dollars.</p></div><div id="fn7"><p><sup>7</sup>&nbsp;Data was obtained from a Freedom of Information Act request filed with the city of El Paso.</p></div></div></section>
+<section id="outcome-series" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="outcome-series">Outcome-series</h4>
+<p>Three outcome-series were analyzed: - All alcohol-related vehicle crashes - Alcohol-related vehicle crashes involving drivers ages 21 to 30 years old - Alcohol-related crashes involving drivers ages 31 and older</p>
+<p>The cutoff of 30 years was based on the age variable’s 50th percentile in the alcohol-related crash data. This ensured there were enough observations each month to model variation and also coincidently reflects the social media usage statistics reported by the Pew Research Center <span class="citation" data-cites="pewresearch2024">(<a href="#ref-pewresearch2024" role="doc-biblioref">Pew Research Center 2024</a>)</span>. Crashes were aggregated to monthly counts and converted into per capita rates of crashes per 100,000 people using decennial census data for the city of El Paso.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>&nbsp;The results did not differ when using estimates of annual vehicle miles traveled for urban populations (&gt; 5,000 residents) in El Paso County.</p></div></div><p>Crashes were defined as alcohol-related if alcohol was flagged as either a contributing or possibly contributing factor. Although vehicle crashes are not direct measurements of drunk driving—because not everyone will crash—they serve as the terminal outcome that DWI prevention strategies seek to reduce <span class="citation" data-cites="ross1983 scott2006">(<a href="#ref-ross1983" role="doc-biblioref">Ross and McCleary 1983</a>; <a href="#ref-scott2006" role="doc-biblioref">Scott et al. 2006</a>)</span>. The rate of traffic fatalities was also considered, specifically those that involved a driver under the influence of alcohol. This outcome was too rare that the lack of variance would not be appropriate for analysis (Range = 0–3, M = 1.08, SD = 0.95). Figure 4 shows the trends of all three outcome-series using nearest-neighbor moving averages.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dwi_study_f3.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 3. Crash trends in El Paso, Texas during the observation period</figcaption>
+</figure>
+</div>
+</section>
+<section id="control-series" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="control-series">Control-series</h4>
+<p>The evidence from prior literature suggests several exogenous factors plausibly affect the rate of alcohol-invovled vehicle crashes. Below are the five control-series used to isolate the campaign’s effect. All control-series were aggregated to the month-level, as not all data were available at smaller units of analysis. Table 1 displays descriptive statistics for all variables in the sample. - Total riders of public transportation services - Mean price of conventional retail fuel in the state of Texas - Rate of unemployment in El Paso, Texas - Gross sales of beer, wine, and liquor by licensed establishments in El Paso, Texas - Total non-alcohol-related vehicle crashes<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn9"><p><sup>9</sup>&nbsp;The inclusion of non-alcohol-related crashes broadly represents exogenous factors not captured in the analysis. For instance, increased usage of rideshare services (e.g., Lyft and Uber) could have plausibly impacted both alcohol-related crashes and all other types of vehicle crashes (e.g., Arif Khan et al., 2022).</p></div></div><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dwi_study_t1.jpg" class="img-fluid figure-img"></p>
+<figcaption>Table 1. Descriptive statistics of sample during observation period (n = 55 months)</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="analytic-strategy" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="analytic-strategy">Analytic Strategy</h3>
+<p>The sharp introduction of DWI Friday resembles an interrupted time-series, where statistical techniques can be used to estimate changes in the outcome before and after an intervention occurred <span class="citation" data-cites="shadish2002">(<a href="#ref-shadish2002" role="doc-biblioref">Shadish 2002</a>)</span>. To account for localized exogenous factors noted in prior literature, this study utilized a controlled interrupted time-series (CITS) design, which incorporated data from several control-series to construct a counterfactual outcome. What follows is a brief overview of Bayesian structural time series (BSTS), the analytic technique used to estimate the causal effect of the campaign. More details on the BSTS framework can be found in <span class="citation" data-cites="brodersen2015">Brodersen et al. (<a href="#ref-brodersen2015" role="doc-biblioref">2015</a>)</span>.</p>
+<p>BSTS is becoming a popular analytic strategy in criminal justice studies (e.g., <span class="citation" data-cites="mourtgos2022">Mourtgos, Adams, and Nix (<a href="#ref-mourtgos2022" role="doc-biblioref">2022</a>)</span>; <span class="citation" data-cites="adams2023">Adams, Mourtgos, and Nix (<a href="#ref-adams2023" role="doc-biblioref">2023</a>)</span>; <span class="citation" data-cites="richards2021">Richards et al. (<a href="#ref-richards2021" role="doc-biblioref">2021</a>)</span>). BSTS models have several strengths. First, they are adept for assessing how the linear combination of covariates contribute to the temporal evolution of an outcome series. Second, they are modular in that several complex temporal patterns can be modelled simultaneously (e.g., seasonality effects and trends). Third, they estimate effects using a fully Bayesian framework, which provides outputs that are often more intuitive and practical for decision-makers.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn10"><p><sup>10</sup>&nbsp;Under a frequentist approach, a significance test below the 5% alpha level is interpreted to mean that, assuming the null hypothesis of no effect is true, there is a 5% probability of obtaining a result at least as extreme as the one observed. Bayesian analyses can be set up to yield similar inferential statements, but they offer greater flexibility by allowing decision-makers to focus directly on probabilities tied to their interest. Rather than thinking in the dichotomous terms required by the Fisher–Neyman framework of statistical significance, a police chief or city official might instead want to know the probability an intervention produced at least a 10% reduction (for guidance on applying Bayesian analyses to policy-decisions, see Mourtgos, 2025).</p></div></div><p>BSTS models are built using a two-level state-space framework consisting of an observation equation and a state equation. The observation equation describes how the observed outcome at each time point is generated from a set of underlying, unobserved components (e.g., local trend, seasonality, and regression effects) plus white noise. The state equation governs how these unobserved components evolve over time. Model parameters and latent states are estimated through their posterior distributions, which represent the uncertainty in each component after combining prior information with the observed data.</p>
+<p>For this analysis, the posterior mean is reported, which represents the most probable estimate of the effect. The precision of the effect is assessed by using the standard error of the posterior distribution to compute a 95% credible interval (CrI), which retains an interpretation analogous to confidence intervals in frequentist statistics. For all causal effect estimates, Bayes factors (BFs) are reported to quantify the strength of evidence (see <span class="citation" data-cites="jeffreys1935">Jeffreys (<a href="#ref-jeffreys1935" role="doc-biblioref">1935</a>)</span>). BFs were calculated relative to the null hypothesis of no or opposite effect, as the ratio of posterior odds favoring a positive effect, P(δ &gt; 0), to posterior odds favoring a nonpositive effect, P(δ ≤ 0). Interpretations of BFs follow those proposed by <span class="citation" data-cites="kass1995">Kass and Raftery (<a href="#ref-kass1995" role="doc-biblioref">1995</a>)</span>: 1–3 represent anecdotal evidence; 3–20 positive evidence; 20–150 strong evidence; and &gt;150 very strong evidence against the null hypothesis of no or opposite effect.</p>
+<p>The following equations were used to model the pre-campaign period spanning January 2021 through June 2024 (n = 42 months). Based on these estimates, a counterfactual for the post-campaign period (n = 13) was generated. The full model is specified as follows:</p>
+<p><span class="math display">\[
+y_t = \mu_t + \gamma_t + \mathbf{x}_t^\top \beta + \varepsilon_t, \quad \varepsilon_t \sim \mathcal{N}(0, \sigma^2)
+\tag{1}
+\]</span></p>
+<p><span class="math display">\[
+\mu_{t+1} = \mu_t + \eta_t, \quad \eta_t \sim \mathcal{N}(0, \sigma_\mu^2)
+\tag{2}
+\]</span></p>
+<p>where <span class="math inline">\(y_t\)</span> is the monthly rate of alcohol-related crashes at month <span class="math inline">\(t\)</span>; <span class="math inline">\(\mu_t\)</span> is the local-level component, capturing slow-moving structural changes over time; <span class="math inline">\(\gamma_t\)</span> is the seasonal component with a seasonal period of 4 months; and <span class="math inline">\(\mathbf{x}_t^\top\)</span> is a vector of control-series predictors with coefficients estimated using spike-and-slab priors (Brodersen et al., 2015).</p>
+<p>Preliminary diagnostics of all outcome series revealed statistically significant (p &lt; .05) autocorrelations between lags 1 to 4. Accordingly, a seasonal component with a period of four was used to capture the recurring quarterly structure. The inclusion of a seasonal component improved model fit for all outcomes except those involving drivers ages 21 to 30. For this outcome, an autoregressive component with a lag of 2 was used to model the serial dependency. The results from Augmented Dickey-Fuller tests showed evidence of non-stationarity in the pre-campaign period for all outcomes. This was confirmed by visually inspecting the series shown in Figure 3: an initial decline can be seen between the years 2021 and 2022. This justified the inclusion of a local-level component, which can model such shifts or trends. All model estimations relied on weakly informative prior beliefs and 10,000 Markov Chain Monte Carlo iterations, and convergence was assessed using trace plots and R-hat statistics. To strengthen causal inference, an in-time placebo test was conducted, which estimated the effect had the intervention begun six months earlier <span class="citation" data-cites="craig2017">(<a href="#ref-craig2017" role="doc-biblioref">Craig et al. 2017</a>)</span>.</p>
+</section>
+<section id="results" class="level3">
+<h3 class="anchored" data-anchor-id="results">Results</h3>
+<p>Table 2 summarizes the causal effect estimates of the BSTS analyses, and Figure 4 illustrates these results. BSTS analyses were carried out using two model specifications: local-level only and local-level and seasonal/autoregressive. The results from the local-level and seasonal/autoregressive models are presented here to facilitate discussion. Differences between the two are emphasized.</p>
+<p>During the post-campaign period, the observed mean crash rates were 5.98 for all alcohol-related crashes, 2.53 for those involving drivers ages 21 to 30, and 2.97 for those involving drivers ages 31 or older. In contrast, all BSTS models estimated higher counterfactual mean rates for each outcome, respectively, 7.03, 2.72, and 3.75. Expressed as a percentage, these results indicate the DWI Friday campaign is associated with crash reductions ranging from 6.1% to 19.5% across the three outcomes.</p>
+<p>The area of the posterior distribution of causal effect estimates equal to or greater than zero is also reported in Table 2. This statistic retains a similar interpretation to p-values in frequentist statistics, where near-zero values or those less than a pre-specified threshold (p &lt; .05) are associated with evidence against the null hypothesis of no or opposite effect.</p>
+<p>Overall, the analysis shows positive evidence that the campaign reduced all alcohol-related crashes (BF = 8.09, mean posterior = -1.05, 95% CrI: [-2.99, 0.71]). Alcohol-related crashes involving drivers ages 21 to 30 also show positive evidence of a reduction (BF = 4.26, mean posterior = -0.18, 95% CrI: [-0.59, 0.24]). The analysis of alcohol-related crashes involving drivers ages 31 and older shows the strongest evidence of a decline (BF = 24.00, mean posterior = -0.78, 95% CrI: [-1.88, 0.11]). It’s important to note that the posterior distribution of estimates for all three outcomes included values greater than zero. When expressed as a percentage in favor of the alternative hypothesis, the analysis shows an 89% probability the campaign caused any reduction for alcohol-related vehicle accidents and about a 96% probability the campaign caused any reduction for alcohol-related vehicle accidents involving drivers ages 31 and older. As for alcohol-related vehicle accidents involving drivers ages 21 to 30, the probability of any reduction is sensitive to model specification: the probability of any reduction is 63% for the local-level only model and increases to 79% when the autoregressive component is added.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dwi_study_t2.jpg" class="img-fluid figure-img"></p>
+<figcaption>Table 2. BSTS results using five control-series</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dwi_study_f4.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 4. Plots of results from BSTS analysis (local + seasonal/autogressive component models)</figcaption>
+</figure>
+</div>
+<section id="additional-analyses" class="level4">
+<h4 class="anchored" data-anchor-id="additional-analyses">Additional Analyses</h4>
+<p>To assess the robustness of the BSTS analyses, all models were re-estimated with the campaign period beginning six months earlier (January 2025). These results are presented in Table 3. If the analyses produce similar evidence of reductions, this would suggest alcohol-related vehicle crashes were declining before the campaign began and would potentially explain the observed findings. The results indicate a downward trend was not causing the observed decline for all alcohol-related vehicle accidents and those involving drivers ages 31 and older. The BF values for both of these outcomes decreased across both model specifications. As for alcohol-related vehicle crashes involving drivers ages 21 to 30, the probability of a reduction increased, suggesting the observed decline among this age group was occurring before the DWI Friday campaign began.</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="dwi_study_t3.jpg" class="img-fluid figure-img"></p>
+<figcaption>Table 3. BSTS results using control-series with false start date (six months earlier)</figcaption>
+</figure>
+</div>
+<p>In an effort to account for broader changes in crash patterns, a supplemental analysis was carried out using crash data from 15 Texas cities. Specifically, dynamic time warping, an algorithm for measuring similarity between time-series data (e.g., <span class="citation" data-cites="eun2021">Eun (<a href="#ref-eun2021" role="doc-biblioref">2021</a>)</span>), was used to rank potential control cities for each of the three outcomes in El Paso. Results from these analyses are presented in the Appendix. Overall, the findings mirror the direction and magnitude from the previous analysis. The DWI Friday campaign was associated with a reduction for all alcohol-related vehicle crashes (BF = 6.69, mean posterior = -0.59, 95% CrI: -1.65, 0.43); a reduction in those involving drivers ages 21 to 30 (BF = 2.23, mean posterior = -0.16, 95% CrI: -0.82, 0.47); and a reduction for crashes involving drivers ages 31 and older (BF = 32.33, mean posterior = -0.55, 95% CrI: -1.16, 0.04). Overall, these results continue to suggest the DWI Friday campaign is associated with a deterrent effect, particularly among drivers older than 30 years old.</p>
+</section>
+</section>
+<section id="discussion" class="level3">
+<h3 class="anchored" data-anchor-id="discussion">Discussion</h3>
+<section id="summary-of-findings" class="level4">
+<h4 class="anchored" data-anchor-id="summary-of-findings">Summary of Findings</h4>
+<p>This study estimated a social media campaign’s effect on drunk driving in a single jurisdiction. To accomplish this, alcohol-involved crash records were analyzed to identify patterns before the campaign began. These patterns were then used to construct a predicted rate of crashes that could be compared to the observed rate. Subgroup analyses were also carried out on the age of involved drivers to understand if the campaign’s effectiveness varied. To minimize the possibility that other changes in the study jurisdiction could explain the observed results, several records were obtained, specifically usage of public transportation, alcohol sales, and other economic indicators. Before reporting the results, two limitations must be acknowledged.</p>
+<p>The first is that the campaign was not implemented under experimental conditions. This problem was handled by incorporating five potential correlates of alcohol-related crashes and conducting falsification tests to account for a pre-existing downward trend. Nevertheless, the possibility stands that an unaccounted change in the study jurisdiction may be misleading the results. The second limitation pertains to the theory of change underlying the campaign. Although social psychologists have demonstrated that public condemnation heightens the experience of humiliation and induces feelings of shame (e.g., <span class="citation" data-cites="combs2010">Combs et al. (<a href="#ref-combs2010" role="doc-biblioref">2010</a>)</span>; <span class="citation" data-cites="smith2002">Smith et al. (<a href="#ref-smith2002" role="doc-biblioref">2002</a>)</span>), this study did not test if these assumptions were met. The results and interpretations that follow must be viewed in light of these limitations.</p>
+<p>Overall, the analysis shows DWI Friday is associated with a reduction in alcohol-involved crashes in El Paso, Texas. According to the analysis, an average of 7.13 alcohol-related crashes were prevented each month during the first year of the campaign. Additional analyses were conducted to test whether the population plausibly more exposed to the campaign—drivers ages 21 to 30—was more deterred than older drivers. The analysis found the opposite: there is strong evidence that drivers between the ages of 31 years and older were deterred from drunk driving. For this age group, an average of 5.36 alcohol-related crashes were prevented each month. No definitive evidence of a deterrent effect was found for drivers ages 21 to 30. One possible explanation is that drivers over 30 may have a greater personal stake in complying with the law, as the consequences of an arrest could jeopardize, for instance, their marriage, employment, or personal relationships with others. While the analysis does not fully explain why older drivers appeared more deterred, these differential effects are consistent with arguments by <span class="citation" data-cites="fradella2000">Fradella (<a href="#ref-fradella2000" role="doc-biblioref">2000</a>)</span> and <span class="citation" data-cites="tay2002">Tay and Ozanne (<a href="#ref-tay2002" role="doc-biblioref">2002</a>)</span>. Future research should investigate potential mechanisms that explain age-graded responses to shaming sanctions.</p>
+</section>
+<section id="policy-implications" class="level4">
+<h4 class="anchored" data-anchor-id="policy-implications">Policy Implications</h4>
+<p>The findings of this study carry both theoretical and practical implications for using public shaming to deter drunk driving. The theoretical implication concerns the use of embarrassment or shame for deterrence. Although these mechanisms were not explicitly tested, the informal review of comments suggests the campaign’s intended goal of eliciting embarrassment and encouraging law-abiding attitudes may be, as <span class="citation" data-cites="maahs2017">Maahs and Pratt (<a href="#ref-maahs2017" role="doc-biblioref">2017</a>)</span> observed in a similar study, “drowned out by those belonging to entertainment, emotion, and the joy that people take in the misfortune of others” (p.&nbsp;56). Such variability offers one explanation for why DWI Friday does not consistently achieve its intended effect: the content must evoke fear, not amusement, for deterrence to occur.</p>
+<p>One could imagine modifying the content to meet this objective and hone viewers’ emotional responses. But achieving the kind of stimulus-response pattern envisioned by perceptual deterrence theory—particularly the sense of shame that amounts to “physiological discomfort”, as described by <span class="citation" data-cites="grasmick1990">Grasmick and Bursik (<a href="#ref-grasmick1990" role="doc-biblioref">1990</a>)</span> (p.&nbsp;840)—would require pushing the emotional intensity of the campaign much further. In pursuing the deterrence logic here, the ideal stimulus runs the risk of resembling a fictional archetype, such as the Ludovico treatment in <em>A Clockwork Orange</em> <span class="citation" data-cites="burgess1962">(<a href="#ref-burgess1962" role="doc-biblioref">Burgess 1962</a>)</span> or the daily ritual of Two Minutes Hate in <em>1984</em> <span class="citation" data-cites="orwell1949">(<a href="#ref-orwell1949" role="doc-biblioref">Orwell 1949</a>)</span>. These characterizations are admittedly extreme and present obvious ethical dilemmas. Beyond attempting to elicit more fear from viewers (i.e., scare them into compliance), attempting to increase the campaign’s effectiveness in this manner raises concerns about its legality.</p>
+<p>Arguments surrounding the constitutionality of state officials shaming offenders date back to the Supreme Court’s decision in <em>Paul v. Davis</em> (1976), in which the Court ruled that “reputation alone, apart from some more tangible interests such as employment,” is insufficient to trigger procedural protections (emphasis added). This principle is commonly referred to as the stigma-plus factor. In other words, social media campaigns conducted by criminal justice organizations appear to be legally permissible so long as the individuals depicted do not experience tangible losses. What constitutes a tangible loss, however, remains an open question. From this author’s review, one case—<em>Bursac v. Suozzi</em> (2008), decided by the New York Supreme Court—found that publicly shaming individuals accused of DWI on the internet can meet the standard of tangible harm.</p>
+<p>The constitutional safeguard implied in <em>Paul v. Davis</em> (1976) strictly shields citizens from state officials who facilitate shaming punishments, not community groups. In the study jurisdiction, the El Paso Police Department (EPPD) is not shaming these individuals beyond what is expected from a department making public notifications of arrests. The community group, on the other hand, is the entity that shames arrested people by leveraging the EPPD’s social media practice. The implication here may not be the legality, but the inability for the state to regulate and monitor how a community punishes its own members. The EPPD is an institution governed by law and susceptible to systematic change. The community group, in contrast, resembles what Yale law professor James Whitman (1998) described as an “uncontrolled, general populace” (p.&nbsp;1088), a group governed by evolving standards of morality that regulate how members punish.</p>
+<p>As the campaign currently stands, the person accused of DWI faces the risk of formal, regulated punishment should they be found guilty, but they are guaranteed punishment by a community group irrespective of their court outcome. How, or even if, community punishment extends beyond social media is unknown. At best, the weekly punishment ritual of DWI Friday is inconsequential—maybe even beneficial—for the offender’s reintegration, assuming they indeed committed the infraction. The other possibility is the community’s punishment extends beyond reputational harm alone, which is not afforded protection outlined in <em>Paul v. Davis</em> (1976). Future research should consider interviewing people who experienced shaming sanctions to learn if the punishment is associated with unintended consequences. Additionally, future research could assess reoffending patterns among those who were shamed, which could speak to whether social media shaming exerts a deterrent effect on recidivism outcomes.</p>
+<p>Taken together, these ethical and potential legal implications limit the study of shaming-based interventions like DWI Friday. A promising path forward is to transform disintegrative elements of the campaign into reintegrative forms of shaming, which aim to preserve deterrent effects while minimizing ethical and practical concerns. A notable example is the Canberra RISE drinking and driving experiment, which utilizes reintegrative shaming for drunk driving offenders and has shown positive effects for reducing DWI recidivism <span class="citation" data-cites="tyler2007">(<a href="#ref-tyler2007" role="doc-biblioref">Tyler et al. 2007</a>)</span>. Incorporating reintegrative strategies not only allows for safer behavioral change but also enables researchers to conduct rigorous evaluations, helping to fill critical gaps in knowledge on preventing one of the most persistent social problems in the United States.</p>
+</section>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>This study reported the first-year impact of a social media campaign aimed at deterring drunk driving. Using alcohol-related vehicle crashes as the key outcome measure, the results show the campaign may have deterred drunk driving among drivers aged 31 and older. Drivers aged 21 to 30 showed no consistent evidence of being deterred. While social media shaming may offer some deterrent benefits, these must be balanced against ethical and legal concerns, especially when implemented by community groups without formal oversight.</p>
+</section>
+<section id="appendix" class="level2">
+<h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
+<p><img src="dwi_study_a1.jpg" class="img-fluid quarto-figure quarto-figure-center" alt="Table A1. Descriptive statistics of monthly mean crash rates in Texas cities between 01/2021 to 07/2025"> <img src="dwi_study_a2.jpg" class="img-fluid quarto-figure quarto-figure-center" alt="Table A2. BSTS results using potential control cities"></p>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-adams2023" class="csl-entry" role="listitem">
+Adams, I. T., S. M. Mourtgos, and J. Nix. 2023. <span>“Turnover in Large US Policing Agencies Following the George Floyd Protests.”</span> <em>Journal of Criminal Justice</em> 88: 102105.
+</div>
+<div id="ref-berk1983" class="csl-entry" role="listitem">
+Berk, R. A., and D. Rauma. 1983. <span>“Capitalizing on Nonrandom Assignment to Treatments: A Regression-Discontinuity Evaluation of a Crime-Control Program.”</span> <em>Journal of the American Statistical Association</em> 78 (381): 21–27.
+</div>
+<div id="ref-braithwaite1989" class="csl-entry" role="listitem">
+Braithwaite, J. 1989. <em>Crime, Shame and Reintegration</em>. Cambridge University Press.
+</div>
+<div id="ref-brodersen2015" class="csl-entry" role="listitem">
+Brodersen, K. H., F. Gallusser, J. Koehler, N. Remy, and S. L. Scott. 2015. <span>“Inferring Causal Impact Using Bayesian Structural Time-Series Models.”</span> <em>Annals of Applied Statistics</em>, 247–74.
+</div>
+<div id="ref-burgess1962" class="csl-entry" role="listitem">
+Burgess, A. 1962. <em>A Clockwork Orange</em>. London, UK: Heinemann.
+</div>
+<div id="ref-campbell1968" class="csl-entry" role="listitem">
+Campbell, D. T., and H. L. Ross. 1968. <span>“The Connecticut Crackdown on Speeding: Time-Series Data in Quasi-Experimental Analysis.”</span> <em>Law &amp; Society Review</em> 3 (1): 33–53.
+</div>
+<div id="ref-chi2011" class="csl-entry" role="listitem">
+Chi, G., X. Zhou, T. E. McClure, P. A. Gilbert, A. G. Cosby, L. Zhang, and D. Levinson. 2011. <span>“Gasoline Prices and Their Relationship to Drunk-Driving Crashes.”</span> <em>Accident Analysis &amp; Prevention</em> 43 (1): 194–203.
+</div>
+<div id="ref-clear2000" class="csl-entry" role="listitem">
+Clear, T. R., and D. R. Karp. 2000. <span>“Toward the Ideal of Community Justice.”</span> <em>National Institute of Justice Journal</em> 245: 21–27.
+</div>
+<div id="ref-combs2010" class="csl-entry" role="listitem">
+Combs, D. J., G. Campbell, M. Jackson, and R. H. Smith. 2010. <span>“Exploring the Consequences of Humiliating a Moral Transgressor.”</span> <em>Basic and Applied Social Psychology</em> 32 (2): 128–43.
+</div>
+<div id="ref-cook1984" class="csl-entry" role="listitem">
+Cook, P. J., and G. Tauchen. 1984. <span>“The Effect of Minimum Drinking Age Legislation on Youthful Auto Fatalities, 1970–1977.”</span> <em>Journal of Legal Studies</em> 13 (1): 169–90.
+</div>
+<div id="ref-craig2017" class="csl-entry" role="listitem">
+Craig, P., S. V. Katikireddi, A. Leyland, and F. Popham. 2017. <span>“Natural Experiments: An Overview of Methods, Approaches, and Contributions to Public Health Intervention Research.”</span> <em>Annual Review of Public Health</em> 38: 39–56.
+</div>
+<div id="ref-elder2004" class="csl-entry" role="listitem">
+Elder, R. W., R. A. Shults, D. A. Sleet, J. L. Nichols, R. S. Thompson, and W. Rajab. 2004. <span>“Effectiveness of Mass Media Campaigns for Reducing Drinking and Driving.”</span> <em>American Journal of Preventive Medicine</em> 27 (1): 57–65.
+</div>
+<div id="ref-eun2021" class="csl-entry" role="listitem">
+Eun, Kyungmin. 2021. <span>“Dynamic Time Warping.”</span>
+</div>
+<div id="ref-evans1991" class="csl-entry" role="listitem">
+Evans, William N., Daniel Neville, and John D. Graham. 1991. <span>“General Deterrence of Drunk Driving: Evaluation of Recent American Policies.”</span> <em>Risk Analysis</em> 11 (2): 279–89.
+</div>
+<div id="ref-fell2020" class="csl-entry" role="listitem">
+Fell, J. C., J. Scolese, T. Achoki, C. Burks, A. Goldberg, and W. DeJong. 2020. <span>“The Effectiveness of Alternative Transportation Programs in Reducing Impaired Driving.”</span> <em>Journal of Safety Research</em> 75: 128–39.
+</div>
+<div id="ref-fradella2000" class="csl-entry" role="listitem">
+Fradella, H. F. 2000. <span>“Mandatory Minimum Sentences: Arizona’s Ineffective Tool for the Social Control of Driving Under the Influence.”</span> <em>Criminal Justice Policy Review</em> 11 (2): 113–35.
+</div>
+<div id="ref-garland2001" class="csl-entry" role="listitem">
+Garland, D. 2001. <em>The Culture of Control: Crime and Social Order in Contemporary Society</em>. Oxford University Press.
+</div>
+<div id="ref-grammich2023" class="csl-entry" role="listitem">
+Grammich, C., E. Dollhopf, M. Gautier, R. Houseal, D. E. Jones, A. Krindatch, R. Stanley, and S. Thumma. 2023. <span>“2020 u.s. Religion Census.”</span>
+</div>
+<div id="ref-grasmick1991" class="csl-entry" role="listitem">
+Grasmick, H. G., R. J. Bursik Jr, and K. A. Kinsey. 1991. <span>“Shame and Embarrassment as Deterrents.”</span> <em>Environment and Behavior</em> 23 (2): 233–51.
+</div>
+<div id="ref-grasmick1990" class="csl-entry" role="listitem">
+Grasmick, H. G., and R. J. Bursik. 1990. <span>“Conscience, Significant Others, and Rational Choice.”</span> <em>Law &amp; Society Review</em> 24 (3): 837–61.
+</div>
+<div id="ref-gruenewald1995" class="csl-entry" role="listitem">
+Gruenewald, P. J., and W. R. Ponicki. 1995. <span>“Retail Alcohol Availability and Alcohol-Related Crashes.”</span> <em>Accident Analysis &amp; Prevention</em> 27 (2): 249–59.
+</div>
+<div id="ref-hingson1988" class="csl-entry" role="listitem">
+Hingson, R. W., J. Howland, and S. Levenson. 1988. <span>“Effects of Legislative Reform to Reduce Drunken Driving.”</span> <em>Public Health Reports</em> 103 (6): 659.
+</div>
+<div id="ref-jeffreys1935" class="csl-entry" role="listitem">
+Jeffreys, H. 1935. <span>“Some Tests of Significance, Treated by the Theory of Probability.”</span> <em>Mathematical Proceedings of the Cambridge Philosophical Society</em> 31 (2): 203–22.
+</div>
+<div id="ref-kass1995" class="csl-entry" role="listitem">
+Kass, R. E., and A. E. Raftery. 1995. <span>“Bayes Factors.”</span> <em>Journal of the American Statistical Association</em> 90 (430): 773–95.
+</div>
+<div id="ref-kfox14_2025" class="csl-entry" role="listitem">
+KFOX14. 2025. <span>“El Paso Leaders on DWI Prevention.”</span> <a href="https://www.youtube.com/watch?v=nWGTuWuQJtQ" class="uri">https://www.youtube.com/watch?v=nWGTuWuQJtQ</a>.
+</div>
+<div id="ref-luna2024" class="csl-entry" role="listitem">
+Luna, M. 2024. <span>“Recent DWI Arrests Within El Paso.”</span> <a href="https://www.ktsm.com/news/recent-dwi-arrests-within-el-paso/">https://www.ktsm.com/news/recent-dwi-arrests-within-el-paso/</a>.
+</div>
+<div id="ref-maahs2017" class="csl-entry" role="listitem">
+Maahs, J., and T. C. Pratt. 2017. <span>“Science, Entertainment, and Scared Straight Programs.”</span> <em>Deviant Behavior</em> 38 (1): 47–60.
+</div>
+<div id="ref-mata2023" class="csl-entry" role="listitem">
+Mata, R. 2023. <span>“El Paso’s FitFam Internet Famous and Anonymous.”</span> <a href="https://www.elpasoinc.com/news/local_news/el-paso-s-fitfam-internet-famous-and-anonymous/article_361b9c4a-6b8f-11ee-b4cf-dbf3a8b8104b.html">https://www.elpasoinc.com/news/local_news/el-paso-s-fitfam-internet-famous-and-anonymous/article_361b9c4a-6b8f-11ee-b4cf-dbf3a8b8104b.html</a>.
+</div>
+<div id="ref-mccarthy1987" class="csl-entry" role="listitem">
+McCarthy, P. S., and W. Oesterle. 1987. <span>“The Deterrent Effects of Stiffer DUI Laws.”</span> <em>Logistics and Transportation Review</em> 23 (4): 353.
+</div>
+<div id="ref-mccornac1982" class="csl-entry" role="listitem">
+McCornac, D. C. 1982. <span>“The Effects of Government Regulation on Teenage Motor Vehicle Mortality.”</span>
+</div>
+<div id="ref-moorevilla2025" class="csl-entry" role="listitem">
+Moore, Robert, and Paul Villa. 2025. <span>“Instagram Removes FitFam El Paso’s Page.”</span> <em>El Paso Matters</em>. <a href="https://elpasomatters.org/2025/06/23/fitfam-canceled-disabled-el-paso-texas-instagram-meta/">https://elpasomatters.org/2025/06/23/fitfam-canceled-disabled-el-paso-texas-instagram-meta/</a>.
+</div>
+<div id="ref-mourtgos2022" class="csl-entry" role="listitem">
+Mourtgos, S. M., I. T. Adams, and J. Nix. 2022. <span>“Elevated Police Turnover Following Protests.”</span> <em>Criminology &amp; Public Policy</em> 21 (1): 9–33.
+</div>
+<div id="ref-nagin1998" class="csl-entry" role="listitem">
+Nagin, D. S. 1998. <span>“Criminal Deterrence Research.”</span> <em>Crime and Justice</em> 23: 1–42.
+</div>
+<div id="ref-naqvi2020" class="csl-entry" role="listitem">
+Naqvi, N. K., M. A. Quddus, and M. P. Enoch. 2020. <span>“Do Higher Fuel Prices Help Reduce Road Traffic Accidents?”</span> <em>Accident Analysis &amp; Prevention</em> 135: 105353.
+</div>
+<div id="ref-nhtsa2023" class="csl-entry" role="listitem">
+National Highway Traffic Safety Administration. 2023. <span>“Traffic Safety Facts 2023 Data.”</span>
+</div>
+<div id="ref-ohara2022" class="csl-entry" role="listitem">
+O’Hara, S. E., M. J. Paschall, and D. A. Herd. 2022. <span>“Drink-Driving Enforcement Operations Dosage Threshold.”</span> <em>Drug and Alcohol Review</em> 41 (7): 1610–20.
+</div>
+<div id="ref-orwell1949" class="csl-entry" role="listitem">
+Orwell, G. 1949. <em>1984</em>. Secker &amp; Warburg.
+</div>
+<div id="ref-pewresearch2024" class="csl-entry" role="listitem">
+Pew Research Center. 2024. <span>“Social Media Fact Sheet.”</span> <a href="https://www.pewresearch.org/internet/fact-sheet/social-media/" class="uri">https://www.pewresearch.org/internet/fact-sheet/social-media/</a>.
+</div>
+<div id="ref-piquero1998" class="csl-entry" role="listitem">
+Piquero, A., and R. Paternoster. 1998. <span>“Deterrence and Drinking and Driving.”</span> <em>Journal of Research in Crime and Delinquency</em> 35 (1): 3–39.
+</div>
+<div id="ref-richards2021" class="csl-entry" role="listitem">
+Richards, T. N., J. Nix, S. M. Mourtgos, and I. T. Adams. 2021. <span>“911 and Domestic Violence During COVID-19.”</span> <em>Criminology &amp; Public Policy</em> 20 (3): 573–91.
+</div>
+<div id="ref-ross1984" class="csl-entry" role="listitem">
+Ross, H. L. 1984. <span>“Social Control Through Deterrence.”</span> <em>Annual Review of Sociology</em> 10 (1): 21–35.
+</div>
+<div id="ref-ross1970" class="csl-entry" role="listitem">
+Ross, H. L., D. T. Campbell, and G. V. Glass. 1970. <span>“British Breathalyser Crackdown.”</span> <em>American Behavioral Scientist</em> 13 (4): 493–509.
+</div>
+<div id="ref-ross1983" class="csl-entry" role="listitem">
+Ross, H. L., and R. McCleary. 1983. <span>“Methods for Studying Drunk Driving Laws.”</span> <em>Accident Analysis &amp; Prevention</em> 15 (6): 415–28.
+</div>
+<div id="ref-scott2006" class="csl-entry" role="listitem">
+Scott, M. S., N. J. Emerson, L. B. Antonacci, and J. B. Plant. 2006. <span>“Drunk Driving Report.”</span>
+</div>
+<div id="ref-shadish2002" class="csl-entry" role="listitem">
+Shadish, W. R. 2002. <span>“Revisiting Field Experimentation.”</span> <em>Psychological Methods</em> 7 (1): 3.
+</div>
+<div id="ref-smith2002" class="csl-entry" role="listitem">
+Smith, R. H., J. M. Webster, W. G. Parrott, and H. L. Eyre. 2002. <span>“Public Exposure and Shame/Guilt.”</span> <em>Journal of Personality and Social Psychology</em> 83 (1): 138.
+</div>
+<div id="ref-tay2005" class="csl-entry" role="listitem">
+Tay, R. 2005. <span>“Mass Media Campaigns Reduce Drinking and Driving.”</span> <em>Evidence-Based Healthcare and Public Health</em> 9 (1): 26–29.
+</div>
+<div id="ref-tay2002" class="csl-entry" role="listitem">
+Tay, R., and L. Ozanne. 2002. <span>“Fear-Based Road Safety Campaigns.”</span>
+</div>
+<div id="ref-tabc2025" class="csl-entry" role="listitem">
+Texas Alcoholic Beverage Commission. 2025. <span>“Mixed Beverage Sales Receipts.”</span> <a href="https://data.texas.gov">https://data.texas.gov</a>.
+</div>
+<div id="ref-txdot2025b" class="csl-entry" role="listitem">
+Texas Department of Transportation. 2025. <span>“Crash Records Information System.”</span> <a href="https://www.txdot.gov/data-maps/crash-reports-records/crash-data-analysis-statistics.html">https://www.txdot.gov/data-maps/crash-reports-records/crash-data-analysis-statistics.html</a>.
+</div>
+<div id="ref-tyler2007" class="csl-entry" role="listitem">
+Tyler, T. R., L. Sherman, H. Strang, G. C. Barnes, and D. Woods. 2007. <span>“Reintegrative Shaming and Procedural Justice.”</span> <em>Law &amp; Society Review</em> 41 (3): 553–86.
+</div>
+<div id="ref-bls2025" class="csl-entry" role="listitem">
+U.S. Bureau of Labor Statistics. 2025. <span>“El Paso MSA Economy at a Glance.”</span> <a href="https://www.bls.gov/eag/eag.tx_elpaso_msa.htm">https://www.bls.gov/eag/eag.tx_elpaso_msa.htm</a>.
+</div>
+<div id="ref-uscensus2020" class="csl-entry" role="listitem">
+U.S. Census Bureau. 2020. <span>“2020 Decennial Census: Profile of General Population and Housing Characteristics—El Paso City, Texas.”</span> <a href="https://data.census.gov" class="uri">https://data.census.gov</a>.
+</div>
+<div id="ref-eia2025" class="csl-entry" role="listitem">
+U.S. Energy Information Administration. 2025. <span>“Texas Gasoline Prices.”</span> <a href="https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx">https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx</a>.
+</div>
+<div id="ref-wagenaar1995" class="csl-entry" role="listitem">
+Wagenaar, A. C., T. S. Zobeck, G. D. Williams, and R. Hingson. 1995. <span>“Meta-Analysis of Drink-Drive Control Studies.”</span> <em>Accident Analysis &amp; Prevention</em> 27 (3): 307–16.
+</div>
+<div id="ref-west1989" class="csl-entry" role="listitem">
+West, S. G., J. T. Hepworth, M. A. McCall, and J. W. Reich. 1989. <span>“Evaluation of Arizona Drunk Driving Law.”</span> <em>Journal of Applied Social Psychology</em> 19 (14): 1212–37.
+</div>
+<div id="ref-williams2006" class="csl-entry" role="listitem">
+Williams, A. F. 2006. <span>“Alcohol-Impaired Driving in the United States.”</span> <em>Journal of Safety Research</em> 37 (2): 123–38.
+</div>
+<div id="ref-williams1983" class="csl-entry" role="listitem">
+Williams, A. F., P. L. Zador, S. S. Harris, and R. S. Karpf. 1983. <span>“Minimum Drinking Age and Fatal Crashes.”</span> <em>Journal of Legal Studies</em> 12 (1): 169–79.
+</div>
+<div id="ref-williams1986" class="csl-entry" role="listitem">
+Williams, K. R., and R. Hawkins. 1986. <span>“Perceptual Research on Deterrence.”</span> <em>Law &amp; Society Review</em> 20 (4): 545–72.
+</div>
+<div id="ref-yadav2015" class="csl-entry" role="listitem">
+Yadav, R. P., and M. Kobayashi. 2015. <span>“Mass Media Campaigns and Alcohol-Impaired Driving.”</span> <em>BMC Public Health</em> 15: 857.
+</div>
+<div id="ref-zwerling1999" class="csl-entry" role="listitem">
+Zwerling, C., and M. P. Jones. 1999. <span>“Low Blood Alcohol Concentration Laws and Younger Drivers.”</span> <em>American Journal of Preventive Medicine</em> 16 (1): 76–80.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -103,8 +103,8 @@ The findings highlight the potential and implications of social-media deterrence
 
 <br>
 
-<a href="dwi_study.pdf" download class="btn btn-primary">
-Download Paper (PDF)
+<a href="dwi_friday_study.html" class="btn btn-primary">
+Read Article
 </a>
 
 :::
