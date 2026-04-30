@@ -64,7 +64,7 @@ View Dashboard
 ::: {.g-col-12 .g-col-md-6}
 
 **Opinion Article:**  
-This article explores why arrest data can be misleading when trying to understand drunk driving trends and why researchers often rely on alternative measures instead. This article also includes a line graph comparing the rate of alcohol-involved crashes to other Texas cities.
+This article explores why arrest data can be misleading when trying to understand drunk driving trends, and why researchers often rely on alternative measures instead. This article also includes a line graph comparing the rate of alcohol-involved crashes in El Paso to other Texas cities.
 
 <br>
 
@@ -95,9 +95,9 @@ Read Article
 ::: {.g-col-12 .g-col-md-6}
 
 **Summary:**  
-This study evaluates the impact of a social media campaign in El Paso that publicly shared booking photos of individuals arrested for driving while intoxicated (DWI). Using Bayesian structural time-series methods and multiple comparison groups, the analysis attempts to isolate the campaign’s effect on alcohol-related crashes.
+This study evaluates the impact of a social media campaign in El Paso that publicly shared booking photos of individuals arrested for driving while intoxicated (DWI). Using time-series analysis, this study attempts to isolate the campaign’s effect on alcohol-related crashes.
 
-The findings highlight both the potential and limits of public-facing deterrence strategies.
+The findings highlight the potential and implications of social-media deterrence strategies. Recommendations for improving the strategy are provided.
 
 <br>
 
