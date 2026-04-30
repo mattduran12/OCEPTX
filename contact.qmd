@@ -1,0 +1,34 @@
+---
+title: ""
+format:
+  html:
+    grid:
+      margin-width: 180px
+      body-width: 780px
+    theme: cosmo
+---
+
+## Contact Us
+
+For questions, data requests, or collaboration opportunities, please use the form below.
+
+<form action="https://formspree.io/f/xrejzyda" method="POST">
+
+  <label for="name">Name</label><br>
+  <input type="text" id="name" name="name" required
+         style="width:100%; padding:8px; margin-bottom:12px;"><br>
+
+  <label for="email">Email</label><br>
+  <input type="email" id="email" name="email" required
+         style="width:100%; padding:8px; margin-bottom:12px;"><br>
+
+  <label for="message">Message</label><br>
+  <textarea id="message" name="message" rows="6" required
+            style="width:100%; padding:8px; margin-bottom:12px;"></textarea><br>
+
+  <button type="submit" class="btn btn-primary">
+    Send Message
+  </button>
+
+</form>
+

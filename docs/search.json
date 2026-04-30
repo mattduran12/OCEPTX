@@ -9,9 +9,9 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About Open Criminology El Paso",
+    "title": "El Paso Crime Lab",
     "section": "",
-    "text": "The purpose of Open Criminology El Paso is to share criminal justice-related research conducted in the El Paso region. By documenting these efforts, city officials and community members can rely on evidence-based findings to inform public policy and practices."
+    "text": "The El Paso Crime Lab is a research-driven initiative focused on producing, analyzing, and sharing knowledge about crime and public safety in the El Paso region. The Lab functions as a hub for data analysis, applied research, and public-facing insights that support informed decision-making.\nWe engage in a range of applied research and data-focused activities, including:"
   },
   {
     "objectID": "about.html#purpose",
@@ -96,5 +96,271 @@
     "title": "El Paso Drunk Driving Surveillance Dashboard",
     "section": "About Data",
     "text": "About Data\nLast updated: March 2026.\nThis dashboard only displays crash data classified as alcohol-related in the city of El Paso, Texas. Crashes involving any person reported with a contributing factor of “Under the Influence of Alcohol”, “Had Been Drinking”, or had a blood alcohol test above 0 are classified as alcohol-related. Data for these crashes can be easily downloaded using the TxDOT-Authored Filter, located in the Crash Query Tool.\nAlcohol-related crashes are the main outcome in this analysis because they show where and when alcohol is directly involved in traffic incidents. Focusing on this measure helps separate these crashes from other types of accidents, giving a clearer picture of impaired driving in El Paso. By looking specifically at alcohol-related crashes, we can better understand the groups of people most affected and identify the places and times where risk is highest. This information can then be used to target prevention efforts, enforcement, and education more effectively."
+  },
+  {
+    "objectID": "our_work.html",
+    "href": "our_work.html",
+    "title": "El Paso Crime Lab",
+    "section": "",
+    "text": "Overview:\nThe Drunk Driving Surveillance Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 indicators covering crash trends, geographic patterns, and driver and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.\n\n View Dashboard"
+  },
+  {
+    "objectID": "our_work.html#our-work",
+    "href": "our_work.html#our-work",
+    "title": "Our Work",
+    "section": "",
+    "text": "The El Paso Crime Lab produces applied research and public-facing tools that translate data into actionable insights. Below are selected projects that reflect our focus on transparency, accessibility, and evidence-based policy."
+  },
+  {
+    "objectID": "our_work.html#drunk-driving-surveillance-dashboard",
+    "href": "our_work.html#drunk-driving-surveillance-dashboard",
+    "title": "El Paso Crime Lab",
+    "section": "",
+    "text": "Overview:\nThe Drunk Driving Surveillance Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 indicators covering crash trends, geographic patterns, and driver and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.\n\n View Dashboard"
+  },
+  {
+    "objectID": "our_work.html#working-paper-does-public-shaming-deter-drunk-driving",
+    "href": "our_work.html#working-paper-does-public-shaming-deter-drunk-driving",
+    "title": "Our Work",
+    "section": "Working Paper: Does Public Shaming Deter Drunk Driving?",
+    "text": "Working Paper: Does Public Shaming Deter Drunk Driving?\nSummary:\nThis report evaluates trends in alcohol-related crashes and assesses the impact of policy or enforcement interventions over time. Using advanced statistical methods, the analysis identifies changes in crash patterns and estimates whether observed shifts are attributable to specific initiatives.\nThe findings contribute to a better understanding of which strategies are effective in reducing impaired driving and improving public safety outcomes in the El Paso region.\n Download Full Report (PDF)"
+  },
+  {
+    "objectID": "crash_dashboard.knit.html",
+    "href": "crash_dashboard.knit.html",
+    "title": "Drunk Driving Surveillance Dashboard",
+    "section": "",
+    "text": "Welcome to the Drunk Driving Surveillance Dashboard!\nThis dashboard displays data on alcohol-related vehicle crashes in El Paso, Texas and is updated every month."
+  },
+  {
+    "objectID": "crash_dashboard.knit.html#row",
+    "href": "crash_dashboard.knit.html#row",
+    "title": "Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row"
+  },
+  {
+    "objectID": "crash_dashboard.knit.html#quick-facts",
+    "href": "crash_dashboard.knit.html#quick-facts",
+    "title": "Drunk Driving Surveillance Dashboard",
+    "section": "Quick Facts",
+    "text": "Quick Facts\nIn March 2026, there were:\n\n63 alcohol-related crashes, representing a -3.1% decrease compared to the previous month\n\n1 fatalities associated with alcohol-related crashes, representing a -66.7% decrease compared to the previous month\n\n45 people injured in alcohol-related crashes, representing a 50% increase compared to the previous month"
+  },
+  {
+    "objectID": "crash_dashboard.knit.html#row-1",
+    "href": "crash_dashboard.knit.html#row-1",
+    "title": "Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row\n\nLast Updated: March 2026\nCrash data is downloaded from the Texas Department of Transportation (TXDOT) website using the Crash Query Tool. All crash data in this dashboard represent those classified as alcohol-related and that occurred in the city of El Paso.\nDefinition of Alcohol-Related Crash\nA crash is defined as alcohol-related if involved drivers or individuals were reported as “Under the Influence of Alcohol”, “Had Been Drinking”, or were reported to have a blood alcohol content (BAC) greater than 0.\nDefinition of Injury/Fatality\nInjuries include people who were classified as having a suspected serious injury, suspected minor injury, or possible injury. Fatalities are defined as any motor vehicle traffic injury crash that results in the death of one or more persons within 30 days of the incident.\nDefinition of Intoxicated Driver\nDriver and vehicle characteristics in these graphs represent intoxicated drivers. An intoxicated driver is defined as a person who’s BAC test result returned a value of 0.08g/dL or greater.\nAcronyms\nBAC = Blood alcohol content; YTD = Year to date\n\n\nCalculation of Moving Average\nThe line graphs on the Trends page show 12-month moving averages for crashes, fatalities, and injuries between 2016 and Present. This technique results in a smooth line, allowing the viewer to see if a trend is increasing or decreasing.\nHoliday Analyses\nHolidays statistics were calculated by aligning crash data to each holiday. For fixed-date holidays (e.g., New Year’s Day, Independence Day, Halloween, Christmas, and St. Patrick’s Day), each crash was assigned an event time based on the number of days before or after the calendar date of the holiday within each year. For shifting holidays (e.g., Super Bowl and Memorial Day), the holiday date was first computed for each year and then used as the reference point for event-time calculation.\nIn all cases, crashes were restricted to a ±7-day window around the holiday and then aggregated across years (2016–2025), excluding 2020 to avoid COVID-19-related disruptions. Average daily crash counts were then computed for each relative day to identify typical patterns before and after each holiday.\nMissing Data\nA small amount of data for Drivers characteristics (e.g., gender, race/ethnicity, vehicle color) is missing. Observations with missing or unknown values in these fields were excluded."
+  },
+  {
+    "objectID": "crash_dashboard.knit.html#row-2",
+    "href": "crash_dashboard.knit.html#row-2",
+    "title": "Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row\n\n\n$icon\n[1] \"car-front-fill\"\n\n$color\n[1] \"primary\"\n\n$value\n[1] 176\n\n\n\n\n$icon\n[1] \"bandaid\"\n\n$color\n[1] \"primary\"\n\n$value\n[1] 99\n\n\n\n\n$icon\n[1] \"hospital\"\n\n$color\n[1] \"danger\"\n\n$value\n[1] 5"
+  },
+  {
+    "objectID": "crash_dashboard.knit.html#row-3",
+    "href": "crash_dashboard.knit.html#row-3",
+    "title": "Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row"
+  },
+  {
+    "objectID": "crash_dashboard.knit.html#row-4",
+    "href": "crash_dashboard.knit.html#row-4",
+    "title": "Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row"
+  },
+  {
+    "objectID": "crash_dashboard.knit.html#row-5",
+    "href": "crash_dashboard.knit.html#row-5",
+    "title": "Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row"
+  },
+  {
+    "objectID": "crash_dashboard.knit.html#row-6",
+    "href": "crash_dashboard.knit.html#row-6",
+    "title": "Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row"
+  },
+  {
+    "objectID": "crash_dashboard.knit.html#row-7",
+    "href": "crash_dashboard.knit.html#row-7",
+    "title": "Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row"
+  },
+  {
+    "objectID": "crash_dashboard.knit.html#row-8",
+    "href": "crash_dashboard.knit.html#row-8",
+    "title": "Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row"
+  },
+  {
+    "objectID": "crash_dashboard.knit.html#row-9",
+    "href": "crash_dashboard.knit.html#row-9",
+    "title": "Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row"
+  },
+  {
+    "objectID": "crash_dashboard.knit.html#row-10",
+    "href": "crash_dashboard.knit.html#row-10",
+    "title": "Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row\n\n\n$icon\n[1] \"emoji-dizzy\"\n\n$color\n[1] \"primary\"\n\n$value\n[1] \"86\"\n\n\n\n\n$icon\n[1] \"moisture\"\n\n$color\n[1] \"danger\"\n\n$value\n[1] \"0.17\"\n\n\n\n\n$icon\n[1] \"person-fill\"\n\n$color\n[1] \"primary\"\n\n$value\n[1] \"34\""
+  },
+  {
+    "objectID": "crash_dashboard.knit.html#row-11",
+    "href": "crash_dashboard.knit.html#row-11",
+    "title": "Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row\n\nColumn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nColumn"
+  },
+  {
+    "objectID": "crash_dashboard.knit.html#row-12",
+    "href": "crash_dashboard.knit.html#row-12",
+    "title": "Drunk Driving Surveillance Dashboard",
+    "section": "Row",
+    "text": "Row\n\nColumn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nColumn"
+  },
+  {
+    "objectID": "about.html#about-the-el-paso-crime-lab",
+    "href": "about.html#about-the-el-paso-crime-lab",
+    "title": "El Paso Crime Lab",
+    "section": "About the El Paso Crime Lab",
+    "text": "About the El Paso Crime Lab\nThe El Paso Crime Lab is a research-driven initiative focused on producing, analyzing, and sharing knowledge about crime and public safety in the El Paso region. The Lab functions as a hub for data analysis, applied research, and public-facing insights that support informed decision-making.\nWe engage in a range of applied research and data-focused activities, including:\n\nSurvey development and analysis\nDesigning, administering, and analyzing surveys to better understand community experiences, perceptions of safety, and underreported dimensions of crime.\nProgram and policy evaluation\nAssessing the impact of interventions, enforcement strategies, and public policies using quasi-experimental and statistical methods.\nCrime data analysis and visualization\nIdentifying trends and patterns in crime and public safety outcomes using administrative and observational data.\nReport and policy brief production\nTranslating research findings into clear, actionable summaries for stakeholders and community partners.\nData integration and management\nCombining data from multiple sources to support comprehensive analyses of crime and related social outcomes."
+  },
+  {
+    "objectID": "about.html#mission",
+    "href": "about.html#mission",
+    "title": "El Paso Crime Lab",
+    "section": "Mission",
+    "text": "Mission\nTo generate high-quality research, promote transparency through accessible data, and support evidence-based policy and practice in the El Paso community."
+  },
+  {
+    "objectID": "about.html#contact-information",
+    "href": "about.html#contact-information",
+    "title": "El Paso Crime Lab",
+    "section": "Contact Information",
+    "text": "Contact Information\nFor questions, data requests, or collaboration opportunities, please contact:\nMatthew J. Durán\nemail: mduran29@asu.edu\nwebsite: https://mattduran12.github.io"
+  },
+  {
+    "objectID": "our_work.html#working-papers-reports",
+    "href": "our_work.html#working-papers-reports",
+    "title": "El Paso Crime Lab",
+    "section": "Working Papers & Reports",
+    "text": "Working Papers & Reports\nThe El Paso Crime Lab produces applied research and technical reports that examine crime trends, public safety issues, and policy impacts in the region. These reports translate data into clear, evidence-based insights for policymakers, practitioners, and the public.\n\n\nDoes Public Shaming Deter Drunk Driving?\n\n\n\nSummary:\nThis study evaluates the impact of a social media campaign in El Paso that publicly shared booking photos of individuals arrested for driving while intoxicated (DWI). Using Bayesian structural time-series methods and multiple comparison groups, the analysis isolates the campaign’s effect on alcohol-related crashes.\nResults suggest the campaign was associated with reductions in alcohol-related crashes, particularly among drivers aged 31 and older. The findings highlight both the potential and limits of public-facing deterrence strategies.\n\n Download Paper (PDF)"
+  },
+  {
+    "objectID": "our_work.html#in-the-media",
+    "href": "our_work.html#in-the-media",
+    "title": "El Paso Crime Lab",
+    "section": "In the Media",
+    "text": "In the Media\n\n\n\nOpinion Article:\nThis piece explores how crime prevention strategies are communicated to the public and how media narratives shape perceptions of safety and deterrence in El Paso. It reflects on the role of transparency, messaging, and public engagement in addressing drunk driving and related harms.\n\n Read Article"
+  },
+  {
+    "objectID": "about.html#open-access-mission",
+    "href": "about.html#open-access-mission",
+    "title": "El Paso Crime Lab",
+    "section": "Open Access Mission",
+    "text": "Open Access Mission\nA central goal of the El Paso Crime Lab is transparency. By making data and research publicly accessible, the Lab promotes open dialogue and supports evidence-based approaches to criminal justice policy. This work helps bridge the gap between academic research and real-world decision-making in the El Paso community."
+  },
+  {
+    "objectID": "subscribe.html",
+    "href": "subscribe.html",
+    "title": "El Paso Crime Lab",
+    "section": "",
+    "text": "Loading…"
+  },
+  {
+    "objectID": "index.html#about-the-el-paso-crime-lab",
+    "href": "index.html#about-the-el-paso-crime-lab",
+    "title": "El Paso Crime Lab",
+    "section": "About the El Paso Crime Lab",
+    "text": "About the El Paso Crime Lab\nThe El Paso Crime Lab is a research-driven initiative focused on producing, analyzing, and sharing knowledge about crime and public safety in the El Paso region. The Lab functions as a hub for data analysis, applied research, and public-facing insights that support informed decision-making.\nWe engage in a range of applied research and data-focused activities, including:\n\nSurvey development and analysis\nDesigning, administering, and analyzing surveys to better understand community experiences, perceptions of safety, and underreported dimensions of crime.\nProgram and policy evaluation\nAssessing the impact of interventions, enforcement strategies, and public policies using quasi-experimental and statistical methods.\nCrime data analysis and visualization\nIdentifying trends and patterns in crime and public safety outcomes using administrative and observational data.\nReport and policy brief production\nTranslating research findings into clear, actionable summaries for stakeholders and community partners.\nData integration and management\nCombining data from multiple sources to support comprehensive analyses of crime and related social outcomes."
+  },
+  {
+    "objectID": "index.html#open-access-mission",
+    "href": "index.html#open-access-mission",
+    "title": "El Paso Crime Lab",
+    "section": "Open Access Mission",
+    "text": "Open Access Mission\nA central goal of the El Paso Crime Lab is transparency. By making data and research publicly accessible, the Lab promotes open dialogue and supports evidence-based approaches to criminal justice policy. This work helps bridge the gap between academic research and real-world decision-making in the El Paso community."
+  },
+  {
+    "objectID": "index.html#contact-information",
+    "href": "index.html#contact-information",
+    "title": "El Paso Crime Lab",
+    "section": "Contact Information",
+    "text": "Contact Information\nFor questions, data requests, or collaboration opportunities, please contact:\nMatthew J. Durán\nemail: mduran29@asu.edu\nwebsite: https://mattduran12.github.io"
+  },
+  {
+    "objectID": "index.html#about-us",
+    "href": "index.html#about-us",
+    "title": "El Paso Crime Lab",
+    "section": "About Us",
+    "text": "About Us\nThe El Paso Crime Lab is a research-driven initiative focused on producing, analyzing, and sharing knowledge about crime and public safety in the El Paso region. The Lab functions as a hub for data analysis, applied research, and public-facing insights that support informed decision-making.\nWe engage in a range of applied research and data-focused activities, including:\n\nSurvey development and analysis\nDesigning, administering, and analyzing surveys to better understand community experiences, perceptions of safety, and underreported dimensions of crime.\nProgram and policy evaluation\nAssessing the impact of interventions, enforcement strategies, and public policies using quasi-experimental and statistical methods.\nCrime data analysis and visualization\nIdentifying trends and patterns in crime and public safety outcomes using administrative and observational data.\nReport and policy brief production\nTranslating research findings into clear, actionable summaries for stakeholders and community partners.\nData integration and management\nCombining data from multiple sources to support comprehensive analyses of crime and related social outcomes."
+  },
+  {
+    "objectID": "index.html#drunk-driving-surveillance-dashboard",
+    "href": "index.html#drunk-driving-surveillance-dashboard",
+    "title": "El Paso Crime Lab",
+    "section": "Drunk Driving Surveillance Dashboard",
+    "text": "Drunk Driving Surveillance Dashboard\n\n\n\nOverview\nThe Drunk Driving Surveillance Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 indicators covering crash trends, geographic patterns, and driver and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.\n\n View Dashboard"
+  },
+  {
+    "objectID": "contact.html",
+    "href": "contact.html",
+    "title": "El Paso Crime Lab",
+    "section": "",
+    "text": "For questions, data requests, or collaboration opportunities, please use the form below.\n\nName \nEmail \nMessage\n\n\n Send Message"
+  },
+  {
+    "objectID": "contact.html#contact-the-el-paso-crime-lab",
+    "href": "contact.html#contact-the-el-paso-crime-lab",
+    "title": "El Paso Crime Lab",
+    "section": "",
+    "text": "For questions, data requests, or collaboration opportunities, please use the form below. Messages will be sent directly to the El Paso Crime Lab team.\n\nName \nEmail \nMessage\n\n\n Send Message"
+  },
+  {
+    "objectID": "research_drunkdriving.html",
+    "href": "research_drunkdriving.html",
+    "title": "El Paso Crime Lab",
+    "section": "",
+    "text": "Overview:\nThe Drunk Driving Surveillance Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 indicators covering crash trends, geographic patterns, and driver and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.\n\n View Dashboard"
+  },
+  {
+    "objectID": "research_drunkdriving.html#drunk-driving-surveillance-dashboard",
+    "href": "research_drunkdriving.html#drunk-driving-surveillance-dashboard",
+    "title": "El Paso Crime Lab",
+    "section": "",
+    "text": "Overview:\nThe Drunk Driving Surveillance Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 indicators covering crash trends, geographic patterns, and driver and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.\n\n View Dashboard"
+  },
+  {
+    "objectID": "research_drunkdriving.html#in-the-media",
+    "href": "research_drunkdriving.html#in-the-media",
+    "title": "El Paso Crime Lab",
+    "section": "In the Media",
+    "text": "In the Media\n\n\n\nOpinion Article:\nThis piece explores how crime prevention strategies are communicated to the public and how media narratives shape perceptions of safety and deterrence in El Paso. It reflects on the role of transparency, messaging, and public engagement in addressing drunk driving and related harms.\n\n Read Article"
+  },
+  {
+    "objectID": "research_drunkdriving.html#working-papers-reports",
+    "href": "research_drunkdriving.html#working-papers-reports",
+    "title": "El Paso Crime Lab",
+    "section": "Working Papers & Reports",
+    "text": "Working Papers & Reports\nThe El Paso Crime Lab produces applied research and technical reports that examine crime trends, public safety issues, and policy impacts in the region. These reports translate data into clear, evidence-based insights for policymakers, practitioners, and the public.\n\n\nDoes Public Shaming Deter Drunk Driving?\n\n\n\nSummary:\nThis study evaluates the impact of a social media campaign in El Paso that publicly shared booking photos of individuals arrested for driving while intoxicated (DWI). Using Bayesian structural time-series methods and multiple comparison groups, the analysis isolates the campaign’s effect on alcohol-related crashes.\nResults suggest the campaign was associated with reductions in alcohol-related crashes, particularly among drivers aged 31 and older. The findings highlight both the potential and limits of public-facing deterrence strategies.\n\n Download Paper (PDF)"
+  },
+  {
+    "objectID": "contact.html#contact-us",
+    "href": "contact.html#contact-us",
+    "title": "El Paso Crime Lab",
+    "section": "",
+    "text": "For questions, data requests, or collaboration opportunities, please use the form below.\n\nName \nEmail \nMessage\n\n\n Send Message"
   }
 ]

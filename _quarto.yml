@@ -8,13 +8,13 @@ website:
     background: primary
     search: true
     left:
-      - text: "Dashboards"
-        menu:
-        - text: "Drunk Driving Surveillance Dashboard"
-          href: crash_dashboard.html
+      - text: "Research on Drunk Driving"
+        href: research_drunkdriving.html
     right:
+      - text: "Subscribe for Updates"
+        href: subscribe.html
       - text: "Contact"
-        href: https://mattduran12.github.io
+        href: contact.html
 
 format:
   html:
