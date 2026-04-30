@@ -6,7 +6,7 @@ website:
   title: "El Paso Crime Lab"
   navbar:
     background: primary
-    search: true
+    search: false
     left:
       - text: "About"
         href: index.html
