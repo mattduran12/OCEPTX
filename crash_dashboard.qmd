@@ -49,38 +49,15 @@ suppressMessages(library(leaflet))
 suppressMessages(library(leaflet.extras))
 
 
-files <- c(
-  austin = "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/Drunk Driving dashboard/data/austin_workingdata.csv",
-  brownsville = "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/Drunk Driving dashboard/data/brownsville_workingdata.csv",
-  dallas = "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/Drunk Driving dashboard/data/dallas_workingdata.csv",
-  elpaso = "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/Drunk Driving dashboard/data/elpaso_workingdata.csv",
-  fortworth = "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/Drunk Driving dashboard/data/fortworth_workingdata.csv",
-  houston = "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/Drunk Driving dashboard/data/houston_workingdata.csv",
-  laredo = "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/Drunk Driving dashboard/data/laredo_workingdata.csv",
-  mcallen = "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/Drunk Driving dashboard/data/mcallen_workingdata.csv",
-  sanantonio = "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/Drunk Driving dashboard/data/sanantonio_workingdata.csv"
-)
+data <- read.csv("C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/Drunk Driving dashboard/data/elpaso_workingdata.csv", header = TRUE)
 
-all_cities <- bind_rows(lapply(names(files), function(city) {
-  df <- read.csv(files[[city]], header = TRUE)
-  df$city <- city
-  df
-}))
 
-all_cities$City <- recode(all_cities$City,
-  "AUSTIN" = "Austin",
-  "BROWNSVILLE" = "Brownsville",
-  "DALLAS" = "Dallas",
-  "EL PASO" = "El Paso",
-  "FORT WORTH" = "Fort Worth",
-  "HOUSTON" = "Houston",
-  "MCALLEN" = "McAllen",
-  "SAN ANTONIO" = "San Antonio",
-  "LAREDO" = "Laredo"
+data$City <- recode(data$City,
+  "EL PASO" = "El Paso"
 )
 
 # drop current month, since its incomplete
-all_cities <- all_cities %>%
+data <- data %>%
   mutate(
     Crash.Date = mdy(Crash.Date)
   ) %>%
@@ -89,12 +66,12 @@ all_cities <- all_cities %>%
       month(Crash.Date) == month(Sys.Date()))
   )
 
-person_level <- all_cities
+person_level <- data
 
-vehicle_level <- all_cities %>%
+vehicle_level <- data %>%
   distinct(Crash.ID, Unit.Number, .keep_all = TRUE)
 
-crash_level <- all_cities %>%
+crash_level <- data %>%
   distinct(Crash.ID, .keep_all = TRUE) 
 ```
 
@@ -268,25 +245,21 @@ dir_injury <- case_when(
   TRUE ~ "no change"
 )
 
-
-
 ```
 
-## Row {height="400px"}
+## Row {height="200px"}
 
 ::: {.card}
-
-## Quick Facts
-
 In **`r report_month`**:
 
-- **Crashes:** This month recorded `r crashes_now` alcohol-related crashes (**`r fmt(pct_change_crash)`** `r dir_crash` vs. last month)  
-- **Fatalities:** There were `r fatal_now` fatalities linked to alcohol-related crashes (**`r fmt(pct_change_fatal)`** `r dir_fatal` vs. last month)
-- **Injuries:** A total of `r injuries_now` people were injured in alcohol-related crashes (**`r fmt(pct_change_injury)`** `r dir_injury` vs. last month)
+- Alcohol-Related Crashes: This month recorded **`r crashes_now`** alcohol-related crashes (**`r fmt(pct_change_crash)`** `r dir_crash` vs. last month)  
+- People Injured in an Alcohol-Related Crashes: A total of **`r injuries_now`** people were injured (**`r fmt(pct_change_injury)`** `r dir_injury` vs. last month)
+
+- Alcohol-Related Traffic Fatalities: There were **`r fatal_now`** fatalities linked to alcohol-related crashes (**`r fmt(pct_change_fatal)`** `r dir_fatal` vs. last month)
 
 :::
 
-### Column {.tabset}
+## Row {.tabset height=400px}
 
 ``` {r}
 # remove future months for current year only
@@ -325,6 +298,28 @@ ggplotly(p1)
 ```
 
 ``` {r}
+#| title: Injuries
+# INJURIES
+p3 <- ggplot(injury_plot_data,
+             aes(x = month_lab, y = val, fill = year)) +
+  geom_col(position = position_dodge(width = 0.9)) +
+  geom_text(
+    aes(label = val, y = val + 1),   # 👈 key fix
+    position = position_dodge(width = 0.9),
+    size = 3
+  ) +
+  scale_y_continuous(
+    limits = c(0, max(injury_plot_data$val, na.rm = TRUE) * 1.1)
+  ) +
+  labs(title = "Total People Injured in Alcohol-Related Crashes",
+       x = "", y = "Total people injured", fill = "") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+ggplotly(p3) 
+```
+
+``` {r}
 #| title: Fatalities
 
 # FATALITIES
@@ -348,28 +343,6 @@ ggplotly(p2)
 
 ```
 
-``` {r}
-#| title: Injuries
-# INJURIES
-p3 <- ggplot(injury_plot_data,
-             aes(x = month_lab, y = val, fill = year)) +
-  geom_col(position = position_dodge(width = 0.9)) +
-  geom_text(
-    aes(label = val, y = val + 1),   # 👈 key fix
-    position = position_dodge(width = 0.9),
-    size = 3
-  ) +
-  scale_y_continuous(
-    limits = c(0, max(injury_plot_data$val, na.rm = TRUE) * 1.1)
-  ) +
-  labs(title = "Total People Injured in Alcohol-Related Crashes",
-       x = "", y = "Total people injured", fill = "") +
-  theme_minimal() +
-  theme(legend.position = "bottom")
-
-ggplotly(p3) 
-```
-
 
 # About this Dashboard
 
@@ -388,7 +361,7 @@ Crash data is downloaded from the Texas Department of Transportation (TXDOT) web
 
 A crash is defined as alcohol-related if involved drivers or individuals were reported as "Under the Influence of Alcohol", "Had Been Drinking", or were reported to have a blood alcohol content (BAC) greater than 0.
 
-<u>Definition of Injury/Fatality</u>
+<u>Definition of Alcohol-Related Injury/Fatality</u>
 
 Injuries include people who were classified as having a suspected serious injury, suspected minor injury, or possible injury. Fatalities are defined as any motor vehicle traffic injury crash that results in the death of one or more persons within 30 days of the incident.
 
@@ -398,26 +371,15 @@ Driver and vehicle characteristics in these graphs represent intoxicated drivers
 
 <u>Acronyms</u>
 
-BAC = Blood alcohol content; YTD = Year to date
+BAC = Blood alcohol content; YTD = Year to date; TXDOT = Texas Department of Transportation; CRIS = Crash Records Information System
 
 :::
 
 ::: {.card title="**For Media**"}
 
-<u>How to Cite This Dashboard</u>
-
-When referencing this dashboard, please use the following citation:
-
-El Paso Crime Lab. *Drunk Driving Surveillance Dashboard: El Paso, Texas* (2026). [www.epcrimelab.org/crash_dashboard.html]
-
-<u>Suggested Language</u>
-
-- “Crash data on alcohol-related crashes in El Paso show…”
-- “Local data on impaired driving trends indicate…”
-
 <u>Key Notes for Reporting</u>
 
-- Data reflect alcohol-related crashes, not arrests or enforcement activity  
+- Crashes, injuries, and fatalities in the dashboard represent those that were alcohol-related  
 - Trends are based on official crash records from TXDOT
 - Monthly updates may revise prior counts as data are finalized  
 
@@ -429,6 +391,16 @@ All figures in this dashboard are interactive and downloadable.
 - To download a figure, hover over the chart and click the camera icon to save it as an image  
 - Charts may be used in media coverage with attribution. *Data Source: TXDOT CRIS Query Tool | Figure created by El Paso Crime Lab*  
 
+<u>How to Cite This Dashboard</u>
+
+When referencing this dashboard, please use the following citation:
+
+El Paso Crime Lab. *Drunk Driving Surveillance Dashboard: El Paso, Texas* (2026). [www.epcrimelab.org/crash_dashboard.html]
+
+<u>Suggested Language</u>
+
+- “Crash data on alcohol-related crashes in El Paso show…”
+- “Local data on alcohol-related traffic fatalities indicate…”
 
 <u>Contact</u>
 
@@ -488,7 +460,7 @@ list(
 #| content: valuebox
 #| title: "Total People Injured (YTD)"
 
-person_level <- person_level %>%
+ytd_people_injury <- person_level %>%
   mutate(
     injured = if_else(
       str_detect(Person.Injury.Severity, "A - SUSPECTED SERIOUS INJURY|B - SUSPECTED MINOR INJURY|C - POSSIBLE INJURY"),
@@ -497,7 +469,7 @@ person_level <- person_level %>%
     )
   )
 
-ytd_people_alcohol <- person_level %>%
+ytd_people_injury <- ytd_people_injury %>%
   filter(
     City == "El Paso",
     Crash.Year == 2026,
@@ -508,14 +480,14 @@ ytd_people_alcohol <- person_level %>%
 list(
   icon = "bandaid",
   color = "primary",
-  value = ytd_people_alcohol)
+  value = ytd_people_injury)
 
 ```
 
 ```{r}
 #| content: valuebox
 #| title: "Total Fatalities (YTD)"
-person_level <- person_level %>%
+ytd_people_fatal <- person_level %>%
   mutate(
     fatal = if_else(
       str_detect(Person.Injury.Severity, "K - FATAL INJURY"),
@@ -523,7 +495,7 @@ person_level <- person_level %>%
       missing = 0
     )
   )
-ytd_alcohol_fatalities <- person_level %>%
+ytd_alcohol_fatalities <- ytd_people_fatal %>%
   filter(
     City == "El Paso",
     Crash.Year == 2026,
@@ -593,10 +565,81 @@ ggplotly(p)
 
 
 ``` {r}
+#| title: Injury Trends
+
+injury_monthly <- person_level %>%
+  mutate(
+    injured = if_else(
+      str_detect(Person.Injury.Severity, "A - SUSPECTED SERIOUS INJURY|B - SUSPECTED MINOR INJURY|C - POSSIBLE INJURY"),
+      1, 0,
+      missing = 0
+    ),
+    month = floor_date(Crash.Date, "month")
+  ) %>%
+  filter(
+    City == "El Paso",
+    injured == 1   # uses your indicator
+  ) %>%
+  group_by(month) %>%
+  summarise(
+    injuries = n(),
+    .groups = "drop"
+  ) %>%
+  arrange(month) %>%
+  mutate(
+    ma_12 = zoo::rollmean(injuries, k = 12, fill = NA, align = "right")
+  )
+
+# ----------------------------
+# Step 2: plot (MA only)
+# ----------------------------
+p <- ggplot(injury_monthly, aes(x = month)) +
+
+  # observed
+  geom_line(
+    aes(y = injuries, color = "Total injuries"),
+    linewidth = 0.8
+  ) +
+
+  # moving average
+  geom_line(
+    aes(y = ma_12, color = "Average"),
+    linewidth = 1.2
+  ) +
+
+  scale_color_manual(
+    values = c(
+      "Total injuries" = "grey70",  # yellow
+      "Average"        = "#F77F00"   # orange
+    )
+  ) +
+
+  labs(
+    x = "",
+    y = "Total people injured",
+    color = ""
+  ) +
+
+  theme_minimal() +
+  theme(
+    legend.position = "top"
+  )
+
+ggplotly(p)
+
+```
+
+
+``` {r}
 #| title: Fatality Trends
 monthly_counts <- person_level %>%
   filter(City == "El Paso") %>%
   mutate(
+    fatal = if_else(
+      str_detect(Person.Injury.Severity, "K - FATAL INJURY"),
+      1, 0,
+      missing = 0
+    ),
     month = floor_date(Crash.Date, "month")
   ) %>%
   group_by(month) %>%
@@ -650,77 +693,6 @@ p <- ggplot(monthly_counts, aes(x = month)) +
   )
 
 ggplotly(p) 
-```
-
-
-``` {r}
-#| title: Injury Trends
-
-injury_monthly <- person_level %>%
-  filter(
-    City == "El Paso",
-    !Person.Injury.Severity %in% c(
-      "99 - UNKNOWN",
-      "95 - AUTONOMOUS",
-      "N - NOT INJURED",
-      "K - FATAL INJURY"
-    ),
-    !is.na(Person.Injury.Severity)
-  ) %>%
-  
-  mutate(
-    month = floor_date(Crash.Date, "month"),
-    
-    injury = case_when(
-      grepl("A - SUSPECTED SERIOUS INJURY", Person.Injury.Severity) ~ "Suspected Serious Injury (Average)",
-      grepl("B - SUSPECTED MINOR INJURY", Person.Injury.Severity) ~ "Suspected Minor Injury (Average)",
-      grepl("C - POSSIBLE INJURY", Person.Injury.Severity) ~ "Possible Injury (Average)",
-      TRUE ~ "Other"
-    )
-  ) %>%
-  
-  group_by(month, injury) %>%
-  summarise(
-    n = n(),
-    .groups = "drop"
-  ) %>%
-  arrange(month) %>%
-  
-  group_by(injury) %>%
-  mutate(
-    ma12 = zoo::rollmean(n, k = 12, fill = NA, align = "right")
-  ) %>%
-  ungroup()
-
-# ----------------------------
-# Step 2: plot (MA only)
-# ----------------------------
-p <- ggplot(injury_monthly, aes(x = month, y = ma12, color = injury)) +
-
-  geom_line(linewidth = 1.2, na.rm = TRUE) +
-
-  scale_color_manual(
-    values = c(
-      "Suspected Serious Injury (Average)" = "#D1495B",  # blue
-      "Suspected Minor Injury (Average)"   = "#F77F00",  # orange
-      "Possible Injury (Average)"          = "#F2C14E"   # green
-    ),
-    labels = function(x) paste0("(Average) ", x)
-  ) +
-
-  labs(
-    x = "",
-    y = "Total people injured",
-    color = ""
-  ) +
-
-  theme_minimal() +
-  theme(
-    legend.position = "right"
-  )
-
-ggplotly(p) 
-
 ```
 
 
@@ -828,7 +800,12 @@ monthly_fatal_year <- person_level %>%
   mutate(
     date = Crash.Date,
     year = year(date),
-    month_num = month(date)
+    month_num = month(date),
+    fatal = if_else(
+      str_detect(Person.Injury.Severity, "K - FATAL INJURY"),
+      1, 0,
+      missing = 0
+    ),
   ) %>%
   group_by(year, month_num) %>%
   summarise(
