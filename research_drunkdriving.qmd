@@ -1,5 +1,5 @@
 ---
-title: "Research on Drunk Driving"
+title: "Research on Driving While Intoxicated"
 format:
   html:
     grid:
@@ -75,9 +75,7 @@ View Dashboard
 ::: {.g-col-12 .g-col-md-6}
 
 **Summary:**  
-This study evaluates the impact of a social media campaign in El Paso that publicly shared booking photos of individuals arrested for driving while intoxicated (DWI). Using time-series analysis, this study attempts to isolate the campaign’s effect on alcohol-related crashes.
-
-The findings highlight the potential and implications of social-media deterrence strategies. Recommendations for improving the strategy are provided.
+This study evaluates the impact of a social media campaign in El Paso that publicly shared booking photos of individuals arrested for driving while intoxicated. Using alcohol-related vehicle crashes as the key outcome measure, the results show the campaign may have deterred drunk driving among drivers aged 31 and older. Drivers aged 21 to 30 showed no consistent evidence of being deterred. While social media shaming may offer some deterrent benefits, these must be balanced against ethical and legal concerns, especially when implemented by community groups without formal oversight. 
 
 <br>
 
@@ -112,9 +110,19 @@ This article explores why arrest data can be misleading when trying to understan
 Read Article
 </a>
 
-<br>
+:::
 
-**Latest News on DWI in El Paso:**  
+::: {.g-col-12 .g-col-md-6}
+
+![](opinion_article.jpg)
+
+:::
+:::
+:::
+
+## Latest News on DWI in El Paso
+
+
 This page tracks the latest developments on drunk driving in El Paso. It brings together recent reporting on crashes, arrests, enforcement activity, and policy changes so you can quickly see what’s happening across the city.
 
 <br>
@@ -125,13 +133,5 @@ View Latest News
 
 
 
-:::
 
-::: {.g-col-12 .g-col-md-6}
-
-![](opinion_article.jpg)
-
-:::
-:::
-:::
 

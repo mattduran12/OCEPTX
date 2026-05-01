@@ -2,7 +2,7 @@
   {
     "objectID": "subscribe.html",
     "href": "subscribe.html",
-    "title": "El Paso Crime Lab",
+    "title": "Subscribe",
     "section": "",
     "text": "Loading…"
   },
@@ -32,7 +32,7 @@
     "href": "dwi_friday_study.html",
     "title": "Does Public Shaming Deter Drunk Driving?",
     "section": "",
-    "text": "Disclaimer: This study is under peer-review and subject to revisions."
+    "text": "Disclaimer: This study is under peer-review and subject to revisions following feedback."
   },
   {
     "objectID": "dwi_friday_study.html#appendix",
@@ -65,30 +65,30 @@
   {
     "objectID": "research_drunkdriving.html",
     "href": "research_drunkdriving.html",
-    "title": "Research on Drunk Driving",
+    "title": "Research on Driving While Intoxicated",
     "section": "",
     "text": "Overview:\nThe Drunk Driving Surveillance Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 indicators covering crash trends, geographic patterns, and driver and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.\n\n View Dashboard"
   },
   {
     "objectID": "research_drunkdriving.html#drunk-driving-surveillance-dashboard",
     "href": "research_drunkdriving.html#drunk-driving-surveillance-dashboard",
-    "title": "Research on Drunk Driving",
+    "title": "Research on Driving While Intoxicated",
     "section": "",
     "text": "Overview:\nThe Drunk Driving Surveillance Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 indicators covering crash trends, geographic patterns, and driver and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.\n\n View Dashboard"
   },
   {
     "objectID": "research_drunkdriving.html#working-papers-reports",
     "href": "research_drunkdriving.html#working-papers-reports",
-    "title": "Research on Drunk Driving",
+    "title": "Research on Driving While Intoxicated",
     "section": "Working Papers & Reports",
-    "text": "Working Papers & Reports\n\n\nDoes Public Shaming Deter Drunk Driving?\n\n\n\nSummary:\nThis study evaluates the impact of a social media campaign in El Paso that publicly shared booking photos of individuals arrested for driving while intoxicated (DWI). Using time-series analysis, this study attempts to isolate the campaign’s effect on alcohol-related crashes.\nThe findings highlight the potential and implications of social-media deterrence strategies. Recommendations for improving the strategy are provided.\n\n Read Paper"
+    "text": "Working Papers & Reports\n\n\nDoes Public Shaming Deter Drunk Driving?\n\n\n\nSummary:\nThis study evaluates the impact of a social media campaign in El Paso that publicly shared booking photos of individuals arrested for driving while intoxicated. Using alcohol-related vehicle crashes as the key outcome measure, the results show the campaign may have deterred drunk driving among drivers aged 31 and older. Drivers aged 21 to 30 showed no consistent evidence of being deterred. While social media shaming may offer some deterrent benefits, these must be balanced against ethical and legal concerns, especially when implemented by community groups without formal oversight.\n\n Read Paper"
   },
   {
     "objectID": "research_drunkdriving.html#in-the-media",
     "href": "research_drunkdriving.html#in-the-media",
-    "title": "Research on Drunk Driving",
+    "title": "Research on Driving While Intoxicated",
     "section": "In the Media",
-    "text": "In the Media\n\n\n\nOpinion Article:\nThis article explores why arrest data can be misleading when trying to understand drunk driving trends, and why researchers often rely on alcohol-involved crash rates instead. This article also includes a graph comparing the rate of alcohol-involved crashes in El Paso to other Texas cities.\n\n Read Article \n\nLatest News on DWI in El Paso:\nThis page tracks the latest developments on drunk driving in El Paso. It brings together recent reporting on crashes, arrests, enforcement activity, and policy changes so you can quickly see what’s happening across the city.\n\n View Latest News"
+    "text": "In the Media\n\n\n\nOpinion Article:\nThis article explores why arrest data can be misleading when trying to understand drunk driving trends, and why researchers often rely on alcohol-involved crash rates instead. This article also includes a graph comparing the rate of alcohol-involved crashes in El Paso to other Texas cities.\n\n Read Article"
   },
   {
     "objectID": "crash_dashboard.html",
@@ -194,5 +194,12 @@
     "title": "Drunk Driving Surveillance Dashboard",
     "section": "Row",
     "text": "Row\n\nColumn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nColumn"
+  },
+  {
+    "objectID": "research_drunkdriving.html#latest-news-on-dwi-in-el-paso",
+    "href": "research_drunkdriving.html#latest-news-on-dwi-in-el-paso",
+    "title": "Research on Driving While Intoxicated",
+    "section": "Latest News on DWI in El Paso",
+    "text": "Latest News on DWI in El Paso\nThis page tracks the latest developments on drunk driving in El Paso. It brings together recent reporting on crashes, arrests, enforcement activity, and policy changes so you can quickly see what’s happening across the city.\n\n View Latest News"
   }
 ]

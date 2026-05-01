@@ -22,7 +22,7 @@ reference-location: margin
 citation-location: document
 ---
 
-*Disclaimer: This study is under peer-review and subject to revisions.*
+*Disclaimer: This study is under peer-review and subject to revisions following feedback.*
 
 ### Introduction
 

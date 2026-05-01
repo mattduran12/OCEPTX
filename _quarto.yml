@@ -10,8 +10,16 @@ website:
     left:
       - text: "About"
         href: index.html
-      - text: "Research on Drunk Driving"
-        href: research_drunkdriving.html
+      - text: "Research on Driving While Intoxicated"
+        menu:
+          - text: "Home"
+            href: research_drunkdriving.html
+          - text: "Drunk Driving Surveillance Dashboard"
+            href: crash_dashboard.html
+          - text: "Study: Does Public Shaming Deter Drunk Driving?"
+            href: dwi_study.html
+          - text: "Latest Local News on DWI"
+            href: dwi_news.html
     right:
       - text: "Subscribe for Updates"
         href: subscribe.html

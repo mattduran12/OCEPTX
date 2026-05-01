@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Subscribe"
 format:
   html:
     grid:
@@ -7,10 +7,15 @@ format:
       body-width: 780px
     theme: cosmo
 ---
-
+<style>
+.quarto-title-block {
+  display: none;
+}
+</style>
 
 
 <div style="text-align:center; margin: 20px 0;">
+
   <iframe 
     src="https://docs.google.com/forms/d/e/1FAIpQLSdcE-lzLzRiJaGp84I1SjMuWEitINbFjUTbBQmgSaEtH3q_Fg/viewform?embedded=true"
     width="100%" 
