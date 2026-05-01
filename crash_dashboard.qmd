@@ -2,9 +2,7 @@
 title: "Drunk Driving Surveillance Dashboard"
 format:
   dashboard:
-    theme:
-      light: default
-      dark: darkly
+    theme: default
     css: styles3.css
     orientation: rows
     scrolling: true
@@ -2057,8 +2055,6 @@ reactable(
   bordered = FALSE
 )
 ```
-
-
 
 # Quiz
 

@@ -6,7 +6,7 @@ format:
       margin-width: 180px
       body-width: 780px
     theme: cosmo
-
+    toc: true
 ---
 
 <style>
@@ -112,6 +112,19 @@ This article explores why arrest data can be misleading when trying to understan
 Read Article
 </a>
 
+<br>
+
+**Latest News on DWI in El Paso:**  
+This page tracks the latest developments on drunk driving in El Paso, updated every six hours. It brings together recent reporting on crashes, arrests, enforcement activity, and policy changes so you can quickly see what’s happening across the city.
+
+<br>
+
+<a href="dwi_news.html" target="_blank" class="btn btn-primary">
+View Latest News
+</a>
+
+
+
 :::
 
 ::: {.g-col-12 .g-col-md-6}
@@ -121,3 +134,4 @@ Read Article
 :::
 :::
 :::
+

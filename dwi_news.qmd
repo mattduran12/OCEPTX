@@ -1,0 +1,243 @@
+---
+title: "Latest Local News on Drunk Driving"
+format: html
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+<style>
+.quarto-title-block {
+  display: none;
+} </style>
+
+## Latest Local News on Drunk Driving
+
+This page shows recent local news coverage related to impaired driving in El Paso. It updates every 6 hours.
+
+<div style="display:flex; gap:12px; margin-bottom:8px; width:100%; align-items:center;">
+
+<input id="searchBox" type="text"
+placeholder="Search news stories"
+style="flex:1; padding:12px; border-radius:8px; border:1px solid #ddd; font-size:14px;">
+
+<select id="categoryFilter"
+style="width:220px; padding:12px; border-radius:8px; border:1px solid #ddd;">
+  <option value="all">All Tags</option>
+  <option value="DWI">DWI</option>
+  <option value="Crash">Crash</option>
+  <option value="Policy">Policy</option>
+  <option value="Arrest">Arrest</option>
+  <option value="Court">Court</option>
+  <option value="Legislation">Legislation</option>
+  <option value="Enforcement">Enforcement</option>
+  <option value="Alcohol">Alcohol</option>
+  <option value="Traffic">Traffic</option>
+  <option value="Injury">Injury</option>
+  <option value="Fatality">Fatality</option>
+  <option value="Police">Police</option>
+  <option value="Texas">Texas</option>
+  <option value="ElPaso">El Paso</option>
+</select>
+
+</div>
+
+<div style="margin-bottom:10px; color:#888; font-size:0.9em;">
+  <span id="resultCount"></span>
+</div>
+
+<div id="news-grid" style="
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:16px;
+">
+</div>
+
+<div style="margin-top:20px; text-align:center;">
+  <button onclick="prevPage()">Previous</button>
+  <span id="pageInfo" style="margin:0 10px;"></span>
+  <button onclick="nextPage()">Next</button>
+</div>
+
+```{r, results='asis'}
+library(tidyRSS)
+library(dplyr)
+library(stringr)
+
+rss_url <- "https://news.google.com/rss/search?q=(\"DWI\"%20OR%20\"drunk%20driving\"%20OR%20\"impaired%20driving\")%20\"El%20Paso\"&hl=en-US&gl=US&ceid=US:en"
+
+rss_items <- tidyfeed(rss_url) %>%
+  select(item_title, item_link, item_pub_date) %>%
+  slice_head(n = 100)
+
+clean_title <- function(full_title) {
+  parts <- str_split(full_title, " - ", simplify = TRUE)
+
+  if (ncol(parts) > 1) {
+    title <- parts[,1]
+    source <- parts[,ncol(parts)]
+  } else {
+    title <- full_title
+    source <- "Unknown"
+  }
+
+  list(title = title, source = toupper(source))
+}
+
+format_date <- function(x) {
+  format(as.Date(x), "%B %d, %Y")
+}
+
+get_tags <- function(text) {
+  tags <- c()
+
+  if (str_detect(text, regex("dwi|dui|drunk|impaired", TRUE))) tags <- c(tags, "DWI")
+  if (str_detect(text, regex("crash|accident|collision", TRUE))) tags <- c(tags, "Crash")
+  if (str_detect(text, regex("policy|law|bill", TRUE))) tags <- c(tags, "Policy")
+  if (str_detect(text, regex("arrest|charged", TRUE))) tags <- c(tags, "Arrest")
+  if (str_detect(text, regex("court|trial", TRUE))) tags <- c(tags, "Court")
+  if (str_detect(text, regex("legislation", TRUE))) tags <- c(tags, "Legislation")
+  if (str_detect(text, regex("enforcement", TRUE))) tags <- c(tags, "Enforcement")
+  if (str_detect(text, regex("alcohol", TRUE))) tags <- c(tags, "Alcohol")
+  if (str_detect(text, regex("traffic", TRUE))) tags <- c(tags, "Traffic")
+  if (str_detect(text, regex("injury", TRUE))) tags <- c(tags, "Injury")
+  if (str_detect(text, regex("fatal", TRUE))) tags <- c(tags, "Fatality")
+  if (str_detect(text, regex("police", TRUE))) tags <- c(tags, "Police")
+  if (str_detect(text, regex("texas", TRUE))) tags <- c(tags, "Texas")
+  if (str_detect(text, regex("el paso", TRUE))) tags <- c(tags, "ElPaso")
+
+  if (length(tags) == 0) tags <- "General"
+  paste(tags, collapse = ",")
+}
+
+for (i in 1:nrow(rss_items)) {
+
+  parsed <- clean_title(rss_items$item_title[i])
+  tags <- get_tags(rss_items$item_title[i])
+
+  cat(
+    paste0(
+      "<div class='news-card' data-tags='", tags, "' style='
+        padding:16px;
+        border-radius:12px;
+        background:#fff3d6;
+        border:1px solid #e5e7eb;
+        position:relative;
+        transition: all 0.25s ease;
+      '
+      onmouseover=\"this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)'\"
+      onmouseout=\"this.style.transform='translateY(0)'; this.style.boxShadow='none'\">",
+
+      "<div style='position:absolute; top:10px; right:12px; font-size:0.75em; color:#888;'>",
+      format_date(rss_items$item_pub_date[i]),
+      "</div>",
+
+      "<div style='font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;'>",
+      parsed$source,
+      "</div>",
+
+      "<a href='", rss_items$item_link[i], "' target='_blank' style='
+        font-size:1.05em;
+        font-weight:600;
+        color:#5c1f14;
+        text-decoration:none;
+      '>",
+      parsed$title,
+      "</a>",
+
+      "<div style='margin-top:10px;'>",
+      paste(
+        sapply(strsplit(tags, ",")[[1]], function(tag) {
+          paste0(
+            "<span style='
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            '>", tag, "</span>"
+          )
+        }),
+        collapse = ""
+      ),
+      "</div></div>"
+    )
+  )
+}
+```
+
+<script>
+let currentPage = 1;
+const pageSize = 12;
+
+function getCards() {
+  return Array.from(document.querySelectorAll(".news-card"));
+}
+
+function updateResultCount(visibleCards) {
+  document.getElementById("resultCount").innerText =
+    visibleCards + " results found";
+}
+
+function renderPage() {
+  const cards = getCards();
+  const start = (currentPage - 1) * pageSize;
+  const end = start + pageSize;
+
+  let visible = 0;
+
+  cards.forEach((card, i) => {
+    const show = (i >= start && i < end);
+    if (show) visible++;
+    card.style.display = show ? "block" : "none";
+  });
+
+  updateResultCount(cards.length);
+
+  document.getElementById("pageInfo").innerText =
+    "Page " + currentPage + " of " + Math.ceil(cards.length / pageSize);
+}
+
+function nextPage() {
+  const cards = getCards();
+  if (currentPage < Math.ceil(cards.length / pageSize)) {
+    currentPage++;
+    renderPage();
+  }
+}
+
+function prevPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    renderPage();
+  }
+}
+
+function filterCards() {
+  const search = document.getElementById("searchBox").value.toLowerCase();
+  const category = document.getElementById("categoryFilter").value;
+
+  let visible = 0;
+
+  getCards().forEach(card => {
+    const text = card.innerText.toLowerCase();
+    const tags = card.dataset.tags;
+
+    const matchesSearch = text.includes(search);
+    const matchesCategory = category === "all" || tags.includes(category);
+
+    const show = matchesSearch && matchesCategory;
+
+    card.style.display = show ? "block" : "none";
+    if (show) visible++;
+  });
+
+  updateResultCount(visible);
+}
+
+document.getElementById("searchBox").addEventListener("input", filterCards);
+document.getElementById("categoryFilter").addEventListener("change", filterCards);
+
+renderPage();
+</script>
