@@ -38,7 +38,7 @@ suppressMessages(library(leaflet))
 suppressMessages(library(leaflet.extras))
 
 
-data <- read.csv("C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/Drunk Driving dashboard/data/elpaso_workingdata.csv", header = TRUE)
+data <- read.csv("data.csv", header = TRUE)
 
 
 data$City <- recode(data$City,
