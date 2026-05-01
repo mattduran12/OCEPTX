@@ -13,7 +13,11 @@ execute:
 
 ## Latest Local News on Drunk Driving
 
-This page shows recent local news coverage related to impaired driving in El Paso. It updates every 6 hours.
+```{r results='asis'}
+el_paso_time <- format(Sys.time(), tz = "America/Denver", "%B %d, %Y • %I:%M %p")
+
+cat(paste0("Last updated (MST): ", el_paso_time))
+```
 
 <div style="display:flex; gap:12px; margin-bottom:8px; width:100%; align-items:center;">
 
