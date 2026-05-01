@@ -2,7 +2,7 @@ name: Render Quarto Site
 
 on:
   schedule:
-    - cron: "*/5 * * * *"    # every 6 hours
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -25,13 +25,8 @@ jobs:
 
       - name: Install R packages
         run: |
-          install.packages(c(
-            "quarto",
-            "tidyRSS",
-            "dplyr",
-            "lubridate",
-            "stringr"
-          ))
+          Rscript -e "options(repos = c(CRAN='https://cloud.r-project.org'));
+                      install.packages(c('quarto','tidyRSS','dplyr','lubridate','stringr'))"
 
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
@@ -44,5 +39,5 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git add docs
-          git commit -m "Hourly site update" || echo "No changes"
+          git commit -m "Auto site update" || echo "No changes"
           git push
