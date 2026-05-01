@@ -68,13 +68,31 @@ library(tidyRSS)
 library(dplyr)
 library(stringr)
 
-rss_url <- "https://news.google.com/rss/search?q=(\"DWI\"%20OR%20\"drunk%20driving\"%20OR%20\"impaired%20driving\")%20\"El%20Paso\"&hl=en-US&gl=US&ceid=US:en"
+# ----------------------------
+# RSS SOURCES (EN + ES)
+# ----------------------------
+rss_url_en <- "https://news.google.com/rss/search?q=(\"DWI\"%20OR%20\"DUI\"%20OR%20\"drunk%20driving\"%20OR%20\"impaired%20driving\")%20\"El%20Paso\"&hl=en-US&gl=US&ceid=US:en"
 
-rss_items <- tidyfeed(rss_url) %>%
+rss_url_es <- "https://news.google.com/rss/search?q=(\"DUI\"%20OR%20\"DWI\"%20OR%20\"manejar%20ebrio\"%20OR%20\"conducir%20ebrio\"%20OR%20\"conducci%C3%B3n%20bajo%20influencia\")%20\"El%20Paso\"&hl=es-419&gl=US&ceid=US:es"
+
+# ----------------------------
+# READ BOTH FEEDS
+# ----------------------------
+rss_en <- tidyfeed(rss_url_en)
+rss_es <- tidyfeed(rss_url_es)
+
+# ----------------------------
+# COMBINE + CLEAN
+# ----------------------------
+rss_items <- bind_rows(rss_en, rss_es) %>%
   select(item_title, item_link, item_pub_date) %>%
-  arrange(desc(item_pub_date)) %>%   # 👈 THIS IS THE KEY LINE
+  distinct() %>%
+  arrange(desc(item_pub_date)) %>%
   slice_head(n = 100)
 
+# ----------------------------
+# HELPERS
+# ----------------------------
 clean_title <- function(full_title) {
   parts <- str_split(full_title, " - ", simplify = TRUE)
 
@@ -96,7 +114,7 @@ format_date <- function(x) {
 get_tags <- function(text) {
   tags <- c()
 
-  if (str_detect(text, regex("dwi|dui|drunk|impaired", TRUE))) tags <- c(tags, "DWI")
+  if (str_detect(text, regex("dwi|dui|drunk|impaired|manejar|conducir", TRUE))) tags <- c(tags, "DWI")
   if (str_detect(text, regex("crash|accident|collision", TRUE))) tags <- c(tags, "Crash")
   if (str_detect(text, regex("policy|law|bill", TRUE))) tags <- c(tags, "Policy")
   if (str_detect(text, regex("arrest|charged", TRUE))) tags <- c(tags, "Arrest")
@@ -115,6 +133,9 @@ get_tags <- function(text) {
   paste(tags, collapse = ",")
 }
 
+# ----------------------------
+# RENDER CARDS
+# ----------------------------
 for (i in 1:nrow(rss_items)) {
 
   parsed <- clean_title(rss_items$item_title[i])
