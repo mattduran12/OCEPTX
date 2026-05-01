@@ -3,7 +3,7 @@ title: ""
 format:
   html:
     grid:
-      margin-width: 180px
+      margin-width: 280px
       body-width: 780px
     theme: cosmo
     toc: true
@@ -16,7 +16,7 @@ format:
 
 ## About Us
 
-The El Paso Crime Lab is a research-focused organization studying crime and public safety in the El Paso region. It produces and shares intelligence products grounded in rigorous methodology to support evidence-based policy and decision-making.
+The El Paso Crime Lab is a research-focused organization studying crime and public safety in the El Paso region. It produces intelligence products grounded in rigorous methodology to support evidence-based policy and decision-making.
 
 We engage in a range of applied research activities, including:
 
@@ -48,6 +48,7 @@ A central goal of the El Paso Crime Lab is transparency. By making data and rese
 
 For questions, data requests, or collaboration opportunities, please contact:
 
-**Matthew J. Durán**  
+Matthew J. Durán
+
 email: [mduran29@asu.edu](mailto:mduran29@asu.edu)  
 website: [https://mattduran12.github.io](https://mattduran12.github.io)

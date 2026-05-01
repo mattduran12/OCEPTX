@@ -3,7 +3,7 @@ title: "Research on Driving While Intoxicated"
 format:
   html:
     grid:
-      margin-width: 380px
+      margin-width: 400px
       body-width: 780px
     theme: cosmo
     toc: true
@@ -64,11 +64,9 @@ View Dashboard
 
 ---
 
-## Working Papers & Reports
+## Study: Does Public Shaming Deter Drunk Driving?
 
 ---
-
-### Does Public Shaming Deter Drunk Driving?
 
 ::: {.project-block}
 ::: {.grid .align-items-center}
