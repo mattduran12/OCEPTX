@@ -37,6 +37,7 @@ jobs:
             dplyr
             lubridate
             stringr
+            DT
 
       # ----------------------------
       # INSTALL QUARTO
