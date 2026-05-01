@@ -20,20 +20,39 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      # ----------------------------
+      # SET UP R (PROPER WAY)
+      # ----------------------------
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
 
-      - name: Install R packages
-        run: |
-          Rscript -e "options(repos = c(CRAN='https://cloud.r-project.org'));
-                      install.packages(c('quarto','tidyRSS','dplyr','lubridate','stringr'))"
+      # ----------------------------
+      # INSTALL R PACKAGES (FIXED)
+      # ----------------------------
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            tidyRSS
+            dplyr
+            lubridate
+            stringr
 
+      # ----------------------------
+      # INSTALL QUARTO
+      # ----------------------------
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
+      # ----------------------------
+      # RENDER SITE
+      # ----------------------------
       - name: Render site
         run: quarto render
 
+      # ----------------------------
+      # COMMIT OUTPUT
+      # ----------------------------
       - name: Commit updated /docs
         run: |
           git config --global user.name "github-actions"
