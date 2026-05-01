@@ -72,6 +72,7 @@ rss_url <- "https://news.google.com/rss/search?q=(\"DWI\"%20OR%20\"drunk%20drivi
 
 rss_items <- tidyfeed(rss_url) %>%
   select(item_title, item_link, item_pub_date) %>%
+  arrange(desc(item_pub_date)) %>%   # 👈 THIS IS THE KEY LINE
   slice_head(n = 100)
 
 clean_title <- function(full_title) {

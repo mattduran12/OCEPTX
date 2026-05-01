@@ -88,8 +88,8 @@ this_month <- crash_level %>%
 last_month <- crash_level %>%
   filter(
     City == "El Paso",
-    year(Crash.Date) == year(report_date %m-% months(1)),
-    month(Crash.Date) == month(report_date %m-% months(1))
+    year(Crash.Date) == prev_year,
+    month(Crash.Date) == month(report_date)
   )
 
 # ----------------------------
@@ -120,8 +120,8 @@ injuries_now <- person_level %>%
 injuries_prev <- person_level %>%
   filter(
     City == "El Paso",
-    year(Crash.Date) == year(report_date %m-% months(1)),
-    month(Crash.Date) == month(report_date %m-% months(1)),
+    year(Crash.Date) == prev_year,
+    month(Crash.Date) == month(report_date),
     !Person.Injury.Severity %in% c(
       "99 - UNKNOWN",
       "95 - AUTONOMOUS",
@@ -149,8 +149,8 @@ fatal_now <- person_level %>%
 fatal_prev <- person_level %>%
   filter(
     City == "El Paso",
-    year(Crash.Date) == year(report_date %m-% months(1)),
-    month(Crash.Date) == month(report_date %m-% months(1)),
+    year(Crash.Date) == prev_year,
+    month(Crash.Date) == month(report_date),
     Person.Injury.Severity == "K - FATAL INJURY"
   ) %>%
   summarise(n = n()) %>%
@@ -236,7 +236,7 @@ dir_injury <- case_when(
 
 ```
 
-## Row {.tabset height=70%}
+## Row {.tabset height=35%}
 
 ``` {r}
 # remove future months for current year only
@@ -250,6 +250,12 @@ filter_future <- function(df){
 crash_plot_data  <- filter_future(crash_plot_data)
 fatal_plot_data  <- filter_future(fatal_plot_data)
 injury_plot_data <- filter_future(injury_plot_data)
+
+# comparison months for brief
+comparison_month <- format(
+  as.Date(paste0(prev_year, "-", month(report_date), "-01")),
+  "%B %Y"
+)
 ```
 
 ``` {r}
@@ -259,7 +265,7 @@ p1 <- ggplot(crash_plot_data,
              aes(x = month_lab, y = val, fill = year)) +
   geom_col(position = position_dodge(width = 0.9)) +
   geom_text(
-    aes(label = val, y = val + 1),   # 👈 key fix
+    aes(label = val, y = val + 1),
     position = position_dodge(width = 0.9),
     size = 3
   ) +
@@ -276,12 +282,12 @@ ggplotly(p1)
 
 ``` {r}
 #| title: Injuries
-# INJURIES
+
 p3 <- ggplot(injury_plot_data,
              aes(x = month_lab, y = val, fill = year)) +
   geom_col(position = position_dodge(width = 0.9)) +
   geom_text(
-    aes(label = val, y = val + 1),   # 👈 key fix
+    aes(label = val, y = val + 1),
     position = position_dodge(width = 0.9),
     size = 3
   ) +
@@ -299,12 +305,11 @@ ggplotly(p3)
 ``` {r}
 #| title: Fatalities
 
-# FATALITIES
 p2 <- ggplot(fatal_plot_data,
              aes(x = month_lab, y = val, fill = year)) +
   geom_col(position = position_dodge(width = 0.9)) +
   geom_text(
-    aes(label = val, y = val * 1.05),   # 👈 key fix
+    aes(label = val, y = val * 1.05),
     position = position_dodge(width = 0.9),
     size = 3
   ) +
@@ -326,12 +331,12 @@ ggplotly(p2)
 ### Column 
 
 ::: {.card title="**Monthly Summary**"}
-In **`r report_month`**:
+In **`r report_month`**, there were:
 
-- Alcohol-Related Crashes: This month recorded **`r crashes_now`** alcohol-related crashes (**`r fmt(pct_change_crash)`** `r dir_crash` vs. last month)  
-- People Injured in an Alcohol-Related Crashes: A total of **`r injuries_now`** people were injured (**`r fmt(pct_change_injury)`** `r dir_injury` vs. last month)
+- **`r crashes_now`** alcohol-related crashes (**`r fmt(pct_change_crash)`** `r dir_crash` vs. `r comparison_month`)  
+- **`r injuries_now`** people injured in an alcohol-related crash (**`r fmt(pct_change_injury)`** `r dir_injury` vs. `r comparison_month`)
 
-- Alcohol-Related Traffic Fatalities: There were **`r fatal_now`** fatalities linked to alcohol-related crashes (**`r fmt(pct_change_fatal)`** `r dir_fatal` vs. last month)
+- **`r fatal_now`** fatalities associated with alcohol-related crashes (**`r fmt(pct_change_fatal)`** `r dir_fatal` vs. `r comparison_month`)
 
 :::
 
@@ -357,7 +362,7 @@ In **`r report_month`**:
 
 ::: {.card title="**About This Dashboard**"}
 
-Last Update: March 2026
+Last Update: April 2026
 
 The Drunk Driving Surveillance Dashboard provides monthly, city-level data on alcohol-related motor vehicle crashes in El Paso, Texas. It is designed as a public-facing resource for journalists, policymakers, and researchers seeking timely and transparent information on impaired driving trends.
 
@@ -1561,7 +1566,7 @@ drivers <- person_level %>%
   )
 ```
 
-## Row {height=30%}
+## Row {height="200px"}
 
 ``` {r}
 #| content: valuebox
@@ -2095,7 +2100,7 @@ const quiz = [
 
   {
     q: "What time of day do alcohol-related crashes most often occur?",
-    a: ["10:00 AM to 12:00 PM", "12:00 PM to 6:00 PM", "9:00 PM to 3:00 AM"],
+    a: ["10:00 AM to 5:00 PM", "12:00 PM to 6:00 PM", "6:00 PM to 11:00 PM", "9:00 PM to 3:00 AM"],
     correct: "9:00 PM to 3:00 AM",
     explanation: "More than half of all alcohol-related crashes in El Paso occur during late-night and early morning hours."
   },
@@ -2115,21 +2120,21 @@ const quiz = [
   },
 
   {
-    q: "On average, what BAC level do drivers involved in alcohol-related crashes in El Paso have?",
-    a: ["About 0.08% (legal limit)", "About 0.10%", "About 0.16% (more than twice the legal limit)"],
-    correct: "About 0.16% (more than twice the legal limit)",
-    explanation: "The data shows that many drivers involved in alcohol-related crashes have very high BAC levels—around 0.16%, which is more than twice the legal limit and associated with severe impairment."
+    q: "On average, what blood alcohol concentration (BAC) level do drivers involved in alcohol-related crashes in El Paso have?",
+    a: ["Less than the legal limit (<0.08%)", "Around the legal limit (~0.08%)", "More than twice the legal limit (>0.16%)"],
+    correct: "More than twice the legal limit (>0.16%)",
+    explanation: "The data shows that the average BAC among drivers who crashed and were tested for alcohol is greater than 0.16, which is more than twice the legal limit and associated with severe impairment."
   },
 
   {
     q: "On which holiday do crashes sharply increase in El Paso?",
     a: ["Memorial Day", "Christmas", "New Years Day"],
     correct: "New Years Day",
-    explanation: "The data shows the average number of crashes on New Years Day doubles compared to the previous day."
+    explanation: "The data shows the average number of alcohol-involved crashes on New Years Day doubles compared to the previous day."
   },
 
   {
-    q: "Which street has the most alcohol-related traffic fatalities in El Paso?",
+    q: "Which roadway has the most alcohol-related traffic fatalities in El Paso?",
     a: ["Mesa Street", "Zaragoza Road", "I-10"],
     correct: "I-10",
     explanation: "The majority of crashes and fatalities occur along I-10 in El Paso, likely due to higher speeds and increased crash severity when alcohol is involved."
