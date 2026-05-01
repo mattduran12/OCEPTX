@@ -33,11 +33,21 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           packages: |
-            tidyRSS
-            dplyr
-            lubridate
-            stringr
-            DT
+              reactable
+              DT
+              gt
+              quarto
+              rsconnect
+              shiny
+              dplyr
+              lubridate
+              ggplot2
+              plotly
+              stringr
+              readr
+              tidyverse
+              leaflet
+              leaflet.extras
 
       # ----------------------------
       # INSTALL QUARTO
