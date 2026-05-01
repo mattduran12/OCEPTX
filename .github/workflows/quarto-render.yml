@@ -1,8 +1,8 @@
-name: Render Quarto Site
+name: Render DWI News Page
 
 on:
   schedule:
-    - cron: "0 0 * * *"   # once per day
+    - cron: "0 */12 * * *"   # every 12 hours
   workflow_dispatch:
 
 permissions:
@@ -17,11 +17,14 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      # ----------------------------
+      # CHECKOUT
+      # ----------------------------
       - name: Checkout repo
         uses: actions/checkout@v4
 
       # ----------------------------
-      # SET UP R (PINNED VERSION)
+      # SET UP R
       # ----------------------------
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
@@ -29,32 +32,20 @@ jobs:
           r-version: "4.4.2"
 
       # ----------------------------
-      # INSTALL R DEPENDENCIES (CACHED + LOCKED)
+      # R DEPENDENCIES (ONLY WHAT YOU NEED)
       # ----------------------------
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           cache-version: 1
           packages: |
-              reactable
-              DT
-              gt
-              quarto
-              rsconnect
-              shiny
-              dplyr
-              lubridate
-              ggplot2
-              plotly
-              stringr
-              readr
-              tidyverse
-              leaflet
-              leaflet.extras
-              tidyRSS
+            tidyRSS
+            dplyr
+            stringr
+            quarto
 
       # ----------------------------
-      # INSTALL QUARTO (PINNED VERSION)
+      # SET UP QUARTO
       # ----------------------------
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
@@ -62,25 +53,27 @@ jobs:
           version: "1.6.42"
 
       # ----------------------------
-      # RENDER SITE
+      # RENDER ONLY THIS FILE
       # ----------------------------
-      - name: Render site
-        run: quarto render
+      - name: Render DWI News page
+        run: quarto render dwi_news.qmd
 
       # ----------------------------
-      # FORCE CNAME (CRITICAL FIX)
+      # ENSURE CNAME EXISTS
       # ----------------------------
       - name: Ensure custom domain CNAME exists
         run: |
           echo www.epcrimelab.org > docs/CNAME
 
       # ----------------------------
-      # COMMIT & DEPLOY
+      # COMMIT ONLY THE OUTPUT FILE
       # ----------------------------
-      - name: Commit updated /docs
+      - name: Commit updated page
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
-          git add docs
-          git commit -m "Auto site update" || echo "No changes"
+
+          git add docs/dwi_news.html docs/CNAME
+
+          git commit -m "Update DWI news page" || echo "No changes to commit"
           git push

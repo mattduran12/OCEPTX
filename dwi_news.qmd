@@ -86,7 +86,21 @@ rss_es <- tidyfeed(rss_url_es)
 # ----------------------------
 rss_items <- bind_rows(rss_en, rss_es) %>%
   select(item_title, item_link, item_pub_date) %>%
-  distinct() %>%
+  
+  # normalize link (removes tracking params)
+  mutate(
+    clean_link = str_remove(item_link, "\\?.*$"),
+    
+    # normalize title for matching
+    clean_title = item_title %>%
+      str_to_lower() %>%
+      str_replace_all("[^a-z0-9 ]", "") %>%
+      str_squish()
+  ) %>%
+  
+  # remove duplicates using BOTH fields
+  distinct(clean_link, clean_title, .keep_all = TRUE) %>%
+  
   arrange(desc(item_pub_date)) %>%
   slice_head(n = 100)
 
