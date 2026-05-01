@@ -3,7 +3,7 @@ title: "Research on Drunk Driving"
 format:
   html:
     grid:
-      margin-width: 180px
+      margin-width: 380px
       body-width: 780px
     theme: cosmo
     toc: true
