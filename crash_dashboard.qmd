@@ -38,7 +38,7 @@ suppressMessages(library(leaflet))
 suppressMessages(library(leaflet.extras))
 
 
-data <- read.csv("data.csv", header = TRUE)
+data <- read.csv("C:/Users/Matt/Documents/data2.csv", header = TRUE)
 
 
 data$City <- recode(data$City,
@@ -70,7 +70,7 @@ crash_level <- data %>%
 # ----------------------------
 # REPORTING MONTH (DATA LAGS 1 MONTH)
 # ----------------------------
-report_date <- Sys.Date() %m-% months(1)
+report_date <- Sys.Date() %m-% months(2)
 report_month <- format(report_date, "%B %Y")
 report_year <- year(report_date)
 prev_year <- report_year - 1
@@ -362,7 +362,7 @@ In **`r report_month`**, there were:
 
 ::: {.card title="**About This Dashboard**"}
 
-Last Update: April 2026
+Last Update: April 10, 2026
 
 The Drunk Driving Surveillance Dashboard provides monthly, city-level data on alcohol-related motor vehicle crashes in El Paso, Texas. It is designed as a public-facing resource for journalists, policymakers, and researchers seeking timely and transparent information on impaired driving trends.
 
