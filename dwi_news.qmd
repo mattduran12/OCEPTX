@@ -87,22 +87,33 @@ rss_es <- tidyfeed(rss_url_es)
 rss_items <- bind_rows(rss_en, rss_es) %>%
   select(item_title, item_link, item_pub_date) %>%
   
-  # normalize link (removes tracking params)
   mutate(
+    # strip Google tracking params
     clean_link = str_remove(item_link, "\\?.*$"),
     
-    # normalize title for matching
+    # normalize title
     clean_title = item_title %>%
       str_to_lower() %>%
       str_replace_all("[^a-z0-9 ]", "") %>%
-      str_squish()
+      str_squish(),
+    
+    # extract news source (everything after last " - ")
+    source = item_title %>%
+      str_extract("-\\s*[^-]+$") %>%
+      str_remove("^-\\s*") %>%
+      str_squish() %>%
+      str_to_upper()
   ) %>%
   
-  # remove duplicates using BOTH fields
-  distinct(clean_link, clean_title, .keep_all = TRUE) %>%
+  # TRUE deduplication key (fixes your issue)
+  mutate(
+    story_key = paste(clean_title, source)
+  ) %>%
+  
+  distinct(story_key, .keep_all = TRUE) %>%
   
   arrange(desc(item_pub_date)) %>%
-  slice_head(n = 100)
+  slice_head(n = 1000)
 
 # ----------------------------
 # HELPERS
@@ -153,7 +164,10 @@ get_tags <- function(text) {
 for (i in 1:nrow(rss_items)) {
 
   parsed <- clean_title(rss_items$item_title[i])
-  tags <- get_tags(rss_items$item_title[i])
+  tags <- get_tags(paste(
+  rss_items$item_title[i],
+  rss_items$item_description[i]
+))
 
   cat(
     paste0(
