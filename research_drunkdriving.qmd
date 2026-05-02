@@ -33,6 +33,31 @@ img {
 }
 </style>
 
+## Local Research on Impaired Driving
+
+::: {.project-block}
+::: {.grid .align-items-center}
+::: {.g-col-12 .g-col-md-6}
+
+**Summary:**  
+A comprehensive review of all local research on impaired driving research is underway. This review will systematically identify and summarize all available evidence related to driving under the influence of alcohol or drugs. The goal of this effort is to support local decision-making and improve understanding of impaired driving.
+
+<br>
+
+<a href="dwi_protocol.html" target="_blank" class="btn btn-primary">
+Read the Search and Analysis Protocol
+</a>
+
+:::
+
+::: {.g-col-12 .g-col-md-6}
+
+:::
+:::
+:::
+
+---
+
 ## Drunk Driving Surveillance Dashboard
 
 ::: {.project-block}
