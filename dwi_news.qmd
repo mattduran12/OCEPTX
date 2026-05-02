@@ -16,7 +16,7 @@ execute:
 ```{r results='asis'}
 el_paso_time <- format(Sys.time(), tz = "America/Denver", "%B %d, %Y • %I:%M %p")
 
-cat(paste0("Last updated (MST): ", el_paso_time))
+cat(paste0("Last updated: ", el_paso_time), "(MST)")
 ```
 
 <div style="display:flex; gap:12px; margin-bottom:8px; width:100%; align-items:center;">

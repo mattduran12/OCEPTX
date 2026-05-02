@@ -11,9 +11,10 @@ format:
       body-width: 780px
     theme: cosmo
     toc: true
-    toc-depth: 6
+    toc-depth: 3
     toc-location: right
     toc-title: "What's on this page"
+    toc-expand: false
 
 bibliography: references.bib
 link-citations: true
