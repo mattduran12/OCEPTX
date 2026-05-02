@@ -33,10 +33,6 @@ img {
 }
 </style>
 
-
-
-
-
 ## Drunk Driving Surveillance Dashboard
 
 ::: {.project-block}
