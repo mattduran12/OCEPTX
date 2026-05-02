@@ -1,5 +1,5 @@
 ---
-title: "Research on Driving While Intoxicated"
+title: "Driving While Intoxicated"
 format:
   html:
     grid:
@@ -44,7 +44,7 @@ img {
 ::: {.g-col-12 .g-col-md-6}
 
 **Overview:**  
-The Drunk Driving Surveillance Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 indicators covering crash trends, geographic patterns, and driver and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.
+The Drunk Driving Surveillance Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 data points covering crash trends, geographic patterns, driver, and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.
 
 <br>
 
@@ -73,7 +73,7 @@ View Dashboard
 ::: {.g-col-12 .g-col-md-6}
 
 **Summary:**  
-This study evaluates the impact of a social media campaign in El Paso that publicly shared booking photos of individuals arrested for driving while intoxicated. Using alcohol-related vehicle crashes as the key outcome measure, the results show the campaign may have deterred drunk driving among drivers aged 31 and older. Drivers aged 21 to 30 showed no consistent evidence of being deterred. While social media shaming may offer some deterrent benefits, these must be balanced against ethical and legal concerns, especially when implemented by community groups without formal oversight. 
+This study evaluates the impact of a social media campaign in El Paso that publicly shared booking photos of individuals arrested for driving while intoxicated. Using alcohol-related vehicle crashes as the key outcome measure, the results show the campaign may have deterred drunk driving among drivers aged 31 and older. Drivers aged 21 to 30 showed no consistent evidence of being deterred. While social media shaming may offer some deterrent benefits, these must be balanced against ethical and legal concerns, especially when implemented by community groups operating without formal oversight. 
 
 <br>
 
