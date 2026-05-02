@@ -11,7 +11,7 @@ format:
 ---
 
 <p style="text-align:center;">
-  <img src="about_logo.png" width=500px>
+  <img src="about_logo.png" width=400px>
 </p>
 
 ## About Us

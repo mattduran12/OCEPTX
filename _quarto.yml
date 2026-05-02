@@ -15,7 +15,7 @@ website:
           - text: "Overview"
             href: research_drunkdriving.html
           - text: "Local Research on Impaired Driving"
-            href: protocol_dwi.html
+            href: dwi_protocol.html
           - text: "Study: Does Public Shaming Deter Drunk Driving?"
             href: dwi_friday_study.html
           - text: "Drunk Driving Surveillance Dashboard"

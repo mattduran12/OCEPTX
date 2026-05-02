@@ -22,7 +22,7 @@ citation-location: document
 
 **Summary:**
 
-This is a search and analysis plan for a comprehensive review of impaired driving research in the El Paso region. The review systematically identifies and synthesizes all available evidence related to driving under the influence of alcohol or drugs. The goal of this project is to support local decision-making and improve understanding of impaired driving dynamics at the jurisdictional level.
+This is a search and analysis plan for a comprehensive review of impaired driving research in the El Paso region. The review systematically identifies and synthesizes all available evidence related to driving under the influence of alcohol or drugs. The goal of this project is to support local decision-making and improve understanding of impaired driving at the jurisdictional level.
 
 *A PDF version of this protocol is available [here](https://osf.io/rktpb/overview)*
 
