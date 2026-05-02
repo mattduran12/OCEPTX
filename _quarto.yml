@@ -17,7 +17,7 @@ website:
           - text: "Drunk Driving Surveillance Dashboard"
             href: crash_dashboard.html
           - text: "Study: Does Public Shaming Deter Drunk Driving?"
-            href: dwi_study.html
+            href: dwi_friday_study.html
           - text: "Latest Local News on DWI"
             href: dwi_news.html
     right:
