@@ -4,6 +4,7 @@ project:
 
 website:
   title: "El Paso Crime Lab"
+  favicon: about_logo.png
   navbar:
     background: primary
     search: false
@@ -33,7 +34,9 @@ format:
     theme: cosmo
     css: styles2.css
     toc: false
+    
 
+    
 editor: source
 
   
