@@ -3,7 +3,7 @@ title: "Drunk Driving Surveillance Dashboard"
 format:
   dashboard:
     theme: default
-    css: styles3.css
+    css: styles2.css
     orientation: rows
     scrolling: true
 execute:
@@ -258,9 +258,9 @@ comparison_month <- format(
 )
 
 ## Color pallete
-sunrise_palette <- c(
-  "#f4b942",  # light gold (older years)
-  "#9c3f2b"   # dark terracotta (current year)
+ytd_colors <- c(
+  "grey", 
+  "steelblue"   
 )
 ```
 
@@ -275,11 +275,11 @@ p1 <- ggplot(crash_plot_data,
     position = position_dodge(width = 0.9),
     size = 3
   ) +
-  scale_fill_manual(values = sunrise_palette) +   # 🔥 FIX
+  scale_fill_manual(values = ytd_colors) +   # 🔥 FIX
   scale_y_continuous(
     limits = c(0, max(crash_plot_data$val, na.rm = TRUE) * 1.1)
   ) +
-  labs(title = "Alcohol-Related Crashes",
+  labs(title = "Alcohol-Related Crashes in El Paso",
        x = "", y = "Total crashes", fill = "") +
   theme_minimal() +
   theme(legend.position = "bottom")
@@ -295,6 +295,12 @@ ggplotly(p1) %>%
 ``` {r}
 #| title: Injuries
 
+## Color pallete
+ytd_colors <- c(
+  "grey", 
+  "orange"   
+)
+
 p1 <- ggplot(injury_plot_data,
              aes(x = month_lab, y = val, fill = year)) +
   geom_col(position = position_dodge(width = 0.9)) +
@@ -303,11 +309,11 @@ p1 <- ggplot(injury_plot_data,
     position = position_dodge(width = 0.9),
     size = 3
   ) +
-  scale_fill_manual(values = sunrise_palette) +   # 🔥 FIX
+  scale_fill_manual(values = ytd_colors) +   # 🔥 FIX
   scale_y_continuous(
     limits = c(0, max(injury_plot_data$val, na.rm = TRUE) * 1.1)
   ) +
-  labs(title = "People Injured in Alcohol-Related Crashes",
+  labs(title = "Injuries from Alcohol-Related Crashes in El Paso",
        x = "", y = "Total people injured", fill = "") +
   theme_minimal() +
   theme(legend.position = "bottom")
@@ -317,11 +323,18 @@ ggplotly(p1) %>%
     yaxis = list(showticklabels = FALSE),
     xaxis = list(showgrid = FALSE, zeroline = FALSE),
     yaxis = list(showgrid = FALSE, zeroline = FALSE)
-  )
+      )
 ```
 
 ``` {r}
 #| title: Fatalities
+
+## Color pallete
+ytd_colors <- c(
+  "grey", 
+  "maroon"   
+)
+
 
 p1 <- ggplot(fatal_plot_data,
              aes(x = month_lab, y = val, fill = year)) +
@@ -331,11 +344,11 @@ p1 <- ggplot(fatal_plot_data,
     position = position_dodge(width = 0.9),
     size = 3
   ) +
-  scale_fill_manual(values = sunrise_palette) +   # 🔥 FIX
+  scale_fill_manual(values = ytd_colors) +   # 🔥 FIX
   scale_y_continuous(
     limits = c(0, max(fatal_plot_data$val, na.rm = TRUE) * 1.1)
   ) +
-  labs(title = "Alcohol-Related Traffic Fatalities",
+  labs(title = "Alcohol-Related Traffic Fatalities in El Paso",
        x = "", y = "Total fatalities", fill = "") +
   theme_minimal() +
   theme(legend.position = "bottom")
@@ -516,7 +529,7 @@ ytd_people_injury <- ytd_people_injury %>%
 
 list(
   icon = "bandaid",
-  color = "primary",
+  color = "warning",
   value = ytd_people_injury)
 
 ```
@@ -545,7 +558,7 @@ list(
   value = ytd_alcohol_fatalities
 )
 ```
-## Row {height=400px}
+## Column {.tabset height=400px}
 
 ``` {r}
 #| title: Crashes by Day of Week (YTD)
@@ -559,15 +572,6 @@ dow_data <- crash_level %>%
       levels = c("Sunday", "Monday", "Tuesday", "Wednesday",
                  "Thursday", "Friday", "Saturday")
     )
-  ) %>%
-  mutate(
-    pct = n / sum(n),
-    label = paste0(
-      n,
-      "<br>(",
-      sprintf("%.1f", pct * 100),
-      "%)"
-    )
   )
 
 avg_val <- mean(dow_data$n, na.rm = TRUE)
@@ -575,16 +579,15 @@ avg_val <- mean(dow_data$n, na.rm = TRUE)
 p <- ggplot(dow_data, aes(
   x = Day.of.Week,
   y = n,
-  text = label
 )) +
 
   geom_col(fill = "steelblue", width = 0.5) +
 
 geom_text(
-  aes(y =  n + max(n) * 0.05, label = round(n, 0)),
-  size = 3.5
+  aes(label = n, y = n + max(n) * 0.05),
+  size = 3
 ) +
-  
+
   geom_hline(
     aes(yintercept = avg_val, color = "Average"),
     linewidth = 0.5,
@@ -592,7 +595,7 @@ geom_text(
   ) +
 
   scale_color_manual(
-    values = c("Average" = "orange"),
+    values = c("Average" = "#4D4D4D"),
     name = ""
   ) +
 scale_y_continuous(
@@ -600,14 +603,12 @@ scale_y_continuous(
 ) +
   theme_minimal() +
   theme(
-    legend.position = "top",
-    axis.text.x = element_text(angle = 45, hjust = 1)
+    legend.position = "bottom",
+    axis.text.x = element_text(angle = 0, hjust = 1)
   ) +
 
-  labs(
-    x = "",
-    y = "Total crashes"
-  )
+  labs(title = "Alcohol-Related Crashes in El Paso by Day of Week (Year-to-Date)",
+       x = "", y = "Total crashes", fill = "") 
 
 ggplotly(p) %>%
   layout(
@@ -699,7 +700,7 @@ p <- ggplot(hour_data, aes(
   ) +
 
   scale_color_manual(
-    values = c("Average" = "orange"),
+    values = c("Average" = "#4D4D4D"),
     name = ""
   ) +
 scale_y_continuous(
@@ -707,13 +708,13 @@ scale_y_continuous(
 ) +
   labs(
     x = "",
-    y = "Total crashes"
-  ) +
+    y = "Total crashes",
+    title = "Alcohol-Related Crashes in El Paso by Hour (YTD)") +
 
   theme_minimal() +
   theme(
-    legend.position = "top",
-    axis.text.x = element_text(angle = 30, hjust = 1)
+    legend.position = "bottom",
+    axis.text.x = element_text(angle = 0, hjust = 1)
   )
 
 # ----------------------------
@@ -728,7 +729,7 @@ ggplotly(p) %>%
 
 ```
 
-## Row {.tabset height="400px"}
+## Column {.tabset height=400px}
 
 ``` {r}
 #| title: Crash Trends
@@ -751,7 +752,7 @@ p <- ggplot(monthly_counts, aes(x = month)) +
 
   # observed
   geom_line(
-    aes(y = crashes, color = "Alcohol-involved crashes"),
+    aes(y = crashes, color = "Total crashes"),
     linewidth = 0.8
   ) +
 
@@ -763,12 +764,13 @@ p <- ggplot(monthly_counts, aes(x = month)) +
 
   scale_color_manual(
     values = c(
-      "Alcohol-involved crashes" = "grey70",
-      "Average" = "black"
+      "Total crashes" = "grey70",
+      "Average" = "steelblue"
     )
   ) +
 
   labs(
+    title = "Alcohol-Related Crashes in El Paso Over Time",
     x = "",
     y = "Total crashes",
     color = ""
@@ -776,7 +778,7 @@ p <- ggplot(monthly_counts, aes(x = month)) +
 
   theme_minimal() +
   theme(
-    legend.position = "top"
+    legend.position = "bottom"
   )
 
 ggplotly(p) 
@@ -816,7 +818,7 @@ p <- ggplot(injury_monthly, aes(x = month)) +
 
   # observed
   geom_line(
-    aes(y = injuries, color = "People injured in alcohol-involved crashes"),
+    aes(y = injuries, color = "Total people injured"),
     linewidth = 0.8
   ) +
 
@@ -828,12 +830,13 @@ p <- ggplot(injury_monthly, aes(x = month)) +
 
   scale_color_manual(
     values = c(
-      "People injured in alcohol-involved crashes" = "grey70",  # yellow
-      "Average"        = "#F77F00"   # orange
+      "Total people injured" = "grey70",  # yellow
+      "Average"        = "orange"   # orange
     )
   ) +
 
   labs(
+    title = "Alcohol-Related Crash Injuries in El Paso Over Time",
     x = "",
     y = "Total people injured",
     color = ""
@@ -841,7 +844,7 @@ p <- ggplot(injury_monthly, aes(x = month)) +
 
   theme_minimal() +
   theme(
-    legend.position = "top"
+    legend.position = "bottom"
   )
 
 ggplotly(p)
@@ -878,7 +881,7 @@ p <- ggplot(monthly_counts, aes(x = month)) +
 
   # observed total fatalities (grey)
   geom_line(
-    aes(y = alcohol_fatal_crashes, color = "Alcohol-involved fatalities"),
+    aes(y = alcohol_fatal_crashes, color = "Total fatalities"),
     linewidth = 1
   ) +
 
@@ -890,7 +893,7 @@ p <- ggplot(monthly_counts, aes(x = month)) +
 
   scale_color_manual(
     values = c(
-      "Alcohol-involved fatalities" = "grey70",
+      "Total fatalities" = "grey70",
       "Average" = "maroon"
     )
   ) +
@@ -903,20 +906,22 @@ p <- ggplot(monthly_counts, aes(x = month)) +
   labs(
     x = "",
     y = "Total fatalities",
-    color = ""
+    color = "",
+    title = "Alcohol-Related Traffic Fatalities in El Paso Over Time"
   ) +
 
   theme_minimal() +
   theme(
-    legend.position = "top"
+    legend.position = "bottom"
   )
 
 ggplotly(p) 
 ```
 
+## Row {.tabset height=400px}
 
 ``` {r}
-#| title: Average Crashes by Month
+#| title: Average Crashes by Month (All Years)
 monthly_year <- crash_level %>%
   filter(City == "El Paso") %>%
   mutate(
@@ -940,7 +945,7 @@ monthly_avg <- monthly_year %>%
   
   mutate(
     pct = avg_crashes / sum(avg_crashes),
-    month_name = factor(month.abb[month_num], levels = month.abb)
+    month_name = factor(month.name[month_num], levels = month.name)
   )
 
 overall_avg <- mean(monthly_avg$avg_crashes)
@@ -983,14 +988,15 @@ geom_col(fill = "steelblue", width = 0.5) +
 
   labs(
     x = "",
-    y = "Average crashes"
+    y = "Average crashes",
+    title = "Average Alcohol-Related Crashes by Month in El Paso (All Years)"
   ) +
 
   theme_minimal() +
 
   theme(
     legend.position = "top",
-    axis.text.x = element_text(angle = 45, hjust = 1)
+    axis.text.x = element_text(angle = 0, hjust = 1)
   )
 
 # ----------------------------
@@ -1005,7 +1011,8 @@ ggplotly(p) %>%
 ```
 
 ``` {r}
-#| title: Average Fatalities by Month
+#| title: Average Fatalities by Month (All Years)
+#| 
 monthly_fatal_year <- person_level %>%
   filter(City == "El Paso") %>%
   mutate(
@@ -1034,7 +1041,7 @@ monthly_fatal_avg <- monthly_fatal_year %>%
     .groups = "drop"
   ) %>%
   mutate(
-    month_name = factor(month.abb[month_num], levels = month.abb),
+  month_name = factor(month.name[month_num], levels = month.name),
     pct = avg_fatalities / sum(avg_fatalities),
     label = paste0(
       round(avg_fatalities, 1),
@@ -1058,7 +1065,7 @@ p <- ggplot(monthly_fatal_avg, aes(
   text = label
 )) +
 
-  geom_col(fill = "steelblue", width = 0.5) +
+  geom_col(fill = "maroon", width = 0.5) +
 
 geom_text(
   aes(y = avg_fatalities + 0.1, label = round(avg_fatalities, 0)),
@@ -1070,14 +1077,15 @@ scale_y_continuous(
 
   labs(
     x = "",
-    y = "Average fatalities"
+    y = "Average fatalities",
+    title = "Average Alcohol-Related Traffic Fatalities by Month in El Paso (All Years)"
   ) +
 
   theme_minimal(base_size = 12) +
 
   theme(
     legend.position = "top",
-    axis.text.x = element_text(angle = 45, hjust = 1)
+    axis.text.x = element_text(angle = 0, hjust = 1)
   )
 
 # ----------------------------
@@ -1095,7 +1103,7 @@ ggplotly(p) %>%
 
 # Holidays
 
-## Row {height="250px"}
+## Row {height=350px}
 
 ```{r}
 #| title: New Year's Day
@@ -1146,7 +1154,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
   geom_vline(xintercept = 0, linetype = "dashed",
              color = "#C0392B", size = 1) +
   scale_x_continuous(breaks = -7:7, limits = c(-7, 7)) +
-  labs(x = "Days from New Year's Day", y = "Average Crashes") +
+  labs(x = "Days from New Year's Day", y = "Average Crashes", title = "Alcohol-Related Crashes Around New Year’s Day in El Paso (All Years)") +
   theme_minimal(base_size = 10)
 
 y_min <- min(plot_data$avg_crashes, na.rm = TRUE)
@@ -1191,7 +1199,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
   geom_point(size=3, color="#34495E") +
   geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
   scale_x_continuous(breaks=-7:7) +
-  labs(x="Days from Superbowl", y="Average Crashes") +
+  labs(x="Days from Superbowl", y="Average Crashes", title = "Alcohol-Related Crashes Around Superbowl in El Paso (All Years)") +
   theme_minimal(base_size=10)
 
 ggplotly(p) %>%
@@ -1212,7 +1220,7 @@ ggplotly(p) %>%
               line = list(width = 0))  
 ```
 
-## Row {height="250px"}
+## Row {height=350px}
 
 ```{r}
 #| title: St. Patrick's Day
@@ -1236,7 +1244,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
   geom_point(size=3, color="#34495E") +
   geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
   scale_x_continuous(breaks=-7:7) +
-  labs(x="Days from Saint Patrick's Day", y="Average Crashes") +
+  labs(x="Days from Saint Patrick's Day", y="Average Crashes", title = "Alcohol-Related Crashes Around St. Patrick's Day in El Paso (All Years)") +
   theme_minimal(base_size=10)
 
 ggplotly(p) %>%
@@ -1289,7 +1297,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
   geom_point(size=3, color="#34495E") +
   geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
   scale_x_continuous(breaks=-7:7) +
-  labs(x="Days from Memorial Day", y="Average Crashes") +
+  labs(x="Days from Memorial Day", y="Average Crashes", title = "Alcohol-Related Crashes Around Memorial Day in El Paso (All Years)") +
   theme_minimal(base_size=10)
 
 ggplotly(p) %>%
@@ -1305,7 +1313,7 @@ ggplotly(p) %>%
               line = list(width = 0))  
 ```
 
-## Row {height="250px"}
+## Row {height=350px}
 
 
 ``` {r}
@@ -1330,7 +1338,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
   geom_point(size=3, color="#34495E") +
   geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
   scale_x_continuous(breaks=-7:7) +
-  labs(x="Days from May 5", y="Average Crashes") +
+  labs(x="Days from May 5", y="Average Crashes", title = "Alcohol-Related Crashes Around Cinco de Mayo in El Paso (All Years)") +
   theme_minimal(base_size=10)
 
 ggplotly(p) %>%
@@ -1369,7 +1377,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
   geom_point(size=3, color="#34495E") +
   geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
   scale_x_continuous(breaks=-7:7) +
-  labs(x="Days from July 4", y="Average Crashes") +
+  labs(x="Days from July 4", y="Average Crashes", title = "Alcohol-Related Crashes Around Independence Day in El Paso (All Years)") +
   theme_minimal(base_size=10)
 
 ggplotly(p) %>%
@@ -1390,7 +1398,7 @@ ggplotly(p) %>%
               line = list(width = 0)) 
 ```
 
-## Row {height="250px"}
+## Row {height=350px}
 
 ``` {r}
 #| title: Labor Day
@@ -1419,7 +1427,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
   geom_point(size=3, color="#34495E") +
   geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
   scale_x_continuous(breaks=-7:7) +
-  labs(x="Days from Labor Day", y="Average Crashes") +
+  labs(x="Days from Labor Day", y="Average Crashes", title = "Alcohol-Related Crashes Around Labor Day in El Paso (All Years)") +
   theme_minimal(base_size=10)
 
 ggplotly(p) %>%
@@ -1457,7 +1465,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
   geom_point(size=3, color="#34495E") +
   geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
   scale_x_continuous(breaks=-7:7) +
-  labs(x="Days from October 31", y="Average Crashes") +
+  labs(x="Days from October 31", y="Average Crashes", title = "Alcohol-Related Crashes Around Halloween in El Paso (All Years)") +
   theme_minimal(base_size=10)
 
 ggplotly(p) %>%
@@ -1483,7 +1491,7 @@ ggplotly(p) %>%
               line = list(width = 0)) 
 ```
 
-## Row {height="250px"}
+## Row {height=350px}
 
 ``` {r}
 #| title: Thanksgiving
@@ -1512,7 +1520,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
   geom_point(size=3, color="#34495E") +
   geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
   scale_x_continuous(breaks=-7:7) +
-  labs(x="Days from Thanksgiving", y="Average Crashes") +
+  labs(x="Days from Thanksgiving", y="Average Crashes", title = "Alcohol-Related Crashes Around Thanksgiving in El Paso (All Years)") +
   theme_minimal(base_size=10)
 
 ggplotly(p) %>%
@@ -1550,7 +1558,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
   geom_point(size=3, color="#34495E") +
   geom_vline(xintercept=0, linetype="dashed", color="#C0392B", size=1) +
   scale_x_continuous(breaks=-7:7) +
-  labs(x="Days from December 25", y="Average Crashes") +
+  labs(x="Days from December 25", y="Average Crashes", title = "Alcohol-Related Crashes Around Christmas in El Paso (All Years)") +
   theme_minimal(base_size=10)
 
 ggplotly(p) %>%
@@ -1652,7 +1660,7 @@ list(
 ### Column {.tabset}
 
 ``` {r}
-#| title: Driver's Zipcode (YTD)
+#| title: Intoxicated Driver's Zipcode (YTD)
 zip_top10 <- drivers %>%
   filter(bac_value >= 0.08 & bac_result == 1,
          !is.na(Driver.Zip.Code)) %>%
@@ -1668,7 +1676,7 @@ zip_top10 <- zip_top10 %>%
   )
 
 
-plot_ly(
+p <- plot_ly(
   data = zip_top10,
   type = "treemap",
   labels = ~label_full,
@@ -1683,12 +1691,24 @@ plot_ly(
     "Drivers: %{value}<br>",
     "<extra></extra>"
   )
-) 
+)  
+
+ggplotly(p) %>%
+  layout(
+    title = list(
+      text = paste0(
+        "<b>Top 10 Zipcodes of Impaired Drivers in El Paso Who Crashed (BAC ≥ 0.08)</b>",
+        "<br><sup>Year-to-Date</sup>"
+      ),
+      x = 0.5,
+      xanchor = "center"
+    )
+  )
 
 ```
 
 ```{r}
-#| title: Driver's Demographics (YTD)
+#| title: Intoxicated Driver's Demographics (YTD)
 
 drivers_clean <- drivers %>%
   mutate(
@@ -1787,8 +1807,87 @@ reactable(
 
 ### Column {.tabset}
 
+```{r}
+#| title: Vehicle Color of Intoxicated Driver (YTD)
+plot_data <- drivers %>%
+  filter(bac_value >= 0.08 & bac_result == 1) %>%
+  mutate(
+    color = case_when(
+      grepl("BLK", Vehicle.Color) ~ "Black",
+      grepl("WHI", Vehicle.Color) ~ "White",
+      grepl("GRY", Vehicle.Color) ~ "Gray",
+      grepl("RED", Vehicle.Color) ~ "Red",
+      grepl("BLU", Vehicle.Color) ~ "Blue",
+      grepl("GRN", Vehicle.Color) ~ "Green",
+      grepl("SIL", Vehicle.Color) ~ "Silver",
+      grepl("TAN", Vehicle.Color) ~ "Tan",
+      grepl("MAR", Vehicle.Color) ~ "Maroon",
+      grepl("YEL", Vehicle.Color) ~ "Yellow",
+      grepl("GLD", Vehicle.Color) ~ "Gold",
+      grepl("PLE", Vehicle.Color) ~ "Purple",
+      grepl("BGE", Vehicle.Color) ~ "Beige",
+      TRUE ~ "Other"
+    )
+  ) %>%
+  count(color) %>%
+  mutate(
+    pct = n / sum(n),
+    label = paste0(n, " (", scales::percent(pct), ")")
+  )
+
+plot_data <- plot_data %>%
+  mutate(label = scales::comma(n))  # just counts
+
+
+p <- plot_ly(
+  data = plot_data,
+  x = ~n,
+  y = ~fct_reorder(color, n),
+  type = "bar",
+  orientation = "h",
+  marker = list(color = "steelblue"),
+  text = ~label,
+  textposition = "outside",
+  hovertemplate = paste(
+    "Color: %{y}<br>",
+    "Drivers: %{x}<br>",
+    "<extra></extra>"
+  )
+) %>%
+  layout(
+    xaxis = list(
+      title = "Total intoxicated drivers",
+      range = c(0, max(plot_data$n) * 1.15)
+    ),
+    yaxis = list(title = ""),
+    margin = list(r = 120)
+  )
+
+p %>%
+  layout(
+    title = list(
+      text = paste0(
+        "<b>Vehicle Color of Impaired Drivers Who Crashed in El Paso (BAC ≥ 0.08)</b>",
+        "<br><sup>Year-to-Date</sup>"
+      ),
+      x = 0.5,
+      xanchor = "center"
+    ),
+    margin = list(t = 80, r = 120, l = 80, b = 40),
+    paper_bgcolor = "white",
+    plot_bgcolor = "white",
+    font = list(
+      family = "Arial, sans-serif",
+      size = 14,
+      color = "#2c3e50"
+    )
+  )
+
+```
+
+
 ``` {r}
-#| title: Driver's Vehicle Information (YTD)
+#| title: Vehicle Info of Intoxicated Driver (YTD)
 
 vehicle_table <- drivers %>%
   
@@ -1833,9 +1932,8 @@ vehicle_table <- drivers %>%
   
   arrange(desc(n))
 
-reactable(
+table <- reactable(
   vehicle_table,
-
   searchable = TRUE,
   sortable = TRUE,
   pagination = TRUE,
@@ -1856,55 +1954,10 @@ reactable(
   defaultSorted = list(n = "desc")
 )
 
+table
 ```
 
-```{r}
-#| title: Driver's Vehicle Color (YTD)
-plot_data <- drivers %>%
-  filter(bac_value >= 0.08 & bac_result == 1) %>%
-  mutate(
-    color = case_when(
-      grepl("BLK", Vehicle.Color) ~ "Black",
-      grepl("WHI", Vehicle.Color) ~ "White",
-      grepl("GRY", Vehicle.Color) ~ "Gray",
-      grepl("RED", Vehicle.Color) ~ "Red",
-      grepl("BLU", Vehicle.Color) ~ "Blue",
-      grepl("GRN", Vehicle.Color) ~ "Green",
-      grepl("SIL", Vehicle.Color) ~ "Silver",
-      grepl("TAN", Vehicle.Color) ~ "Tan",
-      grepl("MAR", Vehicle.Color) ~ "Maroon",
-      grepl("YEL", Vehicle.Color) ~ "Yellow",
-      grepl("GLD", Vehicle.Color) ~ "Gold",
-      grepl("PLE", Vehicle.Color) ~ "Purple",
-      grepl("BGE", Vehicle.Color) ~ "Beige",
-      TRUE ~ "Other"
-    )
-  ) %>%
-  count(color) %>%
-  mutate(
-    pct = n / sum(n),
-    label = paste0(n, " (", scales::percent(pct), ")")
-  )
-plot_ly(
-  data = plot_data,
-  x = ~n,
-  y = ~fct_reorder(color, n),
-  type = "bar",
-  orientation = "h",
-  marker = list(color = "steelblue"),
-  text = ~label,
-  textposition = "outside"
-) %>%
-layout(
-  xaxis = list(
-    title = "Total intoxicated drivers",
-    range = c(0, max(plot_data$n) * 1.15)  # 👈 key fix
-  ),
-  yaxis = list(title = ""),
-  margin = list(r = 120)  # optional extra breathing room
-) 
 
-```
 
 
 
