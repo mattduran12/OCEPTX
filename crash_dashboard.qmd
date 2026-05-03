@@ -545,6 +545,188 @@ list(
   value = ytd_alcohol_fatalities
 )
 ```
+## Row {height=400px}
+
+``` {r}
+#| title: Crashes by Day of Week (YTD)
+dow_data <- crash_level %>%
+  filter(City == "El Paso",
+         Crash.Year == 2026) %>%
+  count(Day.of.Week) %>%
+  mutate(
+    Day.of.Week = factor(
+      tools::toTitleCase(tolower(Day.of.Week)),
+      levels = c("Sunday", "Monday", "Tuesday", "Wednesday",
+                 "Thursday", "Friday", "Saturday")
+    )
+  ) %>%
+  mutate(
+    pct = n / sum(n),
+    label = paste0(
+      n,
+      "<br>(",
+      sprintf("%.1f", pct * 100),
+      "%)"
+    )
+  )
+
+avg_val <- mean(dow_data$n, na.rm = TRUE)
+
+p <- ggplot(dow_data, aes(
+  x = Day.of.Week,
+  y = n,
+  text = label
+)) +
+
+  geom_col(fill = "steelblue", width = 0.5) +
+
+geom_text(
+  aes(y =  n + max(n) * 0.05, label = round(n, 0)),
+  size = 3.5
+) +
+  
+  geom_hline(
+    aes(yintercept = avg_val, color = "Average"),
+    linewidth = 0.5,
+    linetype = "dashed"
+  ) +
+
+  scale_color_manual(
+    values = c("Average" = "orange"),
+    name = ""
+  ) +
+scale_y_continuous(
+  limits = c(0, max(dow_data$n, na.rm = TRUE) * 1.3)
+) +
+  theme_minimal() +
+  theme(
+    legend.position = "top",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  ) +
+
+  labs(
+    x = "",
+    y = "Total crashes"
+  )
+
+ggplotly(p) %>%
+  layout(
+    yaxis = list(showticklabels = FALSE),
+    xaxis = list(showgrid = FALSE, zeroline = FALSE),
+    yaxis = list(showgrid = FALSE, zeroline = FALSE)
+  )
+
+```
+
+``` {r}
+#| title: Crashes by Hour (YTD)
+# ----------------------------
+# Step 1: Define correct order
+# ----------------------------
+time_levels <- c(
+  "12am – 3am", "3am – 6am", "6am – 9am", "9am – 12pm",
+  "12pm – 3pm", "3pm – 6pm", "6pm – 9pm", "9pm – 12am"
+)
+
+
+# ----------------------------
+# Step 2: Build hourly data
+# ----------------------------
+hour_data <- crash_level %>%
+  filter(
+    City == "El Paso",
+    Crash.Year == 2026
+  ) %>%
+  mutate(
+    hour = as.numeric(substr(Hour.of.Day, 1, 2)),
+
+    time_block = case_when(
+      hour >= 0  & hour <= 2  ~ "12am – 3am",
+      hour >= 3  & hour <= 5  ~ "3am – 6am",
+      hour >= 6  & hour <= 8  ~ "6am – 9am",
+      hour >= 9  & hour <= 11 ~ "9am – 12pm",
+      hour >= 12 & hour <= 14 ~ "12pm – 3pm",
+      hour >= 15 & hour <= 17 ~ "3pm – 6pm",
+      hour >= 18 & hour <= 20 ~ "6pm – 9pm",
+      hour >= 21 & hour <= 23 ~ "9pm – 12am",
+      TRUE ~ NA_character_
+    )
+  ) %>%
+
+  # count crashes per block
+  count(time_block) %>%
+
+  # force full structure (adds zeros)
+  complete(time_block = time_levels, fill = list(n = 0)) %>%
+
+  # enforce correct order
+  mutate(
+    time_block = factor(time_block, levels = time_levels),
+    pct = n / sum(n),
+    label = paste0(
+      n,
+      "<br>(",
+      sprintf("%.1f", pct * 100),
+      "%)"
+    )
+  )
+
+# ----------------------------
+# Step 3: overall mean line
+# ----------------------------
+avg_block <- mean(hour_data$n, na.rm = TRUE)
+
+# ----------------------------
+# Step 4: ggplot
+# ----------------------------
+p <- ggplot(hour_data, aes(
+  x = time_block,
+  y = n,
+  text = label
+)) +
+
+  geom_col(fill = "steelblue", width = 0.5) +
+
+  geom_text(
+    aes(y =  n + max(n) * 0.05, label = round(n, 0)),
+    size = 3.5
+  ) +
+
+  geom_hline(
+    aes(yintercept = avg_block, color = "Average"),
+    linetype = "dashed",
+    linewidth = 0.5
+  ) +
+
+  scale_color_manual(
+    values = c("Average" = "orange"),
+    name = ""
+  ) +
+scale_y_continuous(
+  limits = c(0, max(hour_data$n, na.rm = TRUE) * 1.3)
+) +
+  labs(
+    x = "",
+    y = "Total crashes"
+  ) +
+
+  theme_minimal() +
+  theme(
+    legend.position = "top",
+    axis.text.x = element_text(angle = 30, hjust = 1)
+  )
+
+# ----------------------------
+# Step 5: Plotly
+# ----------------------------
+ggplotly(p) %>%
+  layout(
+    yaxis = list(showticklabels = FALSE),
+    xaxis = list(showgrid = FALSE, zeroline = FALSE),
+    yaxis = list(showgrid = FALSE, zeroline = FALSE)
+  )
+
+```
 
 ## Row {.tabset height="400px"}
 
@@ -734,7 +916,7 @@ ggplotly(p)
 
 
 ``` {r}
-#| title: Crashes by Month
+#| title: Average Crashes by Month
 monthly_year <- crash_level %>%
   filter(City == "El Paso") %>%
   mutate(
@@ -799,17 +981,6 @@ geom_text(
 ) +
 geom_col(fill = "steelblue", width = 0.5) +
 
-  geom_hline(
-    aes(yintercept = overall_avg, color = "Average"),
-    linetype = "dashed",
-    linewidth = 0.5
-  ) +
-
-  scale_color_manual(
-    values = c("Average" = "orange"),
-    name = ""
-  ) +
-
   labs(
     x = "",
     y = "Average crashes"
@@ -834,7 +1005,7 @@ ggplotly(p) %>%
 ```
 
 ``` {r}
-#| title: Fatalities by Month
+#| title: Average Fatalities by Month
 monthly_fatal_year <- person_level %>%
   filter(City == "El Paso") %>%
   mutate(
@@ -896,16 +1067,6 @@ geom_text(
 scale_y_continuous(
   limits = c(0, max(monthly_fatal_avg$avg_fatalities, na.rm = TRUE) * 1.3)
 ) +  
-  geom_hline(
-    aes(yintercept = overall_avg, color = "Average"),
-    linetype = "dashed",
-    linewidth = 0.5
-  ) +
-
-  scale_color_manual(
-    values = c("Average" = "orange"),
-    name = ""
-  ) +
 
   labs(
     x = "",
@@ -930,188 +1091,7 @@ ggplotly(p) %>%
   )
 ```
 
-## Row {height="400px"}
 
-``` {r}
-#| title: Crashes by Day of Week (YTD)
-dow_data <- crash_level %>%
-  filter(City == "El Paso",
-         Crash.Year == 2026) %>%
-  count(Day.of.Week) %>%
-  mutate(
-    Day.of.Week = factor(
-      tools::toTitleCase(tolower(Day.of.Week)),
-      levels = c("Sunday", "Monday", "Tuesday", "Wednesday",
-                 "Thursday", "Friday", "Saturday")
-    )
-  ) %>%
-  mutate(
-    pct = n / sum(n),
-    label = paste0(
-      n,
-      "<br>(",
-      sprintf("%.1f", pct * 100),
-      "%)"
-    )
-  )
-
-avg_val <- mean(dow_data$n, na.rm = TRUE)
-
-p <- ggplot(dow_data, aes(
-  x = Day.of.Week,
-  y = n,
-  text = label
-)) +
-
-  geom_col(fill = "steelblue", width = 0.5) +
-
-geom_text(
-  aes(y =  n + max(n) * 0.05, label = round(n, 0)),
-  size = 3.5
-) +
-  
-  geom_hline(
-    aes(yintercept = avg_val, color = "Average"),
-    linewidth = 0.5,
-    linetype = "dashed"
-  ) +
-
-  scale_color_manual(
-    values = c("Average" = "orange"),
-    name = ""
-  ) +
-scale_y_continuous(
-  limits = c(0, max(dow_data$n, na.rm = TRUE) * 1.3)
-) +
-  theme_minimal() +
-  theme(
-    legend.position = "top",
-    axis.text.x = element_text(angle = 45, hjust = 1)
-  ) +
-
-  labs(
-    x = "",
-    y = "Total crashes"
-  )
-
-ggplotly(p) %>%
-  layout(
-    yaxis = list(showticklabels = FALSE),
-    xaxis = list(showgrid = FALSE, zeroline = FALSE),
-    yaxis = list(showgrid = FALSE, zeroline = FALSE)
-  )
-
-```
-
-``` {r}
-#| title: Crashes by Hour (YTD)
-# ----------------------------
-# Step 1: Define correct order
-# ----------------------------
-time_levels <- c(
-  "12am – 3am", "3am – 6am", "6am – 9am", "9am – 12pm",
-  "12pm – 3pm", "3pm – 6pm", "6pm – 9pm", "9pm – 12am"
-)
-
-
-# ----------------------------
-# Step 2: Build hourly data
-# ----------------------------
-hour_data <- crash_level %>%
-  filter(
-    City == "El Paso",
-    Crash.Year == 2026
-  ) %>%
-  mutate(
-    hour = as.numeric(substr(Hour.of.Day, 1, 2)),
-
-    time_block = case_when(
-      hour >= 0  & hour <= 2  ~ "12am – 3am",
-      hour >= 3  & hour <= 5  ~ "3am – 6am",
-      hour >= 6  & hour <= 8  ~ "6am – 9am",
-      hour >= 9  & hour <= 11 ~ "9am – 12pm",
-      hour >= 12 & hour <= 14 ~ "12pm – 3pm",
-      hour >= 15 & hour <= 17 ~ "3pm – 6pm",
-      hour >= 18 & hour <= 20 ~ "6pm – 9pm",
-      hour >= 21 & hour <= 23 ~ "9pm – 12am",
-      TRUE ~ NA_character_
-    )
-  ) %>%
-
-  # count crashes per block
-  count(time_block) %>%
-
-  # force full structure (adds zeros)
-  complete(time_block = time_levels, fill = list(n = 0)) %>%
-
-  # enforce correct order
-  mutate(
-    time_block = factor(time_block, levels = time_levels),
-    pct = n / sum(n),
-    label = paste0(
-      n,
-      "<br>(",
-      sprintf("%.1f", pct * 100),
-      "%)"
-    )
-  )
-
-# ----------------------------
-# Step 3: overall mean line
-# ----------------------------
-avg_block <- mean(hour_data$n, na.rm = TRUE)
-
-# ----------------------------
-# Step 4: ggplot
-# ----------------------------
-p <- ggplot(hour_data, aes(
-  x = time_block,
-  y = n,
-  text = label
-)) +
-
-  geom_col(fill = "steelblue", width = 0.5) +
-
-  geom_text(
-    aes(y =  n + max(n) * 0.05, label = round(n, 0)),
-    size = 3.5
-  ) +
-
-  geom_hline(
-    aes(yintercept = avg_block, color = "Average"),
-    linetype = "dashed",
-    linewidth = 0.5
-  ) +
-
-  scale_color_manual(
-    values = c("Average" = "orange"),
-    name = ""
-  ) +
-scale_y_continuous(
-  limits = c(0, max(hour_data$n, na.rm = TRUE) * 1.3)
-) +
-  labs(
-    x = "",
-    y = "Total crashes"
-  ) +
-
-  theme_minimal() +
-  theme(
-    legend.position = "top",
-    axis.text.x = element_text(angle = 30, hjust = 1)
-  )
-
-# ----------------------------
-# Step 5: Plotly
-# ----------------------------
-ggplotly(p) %>%
-  layout(
-    yaxis = list(showticklabels = FALSE),
-    xaxis = list(showgrid = FALSE, zeroline = FALSE),
-    yaxis = list(showgrid = FALSE, zeroline = FALSE)
-  )
-
-```
 
 # Holidays
 
