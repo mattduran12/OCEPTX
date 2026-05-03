@@ -15,7 +15,7 @@ execute:
 <div style="padding:12px 0 18px 0; line-height:1.4;">
 
   <p style="margin:0; font-size:14px; color:#444;">
-    This dashboard tracks vehicle crashes in El Paso, Texas and is updated monthly with the most recent available data.
+    This dashboard tracks all reported vehicle crashes in El Paso, Texas and is updated monthly with the most recent available data.
   </p>
 
   <p style="margin:8px 0 0 0; font-size:13px; color:#666;">
@@ -495,7 +495,7 @@ In **`r report_month`**, there were:
 
 Last Update: April 10, 2026
 
-The Drunk Driving Surveillance Dashboard provides monthly, city-level data on alcohol-related motor vehicle crashes in El Paso, Texas. It is designed as a public-facing resource for journalists, policymakers, and researchers seeking timely and transparent information on impaired driving trends.
+The Alcohol-Related Crash Dashboard provides monthly, city-level data on alcohol-related motor vehicle crashes in El Paso, Texas. It is designed as a public-facing resource for journalists, policymakers, and researchers seeking timely and transparent information on impaired driving trends.
 
 Crash data is downloaded from the Texas Department of Transportation (TXDOT) website using the 
 [Crash Records Information System (CRIS) Query Tool](https://cris.dot.state.tx.us/public/Query/app/home). All crash data in this dashboard represent those reported by law enforcement, were classified as alcohol-related, and occurred in the city of El Paso.
@@ -1692,6 +1692,12 @@ data <- base %>%
   mutate(event_time = as.numeric(date - memorial_day)) %>%
   filter(event_time >= -7 & event_time <= 7)
 
+plot_data <- data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups="drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes), .groups="drop")
+
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   geom_col(fill = "steelblue", width = 0.8) +
@@ -1874,6 +1880,12 @@ data <- base %>%
   ) %>%
   filter(event_time >= -7 & event_time <= 7)
 
+plot_data <- data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups="drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes), .groups="drop")
+
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   geom_col(fill = "steelblue", width = 0.8) +
@@ -1967,6 +1979,12 @@ data <- base %>%
   mutate(event_time = as.numeric(date - holiday)) %>%
   filter(event_time >= -7 & event_time <= 7)
 
+plot_data <- data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups="drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes), .groups="drop")
+
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   geom_col(fill = "steelblue", width = 0.8) +
@@ -2052,6 +2070,12 @@ data <- base %>%
     event_time = as.numeric(date - holiday)
   ) %>%
   filter(event_time >= -7 & event_time <= 7)
+
+plot_data <- data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups="drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes), .groups="drop")
 
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
@@ -2146,6 +2170,12 @@ data <- base %>%
   mutate(event_time = as.numeric(date - holiday)) %>%
   filter(event_time >= -7 & event_time <= 7)
 
+plot_data <- data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups="drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes), .groups="drop")
+
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   geom_col(fill = "steelblue", width = 0.8) +
@@ -2231,6 +2261,12 @@ data <- base %>%
     event_time = as.numeric(date - holiday)
   ) %>%
   filter(event_time >= -7 & event_time <= 7)
+
+plot_data <- data %>%
+  group_by(year, event_time) %>%
+  summarise(crashes = n_distinct(Crash.ID), .groups="drop") %>%
+  group_by(event_time) %>%
+  summarise(avg_crashes = mean(crashes), .groups="drop")
 
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
