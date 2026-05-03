@@ -58,14 +58,14 @@ Read the Search and Analysis Protocol
 
 ---
 
-## Drunk Driving Surveillance Dashboard
+## Alcohol-Related Crash Dashboard
 
 ::: {.project-block}
 ::: {.grid .align-items-center}
 ::: {.g-col-12 .g-col-md-6}
 
 **Overview:**  
-The Drunk Driving Surveillance Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 data points covering crash trends, geographic patterns, driver, and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.
+The Alcohol-Related Crash Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 data points covering crash trends, geographic patterns, driver, and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.
 
 <br>
 
