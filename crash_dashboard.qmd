@@ -465,10 +465,10 @@ ggplotly(p1) %>%
 ::: {.card title="**Monthly Summary**"}
 In **`r report_month`**, there were:
 
-- **`r crashes_now`** alcohol-related crashes (**`r fmt(pct_change_crash)`** `r dir_crash` vs. `r comparison_month`)  
-- **`r injuries_now`** people injured in an alcohol-related crash (**`r fmt(pct_change_injury)`** `r dir_injury` vs. `r comparison_month`)
+- **`r crashes_now`** alcohol-related crashes
+- **`r injuries_now`** people injured in an alcohol-related crash
 
-- **`r fatal_now`** fatalities associated with alcohol-related crashes (**`r fmt(pct_change_fatal)`** `r dir_fatal` vs. `r comparison_month`)
+- **`r fatal_now`** fatalities associated with alcohol-related crashes
 
 :::
 
@@ -505,13 +505,13 @@ Crash data is downloaded from the Texas Department of Transportation (TXDOT) web
 
 A crash is defined as alcohol-related if involved drivers or individuals were reported as "Under the Influence of Alcohol", "Had Been Drinking", or were reported to have a blood alcohol content (BAC) greater than 0.
 
-<u>Definition of Alcohol-Related Injury/Fatality</u>
+<u>Definition of Injury and Fatality</u>
 
-Injuries include people who were classified as having a suspected serious injury, suspected minor injury, or possible injury. Fatalities are defined as any motor vehicle traffic injury crash that results in the death of one or more persons within 30 days of the incident.
+A person is defined as injured if the crash report indicates a suspected serious injury, suspected minor injury, or possible injury. Fatalities are defined as any motor vehicle traffic injury crash that results in the death of one or more persons within 30 days of the incident. All injuries and fatalities in this data are associated with an alcohol-related crash.
 
 <u>Definition of Intoxicated Driver</u>
 
-Driver and vehicle characteristics in these graphs represent intoxicated drivers. An intoxicated driver is defined as a person who's BAC test result returned a value of 0.08g/dL or greater.
+Driver and vehicle characteristics on the [Drivers](#drivers) page represent intoxicated drivers. An intoxicated driver is defined as a person who's BAC test result returned a value of 0.08g/dL or greater.
 
 <u>Acronyms</u>
 
@@ -533,13 +533,8 @@ All figures in this dashboard are interactive and downloadable.
 
 - To expand a figure, click the “Expand” button located at the bottom-right corner of each chart. Charts can easily be resized by adjusting the size of your internet browsing window.  
 - To download a figure, hover over the chart and click the camera icon to save it as an image  
-- Charts may be used in media coverage with attribution. *Data Source: TXDOT CRIS Query Tool | Figure created by El Paso Crime Lab*  
+- Charts may be used in media coverage with attribution. *Data Source: Texas Department of Transportation CRIS | Figure created by El Paso Crime Lab*  
 
-<u>How to Cite This Dashboard</u>
-
-When referencing this dashboard, please use the following citation:
-
-El Paso Crime Lab. *Drunk Driving Surveillance Dashboard: El Paso, Texas* (2026). [www.epcrimelab.org/crash_dashboard.html]
 
 <u>Suggested Language</u>
 
@@ -549,7 +544,7 @@ El Paso Crime Lab. *Drunk Driving Surveillance Dashboard: El Paso, Texas* (2026)
 <u>Contact</u>
 
 For questions or data clarification, please contact:  
-mduran29@asu.edu
+[mduran29@asu.edu](mduran29@asu.edu)
 
 :::
 
@@ -571,7 +566,7 @@ A small amount of data for [Drivers](#drivers) characteristics (e.g., gender, ra
 
 <u>Limitations</u>
 
-Not all alcohol-involved crashes are identified in official records. In many cases, alcohol use may go undetected or unreported, particularly when testing is not conducted or impairment is not clearly observed. As a result, these data likely underestimate the true number of alcohol-related crashes—a gap often referred to as the “dark figure” of impaired driving.
+Not all alcohol-involved crashes are identified in official records. In many cases, alcohol use may go undetected or unreported, particularly when testing is not conducted or impairment is not clearly observed. As a result, these data likely underestimate the true number of alcohol-related crashes.
 
 Despite this limitation, crash data remain one of the most reliable and policy-relevant indicators of drunk driving. Unlike arrest data, which are influenced by enforcement practices, crash records capture real-world harm—injuries and fatalities—providing a consistent basis for tracking trends over time and understanding the public safety impact of impaired driving.
 
@@ -697,11 +692,12 @@ scale_y_continuous(
 
 ggplotly(p) %>%
   layout(
-    yaxis = list(
+      yaxis = list(
       showticklabels = FALSE,
       showgrid = TRUE,
       zeroline = TRUE
     ),
+      margin = list(b = 60),
   title = list(
     text = paste0(
       "<b>Alcohol-Related Crashes in El Paso by Day of Week</b>",
@@ -716,7 +712,7 @@ ggplotly(p) %>%
     ),
     annotations = list(
       list(
-        x = 0, y = -0.18,
+        x = 0, y = -0.1,
         xref = "paper", yref = "paper",
         text = 'Data source: Texas Department of Transportation | Created by <a href="https://epcrimelab.org" target="_blank">El Paso Crime Lab</a>',
         showarrow = FALSE,
@@ -815,7 +811,7 @@ scale_y_continuous(
   theme_minimal() +
   theme(
     legend.position = "bottom",
-    axis.text.x = element_text(angle = 0, hjust = 1)
+    axis.text.x = element_text(angle = 30, hjust = 1)
   )
 
 # ----------------------------
@@ -828,6 +824,7 @@ ggplotly(p) %>%
       showgrid = TRUE,
       zeroline = TRUE
     ),
+     margin = list(b = 120),
   title = list(
     text = paste0(
       "<b>Alcohol-Related Crashes in El Paso by Hour</b>",
@@ -842,7 +839,7 @@ ggplotly(p) %>%
     ),
     annotations = list(
       list(
-        x = 0, y = -0.18,
+        x = 0, y = -0.3,
         xref = "paper", yref = "paper",
         text = 'Data source: Texas Department of Transportation | Created by <a href="https://epcrimelab.org" target="_blank">El Paso Crime Lab</a>',
         showarrow = FALSE,
@@ -1419,7 +1416,10 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
         y = avg_crashes + 0.3),
     size = 3.5
   ) +
-
+scale_y_continuous(
+  limits = c(0, 6),
+  breaks = seq(0, 6, by = 1)
+) +
   scale_x_continuous(
     breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
   ) +
@@ -1518,6 +1518,10 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
         y = avg_crashes + 0.3),
     size = 3.5
   ) +
+  scale_y_continuous(
+  limits = c(0, 6),
+  breaks = seq(0, 6, by = 1)
+) +
 
   scale_x_continuous(
     breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
@@ -1612,7 +1616,10 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
         y = avg_crashes + 0.3),
     size = 3.5
   ) +
-
+scale_y_continuous(
+  limits = c(0, 6),
+  breaks = seq(0, 6, by = 1)
+) +
   scale_x_continuous(
     breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
   ) +
@@ -1709,7 +1716,10 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
         y = avg_crashes + 0.3),
     size = 3.5
   ) +
-
+  scale_y_continuous(
+  limits = c(0, 6),
+  breaks = seq(0, 6, by = 1)
+) +
   scale_x_continuous(
     breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
   ) +
@@ -1804,7 +1814,10 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
         y = avg_crashes + 0.3),
     size = 3.5
   ) +
-
+  scale_y_continuous(
+  limits = c(0, 6),
+  breaks = seq(0, 6, by = 1)
+) +
   scale_x_continuous(
     breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
   ) +
@@ -1897,7 +1910,10 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
         y = avg_crashes + 0.3),
     size = 3.5
   ) +
-
+scale_y_continuous(
+  limits = c(0, 6),
+  breaks = seq(0, 6, by = 1)
+) +
   scale_x_continuous(
     breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
   ) +
@@ -1996,7 +2012,10 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
         y = avg_crashes + 0.3),
     size = 3.5
   ) +
-
+scale_y_continuous(
+  limits = c(0, 6),
+  breaks = seq(0, 6, by = 1)
+) +
   scale_x_continuous(
     breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
   ) +
@@ -2088,7 +2107,10 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
         y = avg_crashes + 0.3),
     size = 3.5
   ) +
-
+scale_y_continuous(
+  limits = c(0, 6),
+  breaks = seq(0, 6, by = 1)
+) +
   scale_x_continuous(
     breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
   ) +
@@ -2187,7 +2209,10 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
         y = avg_crashes + 0.3),
     size = 3.5
   ) +
-
+scale_y_continuous(
+  limits = c(0, 6),
+  breaks = seq(0, 6, by = 1)
+) +
   scale_x_continuous(
     breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
   ) +
@@ -2279,7 +2304,10 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
         y = avg_crashes + 0.3),
     size = 3.5
   ) +
-
+scale_y_continuous(
+  limits = c(0, 6),
+  breaks = seq(0, 6, by = 1)
+) +
   scale_x_continuous(
     breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
   ) +
@@ -2436,7 +2464,7 @@ list(
 ### Column {.tabset}
 
 ``` {r}
-#| title: Intoxicated Driver's Zipcode (YTD)
+#| title: Driver's License Zipcode (YTD)
 zip_top10 <- drivers %>%
   filter(bac_value >= 0.08 & bac_result == 1,
          !is.na(Driver.Zip.Code)) %>%
@@ -2472,10 +2500,10 @@ p <- plot_ly(
 p %>%
   layout(
     title = list(
-      text = paste0(
-        "<b>Top 10 Zipcodes of Impaired Drivers in El Paso Who Crashed (BAC ≥ 0.08)</b>",
-        "<br><sup>Year-to-Date</sup>"
-      ),
+    text = paste0(
+      "<b>Top 10 Driver License ZIP Codes of Intoxicated Drivers</b>",
+      "<br><sup>Year-to-Date (BAC ≥ 0.08)</sup>"
+    ),
       x = 0.5,
       xanchor = "center"
     ),
@@ -2504,7 +2532,7 @@ p %>%
 ```
 
 ```{r}
-#| title: Intoxicated Driver's Demographics (YTD)
+#| title: Driver's Demographics (YTD)
 
 drivers_clean <- drivers %>%
   mutate(
@@ -2604,7 +2632,7 @@ reactable(
 ### Column {.tabset}
 
 ```{r}
-#| title: Vehicle Color of Intoxicated Driver (YTD)
+#| title: Vehicle Color (YTD)
 plot_data <- drivers %>%
   filter(bac_value >= 0.08 & bac_result == 1) %>%
   mutate(
@@ -2681,8 +2709,8 @@ p <- plot_ly(
 
     title = list(
       text = paste0(
-        "<b>Vehicle Color of Impaired Drivers Who Crashed in El Paso (BAC ≥ 0.08)</b>",
-        "<br><sup>Year-to-Date</sup>"
+        "<b>Vehicle Color of Intoxicated Drivers Who Crashed in El Paso</b>",
+        "<br><sup>Year-to-Date (BAC ≥ 0.08)</sup>"
       ),
       x = 0.5,
       xanchor = "center"
@@ -2733,7 +2761,7 @@ p
 
 
 ``` {r}
-#| title: Vehicle Info of Intoxicated Driver (YTD)
+#| title: Vehicle Info (YTD)
 
 vehicle_table <- drivers %>%
   
