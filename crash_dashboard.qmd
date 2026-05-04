@@ -2413,7 +2413,7 @@ total_intox_drivers <- drivers %>%
   pull(n)
 
 list(
-  icon = "emoji-dizzy",
+  icon = "person-square",
   color = "primary",
   value = format(total_intox_drivers, big.mark = ",")
 )
@@ -2451,7 +2451,7 @@ age_stats <- drivers %>%
   )
 
 list(
-  icon = "person-fill",
+  icon = "rulers",
   color = "primary",
   value = paste0(
     round(age_stats$mean_age, 0)
