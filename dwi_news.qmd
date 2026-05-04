@@ -1,5 +1,5 @@
 ---
-title: "Latest Local News on Drunk Driving"
+title: "Latest Local News on Alcohol-Impaired Driving"
 format: html
 execute:
   echo: false
@@ -11,7 +11,12 @@ execute:
   display: none;
 } </style>
 
-## Latest Local News on Drunk Driving
+## Latest Local News on Alcohol-Impaired Driving
+
+<p style="margin-top:-10px; margin-bottom:14px; color:#555; font-size:0.95em; line-height:1.4;">
+  Articles are pulled from Google News using keywords related to "DWI/DUI" and "impaired driving"
+  combined with “El Paso”. Sources include English and Spanish media. This feed updates every 12-hours.
+</p>
 
 ```{r results='asis'}
 el_paso_time <- format(Sys.time(), tz = "America/Denver", "%B %d, %Y • %I:%M %p")
