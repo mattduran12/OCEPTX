@@ -55,7 +55,7 @@ A central goal of the El Paso Crime Lab is transparency. By making data and rese
 
 ## Contact Information
 
-The El Paso Crime Lab is operated by Open Criminology Research, a Texas limited liability company. It is not affiliated with the Texas Department of Public Safety or any law enforcement agency.
+The El Paso Crime Lab is operated by Open Criminology Research, a Texas limited liability company. While we collaborate with law enforcement agencies, the Lab operates independently and is not affiliated with the Texas Department of Public Safety or any law enforcement agency.
 
 For questions, data requests, or collaboration opportunities, please contact:
 
