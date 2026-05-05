@@ -494,6 +494,7 @@ In **`r report_month`**, there were:
   quiz and find out!
 :::
 
+
 # About this Dashboard {#about-this-dashboard}
 
 ## Row {height="50%"}
@@ -551,11 +552,11 @@ Department of Transportation; CRIS = Crash Records Information System
 
 ::: {.card title="**License and Use**"}
 © 2026 El Paso Crime Lab.
-This Alcohol-Related Crash Dashboard is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).
 
-You are free to use, share, and adapt the charts in this dashboard for noncommercial purposes, provided that appropriate credit is given to El Paso Crime Lab. Attribution should include the project name, source, and a link to the license: https://creativecommons.org/licenses/by-nc/4.0/
+This Alcohol-Related Crash Dashboard is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0).
+You are free to use, share, and adapt the charts in this dashboard for any purpose, including commercial use, provided that appropriate credit is given to El Paso Crime Lab. Attribution should include the project name, source, a link to the license (https://creativecommons.org/licenses/by/4.0/), and a clear indication of whether any modifications were made.
 
-Commercial use of this material is not permitted without prior permission.
+No additional restrictions apply beyond proper attribution.
 
 Suggested citation: El Paso Crime Lab. (2026). *Alcohol-Related Crash Dashboard*.
 
