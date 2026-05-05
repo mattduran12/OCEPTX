@@ -531,8 +531,8 @@ Report](https://www.txdot.gov/data-maps/crash-reports-records/forms-law-enforcem
 contains code A (Suspected Serious Injury), B (Suspected Minor Injury),
 or C (Possible Injury). Fatalities are counted if a person involved in
 the crash is coded K (Fatal Injury). The 2025 edition of the
-[**Instructions to Police for Reporting
-Crashes**](https://www.txdot.gov/content/dam/docs/division/trf/crash-records/cr100-v29.pdf)
+[Instructions to Police for Reporting
+Crashes](https://www.txdot.gov/content/dam/docs/division/trf/crash-records/cr100-v29.pdf)
 by TXDOT indicates that code K is used if "a person dies within 30 days,
 due to injuries sustained in the crash" (p. 26). In these cases, a
 supplement report is submitted to update item 16.
@@ -549,26 +549,32 @@ BAC = Blood alcohol content; YTD = Year to date; TXDOT = Texas
 Department of Transportation; CRIS = Crash Records Information System
 :::
 
-::: {.card title="**For Media**"}
+::: {.card title="**License and Use**"}
+© 2026 El Paso Crime Lab.
+This Alcohol-Related Crash Dashboard is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).
+
+You are free to use, share, and adapt the charts in this dashboard for noncommercial purposes, provided that appropriate credit is given to El Paso Crime Lab. Attribution should include the project name, source, and a link to the license: https://creativecommons.org/licenses/by-nc/4.0/
+
+Commercial use of this material is not permitted without prior permission.
+
+Suggested citation: El Paso Crime Lab. (2026). *Alcohol-Related Crash Dashboard*.
+
 <u>Key Notes for Reporting</u>
 
-- Crashes, injuries, and fatalities in the dashboard represent those
-  that were alcohol-related\
-- Trends are based on official crash records from TXDOT
+- Crashes, injuries, and fatalities in this dashboard represent those
+  classified as alcohol-related (see definition)
+- Crash data is publicly available and provided by the Texas Department of Transportation
 - Monthly updates may revise prior counts as data are finalized
 
 <u>Using Figures and Charts</u>
 
 All figures in this dashboard are interactive and downloadable.
 
-- To expand a figure, click the “Expand” button located at the
-  bottom-right corner of each chart. Charts can easily be resized by
-  adjusting the size of your internet browsing window.\
+- Charts can easily be resized by
+  adjusting the size of your internet browsing window. To expand a figure, click the “Expand” button located at the
+  bottom-right corner of each chart.
 - To download a figure, hover over the chart and click the camera icon
-  to save it as an image\
-- Charts may be used in media coverage with attribution. *Data Source:
-  Texas Department of Transportation CRIS \| Figure created by El Paso
-  Crime Lab*
+  to save it as an image
 
 <u>Suggested Language</u>
 
@@ -3266,6 +3272,4 @@ function finishQuiz() {
 document.addEventListener("DOMContentLoaded", loadStats);
 </script>
 ```
-::::
-:::::
-::::::
+
