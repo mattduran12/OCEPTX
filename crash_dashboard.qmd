@@ -10,34 +10,40 @@ execute:
   echo: false
   warning: false
   message: false
+editor: source
+
 ---
 
-<div style="padding:12px 0 18px 0; line-height:1.4;">
+::: {style="padding:12px 0 18px 0; line-height:1.4;"}
+<p style="margin:0; font-size:14px; color:#444;">
 
-  <p style="margin:0; font-size:14px; color:#444;">
-    This dashboard tracks all reported vehicle crashes in El Paso, Texas and is updated monthly with the most recent available data.
-  </p>
+This dashboard tracks all reported vehicle crashes in El Paso, Texas and
+is updated monthly with the most recent available data.
 
-  <p style="margin:8px 0 0 0; font-size:13px; color:#666;">
-    <b>How to use:</b><br>
-    • Click the <b>bottom-right expand icon</b> to enlarge any chart<br>
-    • Hover over plots for detailed values<br>
-    • Click the <b>camera icon</b> (if available) to download charts as images<br>
-  </p>
+</p>
 
-  <p style="margin:8px 0 0 0; font-size:13px; color:#666;">
-    <b>Mobile users:</b><br>
-    • Double-tap the chart to reset the scale<br>
-    • Use the expand button for full-screen view<br>
-    • Rotate your device for better readability<br>
-  </p>
+<p style="margin:8px 0 0 0; font-size:13px; color:#666;">
 
-  <p style="margin:8px 0 0 0; font-size:12px; color:#888;">
-    Tip: For best experience, view on desktop for full interactivity.
-  </p>
+<b>How to use:</b><br> • Click the <b>bottom-right expand icon</b> to
+enlarge any chart<br> • Hover over plots for detailed values<br> • Click
+the <b>camera icon</b> (if available) to download charts as images<br>
 
-</div>
+</p>
 
+<p style="margin:8px 0 0 0; font-size:13px; color:#666;">
+
+<b>Mobile users:</b><br> • Double-tap the chart to reset the scale<br> •
+Use the expand button for full-screen view<br> • Rotate your device for
+better readability<br>
+
+</p>
+
+<p style="margin:8px 0 0 0; font-size:12px; color:#888;">
+
+Tip: For best experience, view on desktop for full interactivity.
+
+</p>
+:::
 
 ```{r}
 
@@ -87,7 +93,7 @@ crash_level <- data %>%
   distinct(Crash.ID, .keep_all = TRUE) 
 ```
 
-# Monthly Brief
+# Monthly Brief {#monthly-brief}
 
 ```{r}
 # ----------------------------
@@ -259,9 +265,9 @@ dir_injury <- case_when(
 
 ```
 
-## Row {.tabset height=400px}
+## Row {.tabset height="400px"}
 
-``` {r}
+```{r}
 # remove future months for current year only
 filter_future <- function(df){
   df %>%
@@ -283,7 +289,7 @@ comparison_month <- format(
 
 ```
 
-``` {r}
+```{r}
 #| title: Crashes
 
 ## Color pallete
@@ -341,7 +347,7 @@ ggplotly(p1) %>%
   )
 ```
 
-``` {r}
+```{r}
 #| title: Injuries
 
 ## Color pallete
@@ -400,7 +406,7 @@ ggplotly(p1) %>%
 
 ```
 
-``` {r}
+```{r}
 #| title: Fatalities
 
 ## Color pallete
@@ -457,84 +463,112 @@ ggplotly(p1) %>%
 
 ```
 
+## Row {height="250px"}
 
-## Row {height=250px}
-
-### Column 
+### Column
 
 ::: {.card title="**Monthly Summary**"}
 In **`r report_month`**, there were:
 
 - **`r crashes_now`** alcohol-related crashes
+
 - **`r injuries_now`** people injured in an alcohol-related crash
 
 - **`r fatal_now`** fatalities associated with alcohol-related crashes
-
 :::
 
 ### Column
 
 ::: {.card title="**Navigation Links**"}
-
-- [Monthly Brief](#monthly-brief) — Latest monthly summary of crashes, injuries, and fatalities
-- [About this Dashboard](#about-this-dashboard) — Data sources, definitions, and technical details 
+- [Monthly Brief](#monthly-brief) — Latest monthly summary of crashes,
+  injuries, and fatalities
+- [About this Dashboard](#about-this-dashboard) — Data sources,
+  definitions, and technical details
 - [Trends](#trends) — Yearly trend patterns and year-to-date totals
-- [Holidays](#holidays) — Crash patterns around major holidays and event periods  
-- [Drivers](#drivers) — Driver-level characteristics, risk indicators, and year-to-date totals 
-- [Map](#map) — Geographic distribution of alcohol-related crashes  
-- [Quiz](#quiz) — How well do you know the data in El Paso? Take the quiz and find out!
-
+- [Holidays](#holidays) — Crash patterns around major holidays and event
+  periods\
+- [Drivers](#drivers) — Driver-level characteristics, risk indicators,
+  and year-to-date totals
+- [Map](#map) — Geographic distribution of alcohol-related crashes\
+- [Quiz](#quiz) — How well do you know the data in El Paso? Take the
+  quiz and find out!
 :::
 
+# About this Dashboard {#about-this-dashboard}
 
-
-# About this Dashboard
-
-## Row {height=50%}
+## Row {height="50%"}
 
 ::: {.card title="**About This Dashboard**"}
-
 Last Update: May 2, 2026
 
-The Alcohol-Related Crash Dashboard provides monthly, city-level data on alcohol-related motor vehicle crashes in El Paso, Texas. It is designed as a public-facing resource for journalists, policymakers, and researchers seeking timely and transparent information on impaired driving trends.
+The Alcohol-Related Crash Dashboard provides monthly, city-level data on
+alcohol-related motor vehicle crashes in El Paso, Texas. It is designed
+as a public-facing resource for journalists, policymakers, and
+researchers seeking timely and transparent information on impaired
+driving trends.
 
-Crash data is downloaded from the Texas Department of Transportation (TXDOT) website using the 
-[Crash Records Information System (CRIS) Query Tool](https://cris.dot.state.tx.us/public/Query/app/home). All crash data in this dashboard represent those reported by law enforcement, were classified as alcohol-related, and occurred in the city of El Paso.
+Crash data is downloaded from the Texas Department of Transportation
+(TXDOT) website using the [Crash Records Information System (CRIS) Query
+Tool](https://cris.dot.state.tx.us/public/Query/app/home). All crash
+data in this dashboard represent those reported by law enforcement, were
+classified as alcohol-related, and occurred in the city of El Paso.
 
 <u>Definition of Alcohol-Related Crash</u>
 
-A crash is defined as alcohol-related if involved drivers or individuals were reported as "Under the Influence of Alcohol", "Had Been Drinking", or were reported to have a blood alcohol content (BAC) greater than 0.
+A crash is defined as alcohol-related if item 38 *Contributing
+Factors* in the [2023 Texas Peace Officer's Crash
+Report](https://www.txdot.gov/data-maps/crash-reports-records/forms-law-enforcement.html)
+contains code 45 (Had Been Drinking) or 67 (Intoxicated-Alcohol), or if
+a driver's blood alcohol content (BAC) is reported as greater than 0.
+This coding scheme aligns with the Alcohol-Related crash filter in the
+TXDOT CRIS Query Tool.
 
 <u>Definition of Injury and Fatality</u>
 
-A person is defined as injured if the crash report indicates a suspected serious injury, suspected minor injury, or possible injury. Fatalities are defined as any motor vehicle traffic injury crash that results in the death of one or more persons within 30 days of the incident. All injuries and fatalities in this data are associated with an alcohol-related crash.
+A person is defined as injured if item 16 in the [2023 Texas Peace Officer's
+Crash
+Report](https://www.txdot.gov/data-maps/crash-reports-records/forms-law-enforcement.html)
+contains code A (Suspected Serious Injury), B (Suspected Minor Injury),
+or C (Possible Injury). Fatalities are counted if a person involved in
+the crash is coded K (Fatal Injury). The 2025 edition of the
+[**Instructions to Police for Reporting
+Crashes**](https://www.txdot.gov/content/dam/docs/division/trf/crash-records/cr100-v29.pdf)
+by TXDOT indicates that code K is used if "a person dies within 30 days,
+due to injuries sustained in the crash" (p. 26). In these cases, a
+supplement report is submitted to update item 16.
 
 <u>Definition of Intoxicated Driver</u>
 
-Driver and vehicle characteristics on the [Drivers](#drivers) page represent intoxicated drivers. An intoxicated driver is defined as a person who's BAC test result returned a value of 0.08g/dL or greater.
+Driver and vehicle characteristics on the [Drivers](#drivers) page
+represent intoxicated drivers. An intoxicated driver is defined as a
+person who's blood alcohol content test result returned a value of 0.08g/dL or greater.
 
 <u>Acronyms</u>
 
-BAC = Blood alcohol content; YTD = Year to date; TXDOT = Texas Department of Transportation; CRIS = Crash Records Information System
-
+BAC = Blood alcohol content; YTD = Year to date; TXDOT = Texas
+Department of Transportation; CRIS = Crash Records Information System
 :::
 
 ::: {.card title="**For Media**"}
-
 <u>Key Notes for Reporting</u>
 
-- Crashes, injuries, and fatalities in the dashboard represent those that were alcohol-related  
+- Crashes, injuries, and fatalities in the dashboard represent those
+  that were alcohol-related\
 - Trends are based on official crash records from TXDOT
-- Monthly updates may revise prior counts as data are finalized  
+- Monthly updates may revise prior counts as data are finalized
 
 <u>Using Figures and Charts</u>
 
 All figures in this dashboard are interactive and downloadable.
 
-- To expand a figure, click the “Expand” button located at the bottom-right corner of each chart. Charts can easily be resized by adjusting the size of your internet browsing window.  
-- To download a figure, hover over the chart and click the camera icon to save it as an image  
-- Charts may be used in media coverage with attribution. *Data Source: Texas Department of Transportation CRIS | Figure created by El Paso Crime Lab*  
-
+- To expand a figure, click the “Expand” button located at the
+  bottom-right corner of each chart. Charts can easily be resized by
+  adjusting the size of your internet browsing window.\
+- To download a figure, hover over the chart and click the camera icon
+  to save it as an image\
+- Charts may be used in media coverage with attribution. *Data Source:
+  Texas Department of Transportation CRIS \| Figure created by El Paso
+  Crime Lab*
 
 <u>Suggested Language</u>
 
@@ -543,36 +577,58 @@ All figures in this dashboard are interactive and downloadable.
 
 <u>Contact</u>
 
-For questions or data clarification, please contact:  
-[mduran29@asu.edu](mduran29@asu.edu)
-
+For questions or data clarification, please contact:\
+[mduran29\@asu.edu](mduran29@asu.edu)
 :::
 
 ::: {.card title="**Technical Details**"}
-
 <u>Calculation of Moving Average</u>
 
-The line graphs on the [Trends](#trends) page show 12-month moving averages for crashes, fatalities, and injuries between 2016 and *Present*. This technique results in a smooth line, allowing the viewer to see if a trend is increasing or decreasing.
+The line graphs on the [Trends](#trends) page show 12-month moving
+averages for crashes, fatalities, and injuries between 2016 and
+*Present*. This technique results in a smooth line, allowing the viewer
+to see if a trend is increasing or decreasing.
 
 <u>Holiday Analyses</u>
 
-[Holidays](#holidays) statistics were calculated by aligning crash data to each holiday. For fixed-date holidays (e.g., New Year’s Day, Independence Day, Halloween, Christmas, and St. Patrick’s Day), each crash was assigned an event time based on the number of days before or after the calendar date of the holiday within each year. For shifting holidays (e.g., Super Bowl and Memorial Day), the holiday date was first computed for each year and then used as the reference point for event-time calculation.
+[Holidays](#holidays) statistics were calculated by aligning crash data
+to each holiday. For fixed-date holidays (e.g., New Year’s Day,
+Independence Day, Halloween, Christmas, and St. Patrick’s Day), each
+crash was assigned an event time based on the number of days before or
+after the calendar date of the holiday within each year. For shifting
+holidays (e.g., Super Bowl and Memorial Day), the holiday date was first
+computed for each year and then used as the reference point for
+event-time calculation.
 
-In all cases, crashes were restricted to a ±7-day window around the holiday and then aggregated across years (2016–2025), excluding 2020 to avoid COVID-19-related disruptions. Average daily crash counts were then computed for each relative day to identify typical patterns before and after each holiday.
+In all cases, crashes were restricted to a ±7-day window around the
+holiday and then aggregated across years (2016–2025), excluding 2020 to
+avoid COVID-19-related disruptions. Average daily crash counts were then
+computed for each relative day to identify typical patterns before and
+after each holiday.
 
 <u>Missing Data</u>
 
-A small amount of data for [Drivers](#drivers) characteristics (e.g., gender, race/ethnicity, vehicle color) is missing. Observations with missing or unknown values in these fields were excluded.
+A small amount of data for [Drivers](#drivers) characteristics (e.g.,
+gender, race/ethnicity, vehicle color) is missing. Observations with
+missing or unknown values in these fields were excluded.
 
 <u>Limitations</u>
 
-Not all alcohol-involved crashes are identified in official records. In many cases, alcohol use may go undetected or unreported, particularly when testing is not conducted or impairment is not clearly observed. As a result, these data likely underestimate the true number of alcohol-related crashes.
+Not all alcohol-involved crashes are identified in official records. In
+many cases, alcohol use may go undetected or unreported, particularly
+when testing is not conducted or impairment is not clearly observed. As
+a result, these data likely underestimate the true number of
+alcohol-related crashes.
 
-Despite this limitation, crash data remain one of the most reliable and policy-relevant indicators of drunk driving. Unlike arrest data, which are influenced by enforcement practices, crash records capture real-world harm—injuries and fatalities—providing a consistent basis for tracking trends over time and understanding the public safety impact of impaired driving.
-
+Despite this limitation, crash data remain one of the most reliable and
+policy-relevant indicators of drunk driving. Unlike arrest data, which
+are influenced by enforcement practices, crash records capture
+real-world harm—injuries and fatalities—providing a consistent basis for
+tracking trends over time and understanding the public safety impact of
+impaired driving.
 :::
 
-# Trends
+# Trends {#trends}
 
 ## Row {height="200px"}
 
@@ -650,7 +706,7 @@ list(
 
 ## Row
 
-``` {r}
+```{r}
 #| title: Crashes by Day of Week (YTD)
 dow_data <- crash_level %>%
   filter(City == "El Paso",
@@ -726,7 +782,7 @@ ggplotly(p) %>%
 
 ```
 
-``` {r}
+```{r}
 #| title: Crashes by Hour (YTD)
 # ----------------------------
 # Step 1: Define correct order
@@ -852,9 +908,9 @@ ggplotly(p) %>%
 
 ```
 
-## Row {.tabset height=300px}
+## Row {.tabset height="300px"}
 
-``` {r}
+```{r}
 #| title: Crash Trends
 monthly_counts <- crash_level %>%
   filter(City == "El Paso") %>%   # 🔴 THIS IS THE KEY FIX
@@ -929,8 +985,7 @@ ggplotly(p) %>%
 
 ```
 
-
-``` {r}
+```{r}
 #| title: Injury Trends
 
 injury_monthly <- person_level %>%
@@ -1017,8 +1072,7 @@ ggplotly(p) %>%
 
 ```
 
-
-``` {r}
+```{r}
 #| title: Fatality Trends
 monthly_counts <- person_level %>%
   filter(City == "El Paso") %>%
@@ -1105,9 +1159,9 @@ ggplotly(p) %>%
   )
 ```
 
-## Row {.tabset height=250px}
+## Row {.tabset height="250px"}
 
-``` {r}
+```{r}
 #| title: Average Crashes by Month
 monthly_year <- crash_level %>%
   filter(City == "El Paso") %>%
@@ -1224,7 +1278,7 @@ ggplotly(p) %>%
 
 ```
 
-``` {r}
+```{r}
 #| title: Average Fatalities by Month
 #| 
 monthly_fatal_year <- person_level %>%
@@ -1339,11 +1393,9 @@ ggplotly(p) %>%
   )
 ```
 
+# Holidays {#holidays}
 
-
-# Holidays
-
-## Row {height=500px}
+## Row {height="500px"}
 
 ```{r}
 #| title: New Year's Day
@@ -1487,7 +1539,7 @@ layout(
 
 ```
 
-``` {r}
+```{r}
 #| title: Superbowl 
 
 superbowl <- base %>%
@@ -1588,7 +1640,7 @@ layout(
 )
 ```
 
-## Row {height=500px}
+## Row {height="500px"}
 
 ```{r}
 #| title: St. Patrick's Day
@@ -1685,7 +1737,7 @@ layout(
 )
 ```
 
-``` {r}
+```{r}
 #| title: Memorial Day
 
 memorial <- base %>%
@@ -1785,10 +1837,9 @@ layout(
 ) 
 ```
 
-## Row {height=500px}
+## Row {height="500px"}
 
-
-``` {r}
+```{r}
 #| title: Cinco de Mayo
 
 data <- base %>%
@@ -1884,7 +1935,7 @@ layout(
 
 ```
 
-``` {r}
+```{r}
 #| title: Independence Day
 
 data <- base %>%
@@ -1979,9 +2030,9 @@ layout(
 )
 ```
 
-## Row {height=500px}
+## Row {height="500px"}
 
-``` {r}
+```{r}
 #| title: Labor Day
 
 labor <- base %>%
@@ -2081,7 +2132,7 @@ layout(
 ) 
 ```
 
-``` {r}
+```{r}
 #| title: Halloween
 
 data <- base %>%
@@ -2176,9 +2227,9 @@ layout(
 )
 ```
 
-## Row {height=500px}
+## Row {height="500px"}
 
-``` {r}
+```{r}
 #| title: Thanksgiving
 
 thanksgiving <- base %>%
@@ -2278,7 +2329,7 @@ layout(
 )
 ```
 
-``` {r}
+```{r}
 #| title: Christmas
 
 data <- base %>%
@@ -2373,9 +2424,9 @@ layout(
 )
 ```
 
-# Drivers
+# Drivers {#drivers}
 
-``` {r}
+```{r}
 # drivers object with BACs only
 drivers <- person_level %>%
   mutate(
@@ -2403,7 +2454,7 @@ drivers <- person_level %>%
 
 ## Row {height="200px"}
 
-``` {r}
+```{r}
 #| content: valuebox
 #| title: "Total Intoxicated Drivers (YTD)"
 
@@ -2459,11 +2510,11 @@ list(
 )
 ```
 
-## Row { height=70%}
+## Row {height="70%"}
 
 ### Column {.tabset}
 
-``` {r}
+```{r}
 #| title: Driver's License Zipcode (YTD)
 zip_top10 <- drivers %>%
   filter(bac_value >= 0.08 & bac_result == 1,
@@ -2501,7 +2552,7 @@ p %>%
   layout(
     title = list(
     text = paste0(
-      "<b>Top 10 Driver License ZIP Codes of Intoxicated Drivers</b>",
+      "<b>Top 10 License ZIP Codes of Intoxicated Drivers</b>",
       "<br><sup>Year-to-Date (BAC ≥ 0.08)</sup>"
     ),
       x = 0.5,
@@ -2627,7 +2678,6 @@ reactable(
 )
 
 ```
-
 
 ### Column {.tabset}
 
@@ -2759,8 +2809,7 @@ p
 
 ```
 
-
-``` {r}
+```{r}
 #| title: Vehicle Info (YTD)
 
 vehicle_table <- drivers %>%
@@ -2831,16 +2880,11 @@ table <- reactable(
 table
 ```
 
+# Map {#map}
 
+## Row {height="100%"}
 
-
-
-
-# Map
-
-## Row {height=100%}
-
-### Column {.tabset width=70%}
+### Column {.tabset width="70%"}
 
 ```{r}
 #| title: Crashes (YTD)
@@ -2903,9 +2947,9 @@ leaflet(map_data) %>%
   )
 ```
 
-### Column {.tabset width=30%}
+### Column {.tabset width="30%"}
 
-``` {r}
+```{r}
 #| title: Crash Locations (YTD)
 top_streets <- crash_level %>%
   filter(
@@ -2955,7 +2999,7 @@ reactable(
 )
 ```
 
-``` {r}
+```{r}
 #| title: Fatal Crash Locations (YTD)
 top_fatal_streets <- crash_level %>%
   filter(
@@ -3013,27 +3057,35 @@ reactable(
 )
 ```
 
-# Quiz
+# Quiz {#quiz}
 
-::: {.column width="100%"}
+:::::: {.column width="100%"}
+::::: {.card title="Drunk Driving Quiz" style="min-height:780px; margin:0 auto;"}
+:::: {#quizApp}
+<h4 id="introStats">
 
-::: {.card title="Drunk Driving Quiz" style="min-height:780px; margin:0 auto;"}
+Loading stats...
 
-<div id="quizApp">
+</h4>
 
-  <h4 id="introStats">Loading stats...</h4>
-  <h4 id="avgStats"></h4>
+<h4 id="avgStats">
 
-  <button onclick="startQuiz()" id="startBtn">Start Quiz</button>
+</h4>
 
-  <p id="tagline" style="font-style: italic;"></p>
+<button onclick="startQuiz()" id="startBtn">Start Quiz</button>
 
-  <hr>
+<p id="tagline" style="font-style: italic;">
 
-  <div id="quizBox" style="display:none"></div>
+</p>
+
+<hr>
+
+::: {#quizBox style="display:none"}
+:::
 
 </div>
 
+```{=html}
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw4TekPtUfV08eUUU9TbRu0QdeUl9_mondBZS0c179w-eQQb4YliAQwwUHyODuErsYA/exec";
 
@@ -3213,3 +3265,7 @@ function finishQuiz() {
 /* ---------------- INIT ---------------- */
 document.addEventListener("DOMContentLoaded", loadStats);
 </script>
+```
+::::
+:::::
+::::::
