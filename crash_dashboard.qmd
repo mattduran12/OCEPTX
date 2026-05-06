@@ -266,6 +266,38 @@ dir_injury <- case_when(
 
 ```
 
+## Row {height="250px"}
+
+### Column
+
+::: {.card title="**Monthly Summary**"}
+In **`r report_month`**, there were:
+
+- **`r crashes_now`** alcohol-related crashes
+
+- **`r injuries_now`** people injured in an alcohol-related crash
+
+- **`r fatal_now`** fatalities associated with alcohol-related crashes
+:::
+
+### Column
+
+::: {.card title="**Navigation Links**"}
+- [Monthly Brief](#monthly-brief) — Latest monthly summary of crashes,
+  injuries, and fatalities
+- [About this Dashboard](#about-this-dashboard) — Data sources,
+  definitions, and technical details
+- [Trends](#trends) — Yearly trend patterns and year-to-date totals
+- [Holidays](#holidays) — Crash patterns around major holidays and event
+  periods\
+- [Drivers](#drivers) — Driver-level characteristics, risk indicators,
+  and year-to-date totals
+- [Maps](#maps) — Locations of crashes, peak times, police regions, city districts\
+- [Quiz](#quiz) — How well do you know the data in El Paso? Take the
+  quiz and find out!
+:::
+
+
 ## Row {.tabset height="400px"}
 
 ```{r}
@@ -464,36 +496,6 @@ ggplotly(p1) %>%
 
 ```
 
-## Row {height="250px"}
-
-### Column
-
-::: {.card title="**Monthly Summary**"}
-In **`r report_month`**, there were:
-
-- **`r crashes_now`** alcohol-related crashes
-
-- **`r injuries_now`** people injured in an alcohol-related crash
-
-- **`r fatal_now`** fatalities associated with alcohol-related crashes
-:::
-
-### Column
-
-::: {.card title="**Navigation Links**"}
-- [Monthly Brief](#monthly-brief) — Latest monthly summary of crashes,
-  injuries, and fatalities
-- [About this Dashboard](#about-this-dashboard) — Data sources,
-  definitions, and technical details
-- [Trends](#trends) — Yearly trend patterns and year-to-date totals
-- [Holidays](#holidays) — Crash patterns around major holidays and event
-  periods\
-- [Drivers](#drivers) — Driver-level characteristics, risk indicators,
-  and year-to-date totals
-- [Map](#map) — Geographic distribution of alcohol-related crashes\
-- [Quiz](#quiz) — How well do you know the data in El Paso? Take the
-  quiz and find out!
-:::
 
 
 # About this Dashboard {#about-this-dashboard}
@@ -2888,7 +2890,7 @@ table <- reactable(
 table
 ```
 
-# Map {#map}
+# Maps {#maps}
 
 ## Row {height="100%"}
 
@@ -3000,7 +3002,7 @@ blocks_map <- blocks %>%
     popup_text = paste0(
       "<b>Block Group:</b> ", block_group, "<br/>",
       "<b>GEOID:</b> ", GEOID, "<br/>",
-      "<b>Total Crashes (YTD 2026):</b> ", total_crashes, "<br/>",
+      "<b>Total Crashes (YTD):</b> ", total_crashes, "<br/>",
       "<b>Peak Risk Time:</b> ", peak_time, "<br/>",
       "<b>Peak Period Crashes:</b> ", peak_crashes
     ),
@@ -3045,7 +3047,7 @@ leaflet(blocks_map) %>%
   ) %>%
   addControl(
     html = paste0(
-      "<strong>Crash Hotspots + Peak Risk Time (Year-to-Date)</strong><br/>"),
+      "<strong>Alcohol-Related Crash Hotspots in El Paso (Year-to-Date)</strong><br/>"),
     position = "topright"
   )
 ```
@@ -3110,7 +3112,7 @@ leaflet(regions_map) %>%
   addLegend(
     pal = pal,
     values = regions_map$Crashes,
-    title = "Alcohol-Related Crashes (2026)",
+    title = "Total crashes",
     position = "bottomright",
     labFormat = labelFormat(suffix = ""),
     opacity = 1
@@ -3118,7 +3120,7 @@ leaflet(regions_map) %>%
 
   addControl(
     html = paste0(
-      "<strong>Crashes by Police Region (Year-to-Date)</strong><br/>"),
+      "<strong>Alcohol-Related Crashes by Police Region (Year-to-Date)</strong><br/>"),
     position = "topright"
   )
 
@@ -3196,7 +3198,7 @@ leaflet(districts_map) %>%
   addLegend(
     pal = pal,
     values = districts_map$Crashes,
-    title = "Alcohol-Related Crashes (Year-to-Date)",
+    title = "Total crashes",
     position = "bottomright",
     labFormat = labelFormat(suffix = ""),
     opacity = 1
@@ -3204,7 +3206,7 @@ leaflet(districts_map) %>%
   
   addControl(
     html = paste0(
-      "<strong>Crashes by City District (Year-to-Date)</strong><br/>"),
+      "<strong>Alcohol-Related Crashes by City District in El Paso (Year-to-Date)</strong><br/>"),
     position = "topright"
   )
 
@@ -3240,7 +3242,7 @@ leaflet(map_data) %>%
   ) %>%
   addControl(
     html = paste0(
-      "<strong>Alcohol-Related Crashes (Year-to-Date)</strong><br/>"),
+      "<strong>Alcohol-Related Crashes in El Paso (Year-to-Date)</strong><br/>"),
     position = "topright"
   )
 ```
@@ -3276,7 +3278,7 @@ leaflet(map_data) %>%
   ) %>%
   addControl(
     html = paste0(
-      "<strong>Fatal Alcohol-Related Crashes (Year-to-Date)</strong><br/>"),
+      "<strong>Fatal Alcohol-Related Crashes in El Paso (Year-to-Date)</strong><br/>"),
     position = "topright"
   )
 ```
