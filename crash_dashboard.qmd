@@ -64,6 +64,7 @@ suppressMessages(library(readr))
 suppressMessages(library(tidyverse))
 suppressMessages(library(leaflet))
 suppressMessages(library(leaflet.extras))
+suppressMessages(library(sf))
 
 
 # You need to figure out how to limit the resutls to crashes that were alcohol-related
@@ -1203,7 +1204,7 @@ overall_avg <- mean(monthly_avg$avg_crashes)
 monthly_avg <- monthly_avg %>%
   mutate(
     label = paste0(
-      round(avg_crashes, 0),
+      sprintf("%.1f", avg_crashes),
       "\n(",
       sprintf("%.1f", pct * 100),
       "%)"
@@ -1319,8 +1320,8 @@ monthly_fatal_avg <- monthly_fatal_year %>%
   month_name = factor(month.name[month_num], levels = month.name),
     pct = avg_fatalities / sum(avg_fatalities),
     label = paste0(
-      round(avg_fatalities, 1),
-      "<br>(",
+      sprintf("%.1f", avg_fatalities),
+      "\n(",
       sprintf("%.1f", pct * 100),
       "%)"
     )
@@ -1343,7 +1344,7 @@ p <- ggplot(monthly_fatal_avg, aes(
   geom_col(fill = "maroon", width = 0.5) +
 
 geom_text(
-  aes(y = avg_fatalities + 0.1, label = round(avg_fatalities, 0)),
+  aes(y = avg_fatalities + 0.1, label = round(avg_fatalities, 1)),
   size = 3.5
 ) +
 scale_y_continuous(
@@ -2893,6 +2894,154 @@ table
 
 ### Column {.tabset width="70%"}
 
+``` {r}
+#| title: Crashes by Police Region (YTD)
+#| echo: false
+#| 
+regions <- st_read(
+  "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/OCEPTX/shape files/Police Regions/PoliceRegions.shp",   quiet = TRUE
+) %>%
+  st_make_valid()
+
+crash_pts <- crash_level %>%
+  filter(City == "El Paso",
+         Crash.Year == 2026) %>%
+  mutate(
+    Latitude = as.numeric(Latitude),
+    Longitude = as.numeric(Longitude)
+  ) %>%
+  filter(!is.na(Latitude), !is.na(Longitude))
+
+crash_sf <- st_as_sf(crash_pts, coords = c("Longitude", "Latitude"), crs = 4326)
+regions <- st_transform(regions, st_crs(crash_sf))
+
+joined <- st_join(crash_sf, regions, join = st_within)
+
+counts <- joined %>%
+  st_drop_geometry() %>%
+  group_by(DISTRICT) %>%
+  summarise(Crashes = n(), .groups = "drop")
+
+regions_map <- regions %>%
+  left_join(counts, by = "DISTRICT") %>%
+  mutate(Crashes = ifelse(is.na(Crashes), 0, Crashes))
+
+# -------------------------
+# FIXED SCALE (0 to max)
+# -------------------------
+max_val <- max(regions_map$Crashes, na.rm = TRUE)
+
+pal <- colorNumeric(
+  palette = colorRampPalette(c("#f7fbff", "steelblue4"))(100),
+  domain = c(0, max_val),
+  na.color = "transparent"
+)
+
+leaflet(regions_map) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  
+  addPolygons(
+    fillColor = ~pal(Crashes),
+    fillOpacity = 0.8,
+    color = "white",
+    weight = 1,
+    popup = ~paste0(
+      "<strong>District:</strong> ", DISTRICT,
+      "<br><strong>Crashes:</strong> ", Crashes
+    )
+  ) %>%
+  
+  addLegend(
+    pal = pal,
+    values = regions_map$Crashes,
+    title = "Alcohol-Related Crashes (2026)",
+    position = "bottomright",
+    labFormat = labelFormat(suffix = ""),
+    opacity = 1
+  )
+
+```
+
+``` {r}
+#| title: Crashes by City Districts (YTD)
+#| echo: false
+# -------------------------
+# LOAD DISTRICTS SHAPEFILE
+# -------------------------
+districts <- st_read(
+  "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/OCEPTX/shape files/City Districts/RepresentativeDistricts.shp",   quiet = TRUE
+
+) %>%
+  st_make_valid()
+
+# -------------------------
+# CRASH DATA (2026)
+# -------------------------
+crash_pts <- crash_level %>%
+  filter(City == "El Paso",
+         Crash.Year == 2026) %>%
+  mutate(
+    Latitude = as.numeric(Latitude),
+    Longitude = as.numeric(Longitude)
+  ) %>%
+  filter(!is.na(Latitude), !is.na(Longitude))
+
+crash_sf <- st_as_sf(crash_pts, coords = c("Longitude", "Latitude"), crs = 4326)
+districts <- st_transform(districts, st_crs(crash_sf))
+
+# -------------------------
+# SPATIAL JOIN
+# -------------------------
+joined <- st_join(crash_sf, districts, join = st_within)
+
+counts <- joined %>%
+  st_drop_geometry() %>%
+  group_by(DISTRICT) %>%
+  summarise(Crashes = n(), .groups = "drop")
+
+districts_map <- districts %>%
+  left_join(counts, by = "DISTRICT") %>%
+  mutate(Crashes = ifelse(is.na(Crashes), 0, Crashes))
+
+# -------------------------
+# FIXED SCALE (0 → MAX)
+# -------------------------
+max_val <- max(districts_map$Crashes, na.rm = TRUE)
+
+pal <- colorNumeric(
+  palette = colorRampPalette(c("#f7fbff", "steelblue4"))(100),
+  domain = c(0, max_val),
+  na.color = "transparent"
+)
+
+# -------------------------
+# MAP
+# -------------------------
+leaflet(districts_map) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  
+  addPolygons(
+    fillColor = ~pal(Crashes),
+    fillOpacity = 0.8,
+    color = "white",
+    weight = 1,
+    popup = ~paste0(
+      "<strong>District:</strong> ", DISTRICT,
+      "<br><strong>Crashes:</strong> ", Crashes
+    )
+  ) %>%
+  
+  addLegend(
+    pal = pal,
+    values = districts_map$Crashes,
+    title = "Alcohol-Related Crashes (Year-to-Date)",
+    position = "bottomright",
+    labFormat = labelFormat(suffix = ""),
+    opacity = 1
+  )
+
+```
+
 ```{r}
 #| title: Crashes (YTD)
 map_data <- crash_level %>%
@@ -3007,11 +3156,9 @@ reactable(
 ```
 
 ```{r}
-#| title: Fatal Crash Locations (YTD)
+#| title: Fatal Crash Locations (2016-Present)
 top_fatal_streets <- crash_level %>%
   filter(
-    City == "El Paso",
-    Crash.Year == 2026,
     Fatal.Crash.Flag == 1
   ) %>%
   count(Street.Name, sort = TRUE) %>%
