@@ -2895,6 +2895,162 @@ table
 ### Column {.tabset width="70%"}
 
 ``` {r}
+#| title: Peak Risk for Crashes (YTD)
+#| echo: false
+
+# -------------------------
+# 0. DEFINE YTD WINDOW
+# -------------------------
+today <- Sys.Date()
+start_2026 <- as.Date("2026-01-01")
+
+# -------------------------
+# 1. ALL ALCOHOL-RELATED CRASHES (YTD 2026)
+# -------------------------
+crash_2026 <- crash_level %>%
+  mutate(
+    crash_date = as.Date(Crash.Date),  # <-- adjust if your date field differs
+    Latitude = as.numeric(Latitude),
+    Longitude = as.numeric(Longitude),
+    hour = as.numeric(substr(Hour.of.Day, 1, 2))
+  ) %>%
+  filter(
+    crash_date >= start_2026,
+    crash_date <= today
+  ) %>%
+  filter(!is.na(Latitude), !is.na(Longitude))
+
+# -------------------------
+# 2. BLOCK GROUPS
+# -------------------------
+blocks <- st_read(
+  "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/OCEPTX/shape files/Census Block Groups/tl_2025_48_bg.shp",
+  quiet = TRUE
+) %>%
+  st_make_valid()
+
+crash_sf <- st_as_sf(crash_2026, coords = c("Longitude", "Latitude"), crs = 4326)
+blocks <- st_transform(blocks, st_crs(crash_sf))
+
+# -------------------------
+# 3. SPATIAL JOIN
+# -------------------------
+joined <- st_join(crash_sf, blocks, join = st_within)
+
+# -------------------------
+# 4. TIME BLOCKS
+# -------------------------
+joined <- joined %>%
+  mutate(
+    time_block = case_when(
+      hour >= 0  & hour <= 2  ~ "12am–3am",
+      hour >= 3  & hour <= 5  ~ "3am–6am",
+      hour >= 6  & hour <= 8  ~ "6am–9am",
+      hour >= 9  & hour <= 11 ~ "9am–12pm",
+      hour >= 12 & hour <= 14 ~ "12pm–3pm",
+      hour >= 15 & hour <= 17 ~ "3pm–6pm",
+      hour >= 18 & hour <= 20 ~ "6pm–9pm",
+      hour >= 21 & hour <= 23 ~ "9pm–12am"
+    )
+  )
+
+# -------------------------
+# 5. AGGREGATE (TIME × BLOCK GROUP)
+# -------------------------
+tbl_time <- joined %>%
+  st_drop_geometry() %>%
+  group_by(GEOID, time_block) %>%
+  summarise(n = n(), .groups = "drop")
+
+# -------------------------
+# 6. PEAK RISK TIME (MODE)
+# -------------------------
+peak_time <- tbl_time %>%
+  group_by(GEOID) %>%
+  slice_max(n, n = 1, with_ties = FALSE) %>%
+  ungroup() %>%
+  select(GEOID, peak_time = time_block, peak_crashes = n)
+
+# -------------------------
+# 7. TOTAL CRASHES PER GEOID
+# -------------------------
+geo_totals <- joined %>%
+  st_drop_geometry() %>%
+  group_by(GEOID) %>%
+  summarise(total_crashes = n(), .groups = "drop")
+
+# -------------------------
+# 8. TOP 10 BLOCK GROUPS
+# -------------------------
+top_geoids <- geo_totals %>%
+  arrange(desc(total_crashes)) %>%
+  slice_head(n = 10) %>%
+  pull(GEOID)
+
+# -------------------------
+# 9. BUILD MAP DATA
+# -------------------------
+blocks_map <- blocks %>%
+  filter(GEOID %in% top_geoids) %>%
+  left_join(geo_totals, by = "GEOID") %>%
+  left_join(peak_time, by = "GEOID") %>%
+  mutate(
+    block_group = substr(GEOID, nchar(GEOID), nchar(GEOID)),
+
+    popup_text = paste0(
+      "<b>Block Group:</b> ", block_group, "<br/>",
+      "<b>GEOID:</b> ", GEOID, "<br/>",
+      "<b>Total Crashes (YTD 2026):</b> ", total_crashes, "<br/>",
+      "<b>Peak Risk Time:</b> ", peak_time, "<br/>",
+      "<b>Peak Period Crashes:</b> ", peak_crashes
+    ),
+
+    hover_text = paste0(
+      "BG ", block_group,
+      " | Crashes: ", total_crashes,
+      " | Peak: ", peak_time
+    )
+  )
+
+# -------------------------
+# 10. COLOR SCALE
+# -------------------------
+max_val <- max(blocks_map$total_crashes, na.rm = TRUE)
+
+pal <- colorNumeric(
+  palette = colorRampPalette(c("#f7fbff", "steelblue"))(100),
+  domain = c(0, max_val),
+  na.color = "transparent"
+)
+
+# -------------------------
+# 11. MAP
+# -------------------------
+leaflet(blocks_map) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+
+  addPolygons(
+    fillColor = ~pal(total_crashes),
+    fillOpacity = 0.85,
+    color = "white",
+    weight = 1,
+
+    label = ~lapply(hover_text, htmltools::HTML),
+    labelOptions = labelOptions(
+      sticky = TRUE,
+      direction = "auto"
+    ),
+
+    popup = ~popup_text
+  ) %>%
+  addControl(
+    html = paste0(
+      "<strong>Crash Hotspots + Peak Risk Time (Year-to-Date)</strong><br/>"),
+    position = "topright"
+  )
+```
+
+``` {r}
 #| title: Crashes by Police Region (YTD)
 #| echo: false
 #| 
@@ -2958,6 +3114,12 @@ leaflet(regions_map) %>%
     position = "bottomright",
     labFormat = labelFormat(suffix = ""),
     opacity = 1
+  ) %>%
+
+  addControl(
+    html = paste0(
+      "<strong>Crashes by Police Region (Year-to-Date)</strong><br/>"),
+    position = "topright"
   )
 
 ```
@@ -3038,6 +3200,12 @@ leaflet(districts_map) %>%
     position = "bottomright",
     labFormat = labelFormat(suffix = ""),
     opacity = 1
+  ) %>%
+  
+  addControl(
+    html = paste0(
+      "<strong>Crashes by City District (Year-to-Date)</strong><br/>"),
+    position = "topright"
   )
 
 ```
@@ -3069,6 +3237,11 @@ leaflet(map_data) %>%
     lng = mean(map_data$Longitude, na.rm = TRUE),
     lat = mean(map_data$Latitude, na.rm = TRUE),
     zoom = 11
+  ) %>%
+  addControl(
+    html = paste0(
+      "<strong>Alcohol-Related Crashes (Year-to-Date)</strong><br/>"),
+    position = "topright"
   )
 ```
 
@@ -3100,6 +3273,11 @@ leaflet(map_data) %>%
     lng = mean(map_data$Longitude, na.rm = TRUE),
     lat = mean(map_data$Latitude, na.rm = TRUE),
     zoom = 11
+  ) %>%
+  addControl(
+    html = paste0(
+      "<strong>Fatal Alcohol-Related Crashes (Year-to-Date)</strong><br/>"),
+    position = "topright"
   )
 ```
 
