@@ -67,8 +67,6 @@ suppressMessages(library(leaflet.extras))
 suppressMessages(library(sf))
 
 
-# You need to figure out how to limit the resutls to crashes that were alcohol-related
-
 data <- read.csv("C:/Users/Matt/Documents/data/ep_data_(01-01-2016_05-02-2026).csv", header = TRUE)
 
 data$City <- recode(data$City,
@@ -186,12 +184,7 @@ fatal_prev <- person_level %>%
   summarise(n = n()) %>%
   pull(n)
 
-# % changes
-pct_change_crash <- ifelse(crashes_prev == 0, NA, (crashes_now - crashes_prev)/crashes_prev*100)
-pct_change_injury <- ifelse(injuries_prev == 0, NA, (injuries_now - injuries_prev)/injuries_prev*100)
-pct_change_fatal <- ifelse(fatal_prev == 0, NA, (fatal_now - fatal_prev)/fatal_prev*100)
 
-fmt <- function(x) ifelse(is.na(x), "N/A", paste0(round(x,1), "%"))
 
 # ----------------------------
 # MONTHLY SERIES (CURRENT VS PRIOR YEAR)
@@ -240,29 +233,6 @@ injury_plot_data <- build_monthly(
   n()
 )
 
-# ----------------------------
-# DIRECTION LABELS
-# ----------------------------
-dir_crash <- case_when(
-  is.na(pct_change_crash) ~ "",
-  pct_change_crash > 0 ~ "increase",
-  pct_change_crash < 0 ~ "decrease",
-  TRUE ~ "no change"
-)
-
-dir_fatal <- case_when(
-  is.na(pct_change_fatal) ~ "",
-  pct_change_fatal > 0 ~ "increase",
-  pct_change_fatal < 0 ~ "decrease",
-  TRUE ~ "no change"
-)
-
-dir_injury <- case_when(
-  is.na(pct_change_injury) ~ "",
-  pct_change_injury > 0 ~ "increase",
-  pct_change_injury < 0 ~ "decrease",
-  TRUE ~ "no change"
-)
 
 ```
 
@@ -794,18 +764,13 @@ ggplotly(p) %>%
 
 ```{r}
 #| title: Crashes by Hour (YTD)
-# ----------------------------
-# Step 1: Define correct order
-# ----------------------------
+
 time_levels <- c(
   "12am – 3am", "3am – 6am", "6am – 9am", "9am – 12pm",
   "12pm – 3pm", "3pm – 6pm", "6pm – 9pm", "9pm – 12am"
 )
 
 
-# ----------------------------
-# Step 2: Build hourly data
-# ----------------------------
 hour_data <- crash_level %>%
   filter(
     City == "El Paso",
@@ -845,44 +810,31 @@ hour_data <- crash_level %>%
     )
   )
 
-# ----------------------------
-# Step 3: overall mean line
-# ----------------------------
+
 avg_block <- mean(hour_data$n, na.rm = TRUE)
 
-# ----------------------------
-# Step 4: ggplot
-# ----------------------------
+
 p <- ggplot(hour_data, aes(
   x = time_block,
   y = n,
-  text = label
-)) +
-
+  text = label)) +
   geom_col(fill = "steelblue", width = 0.5) +
-
   geom_text(
     aes(y =  n + max(n) * 0.05, label = round(n, 0)),
     size = 3.5
   ) +
-
-scale_y_continuous(
-  limits = c(0, max(hour_data$n, na.rm = TRUE) * 1.3)
-) +
-  labs(
-    x = "",
-    y = "Total crashes",
-    title = "Alcohol-Related Crashes in El Paso by Hour (Year-to-Date)") +
-
+  scale_y_continuous(
+    limits = c(0, max(hour_data$n, na.rm = TRUE) * 1.3)) +
+    labs(
+      x = "",
+      y = "Total crashes",
+      title = "Alcohol-Related Crashes in El Paso by Hour (Year-to-Date)") +
   theme_minimal() +
   theme(
     legend.position = "bottom",
     axis.text.x = element_text(angle = 30, hjust = 1)
   )
 
-# ----------------------------
-# Step 5: Plotly
-# ----------------------------
 ggplotly(p) %>%
   layout(
     yaxis = list(
@@ -894,15 +846,12 @@ ggplotly(p) %>%
   title = list(
     text = paste0(
       "<b>Alcohol-Related Crashes in El Paso by Hour</b>",
-      "<br><sup>Year-to-Date</sup>"
-    ),
+      "<br><sup>Year-to-Date</sup>"),
     x = 0.5,
-    xanchor = "center"
-  ),
+    xanchor = "center"),
     xaxis = list(
       showgrid = FALSE,
-      zeroline = FALSE
-    ),
+      zeroline = FALSE),
     annotations = list(
       list(
         x = 0, y = -0.3,
@@ -922,8 +871,9 @@ ggplotly(p) %>%
 
 ```{r}
 #| title: Crash Trends
+
 monthly_counts <- crash_level %>%
-  filter(City == "El Paso") %>%   # 🔴 THIS IS THE KEY FIX
+  filter(City == "El Paso") %>%  
   mutate(
     month = floor_date(Crash.Date, "month")
   ) %>%
@@ -934,52 +884,36 @@ monthly_counts <- crash_level %>%
   ) %>%
   arrange(month) %>%
   mutate(
-    ma_12 = zoo::rollmean(crashes, k = 12, fill = NA, align = "right")
-  )
+    ma_12 = zoo::rollmean(crashes, k = 12, fill = NA, align = "right"))
 
 p <- ggplot(monthly_counts, aes(x = month)) +
-
-  # observed
   geom_line(
     aes(y = crashes, color = "Total crashes"),
-    linewidth = 0.8
-  ) +
-
-  # moving average
+    linewidth = 0.8) +
   geom_line(
     aes(y = ma_12, color = "Average"),
-    linewidth = 1.2
-  ) +
-
+    linewidth = 1.2) +
   scale_color_manual(
     values = c(
       "Total crashes" = "grey70",
-      "Average" = "steelblue"
-    )
-  ) +
-
+      "Average" = "steelblue")) +
   labs(
     title = "Alcohol-Related Crashes in El Paso (2016 to Present)",
     x = "",
     y = "Total crashes",
-    color = ""
-  ) +
-
+    color = "") +
   theme_minimal() +
   theme(
-    legend.position = "bottom"
-  )
+    legend.position = "bottom")
 
 ggplotly(p) %>%
   layout(
       title = list(
-    text = paste0(
+      text = paste0(
       "<b>Alcohol-Related Crashes in El Paso</b>",
-      "<br><sup>2016–Present</sup>"
-    ),
+      "<br><sup>2016–Present</sup>"),
     x = 0.5,
-    xanchor = "center"
-  ),
+    xanchor = "center"),
     annotations = list(
       list(
         x = 0, y = -0.18,
@@ -1003,70 +937,48 @@ injury_monthly <- person_level %>%
     injured = if_else(
       str_detect(Person.Injury.Severity, "A - SUSPECTED SERIOUS INJURY|B - SUSPECTED MINOR INJURY|C - POSSIBLE INJURY"),
       1, 0,
-      missing = 0
-    ),
-    month = floor_date(Crash.Date, "month")
-  ) %>%
+      missing = 0),
+    month = floor_date(Crash.Date, "month")) %>%
   filter(
     City == "El Paso",
-    injured == 1   # uses your indicator
-  ) %>%
+    injured == 1) %>%
   group_by(month) %>%
   summarise(
     injuries = n(),
-    .groups = "drop"
-  ) %>%
+    .groups = "drop") %>%
   arrange(month) %>%
   mutate(
     ma_12 = zoo::rollmean(injuries, k = 12, fill = NA, align = "right")
   )
 
-# ----------------------------
-# Step 2: plot (MA only)
-# ----------------------------
 p <- ggplot(injury_monthly, aes(x = month)) +
-
-  # observed
   geom_line(
     aes(y = injuries, color = "Total people injured"),
-    linewidth = 0.8
-  ) +
-
-  # moving average
+    linewidth = 0.8) +
   geom_line(
     aes(y = ma_12, color = "Average"),
-    linewidth = 1.2
-  ) +
-
+    linewidth = 1.2) +
   scale_color_manual(
     values = c(
-      "Total people injured" = "grey70",  # yellow
-      "Average"        = "orange"   # orange
-    )
-  ) +
-
+      "Total people injured" = "grey70", 
+      "Average" = "orange")) +
   labs(
     title = "Alcohol-Related Crash Injuries in El Paso (2016 to Present)",
     x = "",
     y = "Total people injured",
-    color = ""
-  ) +
-
+    color = "") +
   theme_minimal() +
   theme(
-    legend.position = "bottom"
-  )
+    legend.position = "bottom")
 
 ggplotly(p) %>%
   layout(
     title = list(
     text = paste0(
       "<b>Alcohol-Related Crash Injuries in El Paso</b>",
-      "<br><sup>2016–Present</sup>"
-    ),
+      "<br><sup>2016–Present</sup>"),
     x = 0.5,
-    xanchor = "center"
-  ),
+    xanchor = "center"),
     annotations = list(
       list(
         x = 0, y = -0.18,
@@ -1084,77 +996,58 @@ ggplotly(p) %>%
 
 ```{r}
 #| title: Fatality Trends
+
 monthly_counts <- person_level %>%
   filter(City == "El Paso") %>%
   mutate(
     fatal = if_else(
       str_detect(Person.Injury.Severity, "K - FATAL INJURY"),
       1, 0,
-      missing = 0
-    ),
-    month = floor_date(Crash.Date, "month")
-  ) %>%
+      missing = 0),
+    month = floor_date(Crash.Date, "month")) %>%
   group_by(month) %>%
   summarise(
     alcohol_fatal_crashes = sum(fatal == 1, na.rm = TRUE),
-    .groups = "drop"
-  ) %>%
+    .groups = "drop") %>%
   arrange(month) %>%
   mutate(
     alcohol_fatal_ma = zoo::rollmean(alcohol_fatal_crashes,
-                                     k = 12,
-                                     fill = NA,
-                                     align = "right")
-  )
+      k = 12,
+      fill = NA,
+      align = "right"))
 
 p <- ggplot(monthly_counts, aes(x = month)) +
 
-  # observed total fatalities (grey)
   geom_line(
     aes(y = alcohol_fatal_crashes, color = "Total fatalities"),
-    linewidth = 1
-  ) +
-
-  # alcohol fatalities 12-mo moving average (maroon)
+    linewidth = 1) +
   geom_line(
     aes(y = alcohol_fatal_ma, color = "Average"),
-    linewidth = 1.2
-  ) +
-
+    linewidth = 1.2) +
   scale_color_manual(
     values = c(
       "Total fatalities" = "grey70",
-      "Average" = "maroon"
-    )
-  ) +
-
+      "Average" = "maroon")) +
   scale_y_continuous(
     limits = c(0, 10),
-    breaks = seq(0, 10, 2)
-  ) +
-
+    breaks = seq(0, 10, 2)) +
   labs(
     x = "",
     y = "Total fatalities",
     color = "",
-    title = "Alcohol-Related Traffic Fatalities in El Paso (2016 to Present)"
-  ) +
-
+    title = "Alcohol-Related Traffic Fatalities in El Paso (2016 to Present)") +
   theme_minimal() +
   theme(
-    legend.position = "bottom"
-  )
+    legend.position = "bottom")
 
 ggplotly(p) %>%
   layout(
   title = list(
     text = paste0(
       "<b>Alcohol-Related Traffic Fatalities in El Paso</b>",
-      "<br><sup>2016–Present</sup>"
-    ),
+      "<br><sup>2016–Present</sup>"),
     x = 0.5,
-    xanchor = "center"
-  ),
+    xanchor = "center"),
     annotations = list(
       list(
         x = 0, y = -0.18,
@@ -1173,6 +1066,7 @@ ggplotly(p) %>%
 
 ```{r}
 #| title: Average Crashes by Month
+
 monthly_year <- crash_level %>%
   filter(City == "El Paso") %>%
   mutate(
@@ -1200,9 +1094,7 @@ monthly_avg <- monthly_year %>%
   )
 
 overall_avg <- mean(monthly_avg$avg_crashes)
-# ----------------------------
-# Step 2: Average by month-of-year
-# ----------------------------
+
 monthly_avg <- monthly_avg %>%
   mutate(
     label = paste0(
@@ -1213,14 +1105,6 @@ monthly_avg <- monthly_avg %>%
     )
   )
 
-# ----------------------------
-# Step 3: overall mean line
-# ----------------------------
-
-
-# ----------------------------
-# Step 4: ggplot base
-# ----------------------------
 p <- ggplot(monthly_avg, aes(
   x = month_name,
   y = avg_crashes,
@@ -1228,30 +1112,22 @@ p <- ggplot(monthly_avg, aes(
     "Month: ", month_name,
     "<br>Crashes: ", round(avg_crashes, 0)  )
 )) +
-
   geom_col(fill = "steelblue") +
-
-geom_text(
-  aes(y = avg_crashes + 1, label = round(avg_crashes, 0)),
-  size = 3.5
-) +
-geom_col(fill = "steelblue", width = 0.5) +
-
-  labs(
-    x = "",
-    y = "Average crashes",
-    title = "Average Alcohol-Related Crashes by Month in El Paso (2016 to Present)"
+  geom_text(
+    aes(y = avg_crashes + 1, label = round(avg_crashes, 0)),
+    size = 3.5
   ) +
-
+  geom_col(fill = "steelblue", width = 0.5) +
+     labs(
+      x = "",
+      y = "Average crashes",
+      title = "Average Alcohol-Related Crashes by Month in El Paso (2016 to Present)"
+    ) +
   theme_minimal() +
-
   theme(
     axis.text.x = element_text(angle = 0, hjust = 1)
   )
 
-# ----------------------------
-# Step 5: Plotly conversion
-# ----------------------------
 ggplotly(p) %>%
   layout(
     margin = list(b = 60),
@@ -1274,7 +1150,7 @@ ggplotly(p) %>%
   ),
     annotations = list(
       list(
-        x = 0, y = -0.2,   # 🔥 inside plot area (not negative)
+        x = 0, y = -0.2,  
         xref = "paper", yref = "paper",
         xanchor = "left",
         yanchor = "bottom",
@@ -1290,7 +1166,7 @@ ggplotly(p) %>%
 
 ```{r}
 #| title: Average Fatalities by Month
-#| 
+
 monthly_fatal_year <- person_level %>%
   filter(City == "El Paso") %>%
   mutate(
@@ -1309,9 +1185,6 @@ monthly_fatal_year <- person_level %>%
     .groups = "drop"
   )
 
-# ----------------------------
-# Step 2: Average fatalities by month-of-year
-# ----------------------------
 monthly_fatal_avg <- monthly_fatal_year %>%
   group_by(month_num) %>%
   summarise(
@@ -1329,14 +1202,8 @@ monthly_fatal_avg <- monthly_fatal_year %>%
     )
   )
 
-# ----------------------------
-# Step 3: overall mean line
-# ----------------------------
 overall_avg <- mean(monthly_fatal_avg$avg_fatalities)
 
-# ----------------------------
-# Step 4: ggplot
-# ----------------------------
 p <- ggplot(monthly_fatal_avg, aes(
   x = month_name,
   y = avg_fatalities,
@@ -1345,13 +1212,13 @@ p <- ggplot(monthly_fatal_avg, aes(
 
   geom_col(fill = "maroon", width = 0.5) +
 
-geom_text(
-  aes(y = avg_fatalities + 0.1, label = round(avg_fatalities, 1)),
-  size = 3.5
-) +
-scale_y_continuous(
-  limits = c(0, max(monthly_fatal_avg$avg_fatalities, na.rm = TRUE) * 1.3)
-) +  
+  geom_text(
+    aes(y = avg_fatalities + 0.1, label = round(avg_fatalities, 1)),
+    size = 3.5
+  ) +
+  scale_y_continuous(
+    limits = c(0, max(monthly_fatal_avg$avg_fatalities, na.rm = TRUE) * 1.3)
+  ) +  
 
   labs(
     x = "",
@@ -1366,9 +1233,6 @@ scale_y_continuous(
     axis.text.x = element_text(angle = 0, hjust = 1)
   )
 
-# ----------------------------
-# Step 5: Plotly
-# ----------------------------
 ggplotly(p) %>%
   layout(
     margin = list(b = 60),
@@ -1391,7 +1255,7 @@ ggplotly(p) %>%
     ),
     annotations = list(
       list(
-        x = 0, y = -0.2,   # 🔥 inside plot area (not negative)
+        x = 0, y = -0.2,
         xref = "paper", yref = "paper",
         xanchor = "left",
         yanchor = "bottom",
@@ -1414,12 +1278,10 @@ base <- crash_level %>%
   filter(City == "El Paso", Crash.Year != 2020) %>%
   mutate(
     date = as.Date(Crash.Date),
-    year = Crash.Year   # 🔥 FIX: required
+    year = Crash.Year 
   )
 
-# ----------------------------
-# 1. Build explicit event window per year
-# ----------------------------
+
 ny_window <- base %>%
   distinct(year) %>%
   mutate(
@@ -1428,38 +1290,26 @@ ny_window <- base %>%
   tidyr::expand_grid(event_time = -7:7) %>%
   mutate(date = holiday + event_time)
 
-# ----------------------------
-# 2. Join crashes to window
-# ----------------------------
 data <- ny_window %>%
   left_join(
     base %>% select(date, Crash.ID),
     by = "date"
   )
 
-# ----------------------------
-# 3. Aggregate
-# ----------------------------
 plot_data <- data %>%
   group_by(year, event_time) %>%
   summarise(crashes = n_distinct(Crash.ID), .groups = "drop") %>%
   group_by(event_time) %>%
   summarise(avg_crashes = mean(crashes, na.rm = TRUE), .groups = "drop")
 
-# ----------------------------
-# 4. Plot
-# ----------------------------
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
-  # bars
   geom_col(fill = "steelblue", width = 0.8) +
-
   labs(
     x = "Days from New Year's Day",
     y = "Average Crashes",
     title = "Alcohol-Related Crashes Around New Year’s Day in El Paso (All Years)"
   ) +
-
   theme_minimal(base_size = 11) +
   theme(
     axis.text.x = element_text(angle = 0),
@@ -1467,12 +1317,9 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
     panel.grid.minor = element_blank()
   )
 
-
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   geom_col(fill = "steelblue", width = 0.8) +
-
-  # 🔥 one-decimal labels above bars
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -1483,15 +1330,13 @@ scale_y_continuous(
   breaks = seq(0, 6, by = 1)
 ) +
   scale_x_continuous(
-    breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
+    breaks = seq(-7, 7, by = 1)
   ) +
-
   labs(
     x = "Days from New Year's Day",
     y = "Average Crashes",
     title = "Alcohol-Related Crashes Around New Year’s Day in El Paso (2016-Present)"
   ) +
-
   theme_minimal(base_size = 11) +
   theme(
     axis.text.x = element_text(angle = 0),
@@ -1516,7 +1361,6 @@ layout(
     dtick = 1
   ),
 
-  # 🔥 KEY FIX: adds space between subtitle and plot
   margin = list(
     t = 100,
     b = 120,
@@ -1574,7 +1418,6 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   geom_col(fill = "steelblue", width = 0.8) +
 
-  # 🔥 one-decimal labels above bars
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -1586,7 +1429,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 ) +
 
   scale_x_continuous(
-    breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
+    breaks = seq(-7, 7, by = 1) 
   ) +
 
   labs(
@@ -1619,7 +1462,6 @@ layout(
     dtick = 1
   ),
 
-  # 🔥 KEY FIX: adds space between subtitle and plot
   margin = list(
     t = 100,
     b = 120,
@@ -1671,8 +1513,6 @@ plot_data <- data %>%
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   geom_col(fill = "steelblue", width = 0.8) +
-
-  # 🔥 one-decimal labels above bars
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -1683,22 +1523,19 @@ scale_y_continuous(
   breaks = seq(0, 6, by = 1)
 ) +
   scale_x_continuous(
-    breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
+    breaks = seq(-7, 7, by = 1) 
   ) +
-
   labs(
     x = "Days from Saint Patrick's Day",
     y = "Average Crashes",
     title = "Alcohol-Related Crashes Around Saint Patrick's Day in El Paso (2016-Present)"
   ) +
-
   theme_minimal(base_size = 11) +
   theme(
     axis.text.x = element_text(angle = 0),
     panel.grid.major.x = element_blank(),
     panel.grid.minor = element_blank()
   )
-
 
 ggplotly(p) %>%
 layout(
@@ -1708,22 +1545,18 @@ layout(
     showgrid = TRUE,
     zeroline = TRUE
   ),
-
   xaxis = list(
     showgrid = FALSE,
     zeroline = FALSE,
     range = c(-8, 8),
     dtick = 1
   ),
-
-  # 🔥 KEY FIX: adds space between subtitle and plot
   margin = list(
     t = 100,
     b = 120,
     l = 40,
     r = 30
   ),
-
   title = list(
     text = paste0(
       "<b>Alcohol-Related Crashes Around Saint Patrick's Day in El Paso</b>",
@@ -1732,7 +1565,6 @@ layout(
     x = 0.5,
     xanchor = "center"
   ),
-
   annotations = list(
     list(
       x = 0, y = -0.5,
@@ -1771,8 +1603,6 @@ plot_data <- data %>%
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   geom_col(fill = "steelblue", width = 0.8) +
-
-  # 🔥 one-decimal labels above bars
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -1783,7 +1613,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
   breaks = seq(0, 6, by = 1)
 ) +
   scale_x_continuous(
-    breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
+    breaks = seq(-7, 7, by = 1)
   ) +
 
   labs(
@@ -1815,15 +1645,12 @@ layout(
     range = c(-8, 8),
     dtick = 1
   ),
-
-  # 🔥 KEY FIX: adds space between subtitle and plot
   margin = list(
     t = 100,
     b = 120,
     l = 40,
     r = 30
   ),
-
   title = list(
     text = paste0(
       "<b>Alcohol-Related Crashes Around Memorial Day in El Paso</b>",
@@ -1832,7 +1659,6 @@ layout(
     x = 0.5,
     xanchor = "center"
   ),
-
   annotations = list(
     list(
       x = 0, y = -0.5,
@@ -1868,8 +1694,6 @@ plot_data <- data %>%
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   geom_col(fill = "steelblue", width = 0.8) +
-
-  # 🔥 one-decimal labels above bars
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -1880,7 +1704,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
   breaks = seq(0, 6, by = 1)
 ) +
   scale_x_continuous(
-    breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
+    breaks = seq(-7, 7, by = 1) 
   ) +
 
   labs(
@@ -1912,8 +1736,6 @@ layout(
     range = c(-8, 8),
     dtick = 1
   ),
-
-  # 🔥 KEY FIX: adds space between subtitle and plot
   margin = list(
     t = 100,
     b = 120,
@@ -1964,8 +1786,6 @@ plot_data <- data %>%
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   geom_col(fill = "steelblue", width = 0.8) +
-
-  # 🔥 one-decimal labels above bars
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -1976,7 +1796,7 @@ scale_y_continuous(
   breaks = seq(0, 6, by = 1)
 ) +
   scale_x_continuous(
-    breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
+    breaks = seq(-7, 7, by = 1)
   ) +
 
   labs(
@@ -1995,28 +1815,23 @@ scale_y_continuous(
 
 ggplotly(p) %>%
 layout(
-
   yaxis = list(
     showticklabels = FALSE,
     showgrid = TRUE,
     zeroline = TRUE
   ),
-
   xaxis = list(
     showgrid = FALSE,
     zeroline = FALSE,
     range = c(-8, 8),
     dtick = 1
   ),
-
-  # 🔥 KEY FIX: adds space between subtitle and plot
   margin = list(
     t = 100,
     b = 120,
     l = 40,
     r = 30
   ),
-
   title = list(
     text = paste0(
       "<b>Alcohol-Related Crashes Around Independence Day in El Paso</b>",
@@ -2025,7 +1840,6 @@ layout(
     x = 0.5,
     xanchor = "center"
   ),
-
   annotations = list(
     list(
       x = 0, y = -0.5,
@@ -2066,8 +1880,6 @@ plot_data <- data %>%
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   geom_col(fill = "steelblue", width = 0.8) +
-
-  # 🔥 one-decimal labels above bars
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -2078,15 +1890,13 @@ scale_y_continuous(
   breaks = seq(0, 6, by = 1)
 ) +
   scale_x_continuous(
-    breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
+    breaks = seq(-7, 7, by = 1)
   ) +
-
   labs(
     x = "Days from Labor Day",
     y = "Average Crashes",
     title = "Alcohol-Related Crashes Around Labor Day in El Paso (2016-Present)"
   ) +
-
   theme_minimal(base_size = 11) +
   theme(
     axis.text.x = element_text(angle = 0),
@@ -2097,21 +1907,17 @@ scale_y_continuous(
 
 ggplotly(p) %>%
 layout(
-
   yaxis = list(
     showticklabels = FALSE,
     showgrid = TRUE,
     zeroline = TRUE
   ),
-
   xaxis = list(
     showgrid = FALSE,
     zeroline = FALSE,
     range = c(-8, 8),
     dtick = 1
   ),
-
-  # 🔥 KEY FIX: adds space between subtitle and plot
   margin = list(
     t = 100,
     b = 120,
@@ -2161,8 +1967,6 @@ plot_data <- data %>%
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   geom_col(fill = "steelblue", width = 0.8) +
-
-  # 🔥 one-decimal labels above bars
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -2173,22 +1977,19 @@ scale_y_continuous(
   breaks = seq(0, 6, by = 1)
 ) +
   scale_x_continuous(
-    breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
+    breaks = seq(-7, 7, by = 1)
   ) +
-
   labs(
     x = "Days from Halloween",
     y = "Average Crashes",
     title = "Alcohol-Related Crashes Around Halloween in El Paso (2016-Present)"
   ) +
-
   theme_minimal(base_size = 11) +
   theme(
     axis.text.x = element_text(angle = 0),
     panel.grid.major.x = element_blank(),
     panel.grid.minor = element_blank()
   )
-
 
 ggplotly(p) %>%
 layout(
@@ -2205,8 +2006,6 @@ layout(
     range = c(-8, 8),
     dtick = 1
   ),
-
-  # 🔥 KEY FIX: adds space between subtitle and plot
   margin = list(
     t = 100,
     b = 120,
@@ -2263,8 +2062,6 @@ plot_data <- data %>%
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   geom_col(fill = "steelblue", width = 0.8) +
-
-  # 🔥 one-decimal labels above bars
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -2275,15 +2072,13 @@ scale_y_continuous(
   breaks = seq(0, 6, by = 1)
 ) +
   scale_x_continuous(
-    breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
+    breaks = seq(-7, 7, by = 1)
   ) +
-
   labs(
     x = "Days from Thanksgiving",
     y = "Average Crashes",
     title = "Alcohol-Related Crashes Around Thanksgiving in El Paso (2016-Present)"
   ) +
-
   theme_minimal(base_size = 11) +
   theme(
     axis.text.x = element_text(angle = 0),
@@ -2294,28 +2089,23 @@ scale_y_continuous(
 
 ggplotly(p) %>%
 layout(
-
   yaxis = list(
     showticklabels = FALSE,
     showgrid = TRUE,
     zeroline = TRUE
   ),
-
   xaxis = list(
     showgrid = FALSE,
     zeroline = FALSE,
     range = c(-8, 8),
     dtick = 1
   ),
-
-  # 🔥 KEY FIX: adds space between subtitle and plot
   margin = list(
     t = 100,
     b = 120,
     l = 40,
     r = 30
   ),
-
   title = list(
     text = paste0(
       "<b>Alcohol-Related Crashes Around Thanksgiving in El Paso</b>",
@@ -2324,7 +2114,6 @@ layout(
     x = 0.5,
     xanchor = "center"
   ),
-
   annotations = list(
     list(
       x = 0, y = -0.5,
@@ -2358,8 +2147,6 @@ plot_data <- data %>%
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   geom_col(fill = "steelblue", width = 0.8) +
-
-  # 🔥 one-decimal labels above bars
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -2370,22 +2157,19 @@ scale_y_continuous(
   breaks = seq(0, 6, by = 1)
 ) +
   scale_x_continuous(
-    breaks = seq(-7, 7, by = 1)   # 🔥 more ticks (every day)
+    breaks = seq(-7, 7, by = 1)
   ) +
-
   labs(
     x = "Days from Christmas",
     y = "Average Crashes",
     title = "Alcohol-Related Crashes Around Christmas in El Paso (2016-Present)"
   ) +
-
   theme_minimal(base_size = 11) +
   theme(
     axis.text.x = element_text(angle = 0),
     panel.grid.major.x = element_blank(),
     panel.grid.minor = element_blank()
   )
-
 
 ggplotly(p) %>%
 layout(
@@ -2395,22 +2179,18 @@ layout(
     showgrid = TRUE,
     zeroline = TRUE
   ),
-
   xaxis = list(
     showgrid = FALSE,
     zeroline = FALSE,
     range = c(-8, 8),
     dtick = 1
   ),
-
-  # 🔥 KEY FIX: adds space between subtitle and plot
   margin = list(
     t = 100,
     b = 120,
     l = 40,
     r = 30
   ),
-
   title = list(
     text = paste0(
       "<b>Alcohol-Related Crashes Around Christmas in El Paso</b>",
@@ -2419,7 +2199,6 @@ layout(
     x = 0.5,
     xanchor = "center"
   ),
-
   annotations = list(
     list(
       x = 0, y = -0.5,
@@ -2443,23 +2222,16 @@ drivers <- person_level %>%
     driver_flag = case_when(
       Person.Type %in% c(
         "1 - DRIVER",
-        "5 - DRIVER OF MOTORCYCLE TYPE VEHICLE"
-      ) ~ 1,
-      TRUE ~ 0
-    ),
-
+        "5 - DRIVER OF MOTORCYCLE TYPE VEHICLE") ~ 1,
+      TRUE ~ 0),
     bac_value = as.numeric(Person.Blood.Alcohol.Content.Test.Result),
-
     bac_result = case_when(
       !is.na(bac_value) & bac_value > 0 ~ 1,
-      TRUE ~ 0
-    )
-  ) %>%
+      TRUE ~ 0)) %>%
   filter(
     City == "El Paso",
     Crash.Year == 2026,
-    driver_flag == 1,
-  )
+    driver_flag == 1,)
 ```
 
 ## Row {height="200px"}
@@ -2526,6 +2298,7 @@ list(
 
 ```{r}
 #| title: Driver's License Zipcode (YTD)
+
 zip_top10 <- drivers %>%
   filter(bac_value >= 0.08 & bac_result == 1,
          !is.na(Driver.Zip.Code)) %>%
@@ -2539,7 +2312,6 @@ zip_top10 <- zip_top10 %>%
     pct = n / sum(n),
     label_full = paste0(Driver.Zip.Code, "\n", n, " (", scales::percent(pct), ")")
   )
-
 
 p <- plot_ly(
   data = zip_top10,
@@ -2562,21 +2334,18 @@ p %>%
   layout(
     title = list(
     text = paste0(
-      "<b>Top 10 License ZIP Codes of Intoxicated Drivers</b>",
+      "<b>Top 10 License ZIP Codes of Intoxicated Drivers Who Crashed in El Paso</b>",
       "<br><sup>Year-to-Date (BAC ≥ 0.08)</sup>"
     ),
       x = 0.5,
       xanchor = "center"
     ),
-
-    # 🔥 THIS is what you’re missing
     margin = list(
       l = 10,
       r = 10,
       t = 70,
       b = 80   # space for caption / footer
     ),
-
     annotations = list(
       list(
         x = 0, y = -0.08,
@@ -2628,12 +2397,10 @@ drivers_clean <- drivers %>%
 demo_table <- drivers_clean %>%
   filter(bac_value >= 0.08 & bac_result == 1) %>%
   filter(!is.na(Person.Ethnicity), !is.na(Person.Gender)) %>%
-  
-  mutate(
+    mutate(
     Person.Gender = factor(Person.Gender, levels = c("Female", "Male")),
     Person.Age = as.numeric(Person.Age)
   ) %>%
-  
   group_by(Person.Ethnicity, Person.Gender) %>%
   summarise(
     avg_bac = mean(bac_value, na.rm = TRUE),
@@ -2641,51 +2408,37 @@ demo_table <- drivers_clean %>%
     n = n(),
     .groups = "drop"
   ) %>%
-  
   mutate(
     pct = scales::percent(n / sum(n), accuracy = 0.1),
-    
     avg_bac = round(avg_bac, 2),
     avg_age = round(avg_age, 0)
   ) %>%
-  
   arrange(desc(n)) %>%
-  
   rename(
     "Race/Ethnicity" = Person.Ethnicity,
     "Sex" = Person.Gender,
     "Average Age" = avg_age,
     "Average BAC" = avg_bac,
     "Count" = n,
-    "Percent" = pct
-  )
-
+    "Percent" = pct)
 
 reactable(
   demo_table,
 
   defaultPageSize = 10,
   searchable = TRUE,
-
   striped = TRUE,
   highlight = TRUE,
   compact = TRUE,
-
   columns = list(
     `Average BAC` = colDef(format = colFormat(digits = 2)),
     `Average Age` = colDef(format = colFormat(digits = 0)),
-
     Count = colDef(
       align = "center"
     ),
-
     Percent = colDef(
-      align = "center"
-    )
-  ),
-
-  defaultSorted = list(Count = "desc")
-)
+      align = "center")),
+    defaultSorted = list(Count = "desc"))
 
 ```
 
@@ -2693,6 +2446,7 @@ reactable(
 
 ```{r}
 #| title: Vehicle Color (YTD)
+
 plot_data <- drivers %>%
   filter(bac_value >= 0.08 & bac_result == 1) %>%
   mutate(
@@ -2714,15 +2468,12 @@ plot_data <- drivers %>%
     )
   ) %>%
   count(color) %>%
-  arrange(desc(n)) %>%   # 🔥 LARGEST FIRST
+  arrange(desc(n)) %>%   
   mutate(
-    color = factor(color, levels = rev(color)),  # 🔥 ensures top-to-bottom ordering in Plotly
+    color = factor(color, levels = rev(color)), 
     label = scales::comma(n)
   )
 
-# ----------------------------
-# 2. Color map
-# ----------------------------
 color_map <- c(
   "Black" = "#2C3E50",
   "White" = "#ECF0F1",
@@ -2740,9 +2491,6 @@ color_map <- c(
   "Other" = "#7F8C8D"
 )
 
-# ----------------------------
-# 3. Plot
-# ----------------------------
 p <- plot_ly(
   data = plot_data,
   x = ~n,
@@ -2775,33 +2523,27 @@ p <- plot_ly(
       x = 0.5,
       xanchor = "center"
     ),
-
     xaxis = list(
       title = "Total intoxicated drivers",
       range = c(0, max(plot_data$n) * 1.2)
     ),
-
     yaxis = list(
       title = "",
       automargin = TRUE
     ),
-
     paper_bgcolor = "white",
     plot_bgcolor = "white",
-
     font = list(
       family = "Arial, sans-serif",
       size = 14,
       color = "#2c3e50"
     ),
-
     margin = list(
       t = 90,
       r = 140,
       l = 80,
       b = 100
     ),
-
     annotations = list(
       list(
         x = 0, y = -0.12,
@@ -2836,33 +2578,24 @@ vehicle_table <- drivers %>%
   ) %>%
   
   mutate(
-
     # Make cleanup
     make = case_when(
       toupper(Vehicle.Make) %in% c("GMC", "BMW") ~ toupper(Vehicle.Make),
       TRUE ~ str_to_title(tolower(Vehicle.Make))
     ),
-
     # Model cleanup
     model = Vehicle.Model.Name %>%
       str_remove("\\s*\\(.*\\)") %>%
       str_to_sentence()
   ) %>%
-  
-  # ----------------------------
-  # Group only Make + Model
-  # ----------------------------
   group_by(make, model) %>%
   summarise(
     n = n(),
     .groups = "drop"
   ) %>%
-  
-  # Percent of total
   mutate(
     pct = scales::percent(n / sum(n), accuracy = 0.1)
   ) %>%
-  
   arrange(desc(n))
 
 table <- reactable(
@@ -2875,17 +2608,11 @@ table <- reactable(
   highlight = TRUE,
   compact = TRUE,
   columns = list(
-
     make = colDef(name = "Make"),
     model = colDef(name = "Model"),
-
     n = colDef(name = "Count"),
-
-    pct = colDef(name = "Percent")
-  ),
-
-  defaultSorted = list(n = "desc")
-)
+    pct = colDef(name = "Percent")),
+  defaultSorted = list(n = "desc"))
 
 table
 ```
@@ -2900,15 +2627,11 @@ table
 #| title: Peak Risk for Crashes (YTD)
 #| echo: false
 
-# -------------------------
-# 0. DEFINE YTD WINDOW
-# -------------------------
+
 today <- Sys.Date()
 start_2026 <- as.Date("2026-01-01")
 
-# -------------------------
-# 1. ALL ALCOHOL-RELATED CRASHES (YTD 2026)
-# -------------------------
+
 crash_2026 <- crash_level %>%
   mutate(
     crash_date = as.Date(Crash.Date),  # <-- adjust if your date field differs
@@ -2922,9 +2645,6 @@ crash_2026 <- crash_level %>%
   ) %>%
   filter(!is.na(Latitude), !is.na(Longitude))
 
-# -------------------------
-# 2. BLOCK GROUPS
-# -------------------------
 blocks <- st_read(
   "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/OCEPTX/shape files/Census Block Groups/tl_2025_48_bg.shp",
   quiet = TRUE
@@ -2934,14 +2654,8 @@ blocks <- st_read(
 crash_sf <- st_as_sf(crash_2026, coords = c("Longitude", "Latitude"), crs = 4326)
 blocks <- st_transform(blocks, st_crs(crash_sf))
 
-# -------------------------
-# 3. SPATIAL JOIN
-# -------------------------
 joined <- st_join(crash_sf, blocks, join = st_within)
 
-# -------------------------
-# 4. TIME BLOCKS
-# -------------------------
 joined <- joined %>%
   mutate(
     time_block = case_when(
@@ -2956,49 +2670,33 @@ joined <- joined %>%
     )
   )
 
-# -------------------------
-# 5. AGGREGATE (TIME × BLOCK GROUP)
-# -------------------------
 tbl_time <- joined %>%
   st_drop_geometry() %>%
   group_by(GEOID, time_block) %>%
   summarise(n = n(), .groups = "drop")
 
-# -------------------------
-# 6. PEAK RISK TIME (MODE)
-# -------------------------
 peak_time <- tbl_time %>%
   group_by(GEOID) %>%
   slice_max(n, n = 1, with_ties = FALSE) %>%
   ungroup() %>%
   select(GEOID, peak_time = time_block, peak_crashes = n)
 
-# -------------------------
-# 7. TOTAL CRASHES PER GEOID
-# -------------------------
 geo_totals <- joined %>%
   st_drop_geometry() %>%
   group_by(GEOID) %>%
   summarise(total_crashes = n(), .groups = "drop")
 
-# -------------------------
-# 8. TOP 10 BLOCK GROUPS
-# -------------------------
 top_geoids <- geo_totals %>%
   arrange(desc(total_crashes)) %>%
   slice_head(n = 10) %>%
   pull(GEOID)
 
-# -------------------------
-# 9. BUILD MAP DATA
-# -------------------------
 blocks_map <- blocks %>%
   filter(GEOID %in% top_geoids) %>%
   left_join(geo_totals, by = "GEOID") %>%
   left_join(peak_time, by = "GEOID") %>%
   mutate(
     block_group = substr(GEOID, nchar(GEOID), nchar(GEOID)),
-
     popup_text = paste0(
       "<b>Block Group:</b> ", block_group, "<br/>",
       "<b>GEOID:</b> ", GEOID, "<br/>",
@@ -3006,7 +2704,6 @@ blocks_map <- blocks %>%
       "<b>Peak Risk Time:</b> ", peak_time, "<br/>",
       "<b>Peak Period Crashes:</b> ", peak_crashes
     ),
-
     hover_text = paste0(
       "BG ", block_group,
       " | Crashes: ", total_crashes,
@@ -3014,9 +2711,6 @@ blocks_map <- blocks %>%
     )
   )
 
-# -------------------------
-# 10. COLOR SCALE
-# -------------------------
 max_val <- max(blocks_map$total_crashes, na.rm = TRUE)
 
 pal <- colorNumeric(
@@ -3025,29 +2719,23 @@ pal <- colorNumeric(
   na.color = "transparent"
 )
 
-# -------------------------
-# 11. MAP
-# -------------------------
 leaflet(blocks_map) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
-
   addPolygons(
     fillColor = ~pal(total_crashes),
     fillOpacity = 0.85,
     color = "white",
     weight = 1,
-
     label = ~lapply(hover_text, htmltools::HTML),
     labelOptions = labelOptions(
       sticky = TRUE,
       direction = "auto"
     ),
-
     popup = ~popup_text
   ) %>%
   addControl(
     html = paste0(
-      "<strong>Alcohol-Related Crash Hotspots in El Paso (Year-to-Date)</strong><br/>"),
+      "<strong>Top 10 Alcohol-Related Crash Hotspots in El Paso (Year-to-Date)</strong><br/>"),
     position = "topright"
   )
 ```
@@ -3055,7 +2743,7 @@ leaflet(blocks_map) %>%
 ``` {r}
 #| title: Crashes by Police Region (YTD)
 #| echo: false
-#| 
+
 regions <- st_read(
   "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/OCEPTX/shape files/Police Regions/PoliceRegions.shp",   quiet = TRUE
 ) %>%
@@ -3084,9 +2772,6 @@ regions_map <- regions %>%
   left_join(counts, by = "DISTRICT") %>%
   mutate(Crashes = ifelse(is.na(Crashes), 0, Crashes))
 
-# -------------------------
-# FIXED SCALE (0 to max)
-# -------------------------
 max_val <- max(regions_map$Crashes, na.rm = TRUE)
 
 pal <- colorNumeric(
@@ -3129,18 +2814,11 @@ leaflet(regions_map) %>%
 ``` {r}
 #| title: Crashes by City Districts (YTD)
 #| echo: false
-# -------------------------
-# LOAD DISTRICTS SHAPEFILE
-# -------------------------
-districts <- st_read(
-  "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/OCEPTX/shape files/City Districts/RepresentativeDistricts.shp",   quiet = TRUE
 
-) %>%
+districts <- st_read(
+  "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/OCEPTX/shape files/City Districts/RepresentativeDistricts.shp",   quiet = TRUE) %>%
   st_make_valid()
 
-# -------------------------
-# CRASH DATA (2026)
-# -------------------------
 crash_pts <- crash_level %>%
   filter(City == "El Paso",
          Crash.Year == 2026) %>%
@@ -3153,9 +2831,6 @@ crash_pts <- crash_level %>%
 crash_sf <- st_as_sf(crash_pts, coords = c("Longitude", "Latitude"), crs = 4326)
 districts <- st_transform(districts, st_crs(crash_sf))
 
-# -------------------------
-# SPATIAL JOIN
-# -------------------------
 joined <- st_join(crash_sf, districts, join = st_within)
 
 counts <- joined %>%
@@ -3167,9 +2842,6 @@ districts_map <- districts %>%
   left_join(counts, by = "DISTRICT") %>%
   mutate(Crashes = ifelse(is.na(Crashes), 0, Crashes))
 
-# -------------------------
-# FIXED SCALE (0 → MAX)
-# -------------------------
 max_val <- max(districts_map$Crashes, na.rm = TRUE)
 
 pal <- colorNumeric(
@@ -3178,9 +2850,6 @@ pal <- colorNumeric(
   na.color = "transparent"
 )
 
-# -------------------------
-# MAP
-# -------------------------
 leaflet(districts_map) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   
@@ -3298,15 +2967,12 @@ top_streets <- crash_level %>%
       str_detect(Street.Name, " ") ~ str_to_title(str_to_lower(Street.Name)),
       TRUE ~ Street.Name
     ),
-    
-    # Optional: clean common suffixes to standard casing
     Street.Name = str_replace_all(Street.Name, "\\bDr\\b", "Dr"),
     Street.Name = str_replace_all(Street.Name, "\\bBlvd\\b", "Blvd"),
     Street.Name = str_replace_all(Street.Name, "\\bCt\\b", "Ct"),
     Street.Name = str_replace_all(Street.Name, "\\bRd\\b", "Rd"),
     Street.Name = str_replace_all(Street.Name, "\\bSt\\b", "St"),
     Street.Name = str_replace_all(Street.Name, "\\bAve\\b", "Ave"),
-    
     percent = round(n / sum(n) * 100, 2)
   ) %>%
   rename(
@@ -3337,6 +3003,7 @@ reactable(
 
 ```{r}
 #| title: Fatal Crash Locations (2016-Present)
+
 top_fatal_streets <- crash_level %>%
   filter(
     Fatal.Crash.Flag == 1
@@ -3348,17 +3015,13 @@ top_fatal_streets <- crash_level %>%
       TRUE ~ Street.Name
     ),
     
-    # Preserve directional abbreviations
     Street.Name = str_replace_all(Street.Name, "\\b(N|S|E|W|NE|NW|SE|SW)\\b", toupper),
-    
-    # Preserve street suffix casing
     Street.Name = str_replace_all(Street.Name, "\\bDr\\b", "Dr"),
     Street.Name = str_replace_all(Street.Name, "\\bBlvd\\b", "Blvd"),
     Street.Name = str_replace_all(Street.Name, "\\bCt\\b", "Ct"),
     Street.Name = str_replace_all(Street.Name, "\\bRd\\b", "Rd"),
     Street.Name = str_replace_all(Street.Name, "\\bSt\\b", "St"),
     Street.Name = str_replace_all(Street.Name, "\\bAve\\b", "Ave"),
-    
     percent = round(n / sum(n) * 100, 2)
   ) %>%
   rename(
@@ -3369,14 +3032,11 @@ top_fatal_streets <- crash_level %>%
 
 reactable(
   top_fatal_streets,
-  
   defaultPageSize = 10,
   striped = TRUE,
   highlight = TRUE,
   searchable = TRUE,
-  
   defaultSorted = list(`Fatal Crashes` = "desc"),
-  
   columns = list(
     `Street Name` = colDef(minWidth = 220),
     `Fatal Crashes` = colDef(align = "center"),
@@ -3385,7 +3045,6 @@ reactable(
       align = "center"
     )
   ),
-  
   compact = TRUE,
   bordered = FALSE
 )
