@@ -361,21 +361,21 @@
     "href": "dwi_home.html",
     "title": "Home - Driving While Intoxicated Research",
     "section": "",
-    "text": "Summary:\nA comprehensive review of all local research on impaired driving in El Paso is underway. This review will document what is known and reveal critical gaps—informing a clear path forward for research, policy, and prevention.\n\n Read the Search and Analysis Protocol"
+    "text": "Overview:\nThe Alcohol-Related Crash Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 data points covering crash trends, geographic patterns, driver, and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.\n\n View Dashboard"
   },
   {
     "objectID": "dwi_home.html#local-research-on-impaired-driving",
     "href": "dwi_home.html#local-research-on-impaired-driving",
     "title": "Home - Driving While Intoxicated Research",
-    "section": "",
-    "text": "Summary:\nA comprehensive review of all local research on impaired driving in El Paso is underway. This review will document what is known and reveal critical gaps—informing a clear path forward for research, policy, and prevention.\n\n Read the Search and Analysis Protocol"
+    "section": "Local Research on Impaired Driving",
+    "text": "Local Research on Impaired Driving\n\n\n\nSummary:\nA comprehensive review of all local research on impaired driving in El Paso is underway. This review will document what is known and reveal critical gaps—informing a clear path forward for research, policy, and prevention.\n\n Read the Search and Analysis Protocol"
   },
   {
     "objectID": "dwi_home.html#alcohol-related-crash-dashboard",
     "href": "dwi_home.html#alcohol-related-crash-dashboard",
     "title": "Home - Driving While Intoxicated Research",
-    "section": "Alcohol-Related Crash Dashboard",
-    "text": "Alcohol-Related Crash Dashboard\n\n\n\nOverview:\nThe Alcohol-Related Crash Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 data points covering crash trends, geographic patterns, driver, and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.\n\n View Dashboard"
+    "section": "",
+    "text": "Overview:\nThe Alcohol-Related Crash Dashboard is a publicly available tool designed to monitor alcohol-related crashes in El Paso. It includes over 30 data points covering crash trends, geographic patterns, driver, and vehicle characteristics. The dashboard is updated monthly, enabling near real-time monitoring of impaired driving in the city.\n\n View Dashboard"
   },
   {
     "objectID": "dwi_home.html#study-does-public-shaming-deter-drunk-driving",
@@ -397,5 +397,12 @@
     "title": "Home - Driving While Intoxicated Research",
     "section": "Latest News on DWI in El Paso",
     "text": "Latest News on DWI in El Paso\nThis page tracks the latest developments on drunk driving in El Paso. It brings together recent reporting on crashes, arrests, enforcement activity, and policy changes so you can quickly see what’s happening across the city.\n\n View Latest News"
+  },
+  {
+    "objectID": "dwi_home.html#does-public-shaming-deter-drunk-driving",
+    "href": "dwi_home.html#does-public-shaming-deter-drunk-driving",
+    "title": "Home - Driving While Intoxicated Research",
+    "section": "Does Public Shaming Deter Drunk Driving?",
+    "text": "Does Public Shaming Deter Drunk Driving?\nThis study evaluates whether a social media campaign posting DWI booking photos influenced alcohol-related crashes in El Paso.\n Read Paper"
   }
 ]

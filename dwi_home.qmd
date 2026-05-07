@@ -33,30 +33,6 @@ img {
 }
 </style>
 
-## Local Research on Impaired Driving
-
-::: {.project-block}
-::: {.grid .align-items-center}
-::: {.g-col-12 .g-col-md-6}
-
-**Summary:**  
-A comprehensive review of all local research on impaired driving in El Paso is underway. This review will document what is known and reveal critical gaps—informing a clear path forward for research, policy, and prevention.
-
-<br>
-
-<a href="dwi_protocol.html" target="_blank" class="btn btn-primary">
-Read the Search and Analysis Protocol
-</a>
-
-:::
-
-::: {.g-col-12 .g-col-md-6}
-
-:::
-:::
-:::
-
----
 
 ## Alcohol-Related Crash Dashboard
 
@@ -82,6 +58,32 @@ View Dashboard
 :::
 :::
 :::
+
+---
+
+## Local Research on Impaired Driving
+
+::: {.project-block}
+::: {.grid .align-items-center}
+::: {.g-col-12 .g-col-md-6}
+
+**Summary:**  
+A comprehensive review of all local research on impaired driving in El Paso is underway. This review will document what is known and reveal critical gaps—informing a clear path forward for research, policy, and prevention.
+
+<br>
+
+<a href="dwi_protocol.html" target="_blank" class="btn btn-primary">
+Read the Search and Analysis Protocol
+</a>
+
+:::
+
+::: {.g-col-12 .g-col-md-6}
+
+:::
+:::
+:::
+
 
 ---
 
