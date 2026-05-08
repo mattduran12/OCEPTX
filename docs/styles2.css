@@ -48,6 +48,21 @@ a:hover {
   color: #ffffff;
 }
 
+/* Fixes auto scrolling
+
+*/
+.nav-tabs .nav-link {
+  scroll-margin-top: 0 !important;
+}
+
+.tab-content {
+  overflow: visible !important;
+}
+
+html {
+  scroll-behavior: auto !important;
+}
+
 /* =================================================
    VALUE BOXES
 ================================================= */
@@ -143,3 +158,4 @@ tr:hover td {
 [data-bs-theme="dark"] tr:hover td {
   background-color: #3a2a26 !important;
 }
+
