@@ -15,8 +15,7 @@ editor: source
 ---
 
 <div style="max-width: 900px; font-size: 14px; color: #444; line-height: 1.4; text-align: left;">
-  This dashboard tracks all reported vehicle crashes in El Paso, Texas and is updated monthly. 
-  Note that counts for previous months may change as new reports are inputted.
+  This dashboard tracks all reported vehicle crashes in El Paso, Texas classified as alcohol-related. Data is updated monthly. Note that counts for previous months may change as new reports are inputted. Tip: All charts automatically resize to your browser window. To show a chart full-screen, clik on the "Expand" button in the bottom-right of any chart.
   <b>Last data update: May 2, 2026</b>.
 </div>
 
@@ -424,7 +423,7 @@ p1 <- ggplot(injury_plot_data,
   scale_y_continuous(
     limits = c(0, max(injury_plot_data$val, na.rm = TRUE) * 1.1)
   ) +
-  labs(title = "Injuries from Alcohol-Related Crashes in El Paso",
+  labs(title = "People Injured from Alcohol-Related Crashes in El Paso",
        x = "", y = "Total people injured", fill = "") +
   theme_minimal() +
   theme(legend.position = "bottom")
@@ -443,7 +442,7 @@ ggplotly(p1, tooltip = "text") %>%
       zeroline = TRUE ),
   title = list(
     text = paste0(
-      "<b>Injuries from Alcohol-Related Crashes in El Paso</b>",
+      "<b>People Injured from Alcohol-Related Crashes in El Paso</b>",
       "<br><sup>2025–Present</sup>"
     ),
     x = 0.5,
@@ -550,9 +549,14 @@ ggplotly(p1, tooltip = "text") %>%
 ::: {.card title="**About This Dashboard**"}
 The Alcohol-Related Crash Dashboard provides monthly, city-level data on
 alcohol-related motor vehicle crashes in El Paso, Texas. It is designed
-as a public-facing resource for journalists, policymakers, and
-researchers seeking timely and transparent information on impaired
-driving trends.
+to provide timely and transparent information on impaired driving trends to the El Paso community.
+
+<u>**Acknowledgements**</u>
+
+Several people provided invaluable feedback in the early stages of this project. Special thanks to members of the Texas Department of Transportation El Paso District, for offering ongoing recommendations on the interpretation and presentation of data. Appreciation is also extended to the El Paso Police Department, specifically to the Special Traffic Investigations Unit, for their service to the community, as well as their expertise in identifying high-impact datapoints to include in this dashboard. Several friends and family are also to thank for their continued support and advice. Lastly, I want to recognize the Sober Streets Movement in El Paso, for their feedback, and importantly, for reminding the community that behind every statistic in these charts is a real person, family, and story impacted by impaired driving. *This project is dedicated to the memory of Joshua and Isaiah Deal.*
+
+
+<u>Data</u>
 
 Crash data is downloaded from the Texas Department of Transportation
 (TxDOT) website using the [Crash Records Information System (CRIS) Query
@@ -593,14 +597,9 @@ Department of Transportation; CRIS = Crash Records Information System
 :::
 
 ::: {.card title="**License and Use**"}
-© 2026 El Paso Crime Lab.
+© 2026 El Paso Crime Lab
 
-This Alcohol-Related Crash Dashboard is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0).
-You are free to use, share, and adapt the charts in this dashboard for any purpose, including commercial use, provided that appropriate credit is given to El Paso Crime Lab. Attribution should include the project name, source, a link to the license (https://creativecommons.org/licenses/by/4.0/), and a clear indication of whether any modifications were made.
-
-No additional restrictions apply beyond proper attribution.
-
-Suggested citation: El Paso Crime Lab. (2026). *Alcohol-Related Crash Dashboard*.
+This Alcohol-Related Crash Dashboard is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0). You are free to use, share, and adapt the charts in this dashboard for any purpose, including commercial use. Attribution to the El Paso Crime Lab is appreciated but not required.
 
 <u>Key Notes for Reporting</u>
 
@@ -1506,46 +1505,46 @@ plot_data <- data %>%
 
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
-  geom_col(fill = "steelblue", width = 0.8) +
-  labs(
-    x = "Days from New Year's Day",
-    y = "Average Crashes",
-    title = "Alcohol-Related Crashes Around New Year’s Day in El Paso (All Years)"
+  geom_col(aes(fill = avg_crashes), width = 0.8) +
+
+  scale_fill_gradient(
+    low = "steelblue",
+    high = "maroon",
+    limits = c(1, 5),
+    breaks = seq(1, 5, by = 1),
+    oob = scales::squish,
+    name = "Average Crashes"
   ) +
-  theme_minimal(base_size = 11) +
-  theme(
-    axis.text.x = element_text(angle = 0),
-    panel.grid.major.x = element_blank(),
-    panel.grid.minor = element_blank()
-  )
 
-p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
-
-  geom_col(fill = "steelblue", width = 0.8) +
   geom_text(
-    aes(label = sprintf("%.1f", avg_crashes),
-        y = avg_crashes + 0.3),
+    aes(
+      label = sprintf("%.1f", avg_crashes),
+      y = avg_crashes + 0.3
+    ),
     size = 3.5
   ) +
-scale_y_continuous(
-  limits = c(0, 6),
-  breaks = seq(0, 6, by = 1)
-) +
+
+  scale_y_continuous(
+    limits = c(0, 6),
+    breaks = seq(0, 6, by = 1)
+  ) +
+
   scale_x_continuous(
     breaks = seq(-7, 7, by = 1)
   ) +
+
   labs(
     x = "Days from New Year's Day",
-    y = "Average Crashes",
+    y = "",
     title = "Alcohol-Related Crashes Around New Year’s Day in El Paso (2016-Present)"
   ) +
+
   theme_minimal(base_size = 11) +
   theme(
     axis.text.x = element_text(angle = 0),
     panel.grid.major.x = element_blank(),
     panel.grid.minor = element_blank()
   )
-
 
 ggplotly(p, tooltip = NULL) %>%
 layout(
@@ -1581,7 +1580,7 @@ layout(
 
   annotations = list(
     list(
-      x = 0, y = -0.5,
+      x = 0, y = -0.42,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -1619,7 +1618,16 @@ plot_data <- data %>%
 
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
-  geom_col(fill = "steelblue", width = 0.8) +
+  geom_col(aes(fill = avg_crashes), width = 0.8) +
+
+  scale_fill_gradient(
+    low = "steelblue",
+    high = "maroon",
+    limits = c(1, 5),
+    breaks = seq(1, 5, by = 1),
+    oob = scales::squish,
+    name = "Average Crashes"
+  ) +
 
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
@@ -1637,7 +1645,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   labs(
     x = "Days from Superbowl",
-    y = "Average Crashes",
+    y = "",
     title = "Alcohol-Related Crashes Around Superbowl in El Paso (2016-Present)"
   ) +
 
@@ -1683,7 +1691,7 @@ layout(
 
   annotations = list(
     list(
-      x = 0, y = -0.5,
+      x = 0, y = -0.42,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -1716,7 +1724,16 @@ plot_data <- data %>%
 
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
-  geom_col(fill = "steelblue", width = 0.8) +
+  geom_col(aes(fill = avg_crashes), width = 0.8) +
+
+  scale_fill_gradient(
+    low = "steelblue",
+    high = "maroon",
+    limits = c(1, 5),
+    breaks = seq(1, 5, by = 1),
+    oob = scales::squish,
+    name = "Average Crashes"
+  ) +
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -1731,7 +1748,7 @@ scale_y_continuous(
   ) +
   labs(
     x = "Days from Saint Patrick's Day",
-    y = "Average Crashes",
+    y = "",
     title = "Alcohol-Related Crashes Around Saint Patrick's Day in El Paso (2016-Present)"
   ) +
   theme_minimal(base_size = 11) +
@@ -1771,7 +1788,7 @@ layout(
   ),
   annotations = list(
     list(
-      x = 0, y = -0.5,
+      x = 0, y = -0.42,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -1807,7 +1824,16 @@ plot_data <- data %>%
 
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
-  geom_col(fill = "steelblue", width = 0.8) +
+  geom_col(aes(fill = avg_crashes), width = 0.8) +
+
+  scale_fill_gradient(
+    low = "steelblue",
+    high = "maroon",
+    limits = c(1, 5),
+    breaks = seq(1, 5, by = 1),
+    oob = scales::squish,
+    name = "Average Crashes"
+  ) +
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -1823,7 +1849,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   labs(
     x = "Days from Memorial Day",
-    y = "Average Crashes",
+    y = "",
     title = "Alcohol-Related Crashes Around Memorial Day in El Paso (2016-Present)"
   ) +
 
@@ -1866,7 +1892,7 @@ layout(
   ),
   annotations = list(
     list(
-      x = 0, y = -0.5,
+      x = 0, y = -0.42,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -1899,7 +1925,16 @@ plot_data <- data %>%
 
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
-  geom_col(fill = "steelblue", width = 0.8) +
+  geom_col(aes(fill = avg_crashes), width = 0.8) +
+
+  scale_fill_gradient(
+    low = "steelblue",
+    high = "maroon",
+    limits = c(1, 5),
+    breaks = seq(1, 5, by = 1),
+    oob = scales::squish,
+    name = "Average Crashes"
+  ) +
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -1915,7 +1950,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
   labs(
     x = "Days from Cinco de Mayo",
-    y = "Average Crashes",
+    y = "",
     title = "Alcohol-Related Crashes Around Cinco de Mayo in El Paso (2016-Present)"
   ) +
 
@@ -1960,7 +1995,7 @@ layout(
 
   annotations = list(
     list(
-      x = 0, y = -0.5,
+      x = 0, y = -0.42,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -1992,7 +2027,16 @@ plot_data <- data %>%
 
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
-  geom_col(fill = "steelblue", width = 0.8) +
+  geom_col(aes(fill = avg_crashes), width = 0.8) +
+
+  scale_fill_gradient(
+    low = "steelblue",
+    high = "maroon",
+    limits = c(1, 5),
+    breaks = seq(1, 5, by = 1),
+    oob = scales::squish,
+    name = "Average Crashes"
+  ) +
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -2008,7 +2052,7 @@ scale_y_continuous(
 
   labs(
     x = "Days from Independence Day",
-    y = "Average Crashes",
+    y = "",
     title = "Alcohol-Related Crashes Around Independence Day in El Paso (2016-Present)"
   ) +
 
@@ -2049,7 +2093,7 @@ layout(
   ),
   annotations = list(
     list(
-      x = 0, y = -0.5,
+      x = 0, y = -0.42,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -2087,7 +2131,16 @@ plot_data <- data %>%
 
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
-  geom_col(fill = "steelblue", width = 0.8) +
+  geom_col(aes(fill = avg_crashes), width = 0.8) +
+
+  scale_fill_gradient(
+    low = "steelblue",
+    high = "maroon",
+    limits = c(1, 5),
+    breaks = seq(1, 5, by = 1),
+    oob = scales::squish,
+    name = "Average Crashes"
+  ) +
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -2102,7 +2155,7 @@ scale_y_continuous(
   ) +
   labs(
     x = "Days from Labor Day",
-    y = "Average Crashes",
+    y = "",
     title = "Alcohol-Related Crashes Around Labor Day in El Paso (2016-Present)"
   ) +
   theme_minimal(base_size = 11) +
@@ -2144,7 +2197,7 @@ layout(
 
   annotations = list(
     list(
-      x = 0, y = -0.5,
+      x = 0, y = -0.42,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -2175,7 +2228,16 @@ plot_data <- data %>%
 
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
-  geom_col(fill = "steelblue", width = 0.8) +
+  geom_col(aes(fill = avg_crashes), width = 0.8) +
+
+  scale_fill_gradient(
+    low = "steelblue",
+    high = "maroon",
+    limits = c(1, 5),
+    breaks = seq(1, 5, by = 1),
+    oob = scales::squish,
+    name = "Average Crashes"
+  ) +
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -2190,7 +2252,7 @@ scale_y_continuous(
   ) +
   labs(
     x = "Days from Halloween",
-    y = "Average Crashes",
+    y = "",
     title = "Alcohol-Related Crashes Around Halloween in El Paso (2016-Present)"
   ) +
   theme_minimal(base_size = 11) +
@@ -2233,7 +2295,7 @@ layout(
 
   annotations = list(
     list(
-      x = 0, y = -0.5,
+      x = 0, y = -0.42,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -2271,7 +2333,16 @@ plot_data <- data %>%
 
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
-  geom_col(fill = "steelblue", width = 0.8) +
+  geom_col(aes(fill = avg_crashes), width = 0.8) +
+
+  scale_fill_gradient(
+    low = "steelblue",
+    high = "maroon",
+    limits = c(1, 5),
+    breaks = seq(1, 5, by = 1),
+    oob = scales::squish,
+    name = "Average Crashes"
+  ) +
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -2286,7 +2357,7 @@ scale_y_continuous(
   ) +
   labs(
     x = "Days from Thanksgiving",
-    y = "Average Crashes",
+    y = "",
     title = "Alcohol-Related Crashes Around Thanksgiving in El Paso (2016-Present)"
   ) +
   theme_minimal(base_size = 11) +
@@ -2326,7 +2397,7 @@ layout(
   ),
   annotations = list(
     list(
-      x = 0, y = -0.5,
+      x = 0, y = -0.42,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -2370,7 +2441,16 @@ plot_data <- data %>%
 
 p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
 
-  geom_col(fill = "steelblue", width = 0.8) +
+  geom_col(aes(fill = avg_crashes), width = 0.8) +
+
+  scale_fill_gradient(
+    low = "steelblue",
+    high = "maroon",
+    limits = c(1, 5),
+    breaks = seq(1, 5, by = 1),
+    oob = scales::squish,
+    name = "Average Crashes"
+  ) +
   geom_text(
     aes(label = sprintf("%.1f", avg_crashes),
         y = avg_crashes + 0.3),
@@ -2385,7 +2465,7 @@ scale_y_continuous(
   ) +
   labs(
     x = "Days from Christmas",
-    y = "Average Crashes",
+    y = "",
     title = "Alcohol-Related Crashes Around Christmas in El Paso (2016-Present)"
   ) +
   theme_minimal(base_size = 11) +
@@ -2425,7 +2505,7 @@ layout(
   ),
   annotations = list(
     list(
-      x = 0, y = -0.5,
+      x = 0, y = -0.42,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -2688,6 +2768,93 @@ reactable(
 ```
 
 ### Column {.tabset}
+
+``` {r}
+#| title: Vehicle Body Style (YTD)
+
+vehicle_data <- drivers %>%
+  
+  filter(
+    bac_result == 1,
+    bac_value >= 0.08
+  ) %>%
+  
+  mutate(
+    vehicle_type = case_when(
+      Vehicle.Body.Style == "P2 - PASSENGER CAR, 2-DOOR" ~ "Passenger Car (2-door)",
+      Vehicle.Body.Style == "P4 - PASSENGER CAR, 4-DOOR" ~ "Passenger Car (4-door)",
+      Vehicle.Body.Style == "SV - SPORT UTILITY VEHICLE" ~ "SUV",
+      Vehicle.Body.Style == "PK - PICKUP" ~ "Truck",
+      Vehicle.Body.Style == "TR - TRUCK" ~ "Truck",
+      Vehicle.Body.Style == "TT - TRUCK TRACTOR" ~ "Truck Tractor",
+      Vehicle.Body.Style == "VN - VAN" ~ "Van",
+      Vehicle.Body.Style == "MC - MOTORCYCLE" ~ "Motorcycle",
+      Vehicle.Body.Style == "99 - UNKNOWN" ~ "Unknown",
+      TRUE ~ "Other"
+    )
+  ) %>%
+  
+  count(vehicle_type, name = "n") %>%
+  
+  mutate(
+    pct_raw = n / sum(n),
+
+    # two-line label: name + 1 decimal percent
+    label_display = paste0(
+      vehicle_type, "<br>",
+      sprintf("%.1f%%", 100 * pct_raw)
+    )
+  )
+
+
+vehicle_pie <- plot_ly(
+  vehicle_data,
+  labels = ~vehicle_type,
+  values = ~n,
+  type = "pie",
+
+  text = ~label_display,
+  textinfo = "text",
+
+  hovertemplate = paste0(
+    "<b>%{label}</b><br>",
+    "Total drivers: %{value}<extra></extra>"
+  )
+)
+
+vehicle_pie %>% layout(
+  showlegend = FALSE,
+
+  title = list(
+    text = paste0(
+      "<b>Vehicle Type of Intoxicated Drivers Involved in Crashes</b>",
+      "<br><sup>El Paso, 2026 YTD (BAC ≥ 0.08 g/dL)</sup>"
+    ),
+    x = 0.5,
+    xanchor = "center"
+  ),
+
+  margin = list(
+    l = 10,
+    r = 10,
+    t = 70,
+    b = 80
+  ),
+
+  annotations = list(
+    list(
+      x = 0, y = -0.08,
+      xref = "paper", yref = "paper",
+      xanchor = "left",
+      yanchor = "top",
+      text = "Data source: Texas Department of Transportation | Created by El Paso Crime Lab",
+      showarrow = FALSE,
+      font = list(size = 10, color = "gray50")
+    )
+  )
+)
+```
+
 
 ```{r}
 #| title: Vehicle Info (YTD)
