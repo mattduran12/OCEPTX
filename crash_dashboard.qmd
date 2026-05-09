@@ -14,36 +14,12 @@ editor: source
 
 ---
 
-::: {style="padding:12px 0 18px 0; line-height:1.4;"}
-<p style="margin:0; font-size:14px; color:#444;">
+<div style="max-width: 900px; font-size: 14px; color: #444; line-height: 1.4; text-align: left;">
+  This dashboard tracks all reported vehicle crashes in El Paso, Texas and is updated monthly. 
+  Note that counts for previous months may change as new reports are inputted.
+  <b>Last data update: May 2, 2026</b>.
+</div>
 
-This dashboard tracks all reported vehicle crashes in El Paso, Texas and
-is updated monthly with the most recent available data.
-
-</p>
-
-<p style="margin:8px 0 0 0; font-size:13px; color:#666;">
-
-<b>How to use:</b><br> • Click the <b>bottom-right expand icon</b> to
-enlarge any chart<br> • Hover over plots for detailed values<br> • Click
-the <b>camera icon</b> (if available) to download charts as images<br>
-
-</p>
-
-<p style="margin:8px 0 0 0; font-size:13px; color:#666;">
-
-<b>Mobile users:</b><br> • Double-tap the chart to reset the scale<br> •
-Use the expand button for full-screen view<br> • Rotate your device for
-better readability<br>
-
-</p>
-
-<p style="margin:8px 0 0 0; font-size:12px; color:#888;">
-
-Tip: For best experience, view on desktop for full interactivity.
-
-</p>
-:::
 
 ```{r}
 
@@ -233,21 +209,64 @@ injury_plot_data <- build_monthly(
   n()
 )
 
+# ----------------------------
+# CRASHES WITH FATALITIES
+# ----------------------------
+fatal_crashes_now <- crash_level %>%
+  filter(
+    City == "El Paso",
+    year(Crash.Date) == report_year,
+    month(Crash.Date) == month(report_date),
+    Fatal.Crash.Flag == 1
+  ) %>%
+  summarise(n = n_distinct(Crash.ID)) %>%
+  pull(n)
 
+# ----------------------------
+# INJURY BREAKDOWN
+# ----------------------------
+injury_breakdown_now <- person_level %>%
+  filter(
+    City == "El Paso",
+    year(Crash.Date) == report_year,
+    month(Crash.Date) == month(report_date)
+  ) %>%
+  mutate(
+    severity = case_when(
+      Person.Injury.Severity == "K - FATAL INJURY" ~ "Fatal",
+      Person.Injury.Severity == "A - SUSPECTED SERIOUS INJURY" ~ "Serious",
+      Person.Injury.Severity == "B - SUSPECTED MINOR INJURY" ~ "Minor",
+      Person.Injury.Severity == "C - POSSIBLE INJURY" ~ "Possible",
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  filter(!is.na(severity)) %>%
+  count(severity)
+
+fatal_injuries_now   <- injury_breakdown_now %>% filter(severity=="Fatal") %>% pull(n)
+serious_injuries_now <- injury_breakdown_now %>% filter(severity=="Serious") %>% pull(n)
+minor_injuries_now   <- injury_breakdown_now %>% filter(severity=="Minor") %>% pull(n)
+possible_injuries_now<- injury_breakdown_now %>% filter(severity=="Possible") %>% pull(n)
 ```
 
-## Row {height="250px"}
+## Row {height="300px"}
 
 ### Column
 
 ::: {.card title="**Monthly Summary**"}
+
 In **`r report_month`**, there were:
 
 - **`r crashes_now`** alcohol-related crashes
+  - **`r fatal_crashes_now`** crashes involved one or more fatalities
 
-- **`r injuries_now`** people injured in an alcohol-related crash
+- **`r injuries_now`** people were injured
+  - **`r serious_injuries_now`** serious injuries
+  - **`r minor_injuries_now`** minor injuries
+  - **`r possible_injuries_now`** possible injuries
 
-- **`r fatal_now`** fatalities associated with alcohol-related crashes
+- **`r fatal_injuries_now`** fatalities associated with alcohol-related crashes
+
 :::
 
 ### Column
@@ -301,41 +320,66 @@ ytd_colors <- c(
   "steelblue"   
 )
 
-p1 <- ggplot(crash_plot_data,
-             aes(x = month_lab, y = val, fill = year)) +
+p1 <- ggplot(
+  crash_plot_data,
+    aes(
+      x = month_lab,
+      y = val,
+      fill = year,
+      text = paste0(
+        month.name[match(month_lab, month.abb)], " ", year,
+        "<br>Total crashes: ", scales::comma(val)
+      )
+    )
+) +
   geom_col(position = position_dodge(width = 0.9)) +
   geom_text(
     aes(label = val, y = val + 1),
     position = position_dodge(width = 0.9),
     size = 3
   ) +
-  scale_fill_manual(values = ytd_colors) +   # 🔥 FIX
+  scale_fill_manual(values = ytd_colors) +
   scale_y_continuous(
     limits = c(0, max(crash_plot_data$val, na.rm = TRUE) * 1.1)
   ) +
-  labs(title = "Alcohol-Related Crashes in El Paso",
-       x = "", y = "Total crashes", fill = "") +
+  labs(
+    title = "Alcohol-Related Crashes in El Paso",
+    x = "",
+    y = "Total crashes",
+    fill = ""
+  ) +
   theme_minimal() +
   theme(legend.position = "bottom")
 
-ggplotly(p1) %>%
+ggplotly(p1, tooltip = "text") %>% 
+  config(p1, displaylogo = FALSE,
+         p1, modeBarButtonsToRemove = c('zoom2d', 'pan2d', 'select2d', 'lasso2d', 'zoomin2d', 'zoomout2d', 'hoverCompareCartesian')) %>%
   layout(
+    hoverlabel = list(
+      bgcolor = "#ffffff",
+      font = list(color = "black")
+    ),
+
     yaxis = list(
       showticklabels = FALSE,
       showgrid = TRUE,
-      zeroline = TRUE),
-  title = list(
-    text = paste0(
-      "<b>Alcohol-Related Crashes in El Paso</b>",
-      "<br><sup>2025–Present</sup>"
+      zeroline = TRUE
     ),
-    x = 0.5,
-    xanchor = "center"
-  ),
+
+    title = list(
+      text = paste0(
+        "<b>Alcohol-Related Crashes in El Paso</b>",
+        "<br><sup>2025–Present</sup>"
+      ),
+      x = 0.5,
+      xanchor = "center"
+    ),
+
     xaxis = list(
       showgrid = FALSE,
       zeroline = FALSE
     ),
+
     annotations = list(
       list(
         x = 0, y = -0.18,
@@ -360,7 +404,16 @@ ytd_colors <- c(
 )
 
 p1 <- ggplot(injury_plot_data,
-             aes(x = month_lab, y = val, fill = year)) +
+    aes(
+      x = month_lab,
+      y = val,
+      fill = year,
+      text = paste0(
+        month.name[match(month_lab, month.abb)], " ", year,
+        "<br>Total people injured: ", scales::comma(val)
+      )
+    )
+) +
   geom_col(position = position_dodge(width = 0.9)) +
   geom_text(
     aes(label = val, y = val + 1),
@@ -376,8 +429,14 @@ p1 <- ggplot(injury_plot_data,
   theme_minimal() +
   theme(legend.position = "bottom")
 
-ggplotly(p1) %>%
+ggplotly(p1, tooltip = "text") %>% 
+    config(p1, displaylogo = FALSE,
+         p1, modeBarButtonsToRemove = c('zoom2d', 'pan2d', 'select2d', 'lasso2d', 'zoomin2d', 'zoomout2d', 'hoverCompareCartesian')) %>%
   layout(
+    hoverlabel = list(
+      bgcolor = "#ffffff",
+      font = list(color = "black")
+    ),
     yaxis = list(
       showticklabels = FALSE,
       showgrid = TRUE,
@@ -420,8 +479,16 @@ ytd_colors <- c(
 
 
 p1 <- ggplot(fatal_plot_data,
-             aes(x = month_lab, y = val, fill = year)) +
-  geom_col(position = position_dodge(width = 0.9)) +
+    aes(
+      x = month_lab,
+      y = val,
+      fill = year,
+      text = paste0(
+        month.name[match(month_lab, month.abb)], " ", year,
+        "<br>Total fatalities: ", scales::comma(val)
+      )
+    )
+) +  geom_col(position = position_dodge(width = 0.9)) +
   geom_text(
     aes(label = val, y = val * 1.03),
     position = position_dodge(width = 0.9),
@@ -436,12 +503,20 @@ p1 <- ggplot(fatal_plot_data,
   theme_minimal() +
   theme(legend.position = "bottom")
 
-ggplotly(p1) %>%
+ggplotly(p1, tooltip = "text") %>% 
+    config(p1, displaylogo = FALSE,
+         p1, modeBarButtonsToRemove = c('zoom2d', 'pan2d', 'select2d', 'lasso2d', 'zoomin2d', 'zoomout2d', 'hoverCompareCartesian')) %>%
   layout(
+    hoverlabel = list(
+      bgcolor = "#ffffff",
+      font = list(color = "black")),
+
     yaxis = list(
       showticklabels = FALSE,
       showgrid = TRUE,
       zeroline = TRUE ),
+    xaxis = list(
+      showgrid = FALSE),
   title = list(
     text = paste0(
       "<b>Alcohol-Related Traffic Fatalities in El Paso</b>",
@@ -473,8 +548,6 @@ ggplotly(p1) %>%
 ## Row {height="50%"}
 
 ::: {.card title="**About This Dashboard**"}
-Last Update: May 2, 2026
-
 The Alcohol-Related Crash Dashboard provides monthly, city-level data on
 alcohol-related motor vehicle crashes in El Paso, Texas. It is designed
 as a public-facing resource for journalists, policymakers, and
@@ -482,7 +555,7 @@ researchers seeking timely and transparent information on impaired
 driving trends.
 
 Crash data is downloaded from the Texas Department of Transportation
-(TXDOT) website using the [Crash Records Information System (CRIS) Query
+(TxDOT) website using the [Crash Records Information System (CRIS) Query
 Tool](https://cris.dot.state.tx.us/public/Query/app/home). All crash
 data in this dashboard represent those reported by law enforcement, were
 classified as alcohol-related, and occurred in the city of El Paso.
@@ -491,35 +564,31 @@ classified as alcohol-related, and occurred in the city of El Paso.
 
 A crash is defined as alcohol-related if item 38 *Contributing
 Factors* in the [2023 Texas Peace Officer's Crash
-Report](https://www.txdot.gov/data-maps/crash-reports-records/forms-law-enforcement.html)
+Report](https://www.TxDOT.gov/data-maps/crash-reports-records/forms-law-enforcement.html)
 contains code 45 (Had Been Drinking) or 67 (Intoxicated-Alcohol), or if
-a driver's blood alcohol content (BAC) is reported as greater than 0.
-This coding scheme aligns with the Alcohol-Related crash filter in the
-TXDOT CRIS Query Tool.
+a driver's blood alcohol content (BAC) is reported as any value greater than 0 g/dL.
+This coding scheme aligns with the Alcohol-Related crash filter in the TxDOT CRIS Query Tool.
 
 <u>Definition of Injury and Fatality</u>
 
 A person is defined as injured if item 16 in the [2023 Texas Peace Officer's
-Crash
-Report](https://www.txdot.gov/data-maps/crash-reports-records/forms-law-enforcement.html)
+Crash Report](https://www.TxDOT.gov/data-maps/crash-reports-records/forms-law-enforcement.html)
 contains code A (Suspected Serious Injury), B (Suspected Minor Injury),
 or C (Possible Injury). Fatalities are counted if a person involved in
 the crash is coded K (Fatal Injury). The 2025 edition of the
-[Instructions to Police for Reporting
-Crashes](https://www.txdot.gov/content/dam/docs/division/trf/crash-records/cr100-v29.pdf)
-by TXDOT indicates that code K is used if "a person dies within 30 days,
+[Instructions to Police for Reporting Crashes](https://www.TxDOT.gov/content/dam/docs/division/trf/crash-records/cr100-v29.pdf)
+by TxDOT indicates that code K is used if "a person dies within 30 days,
 due to injuries sustained in the crash" (p. 26). In these cases, a
 supplement report is submitted to update item 16.
 
 <u>Definition of Intoxicated Driver</u>
 
 Driver and vehicle characteristics on the [Drivers](#drivers) page
-represent intoxicated drivers. An intoxicated driver is defined as a
-person who's blood alcohol content test result returned a value of 0.08g/dL or greater.
+represent intoxicated drivers. An intoxicated driver is defined as a person who's blood alcohol content test result returned a value of 0.08g/dL or greater.
 
 <u>Acronyms</u>
 
-BAC = Blood alcohol content; YTD = Year to date; TXDOT = Texas
+BAC = Blood alcohol content; YTD = Year to date; TxDOT = Texas
 Department of Transportation; CRIS = Crash Records Information System
 :::
 
@@ -614,7 +683,7 @@ impaired driving.
 
 ```{r}
 #| content: valuebox
-#| title: "Total Crashes (YTD)"
+#| title: "Total Crashes (2026 YTD)"
 ytd_alcohol_crashes <- crash_level %>%
   filter(
     City == "El Paso",
@@ -633,7 +702,7 @@ list(
 
 ```{r}
 #| content: valuebox
-#| title: "Total People Injured (YTD)"
+#| title: "Total People Injured (2026 YTD)"
 
 ytd_people_injury <- person_level %>%
   mutate(
@@ -661,7 +730,7 @@ list(
 
 ```{r}
 #| content: valuebox
-#| title: "Total Fatalities (YTD)"
+#| title: "Total Fatalities (2026 YTD)"
 ytd_people_fatal <- person_level %>%
   mutate(
     fatal = if_else(
@@ -688,68 +757,113 @@ list(
 
 ```{r}
 #| title: Crashes by Day of Week (YTD)
+
 dow_data <- crash_level %>%
-  filter(City == "El Paso",
-         Crash.Year == 2026) %>%
+  filter(
+    City == "El Paso",
+    Crash.Year == 2026
+  ) %>%
   count(Day.of.Week) %>%
   mutate(
     Day.of.Week = factor(
       tools::toTitleCase(tolower(Day.of.Week)),
-      levels = c("Sunday", "Monday", "Tuesday", "Wednesday",
-                 "Thursday", "Friday", "Saturday")
-    )
+      levels = c(
+        "Sunday", "Monday", "Tuesday", "Wednesday",
+        "Thursday", "Friday", "Saturday"
+      )
+    ),
+
+    pct = n / sum(n)
   )
 
-avg_val <- mean(dow_data$n, na.rm = TRUE)
-
-p <- ggplot(dow_data, aes(
-  x = Day.of.Week,
-  y = n,
-)) +
-
-  geom_col(fill = "steelblue", width = 0.5) +
-
-geom_text(
-  aes(label = n, y = n + max(n) * 0.05),
-  size = 3
+p <- ggplot(
+  dow_data,
+  aes(
+    x = Day.of.Week,
+    y = n,
+    text = paste0(
+      sprintf("%.1f", pct * 100),
+      "%"
+    )
+  )
 ) +
 
-scale_y_continuous(
-  limits = c(0, max(dow_data$n, na.rm = TRUE) * 1.3)
-) +
-  theme_minimal() +
-  theme(
-    legend.position = "right",
-    axis.text.x = element_text(angle = 0, hjust = 1)
+  geom_col(
+    fill = "steelblue",
+    width = 0.5
   ) +
 
-  labs(title = "Alcohol-Related Crashes in El Paso by Day of Week (Year-to-Date)",
-       x = "", y = "Total crashes", fill = "") 
+  geom_text(
+    aes(
+      label = n,
+      y = n * 1.03
+    ),
+    size = 3
+  ) +
 
-ggplotly(p) %>%
+  scale_y_continuous(
+    limits = c(0, max(dow_data$n, na.rm = TRUE) * 1.15)
+  ) +
+
+  labs(
+    title = "Alcohol-Related Crashes in El Paso by Day of Week",
+    x = "",
+    y = "Total crashes"
+  ) +
+
+  theme_minimal() +
+
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 0, hjust = 1)
+  )
+
+ggplotly(p, tooltip = "text") %>%
+
+  config(
+    displaylogo = FALSE,
+    modeBarButtonsToRemove = c(
+      'zoom2d', 'pan2d', 'select2d',
+      'lasso2d', 'zoomin2d',
+      'zoomout2d', 'hoverCompareCartesian'
+    )
+  ) %>%
+
   layout(
-      yaxis = list(
+
+    hoverlabel = list(
+      bgcolor = "#ffffff",
+      font = list(color = "black")
+    ),
+
+    yaxis = list(
       showticklabels = FALSE,
       showgrid = TRUE,
       zeroline = TRUE
     ),
-      margin = list(b = 60),
-  title = list(
-    text = paste0(
-      "<b>Alcohol-Related Crashes in El Paso by Day of Week</b>",
-      "<br><sup>Year-to-Date</sup>"
-    ),
-    x = 0.5,
-    xanchor = "center"
-  ),
+
     xaxis = list(
       showgrid = FALSE,
       zeroline = FALSE
     ),
+
+    margin = list(b = 60),
+
+    title = list(
+      text = paste0(
+        "<b>Alcohol-Related Crashes in El Paso by Day of Week</b>",
+        "<br><sup>Year-to-Date (2026)</sup>"
+      ),
+      x = 0.5,
+      xanchor = "center"
+    ),
+
     annotations = list(
       list(
-        x = 0, y = -0.1,
-        xref = "paper", yref = "paper",
+        x = 0,
+        y = -0.1,
+        xref = "paper",
+        yref = "paper",
         text = 'Data source: Texas Department of Transportation | Created by <a href="https://epcrimelab.org" target="_blank">El Paso Crime Lab</a>',
         showarrow = FALSE,
         xanchor = "left",
@@ -758,7 +872,6 @@ ggplotly(p) %>%
       )
     )
   )
-
 
 ```
 
@@ -769,7 +882,6 @@ time_levels <- c(
   "12am – 3am", "3am – 6am", "6am – 9am", "9am – 12pm",
   "12pm – 3pm", "3pm – 6pm", "6pm – 9pm", "9pm – 12am"
 )
-
 
 hour_data <- crash_level %>%
   filter(
@@ -792,70 +904,106 @@ hour_data <- crash_level %>%
     )
   ) %>%
 
-  # count crashes per block
   count(time_block) %>%
 
-  # force full structure (adds zeros)
-  complete(time_block = time_levels, fill = list(n = 0)) %>%
+  complete(
+    time_block = time_levels,
+    fill = list(n = 0)
+  ) %>%
 
-  # enforce correct order
   mutate(
     time_block = factor(time_block, levels = time_levels),
-    pct = n / sum(n),
-    label = paste0(
-      n,
-      "<br>(",
-      sprintf("%.1f", pct * 100),
-      "%)"
-    )
+    pct = n / sum(n)
   )
 
+p <- ggplot(
+  hour_data,
+  aes(
+    x = time_block,
+    y = n,
+    text = paste0(
+      sprintf("%.1f", pct * 100),
+      "%"
+    )
+  )
+) +
 
-avg_block <- mean(hour_data$n, na.rm = TRUE)
+  geom_col(
+    fill = "steelblue",
+    width = 0.5
+  ) +
 
-
-p <- ggplot(hour_data, aes(
-  x = time_block,
-  y = n,
-  text = label)) +
-  geom_col(fill = "steelblue", width = 0.5) +
   geom_text(
-    aes(y =  n + max(n) * 0.05, label = round(n, 0)),
+    aes(
+      y = n * 1.03,
+      label = scales::comma(n)
+    ),
     size = 3.5
   ) +
+
   scale_y_continuous(
-    limits = c(0, max(hour_data$n, na.rm = TRUE) * 1.3)) +
-    labs(
-      x = "",
-      y = "Total crashes",
-      title = "Alcohol-Related Crashes in El Paso by Hour (Year-to-Date)") +
+    limits = c(0, max(hour_data$n, na.rm = TRUE) * 1.15)
+  ) +
+
+  labs(
+    x = "",
+    y = "Total crashes",
+    title = "Alcohol-Related Crashes in El Paso by Hour"
+  ) +
+
   theme_minimal() +
+
   theme(
-    legend.position = "bottom",
+    legend.position = "none",
     axis.text.x = element_text(angle = 30, hjust = 1)
   )
 
-ggplotly(p) %>%
+ggplotly(p, tooltip = "text") %>%
+
+  config(
+    displaylogo = FALSE,
+    modeBarButtonsToRemove = c(
+      'zoom2d', 'pan2d', 'select2d',
+      'lasso2d', 'zoomin2d',
+      'zoomout2d', 'hoverCompareCartesian'
+    )
+  ) %>%
+
   layout(
+
+    hoverlabel = list(
+      bgcolor = "#ffffff",
+      font = list(color = "black")
+    ),
+
     yaxis = list(
       showticklabels = FALSE,
       showgrid = TRUE,
       zeroline = TRUE
     ),
-     margin = list(b = 120),
-  title = list(
-    text = paste0(
-      "<b>Alcohol-Related Crashes in El Paso by Hour</b>",
-      "<br><sup>Year-to-Date</sup>"),
-    x = 0.5,
-    xanchor = "center"),
+
     xaxis = list(
       showgrid = FALSE,
-      zeroline = FALSE),
+      zeroline = FALSE
+    ),
+
+    margin = list(b = 120),
+
+    title = list(
+      text = paste0(
+        "<b>Alcohol-Related Crashes in El Paso by Hour</b>",
+        "<br><sup>Year-to-Date (2026)</sup>"
+      ),
+      x = 0.5,
+      xanchor = "center"
+    ),
+
     annotations = list(
       list(
-        x = 0, y = -0.3,
-        xref = "paper", yref = "paper",
+        x = 0,
+        y = -0.3,
+        xref = "paper",
+        yref = "paper",
         text = 'Data source: Texas Department of Transportation | Created by <a href="https://epcrimelab.org" target="_blank">El Paso Crime Lab</a>',
         showarrow = FALSE,
         xanchor = "left",
@@ -873,7 +1021,6 @@ ggplotly(p) %>%
 #| title: Crash Trends
 
 monthly_counts <- crash_level %>%
-  filter(City == "El Paso") %>%  
   mutate(
     month = floor_date(Crash.Date, "month")
   ) %>%
@@ -887,15 +1034,34 @@ monthly_counts <- crash_level %>%
     ma_12 = zoo::rollmean(crashes, k = 12, fill = NA, align = "right"))
 
 p <- ggplot(monthly_counts, aes(x = month)) +
-  geom_line(
-    aes(y = crashes, color = "Total crashes"),
-    linewidth = 0.8) +
-  geom_line(
-    aes(y = ma_12, color = "Average"),
-    linewidth = 1.2) +
+        geom_line(
+          aes(
+            y = crashes,
+            color = "Total crashes",
+            group = 1,
+            text = paste0(
+              format(month, "%B %Y"),
+              "<br>Total crashes: ", scales::comma(crashes)
+            )
+          ),
+          linewidth = 0.8
+        ) +
+        
+        geom_line(
+          aes(
+            y = ma_12,
+            color = "Average",
+            group = 1,
+            text = paste0(
+              format(month, "%B %Y"),
+              "<br>Average crashes: ", sprintf("%.1f", ma_12)
+            )
+          ),
+          linewidth = 1.2
+        ) +
   scale_color_manual(
     values = c(
-      "Total crashes" = "grey70",
+      "Total crashes" = "grey80",
       "Average" = "steelblue")) +
   labs(
     title = "Alcohol-Related Crashes in El Paso (2016 to Present)",
@@ -906,7 +1072,7 @@ p <- ggplot(monthly_counts, aes(x = month)) +
   theme(
     legend.position = "bottom")
 
-ggplotly(p) %>%
+ggplotly(p, tooltip = "text") %>%
   layout(
       title = list(
       text = paste0(
@@ -952,15 +1118,34 @@ injury_monthly <- person_level %>%
   )
 
 p <- ggplot(injury_monthly, aes(x = month)) +
-  geom_line(
-    aes(y = injuries, color = "Total people injured"),
-    linewidth = 0.8) +
-  geom_line(
-    aes(y = ma_12, color = "Average"),
-    linewidth = 1.2) +
+        geom_line(
+          aes(
+            y = injuries,
+            color = "Total people injured",
+            group = 1,
+            text = paste0(
+              format(month, "%B %Y"),
+              "<br>Total people injured: ", scales::comma(injuries)
+            )
+          ),
+          linewidth = 0.8
+        ) +
+        
+        geom_line(
+          aes(
+            y = ma_12,
+            color = "Average",
+            group = 1,
+            text = paste0(
+              format(month, "%B %Y"),
+              "<br>Average people injured: ", sprintf("%.1f", ma_12)
+            )
+          ),
+          linewidth = 1.2
+        ) +
   scale_color_manual(
     values = c(
-      "Total people injured" = "grey70", 
+      "Total people injured" = "grey80", 
       "Average" = "orange")) +
   labs(
     title = "Alcohol-Related Crash Injuries in El Paso (2016 to Present)",
@@ -971,7 +1156,7 @@ p <- ggplot(injury_monthly, aes(x = month)) +
   theme(
     legend.position = "bottom")
 
-ggplotly(p) %>%
+ggplotly(p, tooltip = "text") %>%
   layout(
     title = list(
     text = paste0(
@@ -997,8 +1182,7 @@ ggplotly(p) %>%
 ```{r}
 #| title: Fatality Trends
 
-monthly_counts <- person_level %>%
-  filter(City == "El Paso") %>%
+fatalities_monthly <- person_level %>%
   mutate(
     fatal = if_else(
       str_detect(Person.Injury.Severity, "K - FATAL INJURY"),
@@ -1007,23 +1191,41 @@ monthly_counts <- person_level %>%
     month = floor_date(Crash.Date, "month")) %>%
   group_by(month) %>%
   summarise(
-    alcohol_fatal_crashes = sum(fatal == 1, na.rm = TRUE),
+    fatalities = sum(fatal == 1, na.rm = TRUE),
     .groups = "drop") %>%
   arrange(month) %>%
   mutate(
-    alcohol_fatal_ma = zoo::rollmean(alcohol_fatal_crashes,
+    ma_12 = zoo::rollmean(fatalities,
       k = 12,
       fill = NA,
       align = "right"))
 
-p <- ggplot(monthly_counts, aes(x = month)) +
-
+p <- ggplot(fatalities_monthly, aes(x = month)) +
   geom_line(
-    aes(y = alcohol_fatal_crashes, color = "Total fatalities"),
-    linewidth = 1) +
-  geom_line(
-    aes(y = alcohol_fatal_ma, color = "Average"),
-    linewidth = 1.2) +
+          aes(
+            y = fatalities,
+            color = "Total fatalities",
+            group = 1,
+            text = paste0(
+              format(month, "%B %Y"),
+              "<br>Total fatalities: ", scales::comma(fatalities)
+            )
+          ),
+          linewidth = 0.8
+        ) +
+        
+        geom_line(
+          aes(
+            y = ma_12,
+            color = "Average",
+            group = 1,
+            text = paste0(
+              format(month, "%B %Y"),
+              "<br>Average fatalities: ", sprintf("%.1f", ma_12)
+            )
+          ),
+          linewidth = 1.2
+        ) +
   scale_color_manual(
     values = c(
       "Total fatalities" = "grey70",
@@ -1040,7 +1242,7 @@ p <- ggplot(monthly_counts, aes(x = month)) +
   theme(
     legend.position = "bottom")
 
-ggplotly(p) %>%
+ggplotly(p, tooltip = "text") %>%
   layout(
   title = list(
     text = paste0(
@@ -1128,7 +1330,7 @@ p <- ggplot(monthly_avg, aes(
     axis.text.x = element_text(angle = 0, hjust = 1)
   )
 
-ggplotly(p) %>%
+ggplotly(p, tooltip = NULL) %>%
   layout(
     margin = list(b = 60),
     yaxis = list(
@@ -1233,7 +1435,7 @@ p <- ggplot(monthly_fatal_avg, aes(
     axis.text.x = element_text(angle = 0, hjust = 1)
   )
 
-ggplotly(p) %>%
+ggplotly(p, tooltip = NULL) %>%
   layout(
     margin = list(b = 60),
     yaxis = list(
@@ -1275,7 +1477,7 @@ ggplotly(p) %>%
 #| title: New Year's Day
 
 base <- crash_level %>%
-  filter(City == "El Paso", Crash.Year != 2020) %>%
+  filter(Crash.Year != 2020) %>%
   mutate(
     date = as.Date(Crash.Date),
     year = Crash.Year 
@@ -1345,7 +1547,7 @@ scale_y_continuous(
   )
 
 
-ggplotly(p) %>%
+ggplotly(p, tooltip = NULL) %>%
 layout(
 
   yaxis = list(
@@ -1397,6 +1599,7 @@ layout(
 #| title: Superbowl 
 
 superbowl <- base %>%
+  filter(Crash.Year != 2020) %>%
   distinct(year) %>%
   mutate(
     feb1 = as.Date(paste0(year, "-02-01")),
@@ -1446,7 +1649,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
   )
 
 
-ggplotly(p) %>%
+ggplotly(p, tooltip = NULL) %>%
 layout(
 
   yaxis = list(
@@ -1498,6 +1701,7 @@ layout(
 #| title: St. Patrick's Day
 
 data <- base %>%
+  filter(Crash.Year != 2020) %>%
   mutate(
     holiday = as.Date(paste0(year, "-03-17")),
     event_time = as.numeric(date - holiday)
@@ -1537,7 +1741,7 @@ scale_y_continuous(
     panel.grid.minor = element_blank()
   )
 
-ggplotly(p) %>%
+ggplotly(p, tooltip = NULL) %>%
 layout(
 
   yaxis = list(
@@ -1583,6 +1787,7 @@ layout(
 #| title: Memorial Day
 
 memorial <- base %>%
+  filter(Crash.Year != 2020) %>%
   distinct(year) %>%
   mutate(
     memorial_day = as.Date(paste0(year, "-05-31")) -
@@ -1630,7 +1835,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
   )
 
 
-ggplotly(p) %>%
+ggplotly(p, tooltip = NULL) %>%
 layout(
 
   yaxis = list(
@@ -1679,6 +1884,7 @@ layout(
 #| title: Cinco de Mayo
 
 data <- base %>%
+  filter(Crash.Year != 2020) %>%
   mutate(
     holiday = as.Date(paste0(year, "-05-05")),
     event_time = as.numeric(date - holiday)
@@ -1721,7 +1927,7 @@ p <- ggplot(plot_data, aes(event_time, avg_crashes)) +
   )
 
 
-ggplotly(p) %>%
+ggplotly(p, tooltip = NULL) %>%
 layout(
 
   yaxis = list(
@@ -1771,6 +1977,7 @@ layout(
 #| title: Independence Day
 
 data <- base %>%
+  filter(Crash.Year != 2020) %>%
   mutate(
     holiday = as.Date(paste0(year, "-07-04")),
     event_time = as.numeric(date - holiday)
@@ -1813,7 +2020,7 @@ scale_y_continuous(
   )
 
 
-ggplotly(p) %>%
+ggplotly(p, tooltip = NULL) %>%
 layout(
   yaxis = list(
     showticklabels = FALSE,
@@ -1860,6 +2067,7 @@ layout(
 #| title: Labor Day
 
 labor <- base %>%
+  filter(Crash.Year != 2020) %>%
   distinct(year) %>%
   mutate(
     sept1 = as.Date(paste0(year, "-09-01")),
@@ -1905,7 +2113,7 @@ scale_y_continuous(
   )
 
 
-ggplotly(p) %>%
+ggplotly(p, tooltip = NULL) %>%
 layout(
   yaxis = list(
     showticklabels = FALSE,
@@ -1952,6 +2160,7 @@ layout(
 #| title: Halloween
 
 data <- base %>%
+  filter(Crash.Year != 2020) %>%
   mutate(
     holiday = as.Date(paste0(year, "-10-31")),
     event_time = as.numeric(date - holiday)
@@ -1991,7 +2200,7 @@ scale_y_continuous(
     panel.grid.minor = element_blank()
   )
 
-ggplotly(p) %>%
+ggplotly(p, tooltip = NULL) %>%
 layout(
 
   yaxis = list(
@@ -2042,6 +2251,7 @@ layout(
 #| title: Thanksgiving
 
 thanksgiving <- base %>%
+  filter(Crash.Year != 2020) %>%
   distinct(year) %>%
   mutate(
     nov1 = as.Date(paste0(year, "-11-01")),
@@ -2087,7 +2297,7 @@ scale_y_continuous(
   )
 
 
-ggplotly(p) %>%
+ggplotly(p, tooltip = NULL) %>%
 layout(
   yaxis = list(
     showticklabels = FALSE,
@@ -2132,11 +2342,25 @@ layout(
 #| title: Christmas
 
 data <- base %>%
-  mutate(
-    holiday = as.Date(paste0(year, "-12-25")),
-    event_time = as.numeric(date - holiday)
-  ) %>%
-  filter(event_time >= -7 & event_time <= 7)
+  filter(Crash.Year != 2020) %>%
+   mutate(
+      christmas = as.Date(paste0(lubridate::year(date), "-12-25")),
+      prev_christmas = as.Date(paste0(lubridate::year(date) - 1, "-12-25")),
+      next_christmas = as.Date(paste0(lubridate::year(date) + 1, "-12-25"))
+    ) %>%
+    mutate(
+      # choose closest Christmas within +/- 180 days
+      holiday = case_when(
+        abs(date - christmas) <= abs(date - prev_christmas) &
+        abs(date - christmas) <= abs(date - next_christmas) ~ christmas,
+  
+        abs(date - prev_christmas) <= abs(date - next_christmas) ~ prev_christmas,
+  
+        TRUE ~ next_christmas
+      ),
+      event_time = as.integer(date - holiday)
+    ) %>%
+    filter(event_time >= -7 & event_time <= 7)
 
 plot_data <- data %>%
   group_by(year, event_time) %>%
@@ -2171,7 +2395,7 @@ scale_y_continuous(
     panel.grid.minor = element_blank()
   )
 
-ggplotly(p) %>%
+ggplotly(p, tooltip = NULL) %>%
 layout(
 
   yaxis = list(
@@ -2238,7 +2462,7 @@ drivers <- person_level %>%
 
 ```{r}
 #| content: valuebox
-#| title: "Total Intoxicated Drivers (YTD)"
+#| title: "Total Intoxicated Drivers (2026 YTD)"
 
 total_intox_drivers <- drivers %>%
   filter(bac_value >= 0.08 & bac_result == 1) %>%
@@ -2254,7 +2478,7 @@ list(
 
 ```{r}
 #| content: valuebox
-#| title: "Average BAC Result (YTD)"
+#| title: "Average BAC Result (2026 YTD)"
 bac_stats <- drivers %>%
   filter(bac_result == 1) %>%
   summarise(
@@ -2271,7 +2495,7 @@ list(
 
 ```{r}
 #| content: valuebox
-#| title: "Average Age (YTD)"
+#| title: "Average Age (2026 YTD)"
 
 age_stats <- drivers %>%
   filter(bac_value>=0.08 & bac_result==1) %>%
@@ -2310,7 +2534,12 @@ zip_top10 <- drivers %>%
 zip_top10 <- zip_top10 %>%
   mutate(
     pct = n / sum(n),
-    label_full = paste0(Driver.Zip.Code, "\n", n, " (", scales::percent(pct), ")")
+    label_full = paste0(
+      Driver.Zip.Code,
+      "<br>(",
+      sprintf("%.1f", pct * 100),
+      "%)"
+    )
   )
 
 p <- plot_ly(
@@ -2320,32 +2549,48 @@ p <- plot_ly(
   parents = rep("", nrow(zip_top10)),
   values = ~n,
   textinfo = "label",
+
+  # 🔥 FORCE ROOT TO BE WHITE (critical)
+  root = list(color = "white"),
+
   marker = list(
-    colors = rep("#f4b942", nrow(zip_top10))
+    colors = zip_top10$n,
+colorscale = list(
+  c(0.00, "#fff8e1"),  # very light cream
+  c(0.25, "#ffecb3"),  # pale gold
+  c(0.50, "#ffe082"),  # soft gold
+  c(0.75, "#ffd54f"),  # strong gold
+  c(1.00, "#f4b400")   # vibrant deep gold (Google gold)
+),
+    line = list(color = "white", width = 2)
   ),
+
+  tiling = list(pad = 2),
+  pathbar = list(visible = FALSE),
+
   hovertemplate = paste(
-    "ZIP: %{label}<br>",
-    "Drivers: %{value}<br>",
+    "Total drivers: %{value}",
     "<extra></extra>"
   )
-)  
+)
 
-p %>%
-  layout(
+p %>% layout(
     title = list(
-    text = paste0(
-      "<b>Top 10 License ZIP Codes of Intoxicated Drivers Who Crashed in El Paso</b>",
-      "<br><sup>Year-to-Date (BAC ≥ 0.08)</sup>"
-    ),
+      text = paste0(
+        "<b>Top 10 License ZIP Codes of Intoxicated Drivers Who Crashed in El Paso</b>",
+        "<br><sup>2026 YTD (BAC ≥ 0.08 g/dL)</sup>"
+      ),
       x = 0.5,
       xanchor = "center"
     ),
+
     margin = list(
       l = 10,
       r = 10,
       t = 70,
-      b = 80   # space for caption / footer
+      b = 80
     ),
+
     annotations = list(
       list(
         x = 0, y = -0.08,
@@ -2358,6 +2603,7 @@ p %>%
       )
     )
   )
+
 
 ```
 
@@ -2424,7 +2670,6 @@ demo_table <- drivers_clean %>%
 
 reactable(
   demo_table,
-
   defaultPageSize = 10,
   searchable = TRUE,
   striped = TRUE,
@@ -2443,123 +2688,6 @@ reactable(
 ```
 
 ### Column {.tabset}
-
-```{r}
-#| title: Vehicle Color (YTD)
-
-plot_data <- drivers %>%
-  filter(bac_value >= 0.08 & bac_result == 1) %>%
-  mutate(
-    color = case_when(
-      grepl("BLK", Vehicle.Color) ~ "Black",
-      grepl("WHI", Vehicle.Color) ~ "White",
-      grepl("GRY", Vehicle.Color) ~ "Gray",
-      grepl("RED", Vehicle.Color) ~ "Red",
-      grepl("BLU", Vehicle.Color) ~ "Blue",
-      grepl("GRN", Vehicle.Color) ~ "Green",
-      grepl("SIL", Vehicle.Color) ~ "Silver",
-      grepl("TAN", Vehicle.Color) ~ "Tan",
-      grepl("MAR", Vehicle.Color) ~ "Maroon",
-      grepl("YEL", Vehicle.Color) ~ "Yellow",
-      grepl("GLD", Vehicle.Color) ~ "Gold",
-      grepl("PLE", Vehicle.Color) ~ "Purple",
-      grepl("BGE", Vehicle.Color) ~ "Beige",
-      TRUE ~ "Other"
-    )
-  ) %>%
-  count(color) %>%
-  arrange(desc(n)) %>%   
-  mutate(
-    color = factor(color, levels = rev(color)), 
-    label = scales::comma(n)
-  )
-
-color_map <- c(
-  "Black" = "#2C3E50",
-  "White" = "#ECF0F1",
-  "Gray" = "#95A5A6",
-  "Red" = "#E74C3C",
-  "Blue" = "#3498DB",
-  "Green" = "#2ECC71",
-  "Silver" = "#BDC3C7",
-  "Tan" = "#D2B48C",
-  "Maroon" = "#800000",
-  "Yellow" = "#F1C40F",
-  "Gold" = "#F39C12",
-  "Purple" = "#9B59B6",
-  "Beige" = "#F5F5DC",
-  "Other" = "#7F8C8D"
-)
-
-p <- plot_ly(
-  data = plot_data,
-  x = ~n,
-  y = ~color,
-  type = "bar",
-  orientation = "h",
-
-  marker = list(
-    color = color_map[as.character(plot_data$color)]
-  ),
-
-  text = ~label,
-  textposition = "outside",
-  cliponaxis = FALSE,
-
-  hovertemplate = paste(
-    "Color: %{y}<br>",
-    "Drivers: %{x}<br>",
-    "<extra></extra>"
-  )
-) %>%
-
-  layout(
-
-    title = list(
-      text = paste0(
-        "<b>Vehicle Color of Intoxicated Drivers Who Crashed in El Paso</b>",
-        "<br><sup>Year-to-Date (BAC ≥ 0.08)</sup>"
-      ),
-      x = 0.5,
-      xanchor = "center"
-    ),
-    xaxis = list(
-      title = "Total intoxicated drivers",
-      range = c(0, max(plot_data$n) * 1.2)
-    ),
-    yaxis = list(
-      title = "",
-      automargin = TRUE
-    ),
-    paper_bgcolor = "white",
-    plot_bgcolor = "white",
-    font = list(
-      family = "Arial, sans-serif",
-      size = 14,
-      color = "#2c3e50"
-    ),
-    margin = list(
-      t = 90,
-      r = 140,
-      l = 80,
-      b = 100
-    ),
-    annotations = list(
-      list(
-        x = 0, y = -0.12,
-        xref = "paper", yref = "paper",
-        xanchor = "left",
-        yanchor = "top",
-        text = 'Data source: Texas Department of Transportation | Created by El Paso Crime Lab',
-        showarrow = FALSE,
-        font = list(size = 10, color = "gray50")
-      )
-    )
-  )
-
-p
-
-```
 
 ```{r}
 #| title: Vehicle Info (YTD)
@@ -2616,6 +2744,129 @@ table <- reactable(
 
 table
 ```
+
+
+```{r}
+#| title: Vehicle Color (YTD)
+
+plot_data <- drivers %>%
+  filter(bac_value >= 0.08 & bac_result == 1) %>%
+  mutate(
+    color = case_when(
+      grepl("BLK", Vehicle.Color) ~ "Black",
+      grepl("WHI", Vehicle.Color) ~ "White",
+      grepl("GRY", Vehicle.Color) ~ "Gray",
+      grepl("RED", Vehicle.Color) ~ "Red",
+      grepl("BLU", Vehicle.Color) ~ "Blue",
+      grepl("GRN", Vehicle.Color) ~ "Green",
+      grepl("SIL", Vehicle.Color) ~ "Silver",
+      grepl("TAN", Vehicle.Color) ~ "Tan",
+      grepl("MAR", Vehicle.Color) ~ "Maroon",
+      grepl("YEL", Vehicle.Color) ~ "Yellow",
+      grepl("GLD", Vehicle.Color) ~ "Gold",
+      grepl("PLE", Vehicle.Color) ~ "Purple",
+      grepl("BGE", Vehicle.Color) ~ "Beige",
+      TRUE ~ "Other"
+    )
+  ) %>%
+  count(color) %>%
+  mutate(
+  pct = n / sum(n)) %>%
+  arrange(desc(n)) %>%   
+  mutate(
+    color = factor(color, levels = rev(color)), 
+    label = scales::comma(n)
+  )
+
+color_map <- c(
+  "Black" = "#2C3E50",
+  "White" = "#ECF0F1",
+  "Gray" = "#95A5A6",
+  "Red" = "#E74C3C",
+  "Blue" = "#3498DB",
+  "Green" = "#2ECC71",
+  "Silver" = "#BDC3C7",
+  "Tan" = "#D2B48C",
+  "Maroon" = "#800000",
+  "Yellow" = "#F1C40F",
+  "Gold" = "#F39C12",
+  "Purple" = "#9B59B6",
+  "Beige" = "#F5F5DC",
+  "Other" = "#7F8C8D"
+)
+
+p <- plot_ly(
+  data = plot_data,
+  x = ~n,
+  y = ~color,
+  type = "bar",
+  orientation = "h",
+  customdata = ~pct,
+  marker = list(
+    color = color_map[as.character(plot_data$color)]
+  ),
+
+  text = ~label,
+  textposition = "outside",
+  cliponaxis = FALSE,
+
+  hovertemplate = paste(
+    " %{customdata:.1%}",
+    "<extra></extra>"
+  )
+) %>%
+
+  layout(
+
+    title = list(
+      text = paste0(
+        "<b>Vehicle Color of Intoxicated Drivers Who Crashed in El Paso</b>",
+        "<br><sup>2026 YTD (BAC ≥ 0.08 g/dL)</sup>"
+      ),
+      x = 0.5,
+      xanchor = "center"
+    ),
+   xaxis = list(
+    title = "",
+    range = c(0, max(plot_data$n) * 1.2),
+    showticklabels = FALSE
+  ),
+    yaxis = list(
+      title = "",
+      automargin = TRUE,
+      tickfont = list(size = 10)   # 🔥 add this
+    ),
+    paper_bgcolor = "white",
+    plot_bgcolor = "white",
+    font = list(
+      family = "Arial, sans-serif",
+      size = 14,
+      color = "#2c3e50"
+    ),
+    margin = list(
+      t = 90,
+      r = 140,
+      l = 80,
+      b = 100
+    ),
+    annotations = list(
+      list(
+        x = 0, y = -0.3,
+        xref = "paper", yref = "paper",
+        xanchor = "left",
+        yanchor = "top",
+        text = 'Data source: Texas Department of Transportation | Created by El Paso Crime Lab',
+        showarrow = FALSE,
+        font = list(size = 10, color = "gray50")
+      )
+    )
+  )
+
+p
+
+```
+
+
 
 # Maps {#maps}
 
@@ -2735,7 +2986,10 @@ leaflet(blocks_map) %>%
   ) %>%
   addControl(
     html = paste0(
-      "<strong>Top 10 Alcohol-Related Crash Hotspots in El Paso (Year-to-Date)</strong><br/>"),
+      "<div style='font-size:18px; font-weight:bold; line-height:1.3;'>",
+      "Top 10 Alcohol-Related Crash Hotspots in El Paso (Year-to-Date)",
+      "</div>"
+    ),
     position = "topright"
   )
 ```
@@ -2805,7 +3059,8 @@ leaflet(regions_map) %>%
 
   addControl(
     html = paste0(
-      "<strong>Alcohol-Related Crashes by Police Region (Year-to-Date)</strong><br/>"),
+      "<div style='font-size:18px; font-weight:bold; line-height:1.3;'>",
+      "Alcohol-Related Crashes by Police Region (Year-to-Date)"),
     position = "topright"
   )
 
@@ -2875,7 +3130,8 @@ leaflet(districts_map) %>%
   
   addControl(
     html = paste0(
-      "<strong>Alcohol-Related Crashes by City District in El Paso (Year-to-Date)</strong><br/>"),
+     "<div style='font-size:18px; font-weight:bold; line-height:1.3;'>",
+    "Alcohol-Related Crashes by City District in El Paso (Year-to-Date)"),
     position = "topright"
   )
 
@@ -2901,7 +3157,7 @@ leaflet(map_data) %>%
     radius = 3,
     stroke = FALSE,
     fillOpacity = 0.4,
-    color = "black"
+    color = "steelblue"
   ) %>%
   
   setView(
@@ -2911,7 +3167,8 @@ leaflet(map_data) %>%
   ) %>%
   addControl(
     html = paste0(
-      "<strong>Alcohol-Related Crashes in El Paso (Year-to-Date)</strong><br/>"),
+      "<div style='font-size:18px; font-weight:bold; line-height:1.3;'>",
+      "Alcohol-Related Crashes in El Paso (Year-to-Date)"),
     position = "topright"
   )
 ```
@@ -2947,7 +3204,8 @@ leaflet(map_data) %>%
   ) %>%
   addControl(
     html = paste0(
-      "<strong>Fatal Alcohol-Related Crashes in El Paso (Year-to-Date)</strong><br/>"),
+      "<div style='font-size:18px; font-weight:bold; line-height:1.3;'>",
+      "Fatal Alcohol-Related Crashes in El Paso (Year-to-Date)"),
     position = "topright"
   )
 ```
@@ -2964,15 +3222,28 @@ top_streets <- crash_level %>%
   count(Street.Name, sort = TRUE) %>%
   mutate(
     Street.Name = case_when(
+
+    Street.Name == "IH0010" ~ "I-10",
+    Street.Name == "SL0375" ~ "Loop 375",
+    Street.Name == "US0054" ~ "US-54",
+    Street.Name == "SH0020" ~ "SH-20",
+    Street.Name == "BU0054A" ~ "Bus US-54",
+    Street.Name == "FM0659" ~ "FM 659",
+    Street.Name == "US0062" ~ "US-62",
+    Street.Name == "SL0478" ~ "Loop 478",
+    Street.Name == "US0085" ~ "US-85",
+
       str_detect(Street.Name, " ") ~ str_to_title(str_to_lower(Street.Name)),
       TRUE ~ Street.Name
     ),
+
     Street.Name = str_replace_all(Street.Name, "\\bDr\\b", "Dr"),
     Street.Name = str_replace_all(Street.Name, "\\bBlvd\\b", "Blvd"),
     Street.Name = str_replace_all(Street.Name, "\\bCt\\b", "Ct"),
     Street.Name = str_replace_all(Street.Name, "\\bRd\\b", "Rd"),
     Street.Name = str_replace_all(Street.Name, "\\bSt\\b", "St"),
     Street.Name = str_replace_all(Street.Name, "\\bAve\\b", "Ave"),
+
     percent = round(n / sum(n) * 100, 2)
   ) %>%
   rename(
@@ -3011,10 +3282,21 @@ top_fatal_streets <- crash_level %>%
   count(Street.Name, sort = TRUE) %>%
   mutate(
     Street.Name = case_when(
+
+      Street.Name == "IH0010" ~ "I-10",
+      Street.Name == "SL0375" ~ "Loop 375",
+      Street.Name == "US0054" ~ "US-54",
+      Street.Name == "SH0020" ~ "SH-20",
+      Street.Name == "BU0054A" ~ "Bus US-54",
+      Street.Name == "FM0659" ~ "FM 659",
+      Street.Name == "US0062" ~ "US-62",
+      Street.Name == "SL0478" ~ "Loop 478",
+      Street.Name == "US0085" ~ "US-85",
+
       str_detect(Street.Name, " ") ~ str_to_title(str_to_lower(Street.Name)),
       TRUE ~ Street.Name
     ),
-    
+
     Street.Name = str_replace_all(Street.Name, "\\b(N|S|E|W|NE|NW|SE|SW)\\b", toupper),
     Street.Name = str_replace_all(Street.Name, "\\bDr\\b", "Dr"),
     Street.Name = str_replace_all(Street.Name, "\\bBlvd\\b", "Blvd"),
@@ -3022,6 +3304,7 @@ top_fatal_streets <- crash_level %>%
     Street.Name = str_replace_all(Street.Name, "\\bRd\\b", "Rd"),
     Street.Name = str_replace_all(Street.Name, "\\bSt\\b", "St"),
     Street.Name = str_replace_all(Street.Name, "\\bAve\\b", "Ave"),
+
     percent = round(n / sum(n) * 100, 2)
   ) %>%
   rename(
@@ -3048,6 +3331,7 @@ reactable(
   compact = TRUE,
   bordered = FALSE
 )
+
 ```
 
 # Quiz {#quiz}
