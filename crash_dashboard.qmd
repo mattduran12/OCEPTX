@@ -14,10 +14,17 @@ editor: source
 
 ---
 
-<div style="max-width: 900px; font-size: 14px; color: #444; line-height: 1.4; text-align: left;">
-  This dashboard tracks all reported vehicle crashes in El Paso, Texas classified as alcohol-related. Data is updated monthly. Note that counts for previous months may change as new reports are inputted. Tip: All charts automatically resize to your browser window. To show a chart full-screen, clik on the "Expand" button in the bottom-right of any chart.
-  <b>Last data update: May 2, 2026</b>.
-</div>
+::: {style="max-width: 950px; font-size: 13px; color: #4a4a4a"}
+
+This dashboard tracks all reported vehicle crashes in El Paso, Texas classified as alcohol-related. Data is updated monthly. Note that counts for previous months may change as additional crash reports are submitted and processed.
+
+<b>Last data update:</b> May 2, 2026
+
+<b>Tips</b>
+
+- All charts automatically resize to your browser window.
+- To view a chart in full-screen mode, click the *“Expand”* button in the bottom-right corner of the chart.
+:::
 
 
 ```{r}
@@ -551,7 +558,7 @@ The Alcohol-Related Crash Dashboard provides monthly, city-level data on
 alcohol-related motor vehicle crashes in El Paso, Texas. It is designed
 to provide timely and transparent information on impaired driving trends to the El Paso community.
 
-<u>**Acknowledgements**</u>
+<u>Acknowledgements</u>
 
 Several people provided invaluable feedback in the early stages of this project. Special thanks to members of the Texas Department of Transportation El Paso District, for offering ongoing recommendations on the interpretation and presentation of data. Appreciation is also extended to the El Paso Police Department, specifically to the Special Traffic Investigations Unit, for their service to the community, as well as their expertise in identifying high-impact datapoints to include in this dashboard. Several friends and family are also to thank for their continued support and advice. Lastly, I want to recognize the Sober Streets Movement in El Paso, for their feedback, and importantly, for reminding the community that behind every statistic in these charts is a real person, family, and story impacted by impaired driving. *This project is dedicated to the memory of Joshua and Isaiah Deal.*
 
@@ -752,7 +759,9 @@ list(
 )
 ```
 
-## Row
+## Row 
+
+### Column {.tabset}
 
 ```{r}
 #| title: Crashes by Day of Week (YTD)
@@ -934,7 +943,7 @@ p <- ggplot(
 
   geom_text(
     aes(
-      y = n * 1.03,
+      y = n * 1.05,
       label = scales::comma(n)
     ),
     size = 3.5
@@ -954,8 +963,11 @@ p <- ggplot(
 
   theme(
     legend.position = "none",
-    axis.text.x = element_text(angle = 30, hjust = 1)
-  )
+    axis.text.x = element_text(
+      angle = 0,
+      hjust = 1,
+      size = 8
+    )  )
 
 ggplotly(p, tooltip = "text") %>%
 
@@ -986,7 +998,7 @@ ggplotly(p, tooltip = "text") %>%
       zeroline = FALSE
     ),
 
-    margin = list(b = 120),
+    margin = list(b = 80),
 
     title = list(
       text = paste0(
@@ -1000,7 +1012,7 @@ ggplotly(p, tooltip = "text") %>%
     annotations = list(
       list(
         x = 0,
-        y = -0.3,
+        y = -0.2,
         xref = "paper",
         yref = "paper",
         text = 'Data source: Texas Department of Transportation | Created by <a href="https://epcrimelab.org" target="_blank">El Paso Crime Lab</a>',
@@ -1011,6 +1023,113 @@ ggplotly(p, tooltip = "text") %>%
       )
     )
   )
+
+```
+
+### Column
+
+```{r}
+#| title: Crashes by Day and Hour (YTD)
+day_levels <- c(
+  "Sunday", "Monday", "Tuesday", "Wednesday",
+  "Thursday", "Friday", "Saturday"
+)
+
+hour_labels <- c(
+  "12am","1am","2am","3am","4am","5am",
+  "6am","7am","8am","9am","10am","11am",
+  "12pm","1pm","2pm","3pm","4pm","5pm",
+  "6pm","7pm","8pm","9pm","10pm","11pm"
+)
+
+heatmap_data <- crash_level %>%
+  
+  filter(Crash.Year == 2026) %>%
+  
+  mutate(
+    Day.of.Week = tools::toTitleCase(tolower(Day.of.Week)),
+    Day.of.Week = factor(Day.of.Week, levels = day_levels),
+
+    hour = as.numeric(substr(Hour.of.Day, 1, 2)),
+    
+    hour_label = factor(
+      hour,
+      levels = 0:23,
+      labels = hour_labels
+    )
+  ) %>%
+  
+  count(Day.of.Week, hour_label) %>%
+  
+  complete(
+    Day.of.Week,
+    hour_label,
+    fill = list(n = 0)
+  )
+
+p <- plot_ly(
+  data = heatmap_data,
+  
+  x = ~hour_label,
+  y = ~Day.of.Week,
+  z = ~n,
+  
+  type = "heatmap",
+  
+  colorbar = list(
+    title = "Total crashes"
+  ),  
+  colors = colorRamp(
+    c("#f7fbff", "steelblue")
+  ),
+  
+  hovertemplate = paste(
+    "<b>%{y}</b><br>",
+    "Hour: %{x}<br>",
+    "Crashes: %{z}<extra></extra>"
+  )
+)
+
+p %>% layout(
+
+  title = list(
+    text = paste0(
+      "<b>Alcohol-Related Crashes by Day and Hour</b>",
+      "<br><sup>El Paso, Texas | 2026 YTD</sup>"
+    ),
+    x = 0.5
+  ),
+
+  xaxis = list(
+    title = "",
+    tickangle = -45
+  ),
+
+  yaxis = list(
+    title = "",
+    autorange = "reversed"
+  ),
+
+  margin = list(
+    l = 80,
+    r = 20,
+    t = 80,
+    b = 100
+  ),
+
+  annotations = list(
+    list(
+      x = 0,
+      y = -0.36,
+      xref = "paper",
+      yref = "paper",
+      text = "Data source: Texas Department of Transportation | Created by El Paso Crime Lab",
+      showarrow = FALSE,
+      xanchor = "left",
+      font = list(size = 10, color = "gray50")
+    )
+  )
+)
 
 ```
 
@@ -1580,7 +1699,7 @@ layout(
 
   annotations = list(
     list(
-      x = 0, y = -0.42,
+      x = 0, y = -0.53,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -1691,7 +1810,7 @@ layout(
 
   annotations = list(
     list(
-      x = 0, y = -0.42,
+      x = 0, y = -0.53,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -1788,7 +1907,7 @@ layout(
   ),
   annotations = list(
     list(
-      x = 0, y = -0.42,
+      x = 0, y = -0.53,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -1892,7 +2011,7 @@ layout(
   ),
   annotations = list(
     list(
-      x = 0, y = -0.42,
+      x = 0, y = -0.53,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -1995,7 +2114,7 @@ layout(
 
   annotations = list(
     list(
-      x = 0, y = -0.42,
+      x = 0, y = -0.53,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -2093,7 +2212,7 @@ layout(
   ),
   annotations = list(
     list(
-      x = 0, y = -0.42,
+      x = 0, y = -0.53,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -2197,7 +2316,7 @@ layout(
 
   annotations = list(
     list(
-      x = 0, y = -0.42,
+      x = 0, y = -0.53,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -2295,7 +2414,7 @@ layout(
 
   annotations = list(
     list(
-      x = 0, y = -0.42,
+      x = 0, y = -0.53,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -2397,7 +2516,7 @@ layout(
   ),
   annotations = list(
     list(
-      x = 0, y = -0.42,
+      x = 0, y = -0.53,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -2505,7 +2624,7 @@ layout(
   ),
   annotations = list(
     list(
-      x = 0, y = -0.42,
+      x = 0, y = -0.53,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "bottom",
@@ -2827,7 +2946,7 @@ vehicle_pie %>% layout(
 
   title = list(
     text = paste0(
-      "<b>Vehicle Type of Intoxicated Drivers Involved in Crashes</b>",
+      "<b>Vehicle Type of Intoxicated Drivers Who Crashed</b>",
       "<br><sup>El Paso, 2026 YTD (BAC ≥ 0.08 g/dL)</sup>"
     ),
     x = 0.5,
@@ -2843,7 +2962,7 @@ vehicle_pie %>% layout(
 
   annotations = list(
     list(
-      x = 0, y = -0.08,
+      x = 0, y = -0.12,
       xref = "paper", yref = "paper",
       xanchor = "left",
       yanchor = "top",
