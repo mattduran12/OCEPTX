@@ -17,13 +17,12 @@ editor: source
 ::: {style="max-width: 950px; font-size: 13px; color: #4a4a4a"}
 
 This dashboard tracks all reported vehicle crashes in El Paso, Texas classified as alcohol-related. Data is updated monthly. Note that counts for previous months may change as additional crash reports are submitted and processed.
+<b>Last data update:</b> May 12, 2026
 
-<b>Last data update:</b> May 2, 2026
-
-<b>Tips</b>
+<u>*Tips*</u>
 
 - All charts automatically resize to your browser window.
-- To view a chart in full-screen mode, click the *“Expand”* button in the bottom-right corner of the chart.
+- To view a chart in full-screen, click the *“Expand”* button in the bottom-right corner of the chart.
 :::
 
 
@@ -49,7 +48,7 @@ suppressMessages(library(leaflet.extras))
 suppressMessages(library(sf))
 
 
-data <- read.csv("C:/Users/Matt/Documents/data/ep_data_(01-01-2016_05-02-2026).csv", header = TRUE)
+data <- read.csv("C:/Users/Matt/Documents/data/ep_data_(01-01-2016_05-12-2026)_2.csv", header = TRUE)
 
 data$City <- recode(data$City,
   "EL PASO" = "El Paso"
@@ -255,12 +254,11 @@ minor_injuries_now   <- injury_breakdown_now %>% filter(severity=="Minor") %>% p
 possible_injuries_now<- injury_breakdown_now %>% filter(severity=="Possible") %>% pull(n)
 ```
 
-## Row {height="300px"}
+## Row {height="325px"}
 
-### Column
+### Column {.tabset}
 
 ::: {.card title="**Monthly Summary**"}
-
 In **`r report_month`**, there were:
 
 - **`r crashes_now`** alcohol-related crashes
@@ -272,7 +270,6 @@ In **`r report_month`**, there were:
   - **`r possible_injuries_now`** possible injuries
 
 - **`r fatal_injuries_now`** fatalities associated with alcohol-related crashes
-
 :::
 
 ### Column
@@ -859,8 +856,8 @@ ggplotly(p, tooltip = "text") %>%
 
     title = list(
       text = paste0(
-        "<b>Alcohol-Related Crashes in El Paso by Day of Week</b>",
-        "<br><sup>Year-to-Date (2026)</sup>"
+        "<b>Alcohol-Related Crashes by Day of Week</b>",
+        "<br><sup>El Paso, Texas | 2026 Year-to-Date</sup>"
       ),
       x = 0.5,
       xanchor = "center"
@@ -1002,8 +999,8 @@ ggplotly(p, tooltip = "text") %>%
 
     title = list(
       text = paste0(
-        "<b>Alcohol-Related Crashes in El Paso by Hour</b>",
-        "<br><sup>Year-to-Date (2026)</sup>"
+        "<b>Alcohol-Related Crashes by Hour</b>",
+        "<br><sup>El Paso, Texas | 2026 Year-to-Date</sup>"
       ),
       x = 0.5,
       xanchor = "center"
@@ -1095,7 +1092,7 @@ p %>% layout(
   title = list(
     text = paste0(
       "<b>Alcohol-Related Crashes by Day and Hour</b>",
-      "<br><sup>El Paso, Texas | 2026 YTD</sup>"
+      "<br><sup>El Paso, Texas | 2026 Year-to-Date</sup>"
     ),
     x = 0.5
   ),
