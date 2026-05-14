@@ -2,7 +2,6 @@
 title: "Alcohol-Related Crash Dashboard"
 format:
   dashboard:
-    theme: default
     css: styles2.css
     orientation: rows
     scrolling: true
@@ -11,17 +10,17 @@ execute:
   warning: false
   message: false
 editor: source
-
 ---
 
 ::: {style="max-width: 950px; font-size: 13px; color: #4a4a4a"}
 
 This dashboard tracks all reported vehicle crashes in El Paso, Texas classified as alcohol-related. Data is updated monthly. Note that counts for previous months may change as additional crash reports are submitted and processed.
+
 <b>Last data update:</b> May 12, 2026
 
 <u>*Tips*</u>
 
-- All charts automatically resize to your browser window.
+- Charts automatically resize to your browser window.
 - To view a chart in full-screen, click the *“Expand”* button in the bottom-right corner of the chart.
 :::
 
@@ -256,9 +255,10 @@ possible_injuries_now<- injury_breakdown_now %>% filter(severity=="Possible") %>
 
 ## Row {height="325px"}
 
-### Column {.tabset}
+### Column
 
-::: {.card title="**Monthly Summary**"}
+::: {.card title="Monthly Summary"}
+
 In **`r report_month`**, there were:
 
 - **`r crashes_now`** alcohol-related crashes
@@ -274,7 +274,7 @@ In **`r report_month`**, there were:
 
 ### Column
 
-::: {.card title="**Navigation Links**"}
+::: {.card title="Navigation Links"}
 - [Monthly Brief](#monthly-brief) — Latest monthly summary of crashes,
   injuries, and fatalities
 - [About this Dashboard](#about-this-dashboard) — Data sources,
@@ -550,7 +550,7 @@ ggplotly(p1, tooltip = "text") %>%
 
 ## Row {height="50%"}
 
-::: {.card title="**About This Dashboard**"}
+::: {.card title="About This Dashboard"}
 The Alcohol-Related Crash Dashboard provides monthly, city-level data on
 alcohol-related motor vehicle crashes in El Paso, Texas. It is designed
 to provide timely and transparent information on impaired driving trends to the El Paso community.
@@ -600,7 +600,7 @@ BAC = Blood alcohol content; YTD = Year to date; TxDOT = Texas
 Department of Transportation; CRIS = Crash Records Information System
 :::
 
-::: {.card title="**License and Use**"}
+::: {.card title="License and Use"}
 © 2026 El Paso Crime Lab
 
 This Alcohol-Related Crash Dashboard is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0). You are free to use, share, and adapt the charts in this dashboard for any purpose, including commercial use. Attribution to the El Paso Crime Lab is appreciated but not required.
@@ -633,7 +633,7 @@ For questions or data clarification, please contact:\
 [mduran29\@asu.edu](mduran29@asu.edu)
 :::
 
-::: {.card title="**Technical Details**"}
+::: {.card title="Technical Details"}
 <u>Calculation of Moving Average</u>
 
 The line graphs on the [Trends](#trends) page show 12-month moving
@@ -686,7 +686,7 @@ impaired driving.
 
 ```{r}
 #| content: valuebox
-#| title: "Total Crashes (2026 YTD)"
+#| title: "Total Alcohol-Related Crashes (2026 YTD)"
 ytd_alcohol_crashes <- crash_level %>%
   filter(
     City == "El Paso",
@@ -761,7 +761,7 @@ list(
 ### Column {.tabset}
 
 ```{r}
-#| title: Crashes by Day of Week (YTD)
+#| title: Crashes by Day of Week
 
 dow_data <- crash_level %>%
   filter(
@@ -881,7 +881,7 @@ ggplotly(p, tooltip = "text") %>%
 ```
 
 ```{r}
-#| title: Crashes by Hour (YTD)
+#| title: Crashes by Hour
 
 time_levels <- c(
   "12am – 3am", "3am – 6am", "6am – 9am", "9am – 12pm",
@@ -1026,11 +1026,10 @@ ggplotly(p, tooltip = "text") %>%
 ### Column
 
 ```{r}
-#| title: Crashes by Day and Hour (YTD)
+#| title: Crashes by Day and Hour
 day_levels <- c(
-  "Sunday", "Monday", "Tuesday", "Wednesday",
-  "Thursday", "Friday", "Saturday"
-)
+  "Monday", "Tuesday", "Wednesday",
+  "Thursday", "Friday", "Saturday", "Sunday")
 
 hour_labels <- c(
   "12am","1am","2am","3am","4am","5am",
@@ -1343,7 +1342,7 @@ p <- ggplot(fatalities_monthly, aes(x = month)) +
         ) +
   scale_color_manual(
     values = c(
-      "Total fatalities" = "grey70",
+      "Total fatalities" = "grey80",
       "Average" = "maroon")) +
   scale_y_continuous(
     limits = c(0, 10),
@@ -2717,7 +2716,7 @@ list(
 ### Column {.tabset}
 
 ```{r}
-#| title: Driver's License Zipcode (YTD)
+#| title: Driver's License Zipcode
 
 zip_top10 <- drivers %>%
   filter(bac_value >= 0.08 & bac_result == 1,
@@ -2804,7 +2803,7 @@ p %>% layout(
 ```
 
 ```{r}
-#| title: Driver's Demographics (YTD)
+#| title: Driver's Demographics
 
 drivers_clean <- drivers %>%
   mutate(
@@ -2885,8 +2884,65 @@ reactable(
 
 ### Column {.tabset}
 
+```{r}
+#| title: Vehicle Info
+
+vehicle_table <- drivers %>%
+  
+  # keep BAC filter
+  filter(bac_value >= 0.08 & bac_result == 1) %>%
+  
+  # only remove No Data for Make + Model
+  filter(
+    !Vehicle.Make %in% c("No Data", "No data", "", NA),
+    !Vehicle.Model.Name %in% c("No Data", "No data", "", NA),
+    !is.na(Vehicle.Make),
+    !is.na(Vehicle.Model.Name)
+  ) %>%
+  
+  mutate(
+    # Make cleanup
+    make = case_when(
+      toupper(Vehicle.Make) %in% c("GMC", "BMW") ~ toupper(Vehicle.Make),
+      TRUE ~ str_to_title(tolower(Vehicle.Make))
+    ),
+    # Model cleanup
+    model = Vehicle.Model.Name %>%
+      str_remove("\\s*\\(.*\\)") %>%
+      str_to_sentence()
+  ) %>%
+  group_by(make, model) %>%
+  summarise(
+    n = n(),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    pct = scales::percent(n / sum(n), accuracy = 0.1)
+  ) %>%
+  arrange(desc(n))
+
+table <- reactable(
+  vehicle_table,
+  searchable = TRUE,
+  sortable = TRUE,
+  pagination = TRUE,
+  defaultPageSize = 10,
+  striped = TRUE,
+  highlight = TRUE,
+  compact = TRUE,
+  columns = list(
+    make = colDef(name = "Make"),
+    model = colDef(name = "Model"),
+    n = colDef(name = "Count"),
+    pct = colDef(name = "Percent")),
+  defaultSorted = list(n = "desc"))
+
+table
+```
+
+
 ``` {r}
-#| title: Vehicle Body Style (YTD)
+#| title: Vehicle Body Style
 
 vehicle_data <- drivers %>%
   
@@ -2943,8 +2999,8 @@ vehicle_pie %>% layout(
 
   title = list(
     text = paste0(
-      "<b>Vehicle Type of Intoxicated Drivers Who Crashed</b>",
-      "<br><sup>El Paso, 2026 YTD (BAC ≥ 0.08 g/dL)</sup>"
+      "<b>Vehicle Type of Intoxicated Drivers Who Crashed in El Paso</b>",
+      "<br><sup>2026 YTD (BAC ≥ 0.08 g/dL)</sup>"
     ),
     x = 0.5,
     xanchor = "center"
@@ -2973,64 +3029,7 @@ vehicle_pie %>% layout(
 
 
 ```{r}
-#| title: Vehicle Info (YTD)
-
-vehicle_table <- drivers %>%
-  
-  # keep BAC filter
-  filter(bac_value >= 0.08 & bac_result == 1) %>%
-  
-  # only remove No Data for Make + Model
-  filter(
-    !Vehicle.Make %in% c("No Data", "No data", "", NA),
-    !Vehicle.Model.Name %in% c("No Data", "No data", "", NA),
-    !is.na(Vehicle.Make),
-    !is.na(Vehicle.Model.Name)
-  ) %>%
-  
-  mutate(
-    # Make cleanup
-    make = case_when(
-      toupper(Vehicle.Make) %in% c("GMC", "BMW") ~ toupper(Vehicle.Make),
-      TRUE ~ str_to_title(tolower(Vehicle.Make))
-    ),
-    # Model cleanup
-    model = Vehicle.Model.Name %>%
-      str_remove("\\s*\\(.*\\)") %>%
-      str_to_sentence()
-  ) %>%
-  group_by(make, model) %>%
-  summarise(
-    n = n(),
-    .groups = "drop"
-  ) %>%
-  mutate(
-    pct = scales::percent(n / sum(n), accuracy = 0.1)
-  ) %>%
-  arrange(desc(n))
-
-table <- reactable(
-  vehicle_table,
-  searchable = TRUE,
-  sortable = TRUE,
-  pagination = TRUE,
-  defaultPageSize = 10,
-  striped = TRUE,
-  highlight = TRUE,
-  compact = TRUE,
-  columns = list(
-    make = colDef(name = "Make"),
-    model = colDef(name = "Model"),
-    n = colDef(name = "Count"),
-    pct = colDef(name = "Percent")),
-  defaultSorted = list(n = "desc"))
-
-table
-```
-
-
-```{r}
-#| title: Vehicle Color (YTD)
+#| title: Vehicle Color
 
 plot_data <- drivers %>%
   filter(bac_value >= 0.08 & bac_result == 1) %>%
@@ -3155,10 +3154,10 @@ p
 
 ## Row {height="100%"}
 
-### Column {.tabset width="70%"}
+### Column {.tabset width=0.75}
 
 ``` {r}
-#| title: Peak Risk for Crashes (YTD)
+#| title: Peak Risk for Crashes
 #| echo: false
 
 
@@ -3269,8 +3268,8 @@ leaflet(blocks_map) %>%
   ) %>%
   addControl(
     html = paste0(
-      "<div style='font-size:18px; font-weight:bold; line-height:1.3;'>",
-      "Top 10 Alcohol-Related Crash Hotspots in El Paso (Year-to-Date)",
+      "<div style='font-size:22px; font-weight:bold; line-height:1.3;'>",
+      "Top 10 Alcohol-Related Crash Hotspots in El Paso (2026 YTD)",
       "</div>"
     ),
     position = "topright"
@@ -3278,7 +3277,7 @@ leaflet(blocks_map) %>%
 ```
 
 ``` {r}
-#| title: Crashes by Police Region (YTD)
+#| title: Crashes by Police Region
 #| echo: false
 
 regions <- st_read(
@@ -3342,15 +3341,15 @@ leaflet(regions_map) %>%
 
   addControl(
     html = paste0(
-      "<div style='font-size:18px; font-weight:bold; line-height:1.3;'>",
-      "Alcohol-Related Crashes by Police Region (Year-to-Date)"),
+      "<div style='font-size:22px; font-weight:bold; line-height:1.3;'>",
+      "Alcohol-Related Crashes by Police Region (2026 YTD)"),
     position = "topright"
   )
 
 ```
 
 ``` {r}
-#| title: Crashes by City Districts (YTD)
+#| title: Crashes by City Districts
 #| echo: false
 
 districts <- st_read(
@@ -3413,15 +3412,15 @@ leaflet(districts_map) %>%
   
   addControl(
     html = paste0(
-     "<div style='font-size:18px; font-weight:bold; line-height:1.3;'>",
-    "Alcohol-Related Crashes by City District in El Paso (Year-to-Date)"),
+     "<div style='font-size:22px; font-weight:bold; line-height:1.3;'>",
+    "Alcohol-Related Crashes by City District in El Paso (2026 YTD)"),
     position = "topright"
   )
 
 ```
 
 ```{r}
-#| title: Crashes (YTD)
+#| title: Crashes
 map_data <- crash_level %>%
   filter(City == "El Paso",
          Crash.Year == 2026) %>%
@@ -3450,14 +3449,14 @@ leaflet(map_data) %>%
   ) %>%
   addControl(
     html = paste0(
-      "<div style='font-size:18px; font-weight:bold; line-height:1.3;'>",
-      "Alcohol-Related Crashes in El Paso (Year-to-Date)"),
+      "<div style='font-size:22px; font-weight:bold; line-height:1.3;'>",
+      "Alcohol-Related Crashes in El Paso (2026 YTD)"),
     position = "topright"
   )
 ```
 
 ```{r}
-#| title: Fatal Crashes (YTD)
+#| title: Fatal Crashes
 map_data <- crash_level %>%
   filter(City == "El Paso",
          Crash.Year == 2026,
@@ -3487,13 +3486,13 @@ leaflet(map_data) %>%
   ) %>%
   addControl(
     html = paste0(
-      "<div style='font-size:18px; font-weight:bold; line-height:1.3;'>",
-      "Fatal Alcohol-Related Crashes in El Paso (Year-to-Date)"),
+      "<div style='font-size:22px; font-weight:bold; line-height:1.3;'>",
+      "Fatal Alcohol-Related Crashes in El Paso (2026 YTD)"),
     position = "topright"
   )
 ```
 
-### Column {.tabset width="30%"}
+### Column {.tabset width=0.25}
 
 ```{r}
 #| title: Crash Locations (YTD)

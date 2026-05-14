@@ -31,12 +31,11 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme: default
     css: styles2.css
     toc: false
     
 
-    
 editor: source
 
   

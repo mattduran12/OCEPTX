@@ -1,66 +1,338 @@
 /* =================================================
-   DESERT WARM THEME (LIGHT MODE DEFAULT)
+   DESERT WARM THEME — REFINED
+   Quarto Dashboard CSS
 ================================================= */
-/*-- scss:defaults --*/
 
-/* Page + base layout */
-html, body {
-  background-color: #fdf3e7;   /* warm desert sand */
-  color: #3a2d2a;              /* deep earth brown */
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+/* ---------- ROOT PALETTE ---------- */
+:root {
+  --sand-light: #fdf3e7;
+  --sand-mid: #f6e6d2;
+  --sand-dark: #e9d2b3;
+
+  --terracotta: #8b3a2b;
+  --terracotta-dark: #6f281b;
+  --terracotta-light: #b5543c;
+
+  --gold: #f4b942;
+  --gold-soft: #ffd27a;
+
+  --earth: #3a2d2a;
+  --earth-soft: #5a4a46;
+
+  --card-bg: rgba(255, 249, 241, 0.92);
+  --card-border: rgba(122, 46, 29, 0.12);
+
+  --header-gradient:
+    linear-gradient(
+      135deg,
+      #6f281b 0%,
+      #7f2f22 45%,
+      #9a5a2f 100%
+    );
+
+  --page-gradient:
+    linear-gradient(
+      180deg,
+      #fff7ef 0%,
+      #f8ead8 45%,
+      #f1dcc2 100%
+    );
+
+  --shadow-soft: 0 6px 18px rgba(58, 45, 42, 0.08);
+  --shadow-hover: 0 10px 24px rgba(58, 45, 42, 0.14);
 }
 
-/* Links */
+
+/* ---------- BASE LAYOUT ---------- */
+html,
+body {
+  background: var(--page-gradient);
+  background-attachment: fixed;
+  color: var(--sand-light);
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  line-height: 1.55;
+}
+
+
+/* ---------- TYPOGRAPHY ---------- */
+
+body {
+  color: var(--earth);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--terracotta-dark);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Normal text elements should inherit from body */
+p,
+li {
+  color: inherit;
+}
+
+
+/* ---------- LINKS ---------- */
 a {
-  color: #9c3f2b;
+  color: var(--terracotta);
+  text-decoration: none;
+  transition: all 0.2s ease;
 }
 
 a:hover {
-  color: #f4b942;
+  color: var(--gold);
+  text-decoration: none;
 }
 
-/* Navbar */
+
+/* ---------- NAVBAR (STABLE DESERT THEME) ---------- */
 .navbar {
-  background-color: #7a2e1d !important;  /* terracotta */
+  background: var(--header-gradient) !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
+/* Brand + links only (do NOT target .navbar *) */
 .navbar-brand,
-.navbar-nav .nav-link {
-  color: #fff3d6 !important;
+.navbar-nav .nav-link,
+.navbar-nav .dropdown-toggle {
+  color: #fffaf2 !important;
+  font-weight: 600;
 }
 
-.navbar-nav .nav-link:hover {
-  color: #f4b942 !important;
+/* Hover state */
+.navbar-brand:hover,
+.navbar-nav .nav-link:hover,
+.navbar-nav .dropdown-toggle:hover {
+  color: #ffe6b3 !important;
 }
 
-/* Dropdown */
+/* Active link */
+.navbar-nav .nav-link.active {
+  color: #fffaf2 !important;
+}
+
+/* Remove Bootstrap blue focus/active background artifacts */
+.navbar .nav-link,
+.navbar .dropdown-toggle {
+  background: transparent !important;
+}
+
+/* Mobile toggler */
+.navbar-toggler {
+  border-color: rgba(255,250,242,0.35) !important;
+}
+
+.navbar-toggler-icon {
+  filter: invert(1) brightness(2);
+}
+
+
+/* ---------- DROPDOWN ---------- */
 .dropdown-menu {
-  background-color: #5c1f14;
-  border: none;
+  background: rgba(255, 248, 238, 0.98);
+  border: 1px solid rgba(122, 46, 29, 0.10);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(58, 45, 42, 0.12);
+  backdrop-filter: blur(10px);
 }
 
 .dropdown-item {
-  color: #fff3d6;
+  color: #5a2d23;
+  font-weight: 500;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    padding-left 0.2s ease;
 }
 
-.dropdown-item:hover {
-  background-color: #9c3f2b;
-  color: #ffffff;
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background: linear-gradient(
+    90deg,
+    rgba(244, 185, 66, 0.18) 0%,
+    rgba(139, 58, 43, 0.10) 100%
+  );
+  color: #7a2e1d;
+  padding-left: 1rem;
 }
 
-/* Fixes auto scrolling
+.dropdown-divider {
+  border-top: 1px solid rgba(122, 46, 29, 0.08);
+}
 
-*/
+
+/* ---------- CARDS ---------- */
+.card,
+.value-box,
+.bslib-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card:hover,
+.value-box:hover,
+.bslib-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+
+/* ---------- CARD HEADERS ---------- */
+/* Removes default gray headers */
+.card-header,
+.bslib-card .card-header,
+.value-box .value-box-header {
+  background: var(--header-gradient) !important;
+  color: #fffaf2 !important;
+  border-bottom: none !important;
+
+  font-weight: 700;
+  letter-spacing: 0.01em;
+
+  border-top-left-radius: 18px !important;
+  border-top-right-radius: 18px !important;
+
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+}
+
+/* Header text contrast */
+.card-header *,
+.value-box-header * {
+  color: #fffaf2 !important;
+}
+
+
+/* ---------- TABLES ---------- */
+.table {
+  color: var(--earth);
+}
+
+.table thead {
+  background-color: rgba(139, 58, 43, 0.08);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255,255,255,0.35);
+}
+
+
+/* ---------- SIDEBAR ---------- */
+.sidebar {
+  background: rgba(255, 248, 238, 0.92);
+  border-right: 1px solid rgba(122, 46, 29, 0.08);
+}
+
+
+/* ---------- TABS ---------- */
+.nav-tabs {
+  border-bottom: 1px solid rgba(122, 46, 29, 0.12);
+}
+
 .nav-tabs .nav-link {
+  color: var(--earth-soft);
+  border: none;
+  border-radius: 12px 12px 0 0;
+  margin-right: 4px;
+
   scroll-margin-top: 0 !important;
 }
 
+.nav-tabs .nav-link:hover {
+  background-color: rgba(139, 58, 43, 0.08);
+  color: var(--terracotta);
+}
+
+/* ---------- ACTIVE DASHBOARD TAB ---------- */
+.nav-tabs .nav-link.active {
+  background-color: var(--terracotta-dark) !important;
+  color: #fffaf2 !important;
+  border: none !important;
+  font-weight: 600;
+
+  border-radius: 12px 12px 0 0;
+}
+
+
+/* ---------- PLOTLY / WIDGET CONTAINERS ---------- */
+.js-plotly-plot,
+.plotly,
+.html-widget {
+  border-radius: 16px;
+}
+
+
+/* ---------- INPUTS ---------- */
+.form-control,
+.selectize-input,
+.selectize-dropdown {
+  border-radius: 12px !important;
+  border: 1px solid rgba(122, 46, 29, 0.15) !important;
+}
+
+.form-control:focus,
+.selectize-input.focus {
+  border-color: var(--terracotta-light) !important;
+  box-shadow:
+    0 0 0 0.2rem rgba(180, 84, 60, 0.18) !important;
+}
+
+
+/* ---------- BUTTONS ---------- */
+.btn-primary {
+  background: var(--header-gradient);
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+
+/* ---------- SCROLL FIXES ---------- */
 .tab-content {
   overflow: visible !important;
 }
 
 html {
   scroll-behavior: auto !important;
+}
+
+
+/* ---------- OPTIONAL: SCROLLBAR ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.25);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 58, 43, 0.45);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 58, 43, 0.7);
 }
 
 /* =================================================
@@ -103,59 +375,5 @@ th {
 
 tr:hover td {
   background-color: #f7e6d2;
-}
-
-/* =================================================
-   DARK MODE (QUARTO + BOOTSTRAP SAFE)
-================================================= */
-
-/* 🔥 CRITICAL: full page + dashboard container fix */
-[data-bs-theme="dark"] html,
-[data-bs-theme="dark"] body,
-[data-bs-theme="dark"] .quarto-dashboard-container {
-  background-color: #1f1a18 !important;  /* desert night */
-  color: #f1e7dc !important;
-}
-
-/* Navbar dark */
-[data-bs-theme="dark"] .navbar {
-  background-color: #3a1a12 !important;
-}
-
-/* Links */
-[data-bs-theme="dark"] a {
-  color: #f4b942;
-}
-
-[data-bs-theme="dark"] a:hover {
-  color: #ffd27a;
-}
-
-/* =================================================
-   TABLES (DARK MODE FIX)
-================================================= */
-
-[data-bs-theme="dark"] table,
-[data-bs-theme="dark"] .reactable,
-[data-bs-theme="dark"] .gt_table {
-  background-color: #2b2321 !important;
-  color: #f1e7dc !important;
-}
-
-/* headers */
-[data-bs-theme="dark"] th {
-  background-color: #3a1f1a !important;
-  color: #ffffff !important;
-}
-
-/* cells */
-[data-bs-theme="dark"] td {
-  background-color: #2b2321 !important;
-  color: #f1e7dc !important;
-}
-
-/* hover */
-[data-bs-theme="dark"] tr:hover td {
-  background-color: #3a2a26 !important;
 }
 
