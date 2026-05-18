@@ -563,6 +563,9 @@ Several people provided invaluable feedback in the early stages of this project.
 .memory-popup {
   position: relative;
   display: inline-block;
+  color: blue;
+  text-decoration: underline;
+  cursor: default;
 }
 
 .memory-popup img {
@@ -572,7 +575,6 @@ Several people provided invaluable feedback in the early stages of this project.
   left: 50%;
   transform: translateX(-50%);
   
-  /* keeps full image visible */
   max-width: 500px;
   max-height: 500px;
   width: auto;
@@ -594,7 +596,7 @@ Several people provided invaluable feedback in the early stages of this project.
 <em>
 This project is dedicated to the
 <span class="memory-popup">
-  <a href="#">memory</a>
+  memory
   <img src="dedication_photo.jpg" alt="Dedication photo">
 </span>
 of Isaiah Deal, Joshua Deal, and Shannon Del Rio.

@@ -197,7 +197,7 @@ a:hover {
 .card-header,
 .bslib-card .card-header,
 .value-box .value-box-header {
-  background: var(--terracotta-light) !important;
+  background: var(--terracotta-dark) !important;
   color: #fffaf2 !important;
   border-bottom: none !important;
 
@@ -260,7 +260,7 @@ a:hover {
 
 /* ---------- ACTIVE DASHBOARD TAB ---------- */
 .nav-tabs .nav-link.active {
-  background-color: var(--terracotta-dark) !important;
+  background-color: var(--terracotta-light) !important;
   color: #fffaf2 !important;
   border: none !important;
   font-weight: 600;
