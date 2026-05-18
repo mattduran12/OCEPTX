@@ -46,9 +46,9 @@
 /* ---------- BASE LAYOUT ---------- */
 html,
 body {
-  background: var(--page-gradient);
+  background: var(--sand-mid);
   background-attachment: fixed;
-  color: var(--sand-light);
+  color: var(--sand-mid);
   font-family:
     system-ui,
     -apple-system,
@@ -197,7 +197,7 @@ a:hover {
 .card-header,
 .bslib-card .card-header,
 .value-box .value-box-header {
-  background: var(--header-gradient) !important;
+  background: var(--terracotta-light) !important;
   color: #fffaf2 !important;
   border-bottom: none !important;
 

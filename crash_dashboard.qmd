@@ -557,8 +557,49 @@ to provide timely and transparent information on impaired driving trends to the 
 
 <u>Acknowledgements</u>
 
-Several people provided invaluable feedback in the early stages of this project. Special thanks to members of the Texas Department of Transportation El Paso District, for offering ongoing recommendations on the interpretation and presentation of data. Appreciation is also extended to the El Paso Police Department, specifically to the Special Traffic Investigations Unit, for their service to the community, as well as their expertise in identifying high-impact datapoints to include in this dashboard. Several friends and family are also to thank for their continued support and advice. Lastly, I want to recognize the Sober Streets Movement in El Paso, for their feedback, and importantly, for reminding the community that behind every statistic in these charts is a real person, family, and story impacted by impaired driving. *This project is dedicated to the memory of Joshua and Isaiah Deal.*
+Several people provided invaluable feedback in the early stages of this project. Special thanks to members of the Texas Department of Transportation El Paso District, for offering ongoing recommendations on the interpretation and presentation of data. Appreciation is also extended to the El Paso Police Department, specifically to the Special Traffic Investigations Unit, for their service to the community, as well as their expertise in identifying high-impact datapoints to include in this dashboard. Several friends and family are also to thank for their continued support and advice. Lastly, I want to recognize the Sober Streets Movement in El Paso, for their feedback, and importantly, for reminding the community that behind every statistic in these charts is a real person, family, and story impacted by impaired driving. 
 
+<style>
+.memory-popup {
+  position: relative;
+  display: inline-block;
+}
+
+.memory-popup img {
+  display: none;
+  position: absolute;
+  top: 2em;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  /* keeps full image visible */
+  max-width: 500px;
+  max-height: 500px;
+  width: auto;
+  height: auto;
+
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  background: white;
+  z-index: 1000;
+}
+
+.memory-popup:hover img {
+  display: block;
+}
+</style>
+
+<p>
+<em>
+This project is dedicated to the
+<span class="memory-popup">
+  <a href="#">memory</a>
+  <img src="dedication_photo.jpg" alt="Dedication photo">
+</span>
+of Isaiah Deal, Joshua Deal, and Shannon Del Rio.
+</em>
+</p>
 
 <u>Data</u>
 
