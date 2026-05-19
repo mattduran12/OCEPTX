@@ -9,25 +9,21 @@ website:
     background: primary
     search: false
     left:
-      - text: "About"
+      - text: "Home"
         href: index.html
-      - text: "Driving While Intoxicated"
+      - text: "About"
+        href: about.html
+      - text: "Research"
         menu:
-          - text: "Overview"
+          - text: "Driving While Intoxicated"
             href: dwi_home.html
-          - text: "Local Research on Impaired Driving"
-            href: dwi_protocol.html
-          - text: "Study: Does Public Shaming Deter Drunk Driving?"
-            href: dwi_friday_study.html
-          - text: "Alcohol-Related Crash Dashboard"
-            href: crash_dashboard.html
-          - text: "Latest Local News"
-            href: dwi_news.html
     right:
-      - text: "Subscribe for Updates"
-        href: subscribe.html
-      - text: "Contact"
-        href: contact.html
+      - text: "Connect With Us"
+        menu:
+          - text: "Subscribe for Email Updates"
+            href: subscribe.html
+          - text: "Contact the El Paso Crime Lab"
+            href: contact.html
 
 format:
   html:

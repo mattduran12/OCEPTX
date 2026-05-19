@@ -1,0 +1,108 @@
+---
+title: "About the El Paso Crime Lab"
+description: "About the El Paso Crime Lab"
+favicon: about_logo.png
+format:
+  html:
+    grid:
+      margin-width: 280px
+      body-width: 780px
+    toc: true
+    toc-location: right
+---
+
+
+<style>
+.quarto-title-block {
+  display: none;
+}
+</style>
+
+
+<p style="text-align:center;">
+  <img src="about_logo.png" width=400px>
+</p>
+
+
+## About The Lab
+
+The El Paso Crime Lab is an independent research organization that provides analytical services and evidence-based insights on crime and public safety in the El Paso region.
+
+We engage in a range of applied research activities, including:
+
+- **Survey development and analysis**  
+  Designing, administering, and analyzing surveys to better understand community experiences, perceptions of safety, and underreported dimensions of crime.
+
+- **Program and policy evaluation**  
+  Assessing the impact of interventions, enforcement strategies, and public policies using quasi-experimental and statistical methods.
+
+- **Crime data analysis and visualization**  
+  Identifying trends and patterns in crime and public safety outcomes using administrative and observational data.
+
+- **Report and policy brief production**  
+  Translating research findings into clear, actionable summaries for stakeholders and community partners.
+
+- **Data integration and management**  
+  Combining data from multiple sources to support comprehensive analyses of crime and related social outcomes.
+
+---
+
+## Founder & Principal Researcher
+
+<div style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;">
+
+<div style="flex: 1 1 420px;">
+
+Matthew Durán is a criminologist specializing in crime prevention, policing, and public safety research. He is a fourth-year PhD student in the School of Criminology and Criminal Justice at Arizona State University, where [he teaches](https://search.asu.edu/profile/4757278) undergraduate and graduate courses on policing and research methods.
+
+His work focuses on applying rigorous quantitative and experimental methods to understand crime patterns and evaluate criminal justice policies and interventions. His research spans policing, victimization, and crime prevention strategies, with an emphasis on translating empirical findings into practical insights for policy and practice.
+
+Prior to his doctoral training, Matthew worked in a range of criminal justice roles in the El Paso region, including as a crime analyst with the El Paso Police Department, a detention officer with the El Paso County Sheriff’s Office, and a licensed private investigator and fugitive recovery agent.
+
+He is the Principal Researcher at the El Paso Crime Lab, where he leads applied research and produces evidence-based analysis on crime and public safety issues.
+
+**Selected work and research contributions include:**
+
+- Analyzing trends in alcohol-related crashes and impaired driving outcomes in El Paso, Texas  
+- Conducting research on adverse childhood experiences and their relationship to offending, drug usage, and gang membership  
+- Developing technical reports and policy briefs for criminal justice agencies and public safety stakeholders
+- Applying advanced quantitative methods, including causal inference, program evaluation, and statistical modeling, to real-world criminal justice problems  
+
+For complete list of reports and publications he has contributed to, see his [personal website](https://mattduran12.github.io).
+
+</div>
+
+<div style="flex: 0 0 260px;">
+
+<img 
+  src="bio.jpg" 
+  alt="Portrait of Matthew Durán"
+  style="
+    width: 100%;
+    max-width: 260px;
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.15);
+    object-fit: cover;
+  "
+/>
+
+</div>
+
+</div>
+
+
+## Open Access Mission
+
+A central goal of the El Paso Crime Lab is transparency. By making data and research publicly accessible, the Lab promotes open dialogue and supports evidence-based approaches to criminal justice policy. This work helps bridge the gap between academic research and real-world decision-making in the El Paso community.
+
+---
+
+## Contact Information
+
+The El Paso Crime Lab is operated by Open Criminology Research, a Texas limited liability company. While we collaborate with law enforcement agencies, the Lab operates independently and is not affiliated with the Texas Department of Public Safety or any law enforcement agency.
+
+For questions, data requests, or collaboration opportunities, please contact:
+
+Matthew J. Durán
+
+email: [mduran29@asu.edu](mailto:mduran29@asu.edu)  

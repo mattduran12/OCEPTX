@@ -1,43 +1,125 @@
 ---
-title: "Home - Driving While Intoxicated Research"
+title: "Research - Driving While Intoxicated"
+description: "Public research on impaired driving and alcohol-related crashes in El Paso, Texas."
 format:
   html:
     grid:
       margin-width: 400px
       body-width: 780px
-    theme: cosmo
     toc: true
+    toc-location: right
+    toc-title: "What's on this page"
+    
 ---
 
 <style>
+
+/* Hide default title */
 .quarto-title-block {
   display: none;
 }
+
+/* Global page spacing */
+body {
+  background-color: #f8f9fb;
+}
+
+/* Section spacing */
+.section-header,
+h2 {
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+/* Card styling */
 .project-block {
-  padding: 1.5rem 0;
-  border-bottom: 1px solid #e9ecef;
+  background: white;
+  border-radius: 18px;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  transition: all 0.25s ease;
 }
 
-.project-title {
-  margin-top: 0;
+/* Hover effect */
+.project-block:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.10);
 }
 
-.section-header {
-  margin-top: 3rem;
-  margin-bottom: 1rem;
+/* Typography */
+.project-block p,
+.project-block li {
+  color: #4b5563;
+  line-height: 1.7;
+  font-size: 1rem;
 }
 
-img {
+/* Strong labels */
+.project-block strong {
+  color: #111827;
+}
+
+/* Images */
+.project-block img {
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+  transition: transform 0.25s ease;
+}
+
+.project-block img:hover {
+  transform: scale(1.01);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #1d4ed8;
+  border: none;
   border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  padding: 0.7rem 1.2rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
+
+.btn-primary:hover {
+  background-color: #1e40af;
+  transform: translateY(-1px);
+}
+
+/* Better vertical alignment */
+.grid.align-items-center {
+  gap: 2rem;
+}
+
+/* News section card */
+.news-block {
+  background: white;
+  border-radius: 18px;
+  padding: 2rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+/* Reduce harsh separators */
+hr {
+  border: none;
+  height: 1px;
+  background: #e5e7eb;
+  margin: 3rem 0;
+}
+
 </style>
 
+This webpage shares research, data, and local reporting related to alcohol-impaired driving in El Paso. It includes a public dashboard, research studies, reports, news tracking, and ongoing projects that help explain how impaired driving affects the community.
 
 ## Alcohol-Related Crash Dashboard
 
 ::: {.project-block}
 ::: {.grid .align-items-center}
+
 ::: {.g-col-12 .g-col-md-6}
 
 **Overview:**  
@@ -61,38 +143,11 @@ View Dashboard
 
 ---
 
-## Local Research on Impaired Driving
-
-::: {.project-block}
-::: {.grid .align-items-center}
-::: {.g-col-12 .g-col-md-6}
-
-**Summary:**  
-A comprehensive review of all local research on impaired driving in El Paso is underway. This review will document what is known and reveal critical gaps—informing a clear path forward for research, policy, and prevention.
-
-<br>
-
-<a href="dwi_protocol.html" target="_blank" class="btn btn-primary">
-Read the Search and Analysis Protocol
-</a>
-
-:::
-
-::: {.g-col-12 .g-col-md-6}
-
-:::
-:::
-:::
-
-
----
-
 ## Study: Does Public Shaming Deter Drunk Driving?
 
----
-
 ::: {.project-block}
 ::: {.grid .align-items-center}
+
 ::: {.g-col-12 .g-col-md-6}
 
 **Summary:**  
@@ -120,6 +175,7 @@ Read Paper
 
 ::: {.project-block}
 ::: {.grid .align-items-center}
+
 ::: {.g-col-12 .g-col-md-6}
 
 **Opinion Article:**  
@@ -141,16 +197,46 @@ Read Article
 :::
 :::
 
+---
+
+## Local Research on Impaired Driving
+
+::: {.project-block}
+::: {.grid .align-items-center}
+
+::: {.g-col-12 .g-col-md-6}
+
+**Summary:**  
+A comprehensive review of all local research on impaired driving in El Paso is underway. This review will document what is known and reveal critical gaps—informing a clear path forward for research, policy, and prevention.
+
+<br>
+
+<a href="dwi_protocol.html" target="_blank" class="btn btn-primary">
+Read the Search and Analysis Protocol
+</a>
+
+:::
+
+::: {.g-col-12 .g-col-md-6}
+
+:::
+:::
+:::
+
+
 ## Latest News on DWI in El Paso
 
+::: {.news-block}
 
-This page tracks the latest developments on drunk driving in El Paso. It brings together recent reporting on crashes, arrests, enforcement activity, and policy changes so you can quickly see what’s happening across the city.
+This page tracks the latest developments on impaired driving in El Paso. It brings together recent reporting on crashes, arrests, enforcement activity, and policy changes so you can quickly see what’s happening across the city.
 
 <br>
 
 <a href="dwi_news.html" target="_blank" class="btn btn-primary">
 View Latest News
 </a>
+
+:::
 
 
 

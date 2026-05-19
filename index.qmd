@@ -1,65 +1,82 @@
 ---
 title: "El Paso Crime Lab"
+description: "Providing evidence-based research on crime and public safety in the borderland."
 favicon: about_logo.png
 format:
   html:
     grid:
       margin-width: 280px
       body-width: 780px
-    theme: cosmo
-    toc: true
-    toc-location: right
+    toc: false
 ---
 
-
 <style>
+
+/* Hide default title */
 .quarto-title-block {
   display: none;
 }
+
+
+/* HERO SECTION */
+.hero {
+  text-align: center;
+  padding: 4rem 1rem 2.5rem 1rem;
+}
+
+/* Logo styling */
+.hero img {
+  width: 380px;
+  max-width: 90%;
+  margin-bottom: 1.5rem;
+}
+
+/* Title feel (in case you ever add text) */
+.hero h1 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+/* Subtitle / intro text */
+.hero p {
+  font-size: 1.15rem;
+  color: #4b5563;
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Content section spacing */
+.content {
+  margin-top: 2rem;
+}
+
+/* Subtle divider */
+hr {
+  border: none;
+  height: 1px;
+  background: #e5e7eb;
+  margin: 2.5rem 0;
+}
+
 </style>
 
+<div class="hero">
 
-<p style="text-align:center;">
-  <img src="about_logo.png" width=400px>
+<p>
+  <img src="about_logo.png" alt="El Paso Crime Lab Logo">
 </p>
 
-## About Us
+<p>
+The El Paso Crime Lab is an independent research organization focused on crime and public safety in the El Paso region. Our goal is to produce evidence-based research that increases community capacity to diagnose and respond to criminal justice-related issues.
+</p>
 
-The El Paso Crime Lab is an independent research and data initiative that provides analytical services, data products, and evidence-based insights on crime and public safety in the El Paso region.
-
-We engage in a range of applied research activities, including:
-
-- **Survey development and analysis**  
-  Designing, administering, and analyzing surveys to better understand community experiences, perceptions of safety, and underreported dimensions of crime.
-
-- **Program and policy evaluation**  
-  Assessing the impact of interventions, enforcement strategies, and public policies using quasi-experimental and statistical methods.
-
-- **Crime data analysis and visualization**  
-  Identifying trends and patterns in crime and public safety outcomes using administrative and observational data.
-
-- **Report and policy brief production**  
-  Translating research findings into clear, actionable summaries for stakeholders and community partners.
-
-- **Data integration and management**  
-  Combining data from multiple sources to support comprehensive analyses of crime and related social outcomes.
-
----
-
-## Open Access Mission
-
-A central goal of the El Paso Crime Lab is transparency. By making data and research publicly accessible, the Lab promotes open dialogue and supports evidence-based approaches to criminal justice policy. This work helps bridge the gap between academic research and real-world decision-making in the El Paso community.
-
----
+</div>
 
 
-## Contact Information
 
-The El Paso Crime Lab is operated by Open Criminology Research, a Texas limited liability company. While we collaborate with law enforcement agencies, the Lab operates independently and is not affiliated with the Texas Department of Public Safety or any law enforcement agency.
 
-For questions, data requests, or collaboration opportunities, please contact:
 
-Matthew J. Durán
-
-email: [mduran29@asu.edu](mailto:mduran29@asu.edu)  
-website: [https://mattduran12.github.io](https://mattduran12.github.io)

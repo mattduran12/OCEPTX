@@ -8,7 +8,7 @@
   --sand-light: #fdf3e7;
   --sand-mid: #f6e6d2;
   --sand-dark: #e9d2b3;
-
+  --page-background-color: #f1dcc2;
   --terracotta: #8b3a2b;
   --terracotta-dark: #6f281b;
   --terracotta-light: #b5543c;
@@ -45,10 +45,15 @@
 
 /* ---------- BASE LAYOUT ---------- */
 html,
+  .sidebar,
+  .sidebar.toc-right {
+  background: var(--sand-light) !important;} 
+
+html,
 body {
-  background: var(--sand-mid);
+  background: var(--sand-light) !important;
   background-attachment: fixed;
-  color: var(--sand-mid);
+  color: var(--sand-light);
   font-family:
     system-ui,
     -apple-system,
@@ -57,6 +62,7 @@ body {
     sans-serif;
   line-height: 1.55;
 }
+
 
 
 /* ---------- TYPOGRAPHY ---------- */
