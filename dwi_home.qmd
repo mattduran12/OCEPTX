@@ -141,6 +141,35 @@ View Dashboard
 :::
 :::
 
+---
+
+## Report: Is Drunk Driving Worse in El Paso?
+
+::: {.project-block}
+::: {.grid .align-items-center}
+
+::: {.g-col-12 .g-col-md-6}
+
+**Summary:**  
+A community facing a social problem such as drunk driving often wonders about it’s severity. Members of the community may ask, “Is it worse here than in other places?” To answer that question, we used three measurement strategies to assess the severity of loss of life from drunk driving. This report examines how El Paso compares to other large Texas cities in alcohol-related traffic fatalities between the years 2021 and 2025.
+
+<br>
+
+<a href="dwi_report_01.html" class="btn btn-primary">
+Read the Report
+</a>
+
+:::
+
+::: {.g-col-12 .g-col-md-6}
+
+![](comparing el paso to texas cities.png)
+
+:::
+:::
+:::
+
+
 
 ---
 
@@ -157,7 +186,7 @@ This study evaluates the impact of a social media campaign in El Paso that publi
 <br>
 
 <a href="dwi_friday_study.html" class="btn btn-primary">
-Read Paper
+Read the Study
 </a>
 
 :::

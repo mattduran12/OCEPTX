@@ -1,0 +1,395 @@
+---
+title: "Comparing Alcohol-Related Traffic Fatalities Across Major Texas Cities"
+author: "Matthew Durán"
+date: "2026-05-19"
+
+format: html
+
+execute:
+  echo: false
+  warning: false
+  message: false
+
+editor: source
+
+lang: en
+---
+
+<div style="height: 50px;"></div>
+
+
+```{r, echo = FALSE, warnings= FALSE}
+library(dplyr)
+library(lubridate)
+library(tidyr)
+library(stringr)
+library(openxlsx)
+library(ggplot2)
+library(zoo)
+library(plotly)
+library(reactable)
+
+# Folder path
+folder_path <- "C:/Users/Matt/ASU Dropbox/Matthew Duran/Personal Documents/Consulting business/El Paso Crime Lab/Drunk Driving/data"
+
+# Major Texas cities >100k population (2020 Census)
+major_cities <- c(
+  "Arlington","Austin","Brownsville","Carrollton","Corpus Christi","Dallas","Denton",
+  "El Paso","Fort Worth","Frisco","Garland","Grand Prairie","Houston","Irving",
+  "Killeen","Laredo","Lewisville","McAllen","Mesquite","Midland","Odessa",
+  "Pasadena","Pearland","Plano","Richardson","San Antonio","Sugar Land",
+  "Temple","The Woodlands","Tyler"
+)
+
+# Official 2020 Census populations
+city_pop2020 <- data.frame(
+  City = major_cities,
+  pop2020 = c(
+    398112,   # Arlington
+    961855,   # Austin
+    182781,   # Brownsville
+    137436,   # Carrollton
+    326554,   # Corpus Christi
+    1343573,  # Dallas
+    147995,   # Denton
+    678815,   # El Paso
+    918915,   # Fort Worth
+    200490,   # Frisco
+    238002,   # Garland
+    194543,   # Grand Prairie
+    2320268,  # Houston
+    239798,   # Irving
+    153095,   # Killeen
+    261639,   # Laredo
+    106427,   # Lewisville
+    142210,   # McAllen
+    143484,   # Mesquite
+    181170,   # Midland
+    124009,   # Odessa
+    154193,   # Pasadena
+    125828,   # Pearland
+    285494,   # Plano
+    118858,   # Richardson
+    1547253,  # San Antonio
+    118467,   # Sugar Land
+    83177,    # Temple
+    105000,   # The Woodlands (approximate)
+    105000    # Tyler
+  )
+)
+
+# Read datasets
+combined_data <- read.csv(file.path(folder_path, "combined_alc_related_crashes_2021_2025.csv"), stringsAsFactors = FALSE)
+fatalities_data <- read.csv(file.path(folder_path, "report-01-statewide_fatalities_05192026_2021-2025.csv"), stringsAsFactors = FALSE)
+
+# Create alcohol-related indicator
+fatalities_data <- fatalities_data %>%
+  mutate(
+    Crash.ID = as.character(Crash.ID),
+    City = str_to_title(City),
+    Crash.Date = mdy(Crash.Date),
+    Year = year(Crash.Date)
+  )
+
+alc_ids <- unique(combined_data$Crash.ID)
+fatalities_data$alc_related <- ifelse(fatalities_data$Crash.ID %in% alc_ids, 1, 0)
+
+# Filter for major cities
+fatalities_data <- fatalities_data %>% filter(City %in% major_cities)
+
+# Summarize by city-year
+fatal_summary <- fatalities_data %>%
+  group_by(City, Year) %>%
+  summarise(
+    total_fatalities = n(),
+    alc_fatalities = sum(alc_related, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  right_join(expand.grid(City = major_cities, Year = 2021:2025), by = c("City","Year")) %>%
+  mutate(
+    total_fatalities = replace_na(total_fatalities, 0),
+    alc_fatalities = replace_na(alc_fatalities, 0)
+  ) %>%
+  left_join(city_pop2020, by = "City") %>%
+  arrange(City, Year)
+
+total_table <- fatal_summary %>%
+  select(City, Year, total_fatalities) %>%
+  pivot_wider(names_from = Year, values_from = total_fatalities)
+
+alc_table <- fatal_summary %>%
+  select(City, Year, alc_fatalities) %>%
+  pivot_wider(names_from = Year, values_from = alc_fatalities)
+
+pct_table <- fatal_summary %>%
+  mutate(pct_alc = round(alc_fatalities / total_fatalities * 100, 1)) %>%
+  select(City, Year, pct_alc) %>%
+  pivot_wider(names_from = Year, values_from = pct_alc)
+
+rate_table <- fatal_summary %>%
+  mutate(rate_per_100k = round(alc_fatalities / pop2020 * 100000, 2)) %>%
+  select(City, Year, rate_per_100k) %>%
+  pivot_wider(names_from = Year, values_from = rate_per_100k)
+
+rate_long <- rate_table %>%
+  pivot_longer(-City, names_to = "Year", values_to = "rate_per_100k") %>%
+  mutate(Year = as.integer(Year))
+
+# Reactable
+# Prepare table with ranks and per-capita rate
+ranked_table <- fatal_summary %>%
+    group_by(City) %>%
+    summarise(
+        total_fatalities = sum(total_fatalities, na.rm = TRUE),
+        alc_fatalities = sum(alc_fatalities, na.rm = TRUE),
+        pct_alc = round((alc_fatalities / total_fatalities) * 100, 1),
+        pop2020 = first(pop2020),
+        per_capita_rate = round((alc_fatalities / pop2020) * 100000, 1)
+    ) %>%
+    arrange(desc(pct_alc))
+
+# Build the reactable
+table<- reactable(
+    ranked_table,
+    columns = list(
+        City = colDef(
+            name = "City",
+            align = "left"
+        ),
+        
+        pop2020 = colDef(
+            name = "2020 Census Population Count",
+            align = "center",
+            cell = function(value) format(value, big.mark = ",")
+        ),
+        
+        total_fatalities = colDef(
+            name = "Total Traffic Fatalities",
+            align = "center"
+        ),
+        
+        alc_fatalities = colDef(
+            name = "Total Alcohol-Related Traffic Fatalities",
+            align = "center"
+        ),
+        
+        pct_alc = colDef(
+            name = "Percentage of Traffic Fatalities that were Alcohol-Related",
+            align = "center",
+            cell = function(value) sprintf("%.1f%%", value)
+        ),
+        
+        per_capita_rate = colDef(
+            name = "Per Capita Rate (Alcohol-Related Traffic Fatalities per 100,000 people)",
+            align = "center",
+            cell = function(value) sprintf("%.1f", value)
+        )
+    ),
+    
+    defaultPageSize = nrow(ranked_table),
+    searchable = FALSE,
+    sortable = TRUE,
+    highlight = TRUE,
+    bordered = TRUE,
+    striped = TRUE,
+    theme = reactableTheme(
+      borderColor = "#dfe2e5",
+      stripedColor = "#f6f8fa",
+      highlightColor = "#f0f7ff",
+      cellPadding = "8px 12px",
+      style = list(
+        fontFamily = "-apple-system, BlinkMacSystemFont, sans-serif",
+        fontSize = "14px"
+  )
+)
+)
+
+
+
+
+# Create grouping variable for legend
+rate_long <- rate_long %>%
+  mutate(
+    city_group = ifelse(City == "El Paso", "El Paso", "Other Texas Cities")
+  )
+
+p <- ggplot(
+  rate_long,
+  aes(
+    x = Year,
+    y = rate_per_100k,
+    group = City,
+    color = city_group,
+    text = paste0(
+      "Year: ", Year,
+      "<br>City: ", City,
+      "<br>Rate: ", round(rate_per_100k, 1)
+    )
+  )
+) +
+
+  # Other cities
+  geom_line(
+    data = rate_long %>% filter(City != "El Paso"),
+    size = 0.8,
+    alpha = 0.7
+  ) +
+
+  # El Paso highlighted
+  geom_line(
+    data = rate_long %>% filter(City == "El Paso"),
+    size = 1.5
+  ) +
+
+  scale_color_manual(
+    values = c(
+      "El Paso" = "maroon",
+      "Other Texas Cities" = "lightgrey"
+    )
+  ) +
+
+  scale_x_continuous(breaks = 2021:2025) +
+
+  scale_y_continuous(
+    limits = c(0, 15),
+    breaks = seq(0, 15, by = 3)
+  ) +
+
+  labs(
+    title = "Alcohol-Related Fatalities Rate per 100,000 (Major Texas Cities, 2021-2025)",
+    x = "",
+    y = "Deaths per 100,000 people",
+    color = NULL
+  ) +
+
+  theme_minimal() +
+
+  theme(
+    legend.position = "top",
+    legend.direction = "horizontal",
+    legend.text = element_text(size = 10),
+    plot.margin = margin(t = 10, r = 20, b = 70, l = 20)
+  )
+
+plot <- ggplotly(
+  p,
+  tooltip = "text"
+) %>%
+  style(
+    hovertemplate = "%{text}<extra></extra>"
+  ) %>%
+  layout(
+    title = list(
+      text = "<b>Alcohol-Related Traffic Fatalities Rate per 100,000 People</b><br><sup>Large Texas Cities, 2021-2025 | Data aggregated yearly</sup>",
+      x = 0.5
+    ),
+
+    legend = list(
+      orientation = "h",
+      x = 0.5,
+      xanchor = "center",
+      y = 0.97
+    ),
+
+    margin = list(
+      t = 100,
+      b = 100
+    ),
+
+    hoverlabel = list(
+      bgcolor = "white",
+      font = list(size = 12, color = "black"),
+      bordercolor = "#CCCCCC"
+    ),
+
+    annotations = list(
+      list(
+        x = 0,
+        y = -0.22,
+        text = 'Data source: Texas Department of Transportation | Figure created by <a href="https://www.epcrimelab.org" target="_blank">El Paso Crime Lab</a>',
+        showarrow = FALSE,
+        xref = "paper",
+        yref = "paper",
+        xanchor = "left",
+        yanchor = "top",
+        font = list(size = 10),
+        align = "left"
+      )
+    )
+  )
+```
+
+## Is Drunk Driving Worse in El Paso?
+
+A community facing a social problem such as drunk driving often wonders about it's severity. Members of the community may ask, *"Is it worse here than in other places?"*  To answer that question, we used three measurement strategies to assess the severity of loss of life from drunk driving. This report examines how El Paso compares to other large Texas cities in alcohol-related traffic fatalities between the years 2021 and 2025.
+
+The findings show that:
+
+- 118 people died in alcohol-related crashes in El Paso during the five-year period.
+- Roughly **1 out of every 3 traffic fatalities in El Paso involved alcohol**.
+- Of the 30 large Texas cities, El Paso ranked:
+  - **5th highest** in total alcohol-related fatalities
+  - **12th highest** in per-capita rate
+  - **16th highest** in the percentage of fatalities involving alcohol
+
+Rather than focusing only on raw totals, this report compares cities using:
+
+- total counts,
+- per-capita rates, and
+- percentages of fatalities involving alcohol.
+
+Together, these measures provide a clearer picture of how severe the problem is across communities of different sizes.
+
+***
+
+
+``` {r}
+plot
+```
+
+***
+
+::: {.callout-note appearance="default"}
+## Key Findings
+
+- El Paso recorded **118 alcohol-related traffic fatalities** between 2021 and 2025.
+- Approximately **33.9%** of all traffic fatalities in El Paso involved alcohol.
+- Of the 30 large Texas cities, El Paso ranked:
+  - **5th** in total alcohol-related traffic fatalities
+  - **12th** in per-capita rate
+  - **16th** in percentage of all traffic fatalities involving alcohol
+:::
+
+***
+
+``` {r}
+table
+```
+
+***
+
+# Final Takeaway
+
+Alcohol-related traffic fatalities remain a substantial public safety issue across Texas.
+
+While El Paso does not report the highest per-capita rates in the state, the data show that alcohol contributes to approximately one-third of all traffic fatalities in the city. This places El Paso near the middle of large Texas cities in proportional terms, but among the highest cities in total alcohol-related deaths.
+
+The findings suggest that impaired driving continues to play a major role in fatal crashes and remains an important area for prevention, enforcement, and public awareness efforts.
+
+***
+
+# Technical Details
+
+**Measurement strategy** 
+
+***Counts.*** The total count of traffic fatalities and the total count of traffic fatalities that involved alcohol are both important values for understanding precisely how much loss of life occurs in a city. These totals are particularly critical for service providers and law enforcement agencies, as they must ensure enough staff or resources are available.
+
+***Rates.*** Large counts in a jurisdiction, however, may be the result of having a large population. That is, what may seem high in one city may be low in another.  To account for this, standardizing total counts as a per capita rate is a useful way to generate comparisons across cities with various population sizes. The idea is to take the total count, divide it by the population count in the jurisdiction, and then multiply that value by a set number (e.g., 100,000). This results in a statement such as "1.4 deaths per 100,000 residents". While these statements are not as intuitive, they aid in making comparisons across cities of varying population sizes.
+
+***Percentage of Traffic Fatalities that were Alcohol-Related.*** Similar to the logic of calculating a rate, using the total number of traffic fatalities as the denominator for the total number of alcohol-involved traffic fatalities is a useful way to compare cities to one another. For example, if in one city 90 out of 100 traffic fatalities involved alcohol (90%), and in another city 30 out of 120 traffic fatalities involved alcohol (25%), it would seem that alcohol is by far a more serious problem in the first city because nearly every fatality involves a driver under the influence.
+
+
+***Data Sources.***Crash data were downloaded from the [Transportation Crash Records Information System (CRIS)](https://cris.dot.state.tx.us) on May 19, 2026. Data preparation was conducted in two steps. First, all alcohol-related crashes occurring in Texas between 2021 and 2025 were extracted using the TxDOT-defined alcohol-related crash filter. Second, a separate query was performed to obtain all traffic fatalities in Texas during the same period. This second dataset was person-level and included crash-level identifiers. The alcohol-related crash dataset from the first step was then matched to the person-level fatality dataset using the shared crash identifiers. Fatalities linked to a matched alcohol-related crash were subsequently classified as alcohol-related fatalities. To obtain per capita rates, total population counts fron the 2020 census were obtained for all large Texas cities (those with over 100,000 residents).
+
+
+
