@@ -167,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
 <p style="margin-top:-10px; margin-bottom:14px; color:#555; font-size:0.95em; line-height:1.4;">
 Articles are pulled from Google News using keywords related to “DWI/DUI” and “impaired driving” combined with “El Paso”. Sources include English and Spanish media. This feed updates every 12-hours.
 </p>
-<p>Last updated: May 27, 2026 • 08:07 PM (MST)</p>
+<p>Last updated: May 28, 2026 • 09:30 AM (MST)</p>
 <div style="display:flex; gap:12px; margin-bottom:8px; width:100%; align-items:center;">
 <p><input id="searchBox" type="text" placeholder="Search news stories" style="flex:1; padding:12px; border-radius:8px; border:1px solid #ddd; font-size:14px;"></p>
 <p><select id="categoryFilter" style="width:220px; padding:12px; border-radius:8px; border:1px solid #ddd;"> <option value="all">All Tags</option> <option value="DWI">DWI</option> <option value="Crash">Crash</option> <option value="Policy">Policy</option> <option value="Arrest">Arrest</option> <option value="Court">Court</option> <option value="Legislation">Legislation</option> <option value="Enforcement">Enforcement</option> <option value="Alcohol">Alcohol</option> <option value="Traffic">Traffic</option> <option value="Injury">Injury</option> <option value="Fatality">Fatality</option> <option value="Police">Police</option> <option value="Texas">Texas</option> <option value="ElPaso">El Paso</option> </select></p>
@@ -184,6 +184,51 @@ Articles are pulled from Google News using keywords related to “DWI/DUI” and
 </div>
 <div style="margin-top:20px; text-align:center;">
 <p><button onclick="prevPage()">Previous</button> <span id="pageInfo" style="margin:0 10px;"></span> <button onclick="nextPage()">Next</button></p>
+</div>
+<div class="news-card" data-tags="DWI,Arrest,ElPaso" style="
+        padding:16px;
+        border-radius:12px;
+        background:#fff3d6;
+        border:1px solid #e5e7eb;
+        position:relative;
+        transition: all 0.25s ease;
+      " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+<div style="position:absolute; top:10px; right:12px; font-size:0.75em; color:#888;">
+May 28, 2026
+</div>
+<div style="font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;">
+AOL.COM
+</div>
+<a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE1LTk9HSDBPUlNpeEY5TnFaRXBTZllHTDJMNDc0ZUVoUl9NY1lhZVlUZ3RfVWZjQmdMdzhrZ1paZG5ZaFF5aVlCV0NuUnFMWUtxOWs3REdKYUhVaXRaNG1sakk3WXdlNGtuRkpfQkNQQjFMcG5hSzZj?oc=5" target="_blank" style="
+        font-size:1.05em;
+        font-weight:600;
+        color:#5c1f14;
+        text-decoration:none;
+      ">El Paso mom arrested on DWI charge allegedly had toddler, baby in car</a>
+<div style="margin-top:10px;">
+<span style="
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            ">DWI</span><span style="
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            ">Arrest</span><span style="
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            ">ElPaso</span>
+</div>
 </div>
 <div class="news-card" data-tags="Arrest" style="
         padding:16px;
@@ -245,51 +290,6 @@ NOTICIASELPASO.COM
               border-radius:6px;
               margin-right:6px;
             ">DWI</span>
-</div>
-</div>
-<div class="news-card" data-tags="DWI,Arrest,ElPaso" style="
-        padding:16px;
-        border-radius:12px;
-        background:#fff3d6;
-        border:1px solid #e5e7eb;
-        position:relative;
-        transition: all 0.25s ease;
-      " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-<div style="position:absolute; top:10px; right:12px; font-size:0.75em; color:#888;">
-May 25, 2026
-</div>
-<div style="font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;">
-AOL.COM
-</div>
-<a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE1LTk9HSDBPUlNpeEY5TnFaRXBTZllHTDJMNDc0ZUVoUl9NY1lhZVlUZ3RfVWZjQmdMdzhrZ1paZG5ZaFF5aVlCV0NuUnFMWUtxOWs3REdKYUhVaXRaNG1sakk3WXdlNGtuRkpfQkNQQjFMcG5hSzZj?oc=5" target="_blank" style="
-        font-size:1.05em;
-        font-weight:600;
-        color:#5c1f14;
-        text-decoration:none;
-      ">El Paso mom arrested on DWI charge allegedly had toddler, baby in car</a>
-<div style="margin-top:10px;">
-<span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">DWI</span><span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">Arrest</span><span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">ElPaso</span>
 </div>
 </div>
 <div class="news-card" data-tags="General" style="
@@ -544,37 +544,6 @@ KFOX
             ">Crash</span>
 </div>
 </div>
-<div class="news-card" data-tags="General" style="
-        padding:16px;
-        border-radius:12px;
-        background:#fff3d6;
-        border:1px solid #e5e7eb;
-        position:relative;
-        transition: all 0.25s ease;
-      " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-<div style="position:absolute; top:10px; right:12px; font-size:0.75em; color:#888;">
-May 06, 2026
-</div>
-<div style="font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;">
-DIARIO.MX
-</div>
-<a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxOSGNqVGtXeUpWR2JYYzI5RmkwRmhKcXR3NE05ZVNTWTlsX040cWVfbTA0V1JqYkE2TlRkWEdHcy1GMmlFYmdqN2dtQjdZdWRwNEZ1YklqLUUtUG9NcUNaWDNHQU9RdC1JaWE1aWdXOFJRTWhESVFCTHRJa2F6dU5sTFU4ek1MRG9MY0pRQ3laT1Q1RnFENjJ2c3lZeWR4Qng2SWJabm03V1c1X1A5azBn0gG0AUFVX3lxTFBmanZhSTNsNmdRN094MGJ5bUh3dU1tYjVRa1hoRmlnQnl6bUFtME5FLVRqS3VicW9XZ0FaWmxRSXpYUlczTGJyT2ZpYXRxZlR1ak8wZWhaMzZpZ2xDOTJsOFNjSDBfejRtUHFLSXEzQ0RKWUM2WDZmWUdaclBONnE1clkyRmRpM0VUNmE5OFR4NEZ5OHdKQk51eEtGb3N2eTc5dmlYdVc3ZEVkYU9GV2p5N2V4QQ?oc=5" target="_blank" style="
-        font-size:1.05em;
-        font-weight:600;
-        color:#5c1f14;
-        text-decoration:none;
-      ">Exhibirá Consulado de México impacto del futbol en frontera</a>
-<div style="margin-top:10px;">
-<span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">General</span>
-</div>
-</div>
 <div class="news-card" data-tags="DWI,Policy,ElPaso" style="
         padding:16px;
         border-radius:12px;
@@ -656,6 +625,44 @@ KFOX
               border-radius:6px;
               margin-right:6px;
             ">Court</span><span style="
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            ">ElPaso</span>
+</div>
+</div>
+<div class="news-card" data-tags="DWI,ElPaso" style="
+        padding:16px;
+        border-radius:12px;
+        background:#fff3d6;
+        border:1px solid #e5e7eb;
+        position:relative;
+        transition: all 0.25s ease;
+      " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+<div style="position:absolute; top:10px; right:12px; font-size:0.75em; color:#888;">
+May 05, 2026
+</div>
+<div style="font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;">
+TELEMUNDO EL PASO
+</div>
+<a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxPNzA1TlItVENxbHFJd1I2WnY0SnVxYVljaWlQUVJCWXBEX2Zmc2wzSWtjZVcwcWpybUNPZGZHN3NRTGJLVUdPNExFME4yVGVyOUx4UndldGpham5xaGhNWjQwRWRwQ0RrR0ppOXZLOEJYZjJfdy16M1lBaEJOODB0R1kzRkM3cGNiVjJpUWQ3YndKaDhEUjNZTTNhcndBd3hsYWpnOTBRUWdJd9IBsgFBVV95cUxQbG5rZl9YVldNQUpMX1BTdFZDUTh1V2Vrcjk2QzR1T09GSXNjek1xTFRWQlhaRlAtbHlGQ0ZxbVJqY0UwcFR6dTZyUG1CR0ZlbF90WGZ5LXUyM1BQRXhxR3ZmSEtGVUdESEFjYkNOVEJ4eENoZGZ3S1NCTWlXZmtub2diZVN3VDlzRGhlMlNsdWV3SUxZbFNHZlBYQVZOc0RwM0NLd0lzMzUzcURrdXBVNUZ3?oc=5" target="_blank" style="
+        font-size:1.05em;
+        font-weight:600;
+        color:#5c1f14;
+        text-decoration:none;
+      ">Detienen a mujer con historial de DWI en El Paso</a>
+<div style="margin-top:10px;">
+<span style="
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            ">DWI</span><span style="
               font-size:0.7em;
               background:#7a2e1d;
               color:#fff3d6;
@@ -1329,6 +1336,96 @@ KFOX
             ">ElPaso</span>
 </div>
 </div>
+<div class="news-card" data-tags="DWI,ElPaso" style="
+        padding:16px;
+        border-radius:12px;
+        background:#fff3d6;
+        border:1px solid #e5e7eb;
+        position:relative;
+        transition: all 0.25s ease;
+      " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+<div style="position:absolute; top:10px; right:12px; font-size:0.75em; color:#888;">
+April 23, 2026
+</div>
+<div style="font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;">
+EL PASO INC.
+</div>
+<a href="https://news.google.com/rss/articles/CBMi7gFBVV95cUxOU2NMNVRjOWNpcnFMeWtQODhCeWIwc2JnSGlGajBsbXZPVVVmVU1RU2NUXzFqRzNFaUJZMmh1ZHVLeDJJWG9BRXI4Q05QdDV5WXlHakNOLUpWNEtsODUwem94TkdVVHFGeFp1b0JXOVFKQk1GQ2tiaFZpQXVHOTBaZHBFY196ODl0emR4VkZSQUN3VkZaRkgxcDNBUjlJd3VtWTNrWEV0NXlWSUt6RjZoYXF3SUVSU0VkcWkwOGlsejd0RllMdnJDQU10Qlp4MzRJRWQtQzVtRjlGYWtwWHU1bVZVbW13V1hKRFNrRC1B?oc=5" target="_blank" style="
+        font-size:1.05em;
+        font-weight:600;
+        color:#5c1f14;
+        text-decoration:none;
+      ">El Paso County DWI program receives state recognition</a>
+<div style="margin-top:10px;">
+<span style="
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            ">DWI</span><span style="
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            ">ElPaso</span>
+</div>
+</div>
+<div class="news-card" data-tags="DWI,Arrest,Police,ElPaso" style="
+        padding:16px;
+        border-radius:12px;
+        background:#fff3d6;
+        border:1px solid #e5e7eb;
+        position:relative;
+        transition: all 0.25s ease;
+      " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+<div style="position:absolute; top:10px; right:12px; font-size:0.75em; color:#888;">
+April 22, 2026
+</div>
+<div style="font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;">
+KTSM 9 NEWS
+</div>
+<a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxQUHNsaFVNSG9PQzRVd0lKMXRKN2pfTl9scnh4b19IUnRUTy1BYkw5c2pCOG4xeXJJQi1pbENiYWJPbWxUdS1WVC1rVU05LVFpdXF4SndoamdfWFYwYkRON0l6blh0a3Ffd080TzFyN1JsWklNNTZlOVJMQ1F4Q3hzOW5R?oc=5" target="_blank" style="
+        font-size:1.05em;
+        font-weight:600;
+        color:#5c1f14;
+        text-decoration:none;
+      ">El Paso police officer arrested for DWI</a>
+<div style="margin-top:10px;">
+<span style="
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            ">DWI</span><span style="
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            ">Arrest</span><span style="
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            ">Police</span><span style="
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            ">ElPaso</span>
+</div>
+</div>
 <div class="news-card" data-tags="DWI,Arrest,ElPaso" style="
         padding:16px;
         border-radius:12px;
@@ -1410,58 +1507,6 @@ KTSM 9 NEWS
               border-radius:6px;
               margin-right:6px;
             ">Arrest</span>
-</div>
-</div>
-<div class="news-card" data-tags="DWI,Arrest,Police,ElPaso" style="
-        padding:16px;
-        border-radius:12px;
-        background:#fff3d6;
-        border:1px solid #e5e7eb;
-        position:relative;
-        transition: all 0.25s ease;
-      " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-<div style="position:absolute; top:10px; right:12px; font-size:0.75em; color:#888;">
-April 22, 2026
-</div>
-<div style="font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;">
-KTSM 9 NEWS
-</div>
-<a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxQUHNsaFVNSG9PQzRVd0lKMXRKN2pfTl9scnh4b19IUnRUTy1BYkw5c2pCOG4xeXJJQi1pbENiYWJPbWxUdS1WVC1rVU05LVFpdXF4SndoamdfWFYwYkRON0l6blh0a3Ffd080TzFyN1JsWklNNTZlOVJMQ1F4Q3hzOW5R?oc=5" target="_blank" style="
-        font-size:1.05em;
-        font-weight:600;
-        color:#5c1f14;
-        text-decoration:none;
-      ">El Paso police officer arrested for DWI</a>
-<div style="margin-top:10px;">
-<span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">DWI</span><span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">Arrest</span><span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">Police</span><span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">ElPaso</span>
 </div>
 </div>
 <div class="news-card" data-tags="DWI,Arrest,Police,ElPaso" style="
@@ -1959,51 +2004,6 @@ EL PASO TIMES
             ">ElPaso</span>
 </div>
 </div>
-<div class="news-card" data-tags="Crash,Arrest,ElPaso" style="
-        padding:16px;
-        border-radius:12px;
-        background:#fff3d6;
-        border:1px solid #e5e7eb;
-        position:relative;
-        transition: all 0.25s ease;
-      " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-<div style="position:absolute; top:10px; right:12px; font-size:0.75em; color:#888;">
-April 07, 2026
-</div>
-<div style="font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;">
-KFOX
-</div>
-<a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxPUEFLMXdhMUdGdFVacmRNOVpUZjJjUEgtUVJhMmJPUzA1UXFjS2VtdFVCX2JCbTBfd1JXRG9LcDhLd1ZVZW96UnJDaWhtcHIzNlVFSFJyUFVZSGZaU01VdWdtUmFkSG9seUF3RjZVN3dOeVRPdWsxQTlnTE9RVXJEMVBzTng5cjRSSXExWEJVSkd6RTNSakdNcE92bUFRM09tX1BDX1RsbGQ5ZlFtRmFTT1R2S2lsUQ?oc=5" target="_blank" style="
-        font-size:1.05em;
-        font-weight:600;
-        color:#5c1f14;
-        text-decoration:none;
-      ">56-year-old El Paso man killed after crash in west El Paso; 19-year-old arrested</a>
-<div style="margin-top:10px;">
-<span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">Crash</span><span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">Arrest</span><span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">ElPaso</span>
-</div>
-</div>
 <div class="news-card" data-tags="General" style="
         padding:16px;
         border-radius:12px;
@@ -2306,9 +2306,9 @@ INFOBAE
 March 04, 2026
 </div>
 <div style="font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;">
-KFOX
+KDBC
 </div>
-<a href="https://news.google.com/rss/articles/CBMiqwJBVV95cUxObkhCRUZ4c2FvejNob1llTFBWX3ZuWHpFTXhPYnJCUk1LY01VaDVja2lFT1dpQ0FmZUFmNkdYa1RuVEtXUjF2MDVwVTlNb0dlWjFUeV91RkpiSnBrNmZXTFBJTms1Wlh5TjB3WnoyUmNoYUh3Q3JtamF0MmtaWWs5cW0xQ3g2T1RBTnVQRlhpNXYtZy1yWlJyLWtYVHVVQVlVRHR5TkMwUE1zZ3h5bnBBazEzTUkwUmVVRnpsbUswdHJQMzlLWDFJc1Q0dTdHN29ka0h3cl9Nd3JZOWdRcE1wbGhoV3F4b080VUZlbFhGVjB1NkMyYW16NHdZblpGazJBeVF3N0trQzZFbGozYWFDaUJMVC1Pdmt1NFZvWk5XWlVXSnVuUDVhMFJCYw?oc=5" target="_blank" style="
+<a href="https://news.google.com/rss/articles/CBMi1AJBVV95cUxPLUxSR2d6RTZyd2xMTjdDai1RVmU1VHRGSlBJb0Y4WEV5M2pFQXZFTE81Zm9KdTBNZXJPaXNacmNUbm5WajNLa3dkQXhTT2QzTURzSFVMRmhTcTJlbS11Uy1ZWmtWai1panVVaWRSMXFVM1VDLUc3QWc3UVVhOUMtZ0VrRGxDMWxTNkozWGR4TFNMb2dHQ0tMOV9BaGFXalJPZE0yMFR6U2VBSDdveEZQd2tfRHhrWXIwd0o1NVQyZTVFb0E0SmM3T3A3QmhBRGVCR1hfZmN5V2RWMnNRdTgxWXpVTzNkUGNrZk1aaUZ0WkhqMUI1ZnVxZDF6dEhhNjl4STZIcXBrTzB1TWpuTHBKSTVfM3JvbTZFMElIc3JsOXhsV29sQnR5WEJSbHowWDRZejc5Z2tpRUk5bnA1UlF2c2lCRUVPM2RrVlNUbkRQWkVDOXpH?oc=5" target="_blank" style="
         font-size:1.05em;
         font-weight:600;
         color:#5c1f14;
@@ -2595,37 +2595,6 @@ DIARIO.MX
             ">Arrest</span>
 </div>
 </div>
-<div class="news-card" data-tags="ElPaso" style="
-        padding:16px;
-        border-radius:12px;
-        background:#fff3d6;
-        border:1px solid #e5e7eb;
-        position:relative;
-        transition: all 0.25s ease;
-      " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-<div style="position:absolute; top:10px; right:12px; font-size:0.75em; color:#888;">
-February 28, 2026
-</div>
-<div style="font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;">
-TELEMUNDO EL PASO
-</div>
-<a href="https://news.google.com/rss/articles/CBMixwFBVV95cUxQcXRsNVdUZEpiWWs1RHFOZVY3Q3NwVnRMMUt4SFdEVWYweEgzaUdlVWNrajdCdV9kQ2N6anlqc3AyREFXYi1NRTlmZktyRzcxSDVHdjRGWlNpMmJkT1VrbkE3N1BKUkgyM0NPTGtWRU8yTjBaUEdweXhKaWhVNWt5bVlBRHdPNDZDdmtlVmtvWFhyRkNYRWd2Q0t0RFh5WnJ5aXBZdEZsb3pjYzZDQTN4cTl6SzdJd0NTTUh4RDJrYkstWDZLZ1930gHPAUFVX3lxTE9xeWxHbElueGY4ZUNKbzBscE55cXFYVTFXdXg3eFd3T3J0TTRqR3N6LXFMeElWVFk1aTFQSmx6TFl6UVlKMG8yNUNEcnhCaDVSSjgxdW04cjdIWVdDVVRDQURfZk05UFJfSzhGaDZSb2hfdS1XVjZpajdfMW12aS12bTVXbW1FZGpXVS11UXBPb0RNNnN3anBaMV9yWDR4TVF0VkZfc2RQdmRrVlpGenZSMEQtN1haUHVWT2kzZ01CUklRZk1HcnBkZzRRdFZWNA?oc=5" target="_blank" style="
-        font-size:1.05em;
-        font-weight:600;
-        color:#5c1f14;
-        text-decoration:none;
-      ">Centro comercial ofrece espacios seguros para emergencias de violencia</a>
-<div style="margin-top:10px;">
-<span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">ElPaso</span>
-</div>
-</div>
 <div class="news-card" data-tags="DWI,ElPaso" style="
         padding:16px;
         border-radius:12px;
@@ -2655,37 +2624,6 @@ EL PASO MATTERS
               border-radius:6px;
               margin-right:6px;
             ">DWI</span><span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">ElPaso</span>
-</div>
-</div>
-<div class="news-card" data-tags="ElPaso" style="
-        padding:16px;
-        border-radius:12px;
-        background:#fff3d6;
-        border:1px solid #e5e7eb;
-        position:relative;
-        transition: all 0.25s ease;
-      " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-<div style="position:absolute; top:10px; right:12px; font-size:0.75em; color:#888;">
-February 24, 2026
-</div>
-<div style="font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;">
-TELEMUNDO EL PASO
-</div>
-<a href="https://news.google.com/rss/articles/CBMizAFBVV95cUxQSnBZaGxDSUh4LUZBMm5WMUN3S0p5ZDlEQXRCZjdibUF5ZXd2b2NJWGtlb25vLWRNcXhFaENVOXM2dm1PdDczWGR6WV9rOVB0QnNFQmhhb3FFbWxaaW5sNk5GVlFPY192VzFwWUN3SmpUTF96VGw0VjBQZ003aGJ4Mm5kT3VNQVBCYmhyRE5uQ29mdk1UbVBhbzhFUUFlaTlfNkZCMGUtX3RnTWpDYTBzUWFhM0RkWXktOXo4dl9MeWl0T21DbXU5ZHk4aHbSAdQBQVVfeXFMTkg1ZER0Rk9BRlhfYUM0a3pzSnVlZHpzWFEzZDZyVHdtOWtHOVNUNi1fRVk2elFLVUN4V2lfU3RJRkVSdUNxV0VXcFlMbURCZmEwR1ZzUjZ4VHZKX0lpR2VQdG5PSnlHUDJ1N1RTWFJ0OHRsRzlvV01GYi1ucFpqV0NkSW1pYUlpNktmVVh2S0Z5OE9ENFFrUzJicFF6TXRsYVNRMFFNM3BPc25scWI5SUlOX0RLSy1QNkxlX3J1WjEtek9LSVhrWVJ1eGhCNTJ0cDlqYUg?oc=5" target="_blank" style="
-        font-size:1.05em;
-        font-weight:600;
-        color:#5c1f14;
-        text-decoration:none;
-      ">Tiroteo en Young Park: Jornada intensa en cuarto día de juicio de Nathan Rivas</a>
-<div style="margin-top:10px;">
-<span style="
               font-size:0.7em;
               background:#7a2e1d;
               color:#fff3d6;
@@ -2956,6 +2894,58 @@ EL PASO COUNTY SHERIFF’S OFFICE
               border-radius:6px;
               margin-right:6px;
             ">Enforcement</span><span style="
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            ">ElPaso</span>
+</div>
+</div>
+<div class="news-card" data-tags="DWI,Arrest,Traffic,ElPaso" style="
+        padding:16px;
+        border-radius:12px;
+        background:#fff3d6;
+        border:1px solid #e5e7eb;
+        position:relative;
+        transition: all 0.25s ease;
+      " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+<div style="position:absolute; top:10px; right:12px; font-size:0.75em; color:#888;">
+February 04, 2026
+</div>
+<div style="font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;">
+KFOX
+</div>
+<a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxPYUZTZThIMUx4UjNPWjl1NFBaakd4S25MVXB5ME50N0x4OWdCaHdtLXc2d2J5NHo0X3JtR3ZVZlY1WnJrMzQ1MDdwNGp4aEhNdm9IaG9XbTJyME13ZC1tejdvQnNROU4wTHUydnRFWmFBN0xGT1NRXzJpdG5yUnQ2ODU1Q1ZTYXpOTDRuOTBfRG91NGhzUU1FWmlB?oc=5" target="_blank" style="
+        font-size:1.05em;
+        font-weight:600;
+        color:#5c1f14;
+        text-decoration:none;
+      ">El Paso man arrested on DWI charge after traffic stop with child</a>
+<div style="margin-top:10px;">
+<span style="
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            ">DWI</span><span style="
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            ">Arrest</span><span style="
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            ">Traffic</span><span style="
               font-size:0.7em;
               background:#7a2e1d;
               color:#fff3d6;
@@ -4452,37 +4442,6 @@ INFOBAE
             ">DWI</span>
 </div>
 </div>
-<div class="news-card" data-tags="DWI" style="
-        padding:16px;
-        border-radius:12px;
-        background:#fff3d6;
-        border:1px solid #e5e7eb;
-        position:relative;
-        transition: all 0.25s ease;
-      " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-<div style="position:absolute; top:10px; right:12px; font-size:0.75em; color:#888;">
-November 26, 2025
-</div>
-<div style="font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;">
-ABC
-</div>
-<a href="https://news.google.com/rss/articles/CBMiswFBVV95cUxPdXpCcjIxRkZKYW1PaWtSLTUxOTIwUG1RYU1CM0NQeTRMSG1YVk1ncjJhMnZDcF92SUFfUFNDeS1iS3hkYl9XRDF0Ujh5RldjTG9KTkIwRTRnWVdVcU9Ick02cl90aDBMNHQ0dzFhRUxVWG50YjFzTnZ5U0dtcjJiYTFzX0Z5R1JtemRfN3JINkRfajc5d3dnY3RlaXItUFMxZm04cFlWcmhSMkN4R3lQek92WdIBuAFBVV95cUxOM3pEMmpkMU1uMXJjTDVxYy1JY2hvZ0FmUDlLT3BoMkNHNjFLVFVadmphU3pJaDNHVTNzdW9TbUZqTDhiNkRrMFpzeXQxS0RSU1pqSDE3X19SMlJfeHhETkh3eEprSmJCM1VrRGJ5SXBEcGdPMGk4WW1MNkozWWlNZHZvdXM4ZldEWjhBSjY4SUpFWHE1NzFYdDczb3hMLVhTY1REb1hMVzNVOU80Q1ZRNm9JWE1zQWpm?oc=5" target="_blank" style="
-        font-size:1.05em;
-        font-weight:600;
-        color:#5c1f14;
-        text-decoration:none;
-      ">Fernando Gaviria, condenado a dos meses de prisión por conducir ebrio: «Estaba a una o dos copas de entrar en coma»</a>
-<div style="margin-top:10px;">
-<span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">DWI</span>
-</div>
-</div>
 <div class="news-card" data-tags="DWI,Policy,Enforcement" style="
         padding:16px;
         border-radius:12px;
@@ -4625,7 +4584,7 @@ October 27, 2025
 <div style="font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;">
 KFOX
 </div>
-<a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxNVTF4djJYWXo2ajNIT2lkWHJ4LTVzVWtpZ2RtVzN2eVlWRG9hc294U1lxTGdmRGVlb3Y3SENtMWtIYlJQSFlVazU3NUdjbFdtT2pHeTZPWWNTYV9RdzRIM0RVblhZNklCdjR0ZzhTa3RsRHZLUS1EMkRyMWtXRmtJUjB3?oc=5" target="_blank" style="
+<a href="https://news.google.com/rss/articles/CBMiekFVX3lxTFBjUG1pVzhUOU5hcjVLbHg3eDlXOTg4Szc5bGk0SUhhc2lBWGd0MWlkTVhzbHJ4VVVITlFnUm1PX3BGZ20tWjhEa3FwZkFRRXJmaTBlQ3AyVUxiVjNWeHlxb0JHTTZZZVBLUHRYMV95ZnQtdVlHSV9SeGFB?oc=5" target="_blank" style="
         font-size:1.05em;
         font-weight:600;
         color:#5c1f14;
@@ -4737,51 +4696,6 @@ KFOX
               border-radius:6px;
               margin-right:6px;
             ">Crash</span><span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">Arrest</span><span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">ElPaso</span>
-</div>
-</div>
-<div class="news-card" data-tags="DWI,Arrest,ElPaso" style="
-        padding:16px;
-        border-radius:12px;
-        background:#fff3d6;
-        border:1px solid #e5e7eb;
-        position:relative;
-        transition: all 0.25s ease;
-      " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-<div style="position:absolute; top:10px; right:12px; font-size:0.75em; color:#888;">
-October 15, 2025
-</div>
-<div style="font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;">
-KTSM 9 NEWS
-</div>
-<a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxPMFJVZndPZjBfSmFMS3lkMEpaQUVSS3QxbTZmdGVqOUp5TGZsalB5dnY0NTZaRkVVbDdxOFY2U3RCRGVEazZjSWxhVEJxVXk4MXNNN3picGQ5cnhXM2NHQ1A0dkhpTERtQXM2di13OVpMaUI4bGhmMUN5eVRwQmttUmVwR1paVjVBZlRuMXRqVG03Q2fSAZgBQVVfeXFMUFVaTFpQZ3NiNlAtMEhRMVd3RnJwcUY2T0Y4WmRWU21pX080Rk52a3NFaXAxdUNaWGpERk1hSTZYekI0UlZMU21Vd1Y3UkdJMnNRN3FwOVBjWWduVW9vMlQ3eVQ0cUszZUx6TmFQSFNfbjBxbnNkdWtOaGJTZ3ltelhPX2NqU2RudmMxcTU1M1IySFBJbnNVbUU?oc=5" target="_blank" style="
-        font-size:1.05em;
-        font-weight:600;
-        color:#5c1f14;
-        text-decoration:none;
-      ">Man arrested on two DWI warrants in East El Paso</a>
-<div style="margin-top:10px;">
-<span style="
-              font-size:0.7em;
-              background:#7a2e1d;
-              color:#fff3d6;
-              padding:4px 8px;
-              border-radius:6px;
-              margin-right:6px;
-            ">DWI</span><span style="
               font-size:0.7em;
               background:#7a2e1d;
               color:#fff3d6;
@@ -4924,6 +4838,37 @@ KDBC
               border-radius:6px;
               margin-right:6px;
             ">ElPaso</span>
+</div>
+</div>
+<div class="news-card" data-tags="DWI" style="
+        padding:16px;
+        border-radius:12px;
+        background:#fff3d6;
+        border:1px solid #e5e7eb;
+        position:relative;
+        transition: all 0.25s ease;
+      " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+<div style="position:absolute; top:10px; right:12px; font-size:0.75em; color:#888;">
+September 09, 2025
+</div>
+<div style="font-size:0.75em; font-weight:700; color:#7a2e1d; margin-bottom:6px;">
+DIARIO BASTA!
+</div>
+<a href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxQR3lFc0xRTE1WTUJvZjdwaklaQW12Q0hPLUpHSFFjbkRMQXdyNFExY2xkUEFzb1c2a20zSFJxeEVNLURQdHhsRG9uR2RZRWZ1UWIwNHoyQWx2UWxSanVMXzhXLWRWMl9tTTlsdUFCbjVoNjhvTGlJMG5ZOF93d2JDaFVrb1dMSURQeENTRWdRemtmamZ3MlZDaW8zODNfejhlaV80VUZVUGYzazQ?oc=5" target="_blank" style="
+        font-size:1.05em;
+        font-weight:600;
+        color:#5c1f14;
+        text-decoration:none;
+      ">“El Yaki” pierde visa de trabajo por DUI en EE. UU.; cancela gira en el país</a>
+<div style="margin-top:10px;">
+<span style="
+              font-size:0.7em;
+              background:#7a2e1d;
+              color:#fff3d6;
+              padding:4px 8px;
+              border-radius:6px;
+              margin-right:6px;
+            ">DWI</span>
 </div>
 </div>
 <div class="news-card" data-tags="DWI,Arrest,ElPaso" style="
