@@ -24,7 +24,9 @@ website:
             href: subscribe.html
           - text: "Contact the El Paso Crime Lab"
             href: contact.html
-
+      - icon: instagram
+        href: https://www.instagram.com/epcrimelab/
+        aria-label: Instagram
 format:
   html:
     theme: default
