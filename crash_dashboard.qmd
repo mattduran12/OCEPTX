@@ -16,7 +16,7 @@ editor: source
 
 This dashboard tracks all reported vehicle crashes in El Paso, Texas classified as alcohol-related. Data is updated monthly. Note that counts for previous months may change as additional crash reports are submitted and processed.
 
-<b>Last data update:</b> May 12, 2026
+<b>Last data update:</b> June 11, 2026
 
 <u>*Tips*</u>
 
@@ -47,7 +47,7 @@ suppressMessages(library(leaflet.extras))
 suppressMessages(library(sf))
 
 
-data <- read.csv("C:/Users/Matt/Documents/data/ep_data_(01-01-2016_05-12-2026)_2.csv", header = TRUE)
+data <- read.csv("C:/Users/Matt/Documents/data/ep_data_(01-01-2016_06-11-2026).csv", header = TRUE)
 
 data$City <- recode(data$City,
   "EL PASO" = "El Paso"
@@ -247,10 +247,25 @@ injury_breakdown_now <- person_level %>%
   filter(!is.na(severity)) %>%
   count(severity)
 
-fatal_injuries_now   <- injury_breakdown_now %>% filter(severity=="Fatal") %>% pull(n)
-serious_injuries_now <- injury_breakdown_now %>% filter(severity=="Serious") %>% pull(n)
-minor_injuries_now   <- injury_breakdown_now %>% filter(severity=="Minor") %>% pull(n)
-possible_injuries_now<- injury_breakdown_now %>% filter(severity=="Possible") %>% pull(n)
+fatal_injuries_now <- injury_breakdown_now %>%
+  filter(severity == "Fatal") %>%
+  summarise(n = sum(n, na.rm = TRUE)) %>%
+  pull(n)
+
+serious_injuries_now <- injury_breakdown_now %>%
+  filter(severity == "Serious") %>%
+  summarise(n = sum(n, na.rm = TRUE)) %>%
+  pull(n)
+
+minor_injuries_now <- injury_breakdown_now %>%
+  filter(severity == "Minor") %>%
+  summarise(n = sum(n, na.rm = TRUE)) %>%
+  pull(n)
+
+possible_injuries_now <- injury_breakdown_now %>%
+  filter(severity == "Possible") %>%
+  summarise(n = sum(n, na.rm = TRUE)) %>%
+  pull(n)
 ```
 
 ## Row {height="325px"}
@@ -262,7 +277,7 @@ possible_injuries_now<- injury_breakdown_now %>% filter(severity=="Possible") %>
 In **`r report_month`**, there were:
 
 - **`r crashes_now`** alcohol-related crashes
-  - **`r fatal_crashes_now`** crashes involved one or more fatalities
+  - **`r fatal_crashes_now`** resulted in one or more fatalities
 
 - **`r injuries_now`** people were injured
   - **`r serious_injuries_now`** serious injuries
