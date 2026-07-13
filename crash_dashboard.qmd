@@ -14,9 +14,9 @@ editor: source
 
 ::: {style="max-width: 950px; font-size: 13px; color: #4a4a4a"}
 
-This dashboard tracks all reported vehicle crashes in El Paso, Texas classified as alcohol-related. Data is updated monthly. Note that counts for previous months may change as additional crash reports are submitted and processed.
+This dashboard tracks all reported vehicle crashes in El Paso, Texas classified as alcohol-related. Data for the year 2025 and 2026 is updated monthly. Note that counts for previous months often change as additional crash reports are submitted and processed.
 
-<b>Last data update:</b> June 11, 2026
+<b>Last data update:</b> July 13, 2026
 
 <u>*Tips*</u>
 
@@ -47,7 +47,7 @@ suppressMessages(library(leaflet.extras))
 suppressMessages(library(sf))
 
 
-data <- read.csv("C:/Users/Matt/Documents/data/ep_data_(01-01-2016_06-11-2026).csv", header = TRUE)
+data <- read.csv("C:/Users/Matt/Documents/data/ep_data_(01-01-2016_07-13-2026).csv", header = TRUE)
 
 data$City <- recode(data$City,
   "EL PASO" = "El Paso"
