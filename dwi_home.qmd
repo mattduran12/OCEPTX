@@ -185,7 +185,7 @@ This study evaluates the impact of a social media campaign in El Paso that publi
 
 <br>
 
-<a href="dwi_friday_study.html" class="btn btn-primary">
+<a href="dwi_friday_study.pdf" class="btn btn-primary">
 Read the Study
 </a>
 
