@@ -98,11 +98,11 @@ a:hover {
 }
 
 
-/* ---------- NAVBAR (STABLE DESERT THEME) ---------- */
+/* ---------- WEBSITE NAVBAR ---------- */
 .navbar {
   background: var(--header-gradient) !important;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12) !important;
+  border-bottom: none !important;
 }
 
 /* Brand + links only (do NOT target .navbar *) */
@@ -382,3 +382,29 @@ tr:hover td {
   background-color: #f7e6d2;
 }
 
+/* =================================================
+   REMOVE DASHBOARD NAVIGATION DIVIDER
+   ================================================= */
+
+.navbar,
+.navbar-light,
+.navbar-dark,
+.quarto-dashboard .navbar,
+.quarto-dashboard .navbar-expand,
+.quarto-dashboard header {
+  border-bottom: none !important;
+  border-top: none !important;
+  box-shadow: none !important;
+}
+
+.quarto-dashboard header {
+  border-top: 1px solid var(--earth) !important;
+}
+
+.quarto-dashboard .nav-tabs {
+  border-top: none !important;
+}
+
+.quarto-dashboard .navbar-nav {
+  border: none !important;
+}

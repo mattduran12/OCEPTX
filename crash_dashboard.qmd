@@ -14,14 +14,10 @@ editor: source
 
 ::: {style="max-width: 950px; font-size: 13px; color: #4a4a4a"}
 
-This dashboard tracks all reported vehicle crashes in El Paso, Texas classified as alcohol-related. Data for the year 2025 and 2026 is updated monthly. Note that counts for previous months often change as additional crash reports are submitted and processed.
+This dashboard tracks all reported vehicle crashes in El Paso, Texas classified as alcohol-related. Data for the year 2025 and 2026 is updated monthly. Note that counts may change as additional crash reports are submitted and processed.
 
-<b>Last data update:</b> July 13, 2026
+<b>Last data update:</b> August 12, 2026
 
-<u>*Tips*</u>
-
-- Charts automatically resize to your browser window.
-- To view a chart in full-screen, click the *“Expand”* button in the bottom-right corner of the chart.
 :::
 
 
