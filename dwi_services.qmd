@@ -363,8 +363,6 @@ for (i in seq_len(nrow(mapped_providers))) {
 
 <div class="section-container directory-container">
 
-<h2>Directory</h2>
-
 <div class="controls">
   <input 
     id="searchBox" 
