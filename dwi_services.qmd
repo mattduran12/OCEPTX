@@ -1,0 +1,705 @@
+---
+title: "Service Provider Directory"
+draft: true
+subtitle: "El Paso, Texas"
+format:
+  html:
+    embed-resources: true
+    page-layout: full
+    toc: true
+    toc-depth: 2
+    toc-title: "On this page"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+<style>
+
+.quarto-title-block {
+  display: none;
+}
+
+</style>
+
+
+
+<style>
+/* ============================================================
+   SECTION CONTAINERS
+   ============================================================ */
+
+.section-container {
+  background: #faf8f3;
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem 0;
+  border: 1px solid #e4ddd2;
+  box-shadow: 0 4px 14px rgba(60, 45, 30, 0.07);
+}
+
+/* Directory */
+.directory-container {
+  background: #faf8f3;
+}
+
+/* Map */
+.map-container {
+  background: #eee8de;
+  padding: 1.25rem;
+}
+
+/* Section headings */
+.section-container h2 {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  font-weight: 700;
+  color: #292929;
+}
+
+/* Make leaflet map fit nicely inside its container */
+.map-container .leaflet-container {
+  width: 100% !important;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 600px;
+}
+
+/* ============================================================
+   PROVIDER CARDS
+   ============================================================ */
+
+.provider-card {
+  padding: 20px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5dfd5;
+  margin-bottom: 14px;
+  transition: all 0.25s ease;
+}
+
+.provider-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(60,45,30,0.12);
+}
+
+.provider-name {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.provider-blurb {
+  font-size: 13px;
+  color: #555;
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+
+.provider-info {
+  font-size: 13px;
+  line-height: 1.7;
+  margin-top: 12px;
+}
+
+.provider-info a {
+  color: #7a2e1d;
+  text-decoration: none;
+}
+
+.provider-info a:hover {
+  text-decoration: underline;
+}
+
+.family-message {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: #f8f9fa;
+  border-left: 4px solid #7a2e1d;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.family-message-label {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #7a2e1d;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.7em;
+  background: #7a2e1d;
+  color: #fff3d6;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-right: 6px;
+  margin-top: 8px;
+}
+
+.location-badge {
+  display: inline-block;
+  font-size: 0.75em;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #e9ecef;
+  color: #495057;
+  margin-left: 6px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+
+.header {
+  text-align: center;
+  padding: 3rem 0 3rem 0;
+}
+
+.header h1 {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: .6rem;
+}
+
+.header p {
+  font-size: 1.15rem;
+  color: var(--text-light);
+  max-width: 850px;
+  margin: auto;
+}
+
+/* ============================================================
+   SEARCH AND FILTER CONTROLS
+   ============================================================ */
+
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+#searchBox {
+  flex: 7 1 auto;
+  min-width: 0;
+  width: auto;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+#categoryFilter {
+  flex: 0 0 220px;
+  width: 220px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+</style>
+
+
+<div class="header">
+
+<h1>Service Provider Directory</h1>
+
+</div>
+
+This directory shows contact information for support services offered in the El Paso community. To be added or have information updated, please send a request using the [contact form](https://www.epcrimelab.org/contact.html). 
+
+
+```{r}
+library(leaflet)
+library(dplyr)
+library(readxl)
+library(htmltools)
+
+# ============================================================
+# LOAD PROVIDER DATA
+# ============================================================
+
+providers <- read_excel(
+  "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/OCEPTX/service_providers/service_providers_list_ep.xlsx"
+)
+
+# Create an ID automatically
+providers <- providers %>%
+  mutate(id = row_number())
+
+# Clean character fields
+providers <- providers %>%
+  mutate(
+    across(
+      c(
+        name,
+        el_paso,
+        services,
+        contact_preference,
+        phone,
+        email,
+        website,
+        address,
+        family_message
+      ),
+      ~ ifelse(is.na(.), "", as.character(.))
+    )
+  )
+
+# ============================================================
+# HTML ESCAPE FUNCTION
+# ============================================================
+
+esc <- function(x) {
+  htmlEscape(as.character(x))
+}
+
+# ============================================================
+# PROVIDER SETTINGS
+# ============================================================
+
+providers$tags <- providers$services
+
+providers$website_display <- providers$website
+
+providers$website_url <- ifelse(
+  providers$website == "",
+  "",
+  ifelse(
+    grepl("^https?://", providers$website, ignore.case = TRUE),
+    providers$website,
+    paste0("https://", providers$website)
+  )
+)
+
+# ============================================================
+# MAP POPUPS
+# ============================================================
+
+providers$popup <- paste0(
+  "<b>", esc(providers$name), "</b><br><br>",
+  "<b>Services:</b> ", esc(providers$services), "<br>",
+  
+  ifelse(
+    providers$phone != "",
+    paste0(
+      "<b>Phone:</b> <a href='tel:",
+      gsub("[^0-9]", "", providers$phone),
+      "'>",
+      esc(providers$phone),
+      "</a><br>"
+    ),
+    ""
+  ),
+  
+  ifelse(
+    providers$email != "",
+    paste0(
+      "<b>Email:</b> <a href='mailto:",
+      esc(providers$email),
+      "'>",
+      esc(providers$email),
+      "</a><br>"
+    ),
+    ""
+  ),
+  
+  ifelse(
+    providers$website_url != "",
+    paste0(
+      "<b>Website:</b> <a href='",
+      esc(providers$website_url),
+      "' target='_blank'>Visit website</a><br>"
+    ),
+    ""
+  ),
+  
+  ifelse(
+    providers$address != "",
+    paste0(
+      "<b>Address:</b> ",
+      esc(providers$address),
+      "<br>"
+    ),
+    ""
+  )
+)
+
+# ============================================================
+# MAP
+# ============================================================
+
+map <- leaflet() %>%
+  addProviderTiles("CartoDB.Positron") %>%
+  setView(-106.485, 31.76, zoom = 11)
+
+mapped_providers <- providers %>%
+  filter(
+    !is.na(lon),
+    !is.na(lat)
+  )
+
+for (i in seq_len(nrow(mapped_providers))) {
+
+  map <- map %>%
+    addCircleMarkers(
+      lng = mapped_providers$lon[i],
+      lat = mapped_providers$lat[i],
+      layerId = mapped_providers$id[i],
+      radius = 8,
+      fillOpacity = 0.9,
+      popup = mapped_providers$popup[i]
+    )
+}
+```
+
+
+<div class="section-container directory-container">
+
+<h2>Directory</h2>
+
+<div class="controls">
+  <input 
+    id="searchBox" 
+    type="text" 
+    placeholder="Search providers, services, or support..."
+  >
+
+  <select id="categoryFilter">
+    <option value="all">All Services</option>
+    `r paste0(
+      "<option value='",
+      trimws(unique(providers$services)),
+      "'>",
+      trimws(unique(providers$services)),
+      "</option>",
+      collapse = "\n"
+    )`
+  </select>
+</div>
+
+<div id="resultCount" style="margin-bottom:10px; color:#888; font-size:0.9em;"></div>
+
+<div id="directory">
+
+```{r results='asis'}
+
+for (i in seq_len(nrow(providers))) {
+
+  # Contact information
+  phone_html <- if (providers$phone[i] != "") {
+    paste0(
+      "<div><strong>Phone:</strong> ",
+      "<a href='tel:",
+      gsub("[^0-9]", "", providers$phone[i]),
+      "'>",
+      esc(providers$phone[i]),
+      "</a></div>"
+    )
+  } else {
+    ""
+  }
+
+  email_html <- if (providers$email[i] != "") {
+    paste0(
+      "<div><strong>Email:</strong> ",
+      "<a href='mailto:",
+      esc(providers$email[i]),
+      "'>",
+      esc(providers$email[i]),
+      "</a></div>"
+    )
+  } else {
+    ""
+  }
+
+  website_html <- if (providers$website_url[i] != "") {
+    paste0(
+      "<div><strong>Website:</strong> ",
+      "<a href='",
+      esc(providers$website_url[i]),
+      "' target='_blank'>",
+      esc(providers$website_display[i]),
+      "</a></div>"
+    )
+  } else {
+    ""
+  }
+
+  # Location
+  location_html <- if (
+    tolower(trimws(providers$el_paso[i])) == "yes"
+  ) {
+
+    address_text <- if (providers$address[i] != "") {
+      paste0(
+        "<div><strong>Address:</strong> ",
+        esc(providers$address[i]),
+        "</div>"
+      )
+    } else {
+      ""
+    }
+
+    paste0(
+      "<div><strong>Location:</strong> El Paso, Texas ",
+      "<span class='location-badge'>El Paso-based</span></div>",
+      address_text
+    )
+
+  } else {
+
+    paste0(
+      "<div><strong>Location:</strong> ",
+      "Virtual",
+      "</div>"
+    )
+  }
+
+  # Service tags
+  service_tags <- paste0(
+    "<span class='tag'>",
+    trimws(unlist(strsplit(providers$services[i], ","))),
+    "</span>",
+    collapse = ""
+  )
+
+  # Family message
+  family_message_html <- if (
+    providers$family_message[i] != ""
+  ) {
+
+    paste0(
+      "<div class='family-message'>",
+      "<div class='family-message-label'>",
+      "A message to families",
+      "</div>",
+      esc(providers$family_message[i]),
+      "</div>"
+    )
+
+  } else {
+    ""
+  }
+
+  # Searchable text
+  searchable <- paste(
+    providers$name[i],
+    providers$services[i],
+    providers$phone[i],
+    providers$email[i],
+    providers$website[i],
+    providers$address[i],
+    providers$family_message[i]
+  )
+
+  cat(
+    "<div class='provider-card' ",
+    "data-name='", esc(providers$name[i]), "' ",
+    "data-category='", esc(providers$services[i]), "' ",
+    "data-search='", esc(searchable), "'>",
+
+    "<div class='provider-name'>",
+    "<a href='#' class='provider-link' data-id='",
+    providers$id[i],
+    "'>",
+    "<b>",
+    esc(providers$name[i]),
+    "</b>",
+    "</a>",
+    "</div>",
+
+    "<div>",
+    service_tags,
+    "</div>",
+
+    ifelse(
+      providers$blurb[i] != "",
+      paste0(
+        "<div class='provider-blurb'>",
+        esc(providers$blurb[i]),
+        "</div>"
+      ),
+      ""
+    ),
+
+    "<div class='provider-info'>",
+
+    location_html,
+
+    "<div><strong>Preferred contact:</strong> ",
+    esc(providers$contact_preference[i]),
+    "</div>",
+
+    phone_html,
+    email_html,
+    website_html,
+
+    "</div>",
+
+    family_message_html,
+
+    "</div>\n"
+  )
+}
+
+
+```
+
+</div>
+
+</div>
+
+<div class="section-container map-container">
+
+<h2>Map</h2>
+
+``` {r}
+map
+
+```
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  setTimeout(function() {
+
+    const mapWidget = document.querySelector(".leaflet-container");
+
+    let map = null;
+
+    if (mapWidget) {
+      const widget = HTMLWidgets.find("#" + mapWidget.id);
+
+      if (widget) {
+        map = widget.getMap();
+      }
+    }
+
+    const searchBox = document.getElementById("searchBox");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const resultCount = document.getElementById("resultCount");
+
+    const cards = Array.from(
+      document.querySelectorAll(".provider-card")
+    );
+
+    function filterCards() {
+
+      const search = (
+        searchBox.value || ""
+      ).toLowerCase().trim();
+
+      const category = (
+        categoryFilter.value || "all"
+      ).trim();
+
+      let visible = 0;
+
+      cards.forEach(function(card) {
+
+        const searchable = (
+          card.dataset.search || ""
+        ).toLowerCase();
+
+        const categories = (
+          card.dataset.category || ""
+        ).toLowerCase();
+
+        const matchesSearch =
+          !search ||
+          searchable.includes(search);
+
+        const matchesCategory =
+          category === "all" ||
+          categories.includes(category.toLowerCase());
+
+        if (matchesSearch && matchesCategory) {
+
+          card.classList.remove("hidden");
+          visible++;
+
+        } else {
+
+          card.classList.add("hidden");
+
+        }
+
+      });
+
+      resultCount.textContent =
+        visible + (visible === 1 ? " result" : " results");
+    }
+
+    searchBox.addEventListener(
+      "input",
+      filterCards
+    );
+
+    categoryFilter.addEventListener(
+      "change",
+      filterCards
+    );
+
+    filterCards();
+
+
+    /*
+      Directory → Map
+    */
+
+    document.querySelectorAll(".provider-link").forEach(
+      function(link) {
+
+        link.addEventListener(
+          "click",
+          function(e) {
+
+            e.preventDefault();
+
+            const id = Number(
+              this.dataset.id
+            );
+
+            if (!map) return;
+
+            map.eachLayer(function(layer) {
+
+              if (
+                layer.options &&
+                Number(layer.options.layerId) === id &&
+                typeof layer.getLatLng === "function"
+              ) {
+
+                map.setView(
+                  layer.getLatLng(),
+                  15
+                );
+
+                layer.openPopup();
+
+              }
+
+            });
+
+          }
+        );
+
+      }
+    );
+
+  }, 800);
+
+});
+</script>
+

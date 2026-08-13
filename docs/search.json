@@ -93,105 +93,105 @@
   {
     "objectID": "crash_dashboard.html",
     "href": "crash_dashboard.html",
-    "title": "Drunk Driving Surveillance Dashboard",
+    "title": "Alcohol-Related Crash Dashboard",
     "section": "",
-    "text": "Welcome to the Drunk Driving Surveillance Dashboard!\nThis dashboard displays data on alcohol-related vehicle crashes in El Paso, Texas and is updated every month."
+    "text": "This dashboard tracks all reported vehicle crashes in El Paso, Texas classified as alcohol-related. Data for the year 2025 and 2026 is updated monthly. Note that counts may change as additional crash reports are submitted and processed.\nLast data update: August 12, 2026"
   },
   {
     "objectID": "crash_dashboard.html#row",
     "href": "crash_dashboard.html#row",
-    "title": "Drunk Driving Surveillance Dashboard",
+    "title": "Alcohol-Related Crash Dashboard",
     "section": "Row",
-    "text": "Row"
+    "text": "Row\n\nColumn\n\nIn July 2026, there were:\n\n56 alcohol-related crashes\n\n1 resulted in one or more fatalities\n\n46 people were injured\n\n3 serious injuries\n33 minor injuries\n10 possible injuries\n\n2 fatalities associated with alcohol-related crashes\n\n\n\n\nColumn\n\n\nMonthly Brief — Latest monthly summary of crashes, injuries, and fatalities\nAbout this Dashboard — Data sources, definitions, and technical details\nTrends — Yearly trend patterns and year-to-date totals\nHolidays — Crash patterns around major holidays and event periods\n\nDrivers — Driver-level characteristics, risk indicators, and year-to-date totals\nMaps — Locations of crashes, peak times, police regions, city districts\n\nQuiz — How well do you know the data in El Paso? Take the quiz and find out!"
   },
   {
     "objectID": "crash_dashboard.html#row-1",
     "href": "crash_dashboard.html#row-1",
-    "title": "Drunk Driving Surveillance Dashboard",
-    "section": "Row",
-    "text": "Row\n\nColumn\n\nIn April 2026, there were:\n\n31 alcohol-related crashes (-13.9% decrease vs. April 2025)\n\n23 people injured in an alcohol-related crash (-30.3% decrease vs. April 2025)\n1 fatalities associated with alcohol-related crashes (-66.7% decrease vs. April 2025)\n\n\n\n\nColumn\n\n\nMonthly Brief — Latest monthly summary of crashes, injuries, and fatalities\nAbout this Dashboard — Data sources, definitions, and technical details\nTrends — Yearly trend patterns and year-to-date totals\nHolidays — Crash patterns around major holidays and event periods\n\nDrivers — Driver-level characteristics, risk indicators, and year-to-date totals\nMap — Geographic distribution of alcohol-related crashes\n\nQuiz — How well do you know the data in El Paso? Take the quiz and find out!"
-  },
-  {
-    "objectID": "crash_dashboard.html#row-2",
-    "href": "crash_dashboard.html#row-2",
-    "title": "Drunk Driving Surveillance Dashboard",
-    "section": "Row",
-    "text": "Row\n\nLast Update: April 2026\nThe Drunk Driving Surveillance Dashboard provides monthly, city-level data on alcohol-related motor vehicle crashes in El Paso, Texas. It is designed as a public-facing resource for journalists, policymakers, and researchers seeking timely and transparent information on impaired driving trends.\nCrash data is downloaded from the Texas Department of Transportation (TXDOT) website using the Crash Records Information System (CRIS) Query Tool. All crash data in this dashboard represent those reported by law enforcement, were classified as alcohol-related, and occurred in the city of El Paso.\nDefinition of Alcohol-Related Crash\nA crash is defined as alcohol-related if involved drivers or individuals were reported as “Under the Influence of Alcohol”, “Had Been Drinking”, or were reported to have a blood alcohol content (BAC) greater than 0.\nDefinition of Alcohol-Related Injury/Fatality\nInjuries include people who were classified as having a suspected serious injury, suspected minor injury, or possible injury. Fatalities are defined as any motor vehicle traffic injury crash that results in the death of one or more persons within 30 days of the incident.\nDefinition of Intoxicated Driver\nDriver and vehicle characteristics in these graphs represent intoxicated drivers. An intoxicated driver is defined as a person who’s BAC test result returned a value of 0.08g/dL or greater.\nAcronyms\nBAC = Blood alcohol content; YTD = Year to date; TXDOT = Texas Department of Transportation; CRIS = Crash Records Information System\n\n\nKey Notes for Reporting\n\nCrashes, injuries, and fatalities in the dashboard represent those that were alcohol-related\n\nTrends are based on official crash records from TXDOT\nMonthly updates may revise prior counts as data are finalized\n\nUsing Figures and Charts\nAll figures in this dashboard are interactive and downloadable.\n\nTo expand a figure, click the “Expand” button located at the bottom-right corner of each chart. Charts can easily be resized by adjusting the size of your internet browsing window.\n\nTo download a figure, hover over the chart and click the camera icon to save it as an image\n\nCharts may be used in media coverage with attribution. Data Source: TXDOT CRIS Query Tool | Figure created by El Paso Crime Lab\n\nHow to Cite This Dashboard\nWhen referencing this dashboard, please use the following citation:\nEl Paso Crime Lab. Drunk Driving Surveillance Dashboard: El Paso, Texas (2026). [www.epcrimelab.org/crash_dashboard.html]\nSuggested Language\n\n“Crash data on alcohol-related crashes in El Paso show…”\n“Local data on alcohol-related traffic fatalities indicate…”\n\nContact\nFor questions or data clarification, please contact:\nmduran29@asu.edu\n\n\nCalculation of Moving Average\nThe line graphs on the Trends page show 12-month moving averages for crashes, fatalities, and injuries between 2016 and Present. This technique results in a smooth line, allowing the viewer to see if a trend is increasing or decreasing.\nHoliday Analyses\nHolidays statistics were calculated by aligning crash data to each holiday. For fixed-date holidays (e.g., New Year’s Day, Independence Day, Halloween, Christmas, and St. Patrick’s Day), each crash was assigned an event time based on the number of days before or after the calendar date of the holiday within each year. For shifting holidays (e.g., Super Bowl and Memorial Day), the holiday date was first computed for each year and then used as the reference point for event-time calculation.\nIn all cases, crashes were restricted to a ±7-day window around the holiday and then aggregated across years (2016–2025), excluding 2020 to avoid COVID-19-related disruptions. Average daily crash counts were then computed for each relative day to identify typical patterns before and after each holiday.\nMissing Data\nA small amount of data for Drivers characteristics (e.g., gender, race/ethnicity, vehicle color) is missing. Observations with missing or unknown values in these fields were excluded.\nLimitations\nNot all alcohol-involved crashes are identified in official records. In many cases, alcohol use may go undetected or unreported, particularly when testing is not conducted or impairment is not clearly observed. As a result, these data likely underestimate the true number of alcohol-related crashes—a gap often referred to as the “dark figure” of impaired driving.\nDespite this limitation, crash data remain one of the most reliable and policy-relevant indicators of drunk driving. Unlike arrest data, which are influenced by enforcement practices, crash records capture real-world harm—injuries and fatalities—providing a consistent basis for tracking trends over time and understanding the public safety impact of impaired driving."
-  },
-  {
-    "objectID": "crash_dashboard.html#row-3",
-    "href": "crash_dashboard.html#row-3",
-    "title": "Drunk Driving Surveillance Dashboard",
-    "section": "Row",
-    "text": "Row\n\n\n$icon\n[1] \"car-front-fill\"\n\n$color\n[1] \"primary\"\n\n$value\n[1] 207\n\n\n\n\n$icon\n[1] \"bandaid\"\n\n$color\n[1] \"primary\"\n\n$value\n[1] 122\n\n\n\n\n$icon\n[1] \"hospital\"\n\n$color\n[1] \"danger\"\n\n$value\n[1] 6"
-  },
-  {
-    "objectID": "crash_dashboard.html#row-4",
-    "href": "crash_dashboard.html#row-4",
-    "title": "Drunk Driving Surveillance Dashboard",
+    "title": "Alcohol-Related Crash Dashboard",
     "section": "Row",
     "text": "Row"
   },
   {
+    "objectID": "crash_dashboard.html#row-2",
+    "href": "crash_dashboard.html#row-2",
+    "title": "Alcohol-Related Crash Dashboard",
+    "section": "Row",
+    "text": "Row\n\nThe Alcohol-Related Crash Dashboard provides monthly, city-level data on alcohol-related motor vehicle crashes in El Paso, Texas. It is designed to provide timely and transparent information on impaired driving trends to the El Paso community.\nAcknowledgements\nSeveral people provided invaluable feedback in the early stages of this project. Special thanks to members of the Texas Department of Transportation El Paso District, for offering ongoing recommendations on the interpretation and presentation of data. Appreciation is also extended to the El Paso Police Department, specifically to the Special Traffic Investigations Unit, for their service to the community, as well as their expertise in identifying high-impact datapoints to include in this dashboard. Several friends and family are also to thank for their continued support and advice. Lastly, I want to recognize the Sober Streets Movement in El Paso, for their feedback, and importantly, for reminding the community that behind every statistic in these charts is a real person, family, and story impacted by impaired driving.\n\n\n This project is dedicated to the  memory   of Isaiah Deal, Joshua Deal, and Shannon Del Rio. \n\nData\nCrash data is downloaded from the Texas Department of Transportation (TxDOT) website using the Crash Records Information System (CRIS) Query Tool. All crash data in this dashboard represent those reported by law enforcement, were classified as alcohol-related, and occurred in the city of El Paso.\nDefinition of Alcohol-Related Crash\nA crash is defined as alcohol-related if item 38 Contributing Factors in the 2023 Texas Peace Officer’s Crash Report contains code 45 (Had Been Drinking) or 67 (Intoxicated-Alcohol), or if a driver’s blood alcohol content (BAC) is reported as any value greater than 0 g/dL. This coding scheme aligns with the Alcohol-Related crash filter in the TxDOT CRIS Query Tool.\nDefinition of Injury and Fatality\nA person is defined as injured if item 16 in the 2023 Texas Peace Officer’s Crash Report contains code A (Suspected Serious Injury), B (Suspected Minor Injury), or C (Possible Injury). Fatalities are counted if a person involved in the crash is coded K (Fatal Injury). The 2025 edition of the Instructions to Police for Reporting Crashes by TxDOT indicates that code K is used if “a person dies within 30 days, due to injuries sustained in the crash” (p. 26). In these cases, a supplement report is submitted to update item 16.\nDefinition of Intoxicated Driver\nDriver and vehicle characteristics on the Drivers page represent intoxicated drivers. An intoxicated driver is defined as a person who’s blood alcohol content test result returned a value of 0.08g/dL or greater.\nAcronyms\nBAC = Blood alcohol content; YTD = Year to date; TxDOT = Texas Department of Transportation; CRIS = Crash Records Information System\n\n\n© 2026 El Paso Crime Lab\nThis Alcohol-Related Crash Dashboard is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0). You are free to use, share, and adapt the charts in this dashboard for any purpose, including commercial use. Attribution to the El Paso Crime Lab is appreciated but not required.\nKey Notes for Reporting\n\nCrashes, injuries, and fatalities in this dashboard represent those classified as alcohol-related (see definition)\nCrash data is publicly available and provided by the Texas Department of Transportation\nMonthly updates may revise prior counts as data are finalized\n\nUsing Figures and Charts\nAll figures in this dashboard are interactive and downloadable.\n\nCharts can easily be resized by adjusting the size of your internet browsing window. To expand a figure, click the “Expand” button located at the bottom-right corner of each chart.\nTo download a figure, hover over the chart and click the camera icon to save it as an image\n\nSuggested Language\n\n“Crash data on alcohol-related crashes in El Paso show…”\n“Local data on alcohol-related traffic fatalities indicate…”\n\nContact\nFor questions or data clarification, please contact:\nmduran29@asu.edu\n\n\nCalculation of Moving Average\nThe line graphs on the Trends page show 12-month moving averages for crashes, fatalities, and injuries between 2016 and Present. This technique results in a smooth line, allowing the viewer to see if a trend is increasing or decreasing.\nHoliday Analyses\nHolidays statistics were calculated by aligning crash data to each holiday. For fixed-date holidays (e.g., New Year’s Day, Independence Day, Halloween, Christmas, and St. Patrick’s Day), each crash was assigned an event time based on the number of days before or after the calendar date of the holiday within each year. For shifting holidays (e.g., Super Bowl and Memorial Day), the holiday date was first computed for each year and then used as the reference point for event-time calculation.\nIn all cases, crashes were restricted to a ±7-day window around the holiday and then aggregated across years (2016–2025), excluding 2020 to avoid COVID-19-related disruptions. Average daily crash counts were then computed for each relative day to identify typical patterns before and after each holiday.\nMissing Data\nA small amount of data for Drivers characteristics (e.g., gender, race/ethnicity, vehicle color) is missing. Observations with missing or unknown values in these fields were excluded.\nLimitations\nNot all alcohol-involved crashes are identified in official records. In many cases, alcohol use may go undetected or unreported, particularly when testing is not conducted or impairment is not clearly observed. As a result, these data likely underestimate the true number of alcohol-related crashes.\nDespite this limitation, crash data remain one of the most reliable and policy-relevant indicators of drunk driving. Unlike arrest data, which are influenced by enforcement practices, crash records capture real-world harm—injuries and fatalities—providing a consistent basis for tracking trends over time and understanding the public safety impact of impaired driving."
+  },
+  {
+    "objectID": "crash_dashboard.html#row-3",
+    "href": "crash_dashboard.html#row-3",
+    "title": "Alcohol-Related Crash Dashboard",
+    "section": "Row",
+    "text": "Row\n\n\n$icon\n[1] \"car-front-fill\"\n\n$color\n[1] \"primary\"\n\n$value\n[1] 404\n\n\n\n\n$icon\n[1] \"bandaid\"\n\n$color\n[1] \"warning\"\n\n$value\n[1] 259\n\n\n\n\n$icon\n[1] \"hospital\"\n\n$color\n[1] \"danger\"\n\n$value\n[1] 13"
+  },
+  {
+    "objectID": "crash_dashboard.html#row-4",
+    "href": "crash_dashboard.html#row-4",
+    "title": "Alcohol-Related Crash Dashboard",
+    "section": "Row",
+    "text": "Row\n\nColumn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nColumn"
+  },
+  {
     "objectID": "crash_dashboard.html#row-5",
     "href": "crash_dashboard.html#row-5",
-    "title": "Drunk Driving Surveillance Dashboard",
+    "title": "Alcohol-Related Crash Dashboard",
     "section": "Row",
     "text": "Row"
   },
   {
     "objectID": "crash_dashboard.html#row-6",
     "href": "crash_dashboard.html#row-6",
-    "title": "Drunk Driving Surveillance Dashboard",
+    "title": "Alcohol-Related Crash Dashboard",
     "section": "Row",
     "text": "Row"
   },
   {
     "objectID": "crash_dashboard.html#row-7",
     "href": "crash_dashboard.html#row-7",
-    "title": "Drunk Driving Surveillance Dashboard",
+    "title": "Alcohol-Related Crash Dashboard",
     "section": "Row",
     "text": "Row"
   },
   {
     "objectID": "crash_dashboard.html#row-8",
     "href": "crash_dashboard.html#row-8",
-    "title": "Drunk Driving Surveillance Dashboard",
+    "title": "Alcohol-Related Crash Dashboard",
     "section": "Row",
     "text": "Row"
   },
   {
     "objectID": "crash_dashboard.html#row-9",
     "href": "crash_dashboard.html#row-9",
-    "title": "Drunk Driving Surveillance Dashboard",
+    "title": "Alcohol-Related Crash Dashboard",
     "section": "Row",
     "text": "Row"
   },
   {
     "objectID": "crash_dashboard.html#row-10",
     "href": "crash_dashboard.html#row-10",
-    "title": "Drunk Driving Surveillance Dashboard",
+    "title": "Alcohol-Related Crash Dashboard",
     "section": "Row",
     "text": "Row"
   },
   {
     "objectID": "crash_dashboard.html#row-11",
     "href": "crash_dashboard.html#row-11",
-    "title": "Drunk Driving Surveillance Dashboard",
+    "title": "Alcohol-Related Crash Dashboard",
     "section": "Row",
-    "text": "Row\n\n\n$icon\n[1] \"emoji-dizzy\"\n\n$color\n[1] \"primary\"\n\n$value\n[1] \"103\"\n\n\n\n\n$icon\n[1] \"moisture\"\n\n$color\n[1] \"danger\"\n\n$value\n[1] \"0.16\"\n\n\n\n\n$icon\n[1] \"person-fill\"\n\n$color\n[1] \"primary\"\n\n$value\n[1] \"33\""
+    "text": "Row"
   },
   {
     "objectID": "crash_dashboard.html#row-12",
     "href": "crash_dashboard.html#row-12",
-    "title": "Drunk Driving Surveillance Dashboard",
+    "title": "Alcohol-Related Crash Dashboard",
     "section": "Row",
-    "text": "Row\n\nColumn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nColumn"
+    "text": "Row\n\n\n$icon\n[1] \"person-square\"\n\n$color\n[1] \"primary\"\n\n$value\n[1] \"209\"\n\n\n\n\n$icon\n[1] \"moisture\"\n\n$color\n[1] \"danger\"\n\n$value\n[1] \"0.16\"\n\n\n\n\n$icon\n[1] \"rulers\"\n\n$color\n[1] \"primary\"\n\n$value\n[1] \"33\""
   },
   {
     "objectID": "crash_dashboard.html#row-13",
     "href": "crash_dashboard.html#row-13",
-    "title": "Drunk Driving Surveillance Dashboard",
+    "title": "Alcohol-Related Crash Dashboard",
     "section": "Row",
     "text": "Row\n\nColumn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nColumn"
   },
@@ -525,52 +525,24 @@
     "text": "Report: Is Drunk Driving Worse in El Paso?\n\n\n\nSummary:\nA community facing a social problem such as drunk driving often wonders about it’s severity. Members of the community may ask, “Is it worse here than in other places?” To answer that question, we used three measurement strategies to assess the severity of loss of life from drunk driving. This report examines how El Paso compares to other large Texas cities in alcohol-related traffic fatalities between the years 2021 and 2025.\n\n Read the Report"
   },
   {
+    "objectID": "crash_dashboard.html#row-14",
+    "href": "crash_dashboard.html#row-14",
+    "title": "Alcohol-Related Crash Dashboard",
+    "section": "Row",
+    "text": "Row\n\nColumn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nColumn"
+  },
+  {
+    "objectID": "dwi_home.html#local-service-provider-directory",
+    "href": "dwi_home.html#local-service-provider-directory",
+    "title": "Research - Driving While Intoxicated",
+    "section": "Local Service Provider Directory",
+    "text": "Local Service Provider Directory\n\nEvery month, several families lose a loved one to an alcohol-related traffic fatality. This page shows contact information for support services offered in the El Paso community.\n\n View Directory"
+  },
+  {
     "objectID": "dwi_services.html",
     "href": "dwi_services.html",
     "title": "Service Provider Directory",
     "section": "",
-    "text": "This directory shows support services in the El Paso community — including emotional support, victim advocacy, legal assistance, counseling, and more.\nHow to Use This Directory"
-  },
-  {
-    "objectID": "dwi_services.html#row",
-    "href": "dwi_services.html#row",
-    "title": "Community Resource Directory",
-    "section": "",
-    "text": "EPC Victim Services Unit\n\nProvides advocacy, court guidance, and crime victim compensation support after serious incidents.\n\n\n\n\nEmergence Health Network\n\nPublic mental health provider offering crisis counseling and trauma support for families after sudden loss or violent events.\n\n\n\n\nCenter Against Family & Sexual Violence\n\n24/7 crisis hotline and shelter services for families affected by violence and trauma.\n\n\n\n\nTexas RioGrande Legal Aid\n\nFree legal assistance for probate, custody, insurance claims, and victim compensation navigation.\n\n\n\n\nEl Paso County Medical Examiner Office\n\nHandles death investigations, autopsies, and official reporting after fatal accidents.\n\n\n\n\nHospice of El Paso Grief Center\n\nSpecialized grief counseling for sudden traumatic loss including DUI-related fatalities.\n\n\n\n\nFuneraria del Angel Central\n\nFuneral home experienced in sudden and traumatic loss coordination.\n\n\n\n\nLa Fe Behavioral Health Services\n\nCommunity-based counseling focused on trauma, addiction, and family stabilization.\n\n\n\n\nMothers Against Drunk Driving (MADD Texas)\n\nSupport organization for families impacted by impaired driving fatalities.\n\n\n\n\nEl Paso County Clerk Probate Division\n\nAssists families with probate and estate processes after sudden death.\n\n\n\n\nProject Vida Health Center\n\nProvides wraparound family services including counseling and social support after crisis events.\n\n\n\n\nChild Crisis Center of El Paso\n\nSupport for children dealing with traumatic loss or family disruption."
-  },
-  {
-    "objectID": "dwi_services.html#row-.card-titledirectory-map",
-    "href": "dwi_services.html#row-.card-titledirectory-map",
-    "title": "Service Provider Directory for Families Affected by Impaired Driving",
-    "section": "Row {.card-title=“Directory + Map”}",
-    "text": "Row {.card-title=“Directory + Map”}\n\n\n\n\nVictim Services\n\n\nEPC Victim Services Unit\n\nProvides advocacy, court guidance, and crime victim compensation support after serious incidents.\n\n\n\nCrisis Counseling\n\n\nEmergence Health Network\n\nPublic mental health provider offering crisis counseling and trauma support for families after sudden loss or violent events.\n\n\n\nDomestic Violence Support\n\n\nCenter Against Family & Sexual Violence\n\n24/7 crisis hotline and shelter services for families affected by violence and trauma.\n\n\n\nLegal Aid\n\n\nTexas RioGrande Legal Aid\n\nFree legal assistance for probate, custody, insurance claims, and victim compensation navigation.\n\n\n\nForensic Services\n\n\nEl Paso County Medical Examiner Office\n\nHandles death investigations, autopsies, and official reporting after fatal accidents.\n\n\n\nGrief Counseling\n\n\nHospice of El Paso Grief Center\n\nSpecialized grief counseling for sudden traumatic loss including DUI-related fatalities.\n\n\n\nFuneral Services\n\n\nFuneraria del Angel Central\n\nFuneral home experienced in sudden and traumatic loss coordination.\n\n\n\nFamily Counseling\n\n\nLa Fe Behavioral Health Services\n\nCommunity-based counseling focused on trauma, addiction, and family stabilization.\n\n\n\nDUI Support\n\n\nMothers Against Drunk Driving (MADD Texas)\n\nSupport organization for families impacted by impaired driving fatalities.\n\n\n\nLegal Administration\n\n\nEl Paso County Clerk Probate Division\n\nAssists families with probate and estate processes after sudden death.\n\n\n\nCommunity Support\n\n\nProject Vida Health Center\n\nProvides wraparound family services including counseling and social support after crisis events.\n\n\n\nChild & Family Support\n\n\nChild Crisis Center of El Paso\n\nSupport for children dealing with traumatic loss or family disruption."
-  },
-  {
-    "objectID": "dwi_services.html#directory-map",
-    "href": "dwi_services.html#directory-map",
-    "title": "Service Provider Directory for Families Affected by Impaired Driving",
-    "section": "Directory + Map",
-    "text": "Directory + Map\n\n\n\n\nVictim Services\n\n\nEPC Victim Services Unit\n\nProvides advocacy, court guidance, and crime victim compensation support after serious incidents.\n\n\n\nCrisis Counseling\n\n\nEmergence Health Network\n\nPublic mental health provider offering crisis counseling and trauma support for families after sudden loss or violent events.\n\n\n\nDomestic Violence Support\n\n\nCenter Against Family & Sexual Violence\n\n24/7 crisis hotline and shelter services for families affected by violence and trauma.\n\n\n\nLegal Aid\n\n\nTexas RioGrande Legal Aid\n\nFree legal assistance for probate, custody, insurance claims, and victim compensation navigation.\n\n\n\nForensic Services\n\n\nEl Paso County Medical Examiner Office\n\nHandles death investigations, autopsies, and official reporting after fatal accidents.\n\n\n\nGrief Counseling\n\n\nHospice of El Paso Grief Center\n\nSpecialized grief counseling for sudden traumatic loss including DUI-related fatalities.\n\n\n\nFuneral Services\n\n\nFuneraria del Angel Central\n\nFuneral home experienced in sudden and traumatic loss coordination.\n\n\n\nFamily Counseling\n\n\nLa Fe Behavioral Health Services\n\nCommunity-based counseling focused on trauma, addiction, and family stabilization.\n\n\n\nDUI Support\n\n\nMothers Against Drunk Driving (MADD Texas)\n\nSupport organization for families impacted by impaired driving fatalities.\n\n\n\nLegal Administration\n\n\nEl Paso County Clerk Probate Division\n\nAssists families with probate and estate processes after sudden death.\n\n\n\nCommunity Support\n\n\nProject Vida Health Center\n\nProvides wraparound family services including counseling and social support after crisis events.\n\n\n\nChild & Family Support\n\n\nChild Crisis Center of El Paso\n\nSupport for children dealing with traumatic loss or family disruption."
-  },
-  {
-    "objectID": "dwi_services.html#a-letter-to-families",
-    "href": "dwi_services.html#a-letter-to-families",
-    "title": "Service Provider Directory",
-    "section": "A Letter to Families",
-    "text": "A Letter to Families\nDear loved one,\n\nWith love, [Name] Sober Streets Movement"
-  },
-  {
-    "objectID": "dwi_services.html#map",
-    "href": "dwi_services.html#map",
-    "title": "Service Provider Directory",
-    "section": "Map",
-    "text": "Map"
-  },
-  {
-    "objectID": "dwi_services.html#directory",
-    "href": "dwi_services.html#directory",
-    "title": "Service Provider Directory",
-    "section": "Directory",
-    "text": "Directory\n\n  All Categories Victim Services Crisis Counseling Domestic Violence Support Legal Aid Forensic Services Grief Counseling Funeral Services Family Counseling DUI Support Legal Administration Community Support Child & Family Support \n\n\n\n\n\n\n  EPC Victim Services Unit  \n\nProvides advocacy, court guidance, and crime victim compensation support after serious incidents.\n\n\nVictim Services\n\n\n\n  Emergence Health Network  \n\nPublic mental health provider offering crisis counseling and trauma support for families after sudden loss or violent events.\n\n\nCrisis Counseling\n\n\n\n  Center Against Family & Sexual Violence  \n\n24/7 crisis hotline and shelter services for families affected by violence and trauma.\n\n\nDomestic Violence Support\n\n\n\n  Texas RioGrande Legal Aid  \n\nFree legal assistance for probate, custody, insurance claims, and victim compensation navigation.\n\n\nLegal Aid\n\n\n\n  El Paso County Medical Examiner Office  \n\nHandles death investigations, autopsies, and official reporting after fatal accidents.\n\n\nForensic Services\n\n\n\n  Hospice of El Paso Grief Center  \n\nSpecialized grief counseling for sudden traumatic loss including DUI-related fatalities.\n\n\nGrief Counseling\n\n\n\n  Funeraria del Angel Central  \n\nFuneral home experienced in sudden and traumatic loss coordination.\n\n\nFuneral Services\n\n\n\n  La Fe Behavioral Health Services  \n\nCommunity-based counseling focused on trauma, addiction, and family stabilization.\n\n\nFamily Counseling\n\n\n\n  Mothers Against Drunk Driving (MADD Texas)  \n\nSupport organization for families impacted by impaired driving fatalities.\n\n\nDUI Support\n\n\n\n  El Paso County Clerk Probate Division  \n\nAssists families with probate and estate processes after sudden death.\n\n\nLegal Administration\n\n\n\n  Project Vida Health Center  \n\nProvides wraparound family services including counseling and social support after crisis events.\n\n\nCommunity Support\n\n\n\n  Child Crisis Center of El Paso  \n\nSupport for children dealing with traumatic loss or family disruption.\n\n\nChild & Family Support"
+    "text": "Service Provider Directory\n\n\nThis directory shows contact information for support services offered in the El Paso community. To be added or have information updated, please send a request using the contact form.\n\n\nDirectory\n\n\n\n All Services Notary Public Counseling/Mental health support \n\n\n\n\n\n\n\n  El Paso Mobile Notaries  \n\n\nNotary Public\n\n\n\nLocation: El Paso, Texas El Paso-based\n\n\nAddress: 3465 Lee Blvd Ste 243 El Paso TX 79936\n\n\nPreferred contact: Phone, Email, Website\n\n\nPhone: 915-271-5287\n\n\nEmail: elpmobilenotary@gmail.com\n\n\nWebsite: www.epmobilenotarypublic.com\n\n\n\n\nA message to families\n\nHello El Paso families. The community is here for you. Small obstacles, such as notarizations should be easy and accessible. Let us help you take care of the small things with a big impact. A community helps each other and the people of El Paso will help each other get through these hard times little by little. Stay safe and stay strong.\n\n\n\n\n  Mind Forward Health Center  \n\n\nCounseling/Mental health support\n\n\n\nLocation: El Paso, Texas El Paso-based\n\n\nAddress: 2150 Trawood B161 El Paso Texas 79935\n\n\nPreferred contact: Email\n\n\nPhone: 915-832-1702\n\n\nEmail: v.ortiz@mindforwardhealthcenter.com\n\n\nWebsite: www.mindforwardhealthcenter.com\n\n\n\n\nA message to families\n\nWe provide evidence based trauma informed bilingual services in person or virtual\n\n\n\n\n  Tabitha Cantu Counseling PLLC  \n\n\nCounseling/Mental health support\n\n\n\nLocation: El Paso, Texas El Paso-based\n\n\nAddress: I am a virtual private practice serving women & teen girls 13+\n\n\nPreferred contact: Email\n\n\nPhone: 915-209-0008\n\n\nEmail: info@tabithacantucounseling.com\n\n\nWebsite: https://www.tabithacantucounseling.com/\n\n\n\n\nA message to families\n\nTo families affected by drunk driving, my heart is with you. Even in the midst of hardship and loss, help is always available to support you.\n\n\n\n\n  Rising Perspective Counseling  \n\n\nCounseling/Mental health support\n\n\n\nLocation: El Paso, Texas El Paso-based\n\n\nAddress: Virtual only\n\n\nPreferred contact: Email, Website\n\n\nEmail: v.reyna@risingperspectivecounseling.com\n\n\nWebsite: www.risingperspectivecounseling.com\n\n\n\n\nA message to families\n\nFor families enduring pain from drunk driving-related tragedies, or just want to understand why, there were likely signs and patterns that went unnoticed, but have a deeper explanation. For many adults, an ADHD diagnosis later in life finally makes sense after years of impulsivity, poor decisions, and struggles they couldn’t explain. Understanding the brain behind the behavior doesn’t change the past, but it can change everything about what comes next.\n\n\n\n\n\n\nMap"
   }
 ]
