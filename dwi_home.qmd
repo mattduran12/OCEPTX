@@ -132,7 +132,7 @@ main.content {
   grid-column: span 2;
   min-height: 290px;
   padding: 1.75rem;
-  background: var(--sand-light);
+  background: var(--sand-dark);
   border-top-color: var(--terracotta-dark);
 }
 
@@ -615,7 +615,7 @@ Listen on Spotify →
 
 
 <!-- ============================================================
-     YOUTUBE
+     YOUTUBE/Article
      ============================================================ -->
 
 <div class="media-card">
@@ -632,15 +632,15 @@ Fourth of July Crash Analysis
 <div class="card-content">
 
 <p>
-Watch a video about the [holiday analyses](https://www.epcrimelab.org/crash_dashboard.html#holidays) shown on the El Paso Crime Lab's Crash Dashboard.
+See the local news story on the [holiday analyses](https://www.epcrimelab.org/crash_dashboard.html#holidays) shown on the El Paso Crime Lab's Crash Dashboard.
 </p>
 
 </div>
 
-<a href="https://www.youtube.com/watch?v=Ga60m60xhHU"
+<a href="https://cbs4local.com/newsletter-daily/el-paso-police-crime-lab-warn-of-july-fourth-spike-in-alcohol-related-crashes?fbclid=IwY2xjawTsVQFwZG9mBWV4dG4DYWVtAjEwAGJyaWQRMWNEU1hwWHpGTHdqT3pyazZzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeIQogoKh6z-u8IW23UnOyZkjVW7_4LRPMSnDizfTS5A20CrzrWXKEaLa19oY_aem__fmqyxlKwustkQzD4jPObQ"
    target="_blank"
    class="card-button">
-Watch on YouTube →
+Read Article →
 </a>
 
 </div>
