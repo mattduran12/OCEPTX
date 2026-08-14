@@ -187,22 +187,41 @@ main.content {
    ============================================================ */
 
 .areas {
-  display: flex;
-  width: 100%;
-  border-top: 1px solid #dfe3e8;
-  border-bottom: 1px solid #dfe3e8;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
 }
 
 .area {
-  flex: 1;
-
-  padding: 2.5rem 2.25rem 2.75rem 2.25rem;
-
+  position: relative;
+  display: flex;
+  flex-direction: column;
   min-width: 0;
+  min-height: 285px;
+  padding: 2.1rem 2rem 1.85rem;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(16, 24, 40, 0.05);
+  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
 }
 
-.area + .area {
-  border-left: 1px solid #dfe3e8;
+.area::before {
+  position: absolute;
+  top: 0;
+  left: 2rem;
+  width: 2.5rem;
+  height: 4px;
+  content: "";
+  background: #7a2e1d;
+  border-radius: 0 0 999px 999px;
+}
+
+.area:hover {
+  transform: translateY(-6px);
+  border-color: #d7b5ac;
+  box-shadow: 0 16px 32px rgba(16, 24, 40, 0.1);
 }
 
 .area-number {
@@ -239,7 +258,8 @@ main.content {
 .area-link {
   display: inline-block;
 
-  margin-top: 1.35rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
 
   font-size: 0.85rem;
   font-weight: 650;
@@ -339,19 +359,19 @@ main.content {
 }
 
 .feature-aside {
-  flex: 0.8;
+  flex: 1.15;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  padding: 2.5rem;
+  padding: 1.75rem 1.5rem;
 
   background: #7a2e1d;
 }
 
 .feature-aside p {
-  max-width: 250px;
+  max-width: 330px;
 
   margin: 0;
 
@@ -446,16 +466,13 @@ main.content {
   }
 
   .areas {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .area {
-    padding: 2rem 1rem;
-  }
-
-  .area + .area {
-    border-left: none;
-    border-top: 1px solid #dfe3e8;
+    min-height: 0;
+    padding: 2rem;
   }
 
   .feature {
@@ -619,7 +636,7 @@ Build accessible tools and dashboards that help communities monitor local proble
 </p>
 
 <a
-  href="dwi_home.html"
+  href="crash_dashboard.html"
   class="area-link"
 >
 View the data →

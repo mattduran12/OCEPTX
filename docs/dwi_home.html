@@ -337,32 +337,40 @@ main.content {
 
 
 /* ============================================================
-   BUTTON
+   HYPERLINK
    ============================================================ */
 
 .card-button {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   align-self: flex-start;
 
-  background: #7a2e1d;
-  color: #ffffff !important;
+  background: transparent;
+  color: #7a2e1d !important;
 
-  padding: 0.55rem 0.95rem;
-  border-radius: 8px;
+  padding: 0;
+  margin-top: auto;
 
-  font-size: 0.84rem;
-  font-weight: 600;
+  font-size: 0.88rem;
+  font-weight: 650;
 
   text-decoration: none !important;
 
   transition: all 0.2s ease;
 }
 
+.card-button::after {
+  content: " →";
+  margin-left: 0.3rem;
+  transition: transform 0.2s ease;
+}
+
 .card-button:hover {
-  background: #612417;
-  transform: translateY(-1px);
+  color: #612417 !important;
+}
+
+.card-button:hover::after {
+  transform: translateX(4px);
 }
 
 
@@ -623,7 +631,7 @@ An opinion article examining why arrest data can be misleading and why alcohol-i
 <p>Podcast</p>
 </div>
 <h2 class="anchored">
-Impaired Driving in El Paso
+Conversation with Ashlee from <a href="https://talkinaboutit.com/">Talkin’ About It!</a>
 </h2>
 <div class="card-content">
 <p>
@@ -637,14 +645,14 @@ Listen to a podcast episode discussing alcohol-impaired driving and the challeng
      ============================================================ -->
 <div class="media-card">
 <div class="card-type">
-<p>El Paso ARC Interview</p>
+<p>ARC El Paso Interview</p>
 </div>
 <h2 class="anchored">
-Impaired Driving in El Paso
+Fourth of July Crash Analysis
 </h2>
 <div class="card-content">
 <p>
-Watch a video discussing alcohol-impaired driving and its impact on the El Paso community.
+Watch a video about the <a href="https://www.epcrimelab.org/crash_dashboard.html#holidays">holiday analyses</a> shown on the El Paso Crime Lab’s Crash Dashboard.
 </p>
 </div>
 <p><a href="https://www.youtube.com/watch?v=Ga60m60xhHU" target="_blank" class="card-button"> Watch on YouTube → </a></p>

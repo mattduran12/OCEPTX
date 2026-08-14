@@ -16,195 +16,592 @@ execute:
 
 <style>
 
+/* ============================================================
+   EL PASO CRIME LAB — DESERT COLOR PALETTE
+   ============================================================ */
+
+:root {
+  --epl-rust: #8b3a24;
+  --epl-rust-dark: #682918;
+  --epl-terracotta: #b85c3b;
+  --epl-sand: #d9c3a5;
+  --epl-sand-light: #eee2d0;
+  --epl-cream: #f7f1e7;
+  --epl-cream-dark: #e9dcc9;
+  --epl-brown: #3b2a22;
+  --epl-brown-light: #66564b;
+  --epl-desert: #c99a6b;
+  --epl-sage: #73765c;
+}
+
+
+/* ============================================================
+   GLOBAL
+   ============================================================ */
+
+body {
+  background:
+    linear-gradient(
+      180deg,
+      #eee2d0 0%,
+      #f4eadc 32%,
+      #f7f1e7 100%
+    );
+
+  color: var(--epl-brown);
+}
+
 .quarto-title-block {
   display: none;
 }
 
-</style>
-
-
-
-<style>
-/* ============================================================
-   SECTION CONTAINERS
-   ============================================================ */
-
-.section-container {
-  background: #faf8f3;
-  border-radius: 16px;
-  padding: 2rem;
-  margin: 2rem 0;
-  border: 1px solid #e4ddd2;
-  box-shadow: 0 4px 14px rgba(60, 45, 30, 0.07);
+main.content {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 2.5rem 3rem 4rem 3rem;
 }
 
-/* Directory */
-.directory-container {
-  background: #faf8f3;
-}
-
-/* Map */
-.map-container {
-  background: #eee8de;
-  padding: 1.25rem;
-}
-
-/* Section headings */
-.section-container h2 {
-  margin-top: 0;
-  margin-bottom: 1.25rem;
-  font-weight: 700;
-  color: #292929;
-}
-
-/* Make leaflet map fit nicely inside its container */
-.map-container .leaflet-container {
-  width: 100% !important;
-  border-radius: 12px;
-  overflow: hidden;
-  min-height: 600px;
-}
-
-/* ============================================================
-   PROVIDER CARDS
-   ============================================================ */
-
-.provider-card {
-  padding: 20px;
-  border-radius: 12px;
-  background: #ffffff;
-  border: 1px solid #e5dfd5;
-  margin-bottom: 14px;
-  transition: all 0.25s ease;
-}
-
-.provider-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(60,45,30,0.12);
-}
-
-.provider-name {
-  font-size: 1.1rem;
-  margin-bottom: 6px;
-}
-
-.provider-blurb {
-  font-size: 13px;
-  color: #555;
-  margin-top: 8px;
-  margin-bottom: 12px;
-}
-
-.provider-info {
-  font-size: 13px;
-  line-height: 1.7;
-  margin-top: 12px;
-}
-
-.provider-info a {
-  color: #7a2e1d;
-  text-decoration: none;
-}
-
-.provider-info a:hover {
-  text-decoration: underline;
-}
-
-.family-message {
-  margin-top: 16px;
-  padding: 14px 16px;
-  background: #f8f9fa;
-  border-left: 4px solid #7a2e1d;
-  border-radius: 6px;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.family-message-label {
-  font-weight: 600;
-  margin-bottom: 4px;
-  color: #7a2e1d;
-}
-
-.tag {
-  display: inline-block;
-  font-size: 0.7em;
-  background: #7a2e1d;
-  color: #fff3d6;
-  padding: 4px 8px;
-  border-radius: 6px;
-  margin-right: 6px;
-  margin-top: 8px;
-}
-
-.location-badge {
-  display: inline-block;
-  font-size: 0.75em;
-  padding: 4px 8px;
-  border-radius: 6px;
-  background: #e9ecef;
-  color: #495057;
-  margin-left: 6px;
-}
-
-.hidden {
-  display: none !important;
-}
 
 /* ============================================================
    PAGE HEADER
    ============================================================ */
 
 .header {
-  text-align: center;
-  padding: 3rem 0 3rem 0;
+  padding: 2.5rem 0 2rem 0;
+  margin-bottom: 1rem;
 }
 
 .header h1 {
-  font-size: 3.2rem;
-  font-weight: 700;
-  margin-bottom: .6rem;
+  font-size: 3rem;
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin: 0 0 0.8rem 0;
+  color: var(--epl-brown);
 }
 
-.header p {
-  font-size: 1.15rem;
-  color: var(--text-light);
-  max-width: 850px;
-  margin: auto;
+.header h1::before {
+  content: "EL PASO CRIME LAB";
+  display: block;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+
+  color: var(--epl-rust);
+
+  margin-bottom: 0.6rem;
 }
+
+.header h1::after {
+  content: "";
+  display: block;
+
+  width: 55px;
+  height: 4px;
+
+  background: var(--epl-terracotta);
+
+  border-radius: 10px;
+
+  margin-top: 1rem;
+}
+
 
 /* ============================================================
-   SEARCH AND FILTER CONTROLS
+   INTRODUCTION
+   ============================================================ */
+
+.header + p {
+  max-width: 850px;
+
+  font-size: 1.05rem;
+  line-height: 1.7;
+
+  color: var(--epl-brown-light);
+
+  margin: 0 0 2rem 0;
+}
+
+.header + p a {
+  color: var(--epl-rust);
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   SECTION CONTAINERS
+   ============================================================ */
+
+.section-container {
+  background: rgba(247, 241, 231, 0.92);
+
+  border: 1px solid var(--epl-sand);
+
+  border-radius: 18px;
+
+  padding: 1.5rem;
+
+  margin: 1.5rem 0;
+
+  box-shadow:
+    0 8px 25px rgba(59, 42, 34, 0.08);
+}
+
+.section-container h2 {
+  margin: 0 0 1.2rem 0;
+
+  font-size: 1.25rem;
+  font-weight: 700;
+
+  letter-spacing: -0.02em;
+
+  color: var(--epl-brown);
+}
+
+
+/* ============================================================
+   DIRECTORY CONTAINER
+   ============================================================ */
+
+.directory-container {
+  background:
+    linear-gradient(
+      135deg,
+      #f9f3e9 0%,
+      #f3e6d4 100%
+    );
+
+  border-color: #d8c3a5;
+}
+
+
+/* ============================================================
+   SEARCH + FILTER
    ============================================================ */
 
 .controls {
-  display: flex;
+  display: grid;
+
+  grid-template-columns: 1fr 240px;
+
   gap: 12px;
-  margin-bottom: 10px;
+
+  margin-bottom: 12px;
+
   width: 100%;
+
   align-items: center;
 }
 
-#searchBox {
-  flex: 7 1 auto;
-  min-width: 0;
-  width: auto;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+#searchBox,
+#categoryFilter {
+  height: 46px;
+
+  padding: 0 14px;
+
+  border-radius: 10px;
+
+  border: 1px solid #cfb99a;
+
+  background: #fffaf2;
+
+  color: var(--epl-brown);
+
   font-size: 14px;
+
   box-sizing: border-box;
+
+  outline: none;
+
+  transition: all 0.2s ease;
+}
+
+#searchBox::placeholder {
+  color: #9b8978;
+}
+
+#searchBox:focus,
+#categoryFilter:focus {
+  border-color: var(--epl-rust);
+
+  box-shadow:
+    0 0 0 3px rgba(139, 58, 36, 0.12);
+
+  background: #fffdf9;
 }
 
 #categoryFilter {
-  flex: 0 0 220px;
-  width: 220px;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
+  cursor: pointer;
 }
+
+#resultCount {
+  margin: 0 0 14px 2px !important;
+
+  color: #806f60 !important;
+
+  font-size: 0.82rem !important;
+}
+
+
+/* ============================================================
+   PROVIDER CARDS
+   ============================================================ */
+
+.provider-card {
+  position: relative;
+
+  padding: 20px 22px;
+
+  margin-bottom: 12px;
+
+  background: #fffaf2;
+
+  border: 1px solid #dfccb1;
+
+  border-radius: 13px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.provider-card:hover {
+  transform: translateY(-3px);
+
+  background: #fffdf9;
+
+  box-shadow:
+    0 10px 25px rgba(59, 42, 34, 0.12);
+
+  border-color: #c99a6b;
+}
+
+
+/* ============================================================
+   PROVIDER NAME
+   ============================================================ */
+
+.provider-name {
+  font-size: 1.1rem;
+
+  line-height: 1.3;
+
+  margin-bottom: 4px;
+}
+
+.provider-name a {
+  color: var(--epl-brown);
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.provider-name a:hover {
+  color: var(--epl-rust);
+}
+
+
+/* ============================================================
+   SERVICE TAGS
+   ============================================================ */
+
+.tag {
+  display: inline-block;
+
+  font-size: 0.68rem;
+
+  font-weight: 650;
+
+  line-height: 1;
+
+  background: var(--epl-rust);
+
+  color: #fff5e8;
+
+  padding: 6px 9px;
+
+  border-radius: 6px;
+
+  margin-right: 5px;
+
+  margin-top: 7px;
+
+  box-shadow:
+    0 2px 5px rgba(139, 58, 36, 0.12);
+}
+
+
+/* ============================================================
+   PROVIDER INFORMATION
+   ============================================================ */
+
+.provider-info {
+  font-size: 13px;
+
+  line-height: 1.7;
+
+  margin-top: 13px;
+
+  color: var(--epl-brown-light);
+}
+
+.provider-info > div {
+  margin-bottom: 2px;
+}
+
+.provider-info strong {
+  color: var(--epl-brown);
+
+  font-weight: 650;
+}
+
+.provider-info a {
+  color: var(--epl-rust);
+
+  text-decoration: none;
+
+  font-weight: 500;
+}
+
+.provider-info a:hover {
+  color: var(--epl-rust-dark);
+
+  text-decoration: underline;
+}
+
+
+/* ============================================================
+   LOCATION
+   ============================================================ */
+
+.location-badge {
+  display: inline-block;
+
+  font-size: 0.72em;
+
+  font-weight: 650;
+
+  padding: 4px 8px;
+
+  border-radius: 6px;
+
+  background: #dedfcf;
+
+  color: #56583f;
+
+  margin-left: 5px;
+}
+
+
+/* ============================================================
+   FAMILY MESSAGE
+   ============================================================ */
+
+.family-message {
+  margin-top: 15px;
+
+  padding: 14px 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f1e4d1,
+      #eee0ca
+    );
+
+  border-left: 4px solid var(--epl-terracotta);
+
+  border-radius: 7px;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+
+  color: var(--epl-brown-light);
+}
+
+.family-message-label {
+  font-weight: 700;
+
+  margin-bottom: 4px;
+
+  color: var(--epl-rust);
+}
+
+
+/* ============================================================
+   MAP CONTAINER
+   ============================================================ */
+
+.map-container {
+  background:
+    linear-gradient(
+      135deg,
+      #d8c0a0 0%,
+      #c8a47b 100%
+    );
+
+  border: 1px solid #b9946b;
+
+  padding: 1.5rem;
+
+  box-shadow:
+    0 10px 30px rgba(59, 42, 34, 0.12);
+}
+
+.map-container h2 {
+  color: var(--epl-brown);
+
+  margin-bottom: 1rem;
+}
+
+
+/* ============================================================
+   MAP
+   ============================================================ */
+
+.map-container .leaflet-container {
+  width: 100% !important;
+
+  height: 600px !important;
+
+  border-radius: 13px;
+
+  overflow: hidden;
+
+  border: 2px solid rgba(255, 250, 242, 0.8);
+
+  box-shadow:
+    0 6px 20px rgba(59, 42, 34, 0.18);
+}
+
+
+/* ============================================================
+   LEAFLET CONTROLS
+   ============================================================ */
+
+.map-container .leaflet-control-layers {
+  border: none !important;
+
+  border-radius: 9px !important;
+
+  box-shadow:
+    0 5px 18px rgba(59, 42, 34, 0.18) !important;
+}
+
+.map-container .leaflet-control-zoom {
+  border: none !important;
+
+  box-shadow:
+    0 5px 18px rgba(59, 42, 34, 0.18) !important;
+
+  border-radius: 9px !important;
+
+  overflow: hidden;
+}
+
+.map-container .leaflet-control-zoom a {
+  color: var(--epl-brown) !important;
+}
+
+
+/* ============================================================
+   MAP POPUPS
+   ============================================================ */
+
+.leaflet-popup-content-wrapper {
+  border-radius: 10px !important;
+}
+
+.leaflet-popup-content {
+  color: var(--epl-brown);
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+.leaflet-popup-content a {
+  color: var(--epl-rust);
+
+  text-decoration: none;
+}
+
+
+/* ============================================================
+   HIDDEN
+   ============================================================ */
+
+.hidden {
+  display: none !important;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  main.content {
+    padding: 1.5rem;
+  }
+
+  .header h1 {
+    font-size: 2.4rem;
+  }
+
+  .controls {
+    grid-template-columns: 1fr;
+  }
+
+  #categoryFilter {
+    width: 100%;
+  }
+
+  .map-container .leaflet-container {
+    height: 500px !important;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  main.content {
+    padding: 1rem;
+  }
+
+  .header {
+    padding-top: 1rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .section-container {
+    padding: 1rem;
+
+    border-radius: 13px;
+  }
+
+  .provider-card {
+    padding: 17px;
+  }
+
+  .map-container .leaflet-container {
+    height: 450px !important;
+  }
+
+}
+
 </style>
+
 
 
 <div class="header">
@@ -213,7 +610,7 @@ execute:
 
 </div>
 
-This directory shows contact information for support services offered in the El Paso community. To be added or have information updated, please send a request using the [contact form](https://www.epcrimelab.org/contact.html). 
+Find local services here. To be added, removed, or have information changed, please send a request using the [contact form](https://www.epcrimelab.org/contact.html). 
 
 
 ```{r}
@@ -244,7 +641,10 @@ providers <- providers %>%
         services,
         contact_preference,
         phone,
-        email,
+        email_1,
+        email_1_description,
+        email_2,
+        email_2_description,
         website,
         address,
         family_message
@@ -337,8 +737,29 @@ providers$popup <- paste0(
 # ============================================================
 
 map <- leaflet() %>%
-  addProviderTiles("CartoDB.Positron") %>%
-  setView(-106.485, 31.76, zoom = 11)
+
+  # Street map with street names — default
+  addTiles(
+    group = "Street Map"
+  ) %>%
+
+  # Clean/light background
+  addProviderTiles(
+    "CartoDB.Positron",
+    group = "Light"
+  ) %>%
+
+  # Satellite imagery
+  addProviderTiles(
+    "Esri.WorldImagery",
+    group = "Satellite"
+  ) %>%
+
+  setView(
+    -106.485,
+    31.76,
+    zoom = 11
+  )
 
 mapped_providers <- providers %>%
   filter(
@@ -370,17 +791,35 @@ for (i in seq_len(nrow(mapped_providers))) {
     placeholder="Search providers, services, or support..."
   >
 
-  <select id="categoryFilter">
-    <option value="all">All Services</option>
-    `r paste0(
-      "<option value='",
-      trimws(unique(providers$services)),
-      "'>",
-      trimws(unique(providers$services)),
-      "</option>",
-      collapse = "\n"
-    )`
-  </select>
+<select id="categoryFilter">
+  <option value="all">All Services</option>
+  `r paste0(
+    "<option value='",
+    trimws(
+      unique(
+        unlist(
+          strsplit(
+            providers$services,
+            ","
+          )
+        )
+      )
+    ),
+    "'>",
+    trimws(
+      unique(
+        unlist(
+          strsplit(
+            providers$services,
+            ","
+          )
+        )
+      )
+    ),
+    "</option>",
+    collapse = "\n"
+  )`
+</select>
 </div>
 
 <div id="resultCount" style="margin-bottom:10px; color:#888; font-size:0.9em;"></div>
@@ -405,18 +844,71 @@ for (i in seq_len(nrow(providers))) {
     ""
   }
 
-  email_html <- if (providers$email[i] != "") {
+# ============================================================
+# EMAIL
+# ============================================================
+
+email_items <- character(0)
+
+if (providers$email_1[i] != "") {
+
+  email_items <- c(
+    email_items,
     paste0(
-      "<div><strong>Email:</strong> ",
+      "<span style='margin-right:12px;'>",
       "<a href='mailto:",
-      esc(providers$email[i]),
+      esc(providers$email_1[i]),
       "'>",
-      esc(providers$email[i]),
-      "</a></div>"
+      esc(providers$email_1[i]),
+      "</a>",
+      if (providers$email_1_description[i] != "") {
+        paste0(
+          " <span style='color:#777;'>— ",
+          esc(providers$email_1_description[i]),
+          "</span>"
+        )
+      } else {
+        ""
+      },
+      "</span>"
     )
-  } else {
-    ""
-  }
+  )
+}
+
+if (providers$email_2[i] != "") {
+
+  email_items <- c(
+    email_items,
+    paste0(
+      "<span style='margin-right:12px;'>",
+      "<a href='mailto:",
+      esc(providers$email_2[i]),
+      "'>",
+      esc(providers$email_2[i]),
+      "</a>",
+      if (providers$email_2_description[i] != "") {
+        paste0(
+          " <span style='color:#777;'>— ",
+          esc(providers$email_2_description[i]),
+          "</span>"
+        )
+      } else {
+        ""
+      },
+      "</span>"
+    )
+  )
+}
+
+email_html <- if (length(email_items) > 0) {
+  paste0(
+    "<div><strong>Email:</strong> ",
+    paste0(email_items, collapse = ""),
+    "</div>"
+  )
+} else {
+  ""
+}
 
   website_html <- if (providers$website_url[i] != "") {
     paste0(
@@ -488,15 +980,18 @@ for (i in seq_len(nrow(providers))) {
   }
 
   # Searchable text
-  searchable <- paste(
-    providers$name[i],
-    providers$services[i],
-    providers$phone[i],
-    providers$email[i],
-    providers$website[i],
-    providers$address[i],
-    providers$family_message[i]
-  )
+searchable <- paste(
+  providers$name[i],
+  providers$services[i],
+  providers$phone[i],
+  providers$email_1[i],
+  providers$email_1_description[i],
+  providers$email_2[i],
+  providers$email_2_description[i],
+  providers$website[i],
+  providers$address[i],
+  providers$family_message[i]
+)
 
   cat(
     "<div class='provider-card' ",
@@ -517,16 +1012,6 @@ for (i in seq_len(nrow(providers))) {
     "<div>",
     service_tags,
     "</div>",
-
-    ifelse(
-      providers$blurb[i] != "",
-      paste0(
-        "<div class='provider-blurb'>",
-        esc(providers$blurb[i]),
-        "</div>"
-      ),
-      ""
-    ),
 
     "<div class='provider-info'>",
 
@@ -617,9 +1102,15 @@ document.addEventListener("DOMContentLoaded", function() {
           !search ||
           searchable.includes(search);
 
+        const serviceList = categories
+          .split(",")
+          .map(function(service) {
+            return service.trim();
+          });
+        
         const matchesCategory =
           category === "all" ||
-          categories.includes(category.toLowerCase());
+          serviceList.includes(category.toLowerCase());
 
         if (matchesSearch && matchesCategory) {
 

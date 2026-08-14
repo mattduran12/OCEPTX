@@ -9129,155 +9129,352 @@ function asArray(value) {
 
 
 <style>
+
+:root {
+--epl-rust: #8b3a24;
+--epl-rust-dark: #682918;
+--epl-terracotta: #b85c3b;
+--epl-sand: #d9c3a5;
+--epl-sand-light: #eee2d0;
+--epl-cream: #f7f1e7;
+--epl-cream-dark: #e9dcc9;
+--epl-brown: #3b2a22;
+--epl-brown-light: #66564b;
+--epl-desert: #c99a6b;
+--epl-sage: #73765c;
+}
+
+body {
+background:
+linear-gradient(
+180deg,
+#eee2d0 0%,
+#f4eadc 32%,
+#f7f1e7 100%
+);
+color: var(--epl-brown);
+}
 .quarto-title-block {
 display: none;
 }
-</style>
-<style>
+main.content {
+max-width: 1500px;
+margin: 0 auto;
+padding: 2.5rem 3rem 4rem 3rem;
+}
+
+.header {
+padding: 2.5rem 0 2rem 0;
+margin-bottom: 1rem;
+}
+.header h1 {
+font-size: 3rem;
+font-weight: 750;
+letter-spacing: -0.04em;
+line-height: 1.1;
+margin: 0 0 0.8rem 0;
+color: var(--epl-brown);
+}
+.header h1::before {
+content: "EL PASO CRIME LAB";
+display: block;
+font-size: 0.78rem;
+font-weight: 700;
+letter-spacing: 0.14em;
+color: var(--epl-rust);
+margin-bottom: 0.6rem;
+}
+.header h1::after {
+content: "";
+display: block;
+width: 55px;
+height: 4px;
+background: var(--epl-terracotta);
+border-radius: 10px;
+margin-top: 1rem;
+}
+
+.header + p {
+max-width: 850px;
+font-size: 1.05rem;
+line-height: 1.7;
+color: var(--epl-brown-light);
+margin: 0 0 2rem 0;
+}
+.header + p a {
+color: var(--epl-rust);
+font-weight: 600;
+}
 
 .section-container {
-background: #faf8f3;
-border-radius: 16px;
-padding: 2rem;
-margin: 2rem 0;
-border: 1px solid #e4ddd2;
-box-shadow: 0 4px 14px rgba(60, 45, 30, 0.07);
+background: rgba(247, 241, 231, 0.92);
+border: 1px solid var(--epl-sand);
+border-radius: 18px;
+padding: 1.5rem;
+margin: 1.5rem 0;
+box-shadow:
+0 8px 25px rgba(59, 42, 34, 0.08);
+}
+.section-container h2 {
+margin: 0 0 1.2rem 0;
+font-size: 1.25rem;
+font-weight: 700;
+letter-spacing: -0.02em;
+color: var(--epl-brown);
 }
 
 .directory-container {
-background: #faf8f3;
+background:
+linear-gradient(
+135deg,
+#f9f3e9 0%,
+#f3e6d4 100%
+);
+border-color: #d8c3a5;
+}
+
+.controls {
+display: grid;
+grid-template-columns: 1fr 240px;
+gap: 12px;
+margin-bottom: 12px;
+width: 100%;
+align-items: center;
+}
+#searchBox,
+#categoryFilter {
+height: 46px;
+padding: 0 14px;
+border-radius: 10px;
+border: 1px solid #cfb99a;
+background: #fffaf2;
+color: var(--epl-brown);
+font-size: 14px;
+box-sizing: border-box;
+outline: none;
+transition: all 0.2s ease;
+}
+#searchBox::placeholder {
+color: #9b8978;
+}
+#searchBox:focus,
+#categoryFilter:focus {
+border-color: var(--epl-rust);
+box-shadow:
+0 0 0 3px rgba(139, 58, 36, 0.12);
+background: #fffdf9;
+}
+#categoryFilter {
+cursor: pointer;
+}
+#resultCount {
+margin: 0 0 14px 2px !important;
+color: #806f60 !important;
+font-size: 0.82rem !important;
+}
+
+.provider-card {
+position: relative;
+padding: 20px 22px;
+margin-bottom: 12px;
+background: #fffaf2;
+border: 1px solid #dfccb1;
+border-radius: 13px;
+transition:
+transform 0.2s ease,
+box-shadow 0.2s ease,
+border-color 0.2s ease;
+}
+.provider-card:hover {
+transform: translateY(-3px);
+background: #fffdf9;
+box-shadow:
+0 10px 25px rgba(59, 42, 34, 0.12);
+border-color: #c99a6b;
+}
+
+.provider-name {
+font-size: 1.1rem;
+line-height: 1.3;
+margin-bottom: 4px;
+}
+.provider-name a {
+color: var(--epl-brown);
+text-decoration: none;
+transition: color 0.2s ease;
+}
+.provider-name a:hover {
+color: var(--epl-rust);
+}
+
+.tag {
+display: inline-block;
+font-size: 0.68rem;
+font-weight: 650;
+line-height: 1;
+background: var(--epl-rust);
+color: #fff5e8;
+padding: 6px 9px;
+border-radius: 6px;
+margin-right: 5px;
+margin-top: 7px;
+box-shadow:
+0 2px 5px rgba(139, 58, 36, 0.12);
+}
+
+.provider-info {
+font-size: 13px;
+line-height: 1.7;
+margin-top: 13px;
+color: var(--epl-brown-light);
+}
+.provider-info > div {
+margin-bottom: 2px;
+}
+.provider-info strong {
+color: var(--epl-brown);
+font-weight: 650;
+}
+.provider-info a {
+color: var(--epl-rust);
+text-decoration: none;
+font-weight: 500;
+}
+.provider-info a:hover {
+color: var(--epl-rust-dark);
+text-decoration: underline;
+}
+
+.location-badge {
+display: inline-block;
+font-size: 0.72em;
+font-weight: 650;
+padding: 4px 8px;
+border-radius: 6px;
+background: #dedfcf;
+color: #56583f;
+margin-left: 5px;
+}
+
+.family-message {
+margin-top: 15px;
+padding: 14px 16px;
+background:
+linear-gradient(
+135deg,
+#f1e4d1,
+#eee0ca
+);
+border-left: 4px solid var(--epl-terracotta);
+border-radius: 7px;
+font-size: 13px;
+line-height: 1.6;
+color: var(--epl-brown-light);
+}
+.family-message-label {
+font-weight: 700;
+margin-bottom: 4px;
+color: var(--epl-rust);
 }
 
 .map-container {
-background: #eee8de;
-padding: 1.25rem;
+background:
+linear-gradient(
+135deg,
+#d8c0a0 0%,
+#c8a47b 100%
+);
+border: 1px solid #b9946b;
+padding: 1.5rem;
+box-shadow:
+0 10px 30px rgba(59, 42, 34, 0.12);
 }
-
-.section-container h2 {
-margin-top: 0;
-margin-bottom: 1.25rem;
-font-weight: 700;
-color: #292929;
+.map-container h2 {
+color: var(--epl-brown);
+margin-bottom: 1rem;
 }
 
 .map-container .leaflet-container {
 width: 100% !important;
-border-radius: 12px;
+height: 600px !important;
+border-radius: 13px;
 overflow: hidden;
-min-height: 600px;
+border: 2px solid rgba(255, 250, 242, 0.8);
+box-shadow:
+0 6px 20px rgba(59, 42, 34, 0.18);
 }
 
-.provider-card {
-padding: 20px;
-border-radius: 12px;
-background: #ffffff;
-border: 1px solid #e5dfd5;
-margin-bottom: 14px;
-transition: all 0.25s ease;
+.map-container .leaflet-control-layers {
+border: none !important;
+border-radius: 9px !important;
+box-shadow:
+0 5px 18px rgba(59, 42, 34, 0.18) !important;
 }
-.provider-card:hover {
-transform: translateY(-3px);
-box-shadow: 0 8px 20px rgba(60,45,30,0.12);
+.map-container .leaflet-control-zoom {
+border: none !important;
+box-shadow:
+0 5px 18px rgba(59, 42, 34, 0.18) !important;
+border-radius: 9px !important;
+overflow: hidden;
 }
-.provider-name {
-font-size: 1.1rem;
-margin-bottom: 6px;
+.map-container .leaflet-control-zoom a {
+color: var(--epl-brown) !important;
 }
-.provider-blurb {
-font-size: 13px;
-color: #555;
-margin-top: 8px;
-margin-bottom: 12px;
+
+.leaflet-popup-content-wrapper {
+border-radius: 10px !important;
 }
-.provider-info {
-font-size: 13px;
-line-height: 1.7;
-margin-top: 12px;
-}
-.provider-info a {
-color: #7a2e1d;
-text-decoration: none;
-}
-.provider-info a:hover {
-text-decoration: underline;
-}
-.family-message {
-margin-top: 16px;
-padding: 14px 16px;
-background: #f8f9fa;
-border-left: 4px solid #7a2e1d;
-border-radius: 6px;
+.leaflet-popup-content {
+color: var(--epl-brown);
 font-size: 13px;
 line-height: 1.6;
 }
-.family-message-label {
-font-weight: 600;
-margin-bottom: 4px;
-color: #7a2e1d;
+.leaflet-popup-content a {
+color: var(--epl-rust);
+text-decoration: none;
 }
-.tag {
-display: inline-block;
-font-size: 0.7em;
-background: #7a2e1d;
-color: #fff3d6;
-padding: 4px 8px;
-border-radius: 6px;
-margin-right: 6px;
-margin-top: 8px;
-}
-.location-badge {
-display: inline-block;
-font-size: 0.75em;
-padding: 4px 8px;
-border-radius: 6px;
-background: #e9ecef;
-color: #495057;
-margin-left: 6px;
-}
+
 .hidden {
 display: none !important;
 }
 
-.header {
-text-align: center;
-padding: 3rem 0 3rem 0;
+@media (max-width: 900px) {
+main.content {
+padding: 1.5rem;
 }
 .header h1 {
-font-size: 3.2rem;
-font-weight: 700;
-margin-bottom: .6rem;
+font-size: 2.4rem;
 }
-.header p {
-font-size: 1.15rem;
-color: var(--text-light);
-max-width: 850px;
-margin: auto;
-}
-
 .controls {
-display: flex;
-gap: 12px;
-margin-bottom: 10px;
-width: 100%;
-align-items: center;
-}
-#searchBox {
-flex: 7 1 auto;
-min-width: 0;
-width: auto;
-padding: 12px;
-border-radius: 8px;
-border: 1px solid #ddd;
-font-size: 14px;
-box-sizing: border-box;
+grid-template-columns: 1fr;
 }
 #categoryFilter {
-flex: 0 0 220px;
-width: 220px;
-padding: 12px;
-border-radius: 8px;
-border: 1px solid #ddd;
-box-sizing: border-box;
+width: 100%;
+}
+.map-container .leaflet-container {
+height: 500px !important;
+}
+}
+@media (max-width: 600px) {
+main.content {
+padding: 1rem;
+}
+.header {
+padding-top: 1rem;
+}
+.header h1 {
+font-size: 2rem;
+}
+.section-container {
+padding: 1rem;
+border-radius: 13px;
+}
+.provider-card {
+padding: 17px;
+}
+.map-container .leaflet-container {
+height: 450px !important;
+}
 }
 </style>
 <div class="header">
@@ -9285,17 +9482,17 @@ box-sizing: border-box;
 Service Provider Directory
 </h1>
 </div>
-<p>This directory shows contact information for support services offered in the El Paso community. To be added or have information updated, please send a request using the <a href="https://www.epcrimelab.org/contact.html">contact form</a>.</p>
+<p>Find local services here. To be added, removed, or have information changed, please send a request using the <a href="https://www.epcrimelab.org/contact.html">contact form</a>.</p>
 <div class="section-container directory-container">
 <div class="controls">
 <p><input id="searchBox" type="text" placeholder="Search providers, services, or support..."></p>
-<p><select id="categoryFilter"> <option value="all">All Services</option> <option value="Notary Public">Notary Public</option> <option value="Counseling/Mental health support">Counseling/Mental health support</option> </select></p>
+<p><select id="categoryFilter"> <option value="all">All Services</option> <option value="Notary Public">Notary Public</option> <option value="Counseling/Mental health support">Counseling/Mental health support</option> <option value="Support groups">Support groups</option> <option value="Grief counseling">Grief counseling</option> </select></p>
 </div>
 <div id="resultCount" style="margin-bottom:10px; color:#888; font-size:0.9em;">
 
 </div>
 <div id="directory">
-<div class="provider-card" data-name=" El Paso Mobile Notaries " data-category=" Notary Public " data-search=" El Paso Mobile Notaries Notary Public 915-271-5287 elpmobilenotary@gmail.com www.epmobilenotarypublic.com 3465 Lee Blvd Ste 243 El Paso TX 79936 Hello El Paso families. The community is here for you. Small obstacles, such as notarizations should be easy and accessible. Let us help you take care of the small things with a big impact. A community helps each other and the people of El Paso will help each other get through these hard times little by little. Stay safe and stay strong. ">
+<div class="provider-card" data-name=" El Paso Mobile Notaries " data-category=" Notary Public " data-search=" El Paso Mobile Notaries Notary Public 915-271-5287 elpmobilenotary@gmail.com    www.epmobilenotarypublic.com 3465 Lee Blvd Ste 243 El Paso TX 79936 Hello El Paso families. The community is here for you. Small obstacles, such as notarizations should be easy and accessible. Let us help you take care of the small things with a big impact. A community helps each other and the people of El Paso will help each other get through these hard times little by little. Stay safe and stay strong. ">
 <div class="provider-name">
 <a href="#" class="provider-link" data-id=" 1 "> <b> El Paso Mobile Notaries </b> </a>
 </div>
@@ -9316,7 +9513,7 @@ Service Provider Directory
 <strong>Phone:</strong> <a href="tel:9152715287">915-271-5287</a>
 </div>
 <div>
-<strong>Email:</strong> <a href="mailto:elpmobilenotary@gmail.com">elpmobilenotary@gmail.com</a>
+<strong>Email:</strong> <span style="margin-right:12px;"><a href="mailto:elpmobilenotary@gmail.com">elpmobilenotary@gmail.com</a></span>
 </div>
 <div>
 <strong>Website:</strong> <a href="https://www.epmobilenotarypublic.com" target="_blank">www.epmobilenotarypublic.com</a>
@@ -9329,7 +9526,7 @@ A message to families
 Hello El Paso families. The community is here for you. Small obstacles, such as notarizations should be easy and accessible. Let us help you take care of the small things with a big impact. A community helps each other and the people of El Paso will help each other get through these hard times little by little. Stay safe and stay strong.
 </div>
 </div>
-<div class="provider-card" data-name=" Mind Forward Health Center " data-category=" Counseling/Mental health support " data-search=" Mind Forward Health Center Counseling/Mental health support 915-832-1702 v.ortiz@mindforwardhealthcenter.com www.mindforwardhealthcenter.com 2150 Trawood B161 El Paso Texas 79935 We provide evidence based trauma informed bilingual services in person or virtual ">
+<div class="provider-card" data-name=" Mind Forward Health Center " data-category=" Counseling/Mental health support " data-search=" Mind Forward Health Center Counseling/Mental health support 915-832-1702 v.ortiz@mindforwardhealthcenter.com    www.mindforwardhealthcenter.com 2150 Trawood B161 El Paso Texas 79935 We provide evidence based trauma informed bilingual services in person or virtual ">
 <div class="provider-name">
 <a href="#" class="provider-link" data-id=" 2 "> <b> Mind Forward Health Center </b> </a>
 </div>
@@ -9350,7 +9547,7 @@ Hello El Paso families. The community is here for you. Small obstacles, such as 
 <strong>Phone:</strong> <a href="tel:9158321702">915-832-1702</a>
 </div>
 <div>
-<strong>Email:</strong> <a href="mailto:v.ortiz@mindforwardhealthcenter.com">v.ortiz@mindforwardhealthcenter.com</a>
+<strong>Email:</strong> <span style="margin-right:12px;"><a href="mailto:v.ortiz@mindforwardhealthcenter.com">v.ortiz@mindforwardhealthcenter.com</a></span>
 </div>
 <div>
 <strong>Website:</strong> <a href="https://www.mindforwardhealthcenter.com" target="_blank">www.mindforwardhealthcenter.com</a>
@@ -9363,7 +9560,7 @@ A message to families
 We provide evidence based trauma informed bilingual services in person or virtual
 </div>
 </div>
-<div class="provider-card" data-name=" Tabitha Cantu Counseling PLLC " data-category=" Counseling/Mental health support " data-search=" Tabitha Cantu Counseling PLLC Counseling/Mental health support 915-209-0008 info@tabithacantucounseling.com https://www.tabithacantucounseling.com/ Virtual only To families affected by drunk driving, my heart is with you. Even in the midst of hardship and loss, help is always available to support you. ">
+<div class="provider-card" data-name=" Tabitha Cantu Counseling PLLC " data-category=" Counseling/Mental health support " data-search=" Tabitha Cantu Counseling PLLC Counseling/Mental health support 915-209-0008 info@tabithacantucounseling.com    https://www.tabithacantucounseling.com/ Virtual only To families affected by drunk driving, my heart is with you. Even in the midst of hardship and loss, help is always available to support you. ">
 <div class="provider-name">
 <a href="#" class="provider-link" data-id=" 3 "> <b> Tabitha Cantu Counseling PLLC </b> </a>
 </div>
@@ -9384,7 +9581,7 @@ We provide evidence based trauma informed bilingual services in person or virtua
 <strong>Phone:</strong> <a href="tel:9152090008">915-209-0008</a>
 </div>
 <div>
-<strong>Email:</strong> <a href="mailto:info@tabithacantucounseling.com">info@tabithacantucounseling.com</a>
+<strong>Email:</strong> <span style="margin-right:12px;"><a href="mailto:info@tabithacantucounseling.com">info@tabithacantucounseling.com</a></span>
 </div>
 <div>
 <strong>Website:</strong> <a href="https://www.tabithacantucounseling.com/" target="_blank">https://www.tabithacantucounseling.com/</a>
@@ -9397,7 +9594,7 @@ A message to families
 To families affected by drunk driving, my heart is with you. Even in the midst of hardship and loss, help is always available to support you.
 </div>
 </div>
-<div class="provider-card" data-name=" Rising Perspective Counseling " data-category=" Counseling/Mental health support " data-search=" Rising Perspective Counseling Counseling/Mental health support  v.reyna@risingperspectivecounseling.com www.risingperspectivecounseling.com Virtual only For families enduring pain from drunk driving-related tragedies, or just want to understand why, there were likely signs and patterns that went unnoticed, but have a deeper explanation.
+<div class="provider-card" data-name=" Rising Perspective Counseling " data-category=" Counseling/Mental health support " data-search=" Rising Perspective Counseling Counseling/Mental health support  v.reyna@risingperspectivecounseling.com    www.risingperspectivecounseling.com Virtual only For families enduring pain from drunk driving-related tragedies, or just want to understand why, there were likely signs and patterns that went unnoticed, but have a deeper explanation.
 For many adults, an ADHD diagnosis later in life finally makes sense after years of impulsivity, poor decisions, and struggles they couldn’t explain. Understanding the brain behind the behavior doesn’t change the past, but it can change everything about what comes next. ">
 <div class="provider-name">
 <a href="#" class="provider-link" data-id=" 4 "> <b> Rising Perspective Counseling </b> </a>
@@ -9416,7 +9613,7 @@ For many adults, an ADHD diagnosis later in life finally makes sense after years
 <strong>Preferred contact:</strong> Email, Website
 </div>
 <div>
-<strong>Email:</strong> <a href="mailto:v.reyna@risingperspectivecounseling.com">v.reyna@risingperspectivecounseling.com</a>
+<strong>Email:</strong> <span style="margin-right:12px;"><a href="mailto:v.reyna@risingperspectivecounseling.com">v.reyna@risingperspectivecounseling.com</a></span>
 </div>
 <div>
 <strong>Website:</strong> <a href="https://www.risingperspectivecounseling.com" target="_blank">www.risingperspectivecounseling.com</a>
@@ -9429,6 +9626,7 @@ A message to families
 For families enduring pain from drunk driving-related tragedies, or just want to understand why, there were likely signs and patterns that went unnoticed, but have a deeper explanation. For many adults, an ADHD diagnosis later in life finally makes sense after years of impulsivity, poor decisions, and struggles they couldn’t explain. Understanding the brain behind the behavior doesn’t change the past, but it can change everything about what comes next.
 </div>
 </div>
+<div class="provider-card" data-name=" Children" s grief center el paso ' data-category=" Counseling/Mental health support, Support groups, Grief counseling " data-search=" Children" counseling mental health support, support groups, 915-532-6004 frontdesk@cgcelpaso.org general questions luisa@cgcelpaso.org programming or scheduling www.cgcelpaso.org 2616 montana ave., paso, tx, 79903 our mission at cgc is to provide a safe, welcoming space for your family find hope and begin healing after this unimaginable loss. main services include individual therapy as well peer-led groups. there no rush timeline; we just want you know that doors are open, whenever you're ready.> <div class="provider-name"> <a href="#" class="provider-link" data-id=" 5 "> <b> Children&#39;s Grief Center El Paso </b> </a> </div> <div> <span class="tag">Counseling/Mental health support</span><span class="tag">Support groups</span><span class="tag">Grief counseling</span> </div> <div class="provider-info"> <div><strong>Location:</strong> El Paso, Texas <span class="location-badge">El Paso-based</span></div><div><strong>Address:</strong> 2616 Montana Ave., El Paso, TX, 79903</div> <div><strong>Preferred contact:</strong>  Phone, Email </div> <div><strong>Phone:</strong> <a href="tel:9155326004">915-532-6004</a></div> <div><strong>Email:</strong> <span style="margin-right:12px;"><a href="mailto:frontdesk@cgcelpaso.org">frontdesk@cgcelpaso.org</a> <span style="color:#777;">— General questions</span></span><span style="margin-right:12px;"><a href="mailto:luisa@cgcelpaso.org">luisa@cgcelpaso.org</a> <span style="color:#777;">— Programming or scheduling</span></span></div> <div><strong>Website:</strong> <a href="https://www.cgcelpaso.org" target="_blank">www.cgcelpaso.org</a></div> </div> <div class="family-message"><div class="family-message-label">A message to families</div>Our mission at CGC is to provide a safe, welcoming space for your family to find hope and begin healing after this unimaginable loss. Our main services include individual grief therapy as well as peer-led grief support groups. There is no rush and no timeline; we just want you to know that our doors are open, whenever you&#39;re ready.</div> </div>
 </div>
 </div>
 <div class="section-container map-container">
@@ -9437,8 +9635,8 @@ Map
 </h2>
 <div class="cell">
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-29b7eee617579602cd19" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-29b7eee617579602cd19">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[31.7637,-106.311,8,1,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.9},null,null,"<b>El Paso Mobile Notaries<\/b><br><br><b>Services:<\/b> Notary Public<br><b>Phone:<\/b> <a href='tel:9152715287'>915-271-5287<\/a><br><b>Email:<\/b> <a href='mailto:elpmobilenotary@gmail.com'>elpmobilenotary@gmail.com<\/a><br><b>Website:<\/b> <a href='https://www.epmobilenotarypublic.com' target='_blank'>Visit website<\/a><br><b>Address:<\/b> 3465 Lee Blvd Ste 243 El Paso TX 79936<br>",null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[31.7486,-106.2927,8,2,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.9},null,null,"<b>Mind Forward Health Center<\/b><br><br><b>Services:<\/b> Counseling/Mental health support<br><b>Phone:<\/b> <a href='tel:9158321702'>915-832-1702<\/a><br><b>Email:<\/b> <a href='mailto:v.ortiz@mindforwardhealthcenter.com'>v.ortiz@mindforwardhealthcenter.com<\/a><br><b>Website:<\/b> <a href='https://www.mindforwardhealthcenter.com' target='_blank'>Visit website<\/a><br><b>Address:<\/b> 2150 Trawood B161 El Paso Texas 79935<br>",null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"setView":[[31.76,-106.485],11,[]],"limits":{"lat":[31.7486,31.7637],"lng":[-106.311,-106.2927]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-376392d5aeec4735cefa" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-376392d5aeec4735cefa">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,"Street Map",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"Light",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Satellite",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[31.7637,-106.311,8,1,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.9},null,null,"<b>El Paso Mobile Notaries<\/b><br><br><b>Services:<\/b> Notary Public<br><b>Phone:<\/b> <a href='tel:9152715287'>915-271-5287<\/a><br><b>Website:<\/b> <a href='https://www.epmobilenotarypublic.com' target='_blank'>Visit website<\/a><br><b>Address:<\/b> 3465 Lee Blvd Ste 243 El Paso TX 79936<br>",null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[31.7486,-106.2927,8,2,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.9},null,null,"<b>Mind Forward Health Center<\/b><br><br><b>Services:<\/b> Counseling/Mental health support<br><b>Phone:<\/b> <a href='tel:9158321702'>915-832-1702<\/a><br><b>Website:<\/b> <a href='https://www.mindforwardhealthcenter.com' target='_blank'>Visit website<\/a><br><b>Address:<\/b> 2150 Trawood B161 El Paso Texas 79935<br>",null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[31.7809881132938,-106.464590545751,8,5,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.9},null,null,"<b>Children's Grief Center El Paso<\/b><br><br><b>Services:<\/b> Counseling/Mental health support, Support groups, Grief counseling<br><b>Phone:<\/b> <a href='tel:9155326004'>915-532-6004<\/a><br><b>Website:<\/b> <a href='https://www.cgcelpaso.org' target='_blank'>Visit website<\/a><br><b>Address:<\/b> 2616 Montana Ave., El Paso, TX, 79903<br>",null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"setView":[[31.76,-106.485],11,[]],"limits":{"lat":[31.7486,31.7809881132938],"lng":[-106.464590545751,-106.2927]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -9493,9 +9691,15 @@ document.addEventListener("DOMContentLoaded", function() {
           !search ||
           searchable.includes(search);
 
+        const serviceList = categories
+          .split(",")
+          .map(function(service) {
+            return service.trim();
+          });
+        
         const matchesCategory =
           category === "all" ||
-          categories.includes(category.toLowerCase());
+          serviceList.includes(category.toLowerCase());
 
         if (matchesSearch && matchesCategory) {
 
