@@ -4,78 +4,747 @@ description: "Providing evidence-based research on crime and public safety in th
 favicon: about_logo.png
 format:
   html:
-    grid:
-      margin-width: 280px
-      body-width: 780px
+    page-layout: full
     toc: false
 ---
 
 <style>
 
-/* Hide default title */
+/* ============================================================
+   GLOBAL
+   ============================================================ */
+
+body {
+  background: #f7f8fa;
+  color: #1f2937;
+}
+
 .quarto-title-block {
   display: none;
 }
 
-
-/* HERO SECTION */
-.hero {
-  text-align: center;
-  padding: 4rem 1rem 2.5rem 1rem;
-}
-
-/* Logo styling */
-.hero img {
-  width: 380px;
-  max-width: 90%;
-  margin-bottom: 1.5rem;
-}
-
-/* Title feel (in case you ever add text) */
-.hero h1 {
-  font-size: 2.6rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: #111827;
-  margin-bottom: 0.5rem;
-}
-
-/* Subtitle / intro text */
-.hero p {
-  font-size: 1.15rem;
-  color: #4b5563;
-  max-width: 650px;
+main.content {
+  max-width: 1350px;
   margin: 0 auto;
-  line-height: 1.6;
+  padding: 0 3rem 4rem 3rem;
 }
 
-/* Content section spacing */
-.content {
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.about-hero {
+  text-align: center;
+  padding: 5rem 1rem 4.5rem 1rem;
+}
+
+.about-logo {
+  width: 380px;
+  max-width: 82%;
+  margin-bottom: 2rem;
+}
+
+.about-hero h1 {
+  font-size: 2.65rem;
+  line-height: 1.15;
+  font-weight: 550;
+  letter-spacing: -0.035em;
+  color: #242424;
+  margin: 0 auto 1rem auto;
+}
+
+.about-tagline {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #667085;
+}
+
+
+/* ============================================================
+   HERO BUTTONS
+   ============================================================ */
+
+.hero-links {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
   margin-top: 2rem;
 }
 
-/* Subtle divider */
-hr {
-  border: none;
-  height: 1px;
-  background: #e5e7eb;
-  margin: 2.5rem 0;
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.7rem 1.15rem;
+
+  border-radius: 9px;
+
+  font-size: 0.88rem;
+  font-weight: 600;
+
+  text-decoration: none !important;
+
+  transition: all 0.2s ease;
+}
+
+.hero-button.primary {
+  background: #7a2e1d;
+  color: white !important;
+}
+
+.hero-button.primary:hover {
+  background: #612417;
+  transform: translateY(-2px);
+}
+
+.hero-button.secondary {
+  background: white;
+  color: #344054 !important;
+  border: 1px solid #d9dde3;
+}
+
+.hero-button.secondary:hover {
+  border-color: #7a2e1d;
+  color: #7a2e1d !important;
+}
+
+
+/* ============================================================
+   MISSION
+   ============================================================ */
+
+.mission {
+  max-width: 900px;
+  margin: 0 auto 5rem auto;
+
+  text-align: center;
+
+  padding: 0 1rem;
+}
+
+.mission-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+
+  color: #7a2e1d;
+
+  margin-bottom: 1rem;
+}
+
+.mission p {
+  margin: 0;
+
+  font-size: 1.2rem;
+  line-height: 1.8;
+
+  color: #475467;
+}
+
+
+/* ============================================================
+   WHAT WE DO
+   ============================================================ */
+
+.what-we-do {
+  max-width: 1150px;
+  margin: 0 auto 5.5rem auto;
+}
+
+.what-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.what-header h2 {
+  margin: 0 0 0.6rem 0;
+
+  font-size: 2rem;
+  font-weight: 550;
+
+  letter-spacing: -0.03em;
+
+  color: #171717;
+}
+
+.what-header p {
+  margin: 0;
+
+  color: #667085;
+
+  font-size: 1rem;
+}
+
+
+/* ============================================================
+   THREE AREAS
+   ============================================================ */
+
+.areas {
+  display: flex;
+  width: 100%;
+  border-top: 1px solid #dfe3e8;
+  border-bottom: 1px solid #dfe3e8;
+}
+
+.area {
+  flex: 1;
+
+  padding: 2.5rem 2.25rem 2.75rem 2.25rem;
+
+  min-width: 0;
+}
+
+.area + .area {
+  border-left: 1px solid #dfe3e8;
+}
+
+.area-number {
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  color: #7a2e1d;
+
+  letter-spacing: 0.08em;
+
+  margin-bottom: 1.25rem;
+}
+
+.area h3 {
+  margin: 0 0 0.85rem 0;
+
+  font-size: 1.45rem;
+  font-weight: 650;
+
+  letter-spacing: -0.025em;
+
+  color: #171717;
+}
+
+.area p {
+  margin: 0;
+
+  font-size: 0.96rem;
+  line-height: 1.7;
+
+  color: #667085;
+}
+
+.area-link {
+  display: inline-block;
+
+  margin-top: 1.35rem;
+
+  font-size: 0.85rem;
+  font-weight: 650;
+
+  color: #7a2e1d !important;
+
+  text-decoration: none !important;
+}
+
+.area-link:hover {
+  text-decoration: underline !important;
+}
+
+
+/* ============================================================
+   FEATURE
+   ============================================================ */
+
+.feature {
+  max-width: 1150px;
+
+  margin: 0 auto 5rem auto;
+
+  display: flex;
+
+  background: #20252b;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  box-shadow: 0 12px 35px rgba(16, 24, 40, 0.12);
+}
+
+.feature-main {
+  flex: 1.5;
+
+  padding: 3rem;
+}
+
+.feature-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+
+  color: #d9a38f;
+
+  margin-bottom: 0.8rem;
+}
+
+.feature-main h2 {
+  margin: 0 0 1rem 0;
+
+  font-size: 2rem;
+  line-height: 1.2;
+
+  font-weight: 600;
+
+  letter-spacing: -0.03em;
+
+  color: white;
+}
+
+.feature-main p {
+  margin: 0;
+
+  max-width: 650px;
+
+  color: #cbd5e1;
+
+  line-height: 1.75;
+}
+
+.feature-action {
+  display: inline-block;
+
+  margin-top: 1.5rem;
+
+  padding: 0.7rem 1rem;
+
+  border-radius: 8px;
+
+  background: white;
+
+  color: #20252b !important;
+
+  font-size: 0.85rem;
+  font-weight: 650;
+
+  text-decoration: none !important;
+}
+
+.feature-action:hover {
+  background: #f1f5f9;
+}
+
+.feature-aside {
+  flex: 0.8;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2.5rem;
+
+  background: #7a2e1d;
+}
+
+.feature-aside p {
+  max-width: 250px;
+
+  margin: 0;
+
+  text-align: center;
+
+  color: white;
+
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+
+/* ============================================================
+   CONNECT
+   ============================================================ */
+
+.connect {
+  max-width: 850px;
+
+  margin: 0 auto;
+
+  text-align: center;
+
+  padding: 0 1rem 3rem 1rem;
+}
+
+.connect h2 {
+  margin: 0 0 0.75rem 0;
+
+  font-size: 1.9rem;
+  font-weight: 550;
+
+  letter-spacing: -0.03em;
+
+  color: #171717;
+}
+
+.connect p {
+  margin: 0 auto;
+
+  max-width: 650px;
+
+  color: #667085;
+
+  line-height: 1.65;
+}
+
+.connect-links {
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 0.75rem;
+
+  margin-top: 1.5rem;
+}
+
+.connect-link {
+  color: #7a2e1d !important;
+
+  font-size: 0.88rem;
+  font-weight: 650;
+
+  text-decoration: none !important;
+
+  padding: 0.4rem 0.2rem;
+}
+
+.connect-link:hover {
+  text-decoration: underline !important;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 850px) {
+
+  main.content {
+    padding: 0 1.5rem 3rem 1.5rem;
+  }
+
+  .about-hero {
+    padding-top: 3rem;
+  }
+
+  .about-hero h1 {
+    font-size: 2.35rem;
+  }
+
+  .areas {
+    flex-direction: column;
+  }
+
+  .area {
+    padding: 2rem 1rem;
+  }
+
+  .area + .area {
+    border-left: none;
+    border-top: 1px solid #dfe3e8;
+  }
+
+  .feature {
+    flex-direction: column;
+  }
+
+  .feature-aside {
+    min-height: 180px;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  main.content {
+    padding: 0 1rem 3rem 1rem;
+  }
+
+  .about-logo {
+    width: 300px;
+  }
+
+  .about-hero h1 {
+    font-size: 2rem;
+  }
+
+  .about-tagline {
+    font-size: 1rem;
+  }
+
+  .mission p {
+    font-size: 1.05rem;
+  }
+
+  .feature-main {
+    padding: 2rem;
+  }
+
+  .feature-main h2 {
+    font-size: 1.7rem;
+  }
+
 }
 
 </style>
 
-<div class="hero">
 
-<p>
-  <img src="about_logo.png" alt="El Paso Crime Lab Logo">
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+
+<div class="about-hero">
+
+<img
+  src="about_logo.png"
+  alt="El Paso Crime Lab"
+  class="about-logo"
+>
+
+<h1>
+Evidence. Research. Public Safety.
+</h1>
+
+<p class="about-tagline">
+Independent research on crime and public safety in the borderland.
 </p>
 
+<div class="hero-links">
+
+<a
+  href="dwi_home.html"
+  class="hero-button primary"
+>
+Explore Our Research →
+</a>
+
+<a
+  href="contact.html"
+  class="hero-button secondary"
+>
+Contact Us
+</a>
+
+</div>
+
+</div>
+
+
+<!-- ============================================================
+     MISSION
+     ============================================================ -->
+
+<div class="mission">
+
+<div class="mission-label">
+Our Mission
+</div>
+
 <p>
-The El Paso Crime Lab is an independent research organization focused on crime and public safety in the El Paso region. Our goal is to produce evidence-based research that increases community capacity to diagnose and respond to criminal justice-related issues.
+The El Paso Crime Lab is an independent research organization focused on crime and public safety in the El Paso region. We produce evidence-based research that increases community capacity to diagnose, understand, and respond to criminal justice-related issues.
 </p>
 
 </div>
 
 
+<!-- ============================================================
+     WHAT WE DO
+     ============================================================ -->
+
+<div class="what-we-do">
+
+<div class="what-header">
+
+<h2>
+What We Do
+</h2>
+
+</div>
 
 
+<div class="areas">
+
+
+<div class="area">
+
+<div class="area-number">
+01
+</div>
+
+<h3>
+Research
+</h3>
+
+<p>
+Conduct independent research examining crime, public safety, and criminal justice issues affecting the El Paso region.
+</p>
+
+<a
+  href="dwi_home.html"
+  class="area-link"
+>
+Explore research →
+</a>
+
+</div>
+
+
+<div class="area">
+
+<div class="area-number">
+02
+</div>
+
+<h3>
+Local Data
+</h3>
+
+<p>
+Build accessible tools and dashboards that help communities monitor local problems and understand what the data show.
+</p>
+
+<a
+  href="dwi_home.html"
+  class="area-link"
+>
+View the data →
+</a>
+
+</div>
+
+
+<div class="area">
+
+<div class="area-number">
+03
+</div>
+
+<h3>
+Community Resources
+</h3>
+
+<p>
+Connect residents and families with organizations and services available throughout the El Paso community.
+</p>
+
+<a
+  href="dwi_services.html"
+  class="area-link"
+>
+Find resources →
+</a>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- ============================================================
+     FEATURE
+     ============================================================ -->
+
+<div class="feature">
+
+<div class="feature-main">
+
+<div class="feature-label">
+Current Research
+</div>
+
+<h2>
+Understanding impaired driving in El Paso
+</h2>
+
+<p>
+Our current research examines alcohol-impaired driving using local crash data, research evidence, and community information. Explore the dashboard, reports, studies, and local reporting.
+</p>
+
+<a
+  href="dwi_home.html"
+  class="feature-action"
+>
+Explore the DWI Research Hub →
+</a>
+
+</div>
+
+
+<div class="feature-aside">
+
+<p>
+Local problems require local evidence.
+<br><br>
+We focus on producing research that can be understood and used by the communities it describes.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- ============================================================
+     CONNECT
+     ============================================================ -->
+
+<div class="connect">
+
+<h2>
+Stay Connected
+</h2>
+
+<p>
+Follow our work, receive updates about new research, or get in touch.
+</p>
+
+<div class="connect-links">
+
+<a
+  href="subscribe.html"
+  class="connect-link"
+>
+Email Updates
+</a>
+
+<a
+  href="contact.html"
+  class="connect-link"
+>
+Contact
+</a>
+
+<a
+  href="https://www.instagram.com/epcrimelab/"
+  target="_blank"
+  class="connect-link"
+>
+Instagram
+</a>
+
+<a
+  href="dwi_home.html"
+  class="connect-link"
+>
+Research
+</a>
+
+</div>
+
+</div>
