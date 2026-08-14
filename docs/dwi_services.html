@@ -9131,26 +9131,26 @@ function asArray(value) {
 <style>
 
 :root {
---epl-rust: #8b3a24;
---epl-rust-dark: #682918;
---epl-terracotta: #b85c3b;
---epl-sand: #d9c3a5;
---epl-sand-light: #eee2d0;
---epl-cream: #f7f1e7;
---epl-cream-dark: #e9dcc9;
---epl-brown: #3b2a22;
---epl-brown-light: #66564b;
---epl-desert: #c99a6b;
---epl-sage: #73765c;
+--epl-rust: #7a2f1d;
+--epl-rust-dark: #562014;
+--epl-terracotta: #a7462c;
+--epl-sand: #c8ad87;
+--epl-sand-light: #e5d3b9;
+--epl-cream: #fffaf2;
+--epl-cream-dark: #ead7bb;
+--epl-brown: #2d1c16;
+--epl-brown-light: #4e3d33;
+--epl-desert: #a97847;
+--epl-sage: #4e563d;
 }
 
 body {
 background:
 linear-gradient(
 180deg,
-#eee2d0 0%,
-#f4eadc 32%,
-#f7f1e7 100%
+#e5d3b9 0%,
+#f5e9d8 32%,
+#fffaf2 100%
 );
 color: var(--epl-brown);
 }
@@ -9207,7 +9207,7 @@ font-weight: 600;
 }
 
 .section-container {
-background: rgba(247, 241, 231, 0.92);
+background: rgba(255, 250, 242, 0.96);
 border: 1px solid var(--epl-sand);
 border-radius: 18px;
 padding: 1.5rem;
@@ -9227,8 +9227,8 @@ color: var(--epl-brown);
 background:
 linear-gradient(
 135deg,
-#f9f3e9 0%,
-#f3e6d4 100%
+#fffaf2 0%,
+#f0ddc3 100%
 );
 border-color: #d8c3a5;
 }
@@ -9246,7 +9246,7 @@ align-items: center;
 height: 46px;
 padding: 0 14px;
 border-radius: 10px;
-border: 1px solid #cfb99a;
+border: 1px solid #af8d65;
 background: #fffaf2;
 color: var(--epl-brown);
 font-size: 14px;
@@ -9255,7 +9255,7 @@ outline: none;
 transition: all 0.2s ease;
 }
 #searchBox::placeholder {
-color: #9b8978;
+color: #765f4e;
 }
 #searchBox:focus,
 #categoryFilter:focus {
@@ -9269,7 +9269,7 @@ cursor: pointer;
 }
 #resultCount {
 margin: 0 0 14px 2px !important;
-color: #806f60 !important;
+color: #5c4638 !important;
 font-size: 0.82rem !important;
 }
 
@@ -9278,7 +9278,7 @@ position: relative;
 padding: 20px 22px;
 margin-bottom: 12px;
 background: #fffaf2;
-border: 1px solid #dfccb1;
+border: 1px solid #c6a47c;
 border-radius: 13px;
 transition:
 transform 0.2s ease,
@@ -9326,7 +9326,7 @@ box-shadow:
 font-size: 13px;
 line-height: 1.7;
 margin-top: 13px;
-color: var(--epl-brown-light);
+color: #47352b;
 }
 .provider-info > div {
 margin-bottom: 2px;
@@ -9351,8 +9351,8 @@ font-size: 0.72em;
 font-weight: 650;
 padding: 4px 8px;
 border-radius: 6px;
-background: #dedfcf;
-color: #56583f;
+background: #d7dbc3;
+color: #37412a;
 margin-left: 5px;
 }
 
@@ -9362,8 +9362,8 @@ padding: 14px 16px;
 background:
 linear-gradient(
 135deg,
-#f1e4d1,
-#eee0ca
+#f7e7cf,
+#efdbbd
 );
 border-left: 4px solid var(--epl-terracotta);
 border-radius: 7px;
@@ -9381,8 +9381,8 @@ color: var(--epl-rust);
 background:
 linear-gradient(
 135deg,
-#d8c0a0 0%,
-#c8a47b 100%
+#d1ad82 0%,
+#af7c4d 100%
 );
 border: 1px solid #b9946b;
 padding: 1.5rem;
@@ -9409,6 +9409,16 @@ border: none !important;
 border-radius: 9px !important;
 box-shadow:
 0 5px 18px rgba(59, 42, 34, 0.18) !important;
+background: #fffaf2 !important;
+color: var(--epl-brown) !important;
+}
+.map-container .leaflet-control-layers-expanded {
+padding: 8px 10px !important;
+}
+.map-container .leaflet-control-layers label {
+color: var(--epl-brown) !important;
+font-size: 0.82rem;
+font-weight: 600;
 }
 .map-container .leaflet-control-zoom {
 border: none !important;
@@ -9635,8 +9645,8 @@ Map
 </h2>
 <div class="cell">
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-376392d5aeec4735cefa" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-376392d5aeec4735cefa">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,"Street Map",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"Light",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Satellite",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[31.7637,-106.311,8,1,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.9},null,null,"<b>El Paso Mobile Notaries<\/b><br><br><b>Services:<\/b> Notary Public<br><b>Phone:<\/b> <a href='tel:9152715287'>915-271-5287<\/a><br><b>Website:<\/b> <a href='https://www.epmobilenotarypublic.com' target='_blank'>Visit website<\/a><br><b>Address:<\/b> 3465 Lee Blvd Ste 243 El Paso TX 79936<br>",null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[31.7486,-106.2927,8,2,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.9},null,null,"<b>Mind Forward Health Center<\/b><br><br><b>Services:<\/b> Counseling/Mental health support<br><b>Phone:<\/b> <a href='tel:9158321702'>915-832-1702<\/a><br><b>Website:<\/b> <a href='https://www.mindforwardhealthcenter.com' target='_blank'>Visit website<\/a><br><b>Address:<\/b> 2150 Trawood B161 El Paso Texas 79935<br>",null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[31.7809881132938,-106.464590545751,8,5,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.9},null,null,"<b>Children's Grief Center El Paso<\/b><br><br><b>Services:<\/b> Counseling/Mental health support, Support groups, Grief counseling<br><b>Phone:<\/b> <a href='tel:9155326004'>915-532-6004<\/a><br><b>Website:<\/b> <a href='https://www.cgcelpaso.org' target='_blank'>Visit website<\/a><br><b>Address:<\/b> 2616 Montana Ave., El Paso, TX, 79903<br>",null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"setView":[[31.76,-106.485],11,[]],"limits":{"lat":[31.7486,31.7809881132938],"lng":[-106.464590545751,-106.2927]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-6f4d48c00e44142a1a3d" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-6f4d48c00e44142a1a3d">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,"Street Map",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addProviderTiles","args":["CartoDB.Positron",null,"Light",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Satellite",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addLayersControl","args":[["Street Map","Light","Satellite"],[],{"collapsed":false,"autoZIndex":true,"position":"topright"}]},{"method":"hideGroup","args":[["Light","Satellite"]]},{"method":"addCircleMarkers","args":[31.7637,-106.311,8,1,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.9},null,null,"<b>El Paso Mobile Notaries<\/b><br><br><b>Services:<\/b> Notary Public<br><b>Phone:<\/b> <a href='tel:9152715287'>915-271-5287<\/a><br><b>Website:<\/b> <a href='https://www.epmobilenotarypublic.com' target='_blank'>Visit website<\/a><br><b>Address:<\/b> 3465 Lee Blvd Ste 243 El Paso TX 79936<br>",null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[31.7486,-106.2927,8,2,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.9},null,null,"<b>Mind Forward Health Center<\/b><br><br><b>Services:<\/b> Counseling/Mental health support<br><b>Phone:<\/b> <a href='tel:9158321702'>915-832-1702<\/a><br><b>Website:<\/b> <a href='https://www.mindforwardhealthcenter.com' target='_blank'>Visit website<\/a><br><b>Address:<\/b> 2150 Trawood B161 El Paso Texas 79935<br>",null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addCircleMarkers","args":[31.7809881132938,-106.464590545751,8,5,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.9},null,null,"<b>Children's Grief Center El Paso<\/b><br><br><b>Services:<\/b> Counseling/Mental health support, Support groups, Grief counseling<br><b>Phone:<\/b> <a href='tel:9155326004'>915-532-6004<\/a><br><b>Website:<\/b> <a href='https://www.cgcelpaso.org' target='_blank'>Visit website<\/a><br><b>Address:<\/b> 2616 Montana Ave., El Paso, TX, 79903<br>",null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"setView":[[31.76,-106.485],11,[]],"limits":{"lat":[31.7486,31.7809881132938],"lng":[-106.464590545751,-106.2927]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>

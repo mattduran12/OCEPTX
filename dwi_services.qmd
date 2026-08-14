@@ -21,17 +21,17 @@ execute:
    ============================================================ */
 
 :root {
-  --epl-rust: #8b3a24;
-  --epl-rust-dark: #682918;
-  --epl-terracotta: #b85c3b;
-  --epl-sand: #d9c3a5;
-  --epl-sand-light: #eee2d0;
-  --epl-cream: #f7f1e7;
-  --epl-cream-dark: #e9dcc9;
-  --epl-brown: #3b2a22;
-  --epl-brown-light: #66564b;
-  --epl-desert: #c99a6b;
-  --epl-sage: #73765c;
+  --epl-rust: #7a2f1d;
+  --epl-rust-dark: #562014;
+  --epl-terracotta: #a7462c;
+  --epl-sand: #c8ad87;
+  --epl-sand-light: #e5d3b9;
+  --epl-cream: #fffaf2;
+  --epl-cream-dark: #ead7bb;
+  --epl-brown: #2d1c16;
+  --epl-brown-light: #4e3d33;
+  --epl-desert: #a97847;
+  --epl-sage: #4e563d;
 }
 
 
@@ -43,9 +43,9 @@ body {
   background:
     linear-gradient(
       180deg,
-      #eee2d0 0%,
-      #f4eadc 32%,
-      #f7f1e7 100%
+      #e5d3b9 0%,
+      #f5e9d8 32%,
+      #fffaf2 100%
     );
 
   color: var(--epl-brown);
@@ -135,7 +135,7 @@ main.content {
    ============================================================ */
 
 .section-container {
-  background: rgba(247, 241, 231, 0.92);
+  background: rgba(255, 250, 242, 0.96);
 
   border: 1px solid var(--epl-sand);
 
@@ -169,8 +169,8 @@ main.content {
   background:
     linear-gradient(
       135deg,
-      #f9f3e9 0%,
-      #f3e6d4 100%
+      #fffaf2 0%,
+      #f0ddc3 100%
     );
 
   border-color: #d8c3a5;
@@ -203,7 +203,7 @@ main.content {
 
   border-radius: 10px;
 
-  border: 1px solid #cfb99a;
+  border: 1px solid #af8d65;
 
   background: #fffaf2;
 
@@ -219,7 +219,7 @@ main.content {
 }
 
 #searchBox::placeholder {
-  color: #9b8978;
+  color: #765f4e;
 }
 
 #searchBox:focus,
@@ -239,7 +239,7 @@ main.content {
 #resultCount {
   margin: 0 0 14px 2px !important;
 
-  color: #806f60 !important;
+  color: #5c4638 !important;
 
   font-size: 0.82rem !important;
 }
@@ -258,7 +258,7 @@ main.content {
 
   background: #fffaf2;
 
-  border: 1px solid #dfccb1;
+  border: 1px solid #c6a47c;
 
   border-radius: 13px;
 
@@ -346,7 +346,7 @@ main.content {
 
   margin-top: 13px;
 
-  color: var(--epl-brown-light);
+  color: #47352b;
 }
 
 .provider-info > div {
@@ -389,9 +389,9 @@ main.content {
 
   border-radius: 6px;
 
-  background: #dedfcf;
+  background: #d7dbc3;
 
-  color: #56583f;
+  color: #37412a;
 
   margin-left: 5px;
 }
@@ -409,8 +409,8 @@ main.content {
   background:
     linear-gradient(
       135deg,
-      #f1e4d1,
-      #eee0ca
+      #f7e7cf,
+      #efdbbd
     );
 
   border-left: 4px solid var(--epl-terracotta);
@@ -441,8 +441,8 @@ main.content {
   background:
     linear-gradient(
       135deg,
-      #d8c0a0 0%,
-      #c8a47b 100%
+      #d1ad82 0%,
+      #af7c4d 100%
     );
 
   border: 1px solid #b9946b;
@@ -491,6 +491,19 @@ main.content {
 
   box-shadow:
     0 5px 18px rgba(59, 42, 34, 0.18) !important;
+
+  background: #fffaf2 !important;
+  color: var(--epl-brown) !important;
+}
+
+.map-container .leaflet-control-layers-expanded {
+  padding: 8px 10px !important;
+}
+
+.map-container .leaflet-control-layers label {
+  color: var(--epl-brown) !important;
+  font-size: 0.82rem;
+  font-weight: 600;
 }
 
 .map-container .leaflet-control-zoom {
@@ -754,6 +767,14 @@ map <- leaflet() %>%
     "Esri.WorldImagery",
     group = "Satellite"
   ) %>%
+
+  # Basemap toggle; Street Map remains visible when the page opens.
+  addLayersControl(
+    baseGroups = c("Street Map", "Light", "Satellite"),
+    options = layersControlOptions(collapsed = FALSE)
+  ) %>%
+
+  hideGroup(c("Light", "Satellite")) %>%
 
   setView(
     -106.485,
