@@ -628,11 +628,11 @@ Explore research →
 </div>
 
 <h3>
-Local Data
+Training & Technical Assistance
 </h3>
 
 <p>
-Build accessible tools and dashboards that help communities monitor local problems and understand what the data show.
+Collaborate with local government and non-government organizations to build dashboards or intelligence products that help communities monitor local problems and understand what the data show.
 </p>
 
 <a
