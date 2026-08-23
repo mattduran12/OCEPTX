@@ -535,7 +535,7 @@ This study examines whether a social media campaign that publicly shared DWI boo
 
 <a href="dwi_friday_study.pdf"
    class="card-button">
-Read Study →
+Read the Plain Language Summary →
 </a>
 
 </div>
