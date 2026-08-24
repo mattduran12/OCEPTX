@@ -225,7 +225,7 @@ main.content {
 }
 
 .card-button::after {
-  content: " →";
+  content: "";
   margin-left: 0.3rem;
   transition: transform 0.2s ease;
 }
@@ -461,8 +461,7 @@ Explore alcohol-related crash patterns across El Paso. The dashboard includes mo
 <a href="crash_dashboard.html"
    target="_blank"
    class="card-button">
-View Dashboard →
-</a>
+View Dashboard </a>
 
 </div>
 
@@ -504,7 +503,7 @@ How does El Paso compare with other large Texas cities? This report examines alc
 
 <a href="dwi_report_01.html"
    class="card-button">
-Read Report →
+Read Report
 </a>
 
 </div>
@@ -535,7 +534,7 @@ This study examines whether a social media campaign that publicly shared DWI boo
 
 <a href="dwi_friday_study.pdf"
    class="card-button">
-Read the Plain Language Summary →
+Read the Plain Language Summary
 </a>
 
 </div>
@@ -576,7 +575,7 @@ An opinion article examining why arrest data can be misleading and why alcohol-i
 <a href="https://elpasomatters.org/2026/02/25/opinion-why-el-paso-needs-better-data-to-solve-drunk-driving-problem/"
    target="_blank"
    class="card-button">
-Read Article →
+Read Article
 </a>
 
 </div>
@@ -608,7 +607,7 @@ Listen to a podcast episode discussing alcohol-impaired driving and the challeng
 <a href="https://open.spotify.com/episode/7qRoqOapZSc070pateZQP5?si=7ac5f0e6bf194d77"
    target="_blank"
    class="card-button">
-Listen on Spotify →
+Listen on Spotify
 </a>
 
 </div>
@@ -640,7 +639,7 @@ See the local news story on the [holiday analyses](https://www.epcrimelab.org/cr
 <a href="https://cbs4local.com/newsletter-daily/el-paso-police-crime-lab-warn-of-july-fourth-spike-in-alcohol-related-crashes?fbclid=IwY2xjawTsVQFwZG9mBWV4dG4DYWVtAjEwAGJyaWQRMWNEU1hwWHpGTHdqT3pyazZzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeIQogoKh6z-u8IW23UnOyZkjVW7_4LRPMSnDizfTS5A20CrzrWXKEaLa19oY_aem__fmqyxlKwustkQzD4jPObQ"
    target="_blank"
    class="card-button">
-Read Article →
+Read Article
 </a>
 
 </div>
@@ -681,7 +680,7 @@ A comprehensive review of local research on impaired driving is underway. The pr
 <a href="dwi_protocol.html"
    target="_blank"
    class="card-button">
-View Protocol →
+View Protocol
 </a>
 
 </div>
@@ -712,7 +711,7 @@ Recent reporting on crashes, arrests, enforcement, and policy changes related to
 <a href="dwi_news.html"
    target="_blank"
    class="card-button">
-View News →
+View News
 </a>
 
 </div>
@@ -745,7 +744,7 @@ Find local organizations providing counseling, advocacy, legal assistance, and o
 <a href="dwi_services.html"
    target="_blank"
    class="card-button">
-View Directory →
+View Directory
 </a>
 
 </div>
