@@ -1,7 +1,7 @@
 ---
 title: "About the El Paso Crime Lab"
 description: "About the El Paso Crime Lab"
-favicon: about_logo.png
+favicon: logo_color.png
 format:
   html:
     grid:
@@ -19,7 +19,7 @@ format:
 
 
 <p style="text-align:center;">
-  <img src="about_logo.png" width=400px>
+  <img src="logo_color.png" width=400px>
 </p>
 
 
