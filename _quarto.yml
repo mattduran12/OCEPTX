@@ -5,6 +5,13 @@ project:
 website:
   title: "El Paso Crime Lab"
   favicon: about_logo.png
+  announcement:
+    icon: info-circle
+    dismissable: true
+    
+    content: "**New Publication!** - Check out the [plain language summary](https://www.epcrimelab.org/dwi_friday_study.pdf) of an anti-DWI prevention evaluation."
+    type: primary
+    position: below-navbar
   navbar:
     background: primary
     search: false

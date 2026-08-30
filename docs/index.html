@@ -138,6 +138,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <div id="quarto-announcement" data-announcement-id="5efedc65aad05ace51e45b35006795cc" class="alert alert-primary hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p><strong>New Publication!</strong> - Check out the <a href="https://www.epcrimelab.org/dwi_friday_study.pdf">plain language summary</a> of an anti-DWI prevention evaluation.</p>
+</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
@@ -282,34 +285,35 @@ main.content {
    ============================================================ */
 
 .mission {
-  max-width: 900px;
-  margin: 0 auto 5rem auto;
+  max-width: 1150px;
+  margin: 0 auto 3.5rem auto;
+}
 
+.mission .what-header {
   text-align: center;
-
-  padding: 0 1rem;
+  margin-bottom: 0;
 }
 
-.mission-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+.mission .what-header h2 {
+  margin: 0 0 0.6rem 0;
 
-  color: #7a2e1d;
+  font-size: 2rem;
+  font-weight: 550;
 
-  margin-bottom: 1rem;
+  letter-spacing: -0.03em;
+
+  color: #171717;
 }
 
-.mission p {
-  margin: 0;
+.mission .what-header p {
+  max-width: 900px;
+  margin: 0 auto;
 
-  font-size: 1.2rem;
-  line-height: 1.8;
+  color: #667085;
 
-  color: #475467;
+  font-size: 1rem;
+  line-height: 1.7;
 }
-
 
 /* ============================================================
    WHAT WE DO
@@ -686,28 +690,16 @@ main.content {
      HERO
      ============================================================ -->
 <div class="about-hero">
-<p><img src="about_logo.png" alt="El Paso Crime Lab" class="about-logo"></p>
-<h1>
-Evidence. Research. Public Safety.
-</h1>
-<p class="about-tagline">
-Independent research on crime and public safety in the borderland.
-</p>
-<div class="hero-links">
-<p><a href="dwi_home.html" class="hero-button primary"> Explore Our Research → </a></p>
-<p><a href="contact.html" class="hero-button secondary"> Contact Us </a></p>
-</div>
+<p><img src="logo_color.png" alt="El Paso Crime Lab" class="about-logo"></p>
 </div>
 <!-- ============================================================
      MISSION
      ============================================================ -->
 <div class="mission">
-<div class="mission-label">
-<p>Our Mission</p>
-</div>
-<p>
-The El Paso Crime Lab is an independent research organization focused on crime and public safety in the El Paso region. We produce evidence-based research that increases community capacity to diagnose, understand, and respond to criminal justice-related issues.
-</p>
+<section id="our-mission" class="level2 what-header">
+<h2 class="anchored" data-anchor-id="our-mission">Our Mission</h2>
+<p>The El Paso Crime Lab is an independent research organization focused on understanding crime and public safety in the El Paso region. We conduct and share research that helps communities, organizations, and policymakers better understand local criminal justice issues.</p>
+</section>
 </div>
 <!-- ============================================================
      WHAT WE DO

@@ -1,7 +1,7 @@
 ---
 title: "El Paso Crime Lab"
 description: "Providing evidence-based research on crime and public safety in the borderland."
-favicon: about_logo.png
+favicon: logo_color.png
 format:
   html:
     page-layout: full
@@ -119,34 +119,35 @@ main.content {
    ============================================================ */
 
 .mission {
-  max-width: 900px;
-  margin: 0 auto 5rem auto;
+  max-width: 1150px;
+  margin: 0 auto 3.5rem auto;
+}
 
+.mission .what-header {
   text-align: center;
-
-  padding: 0 1rem;
+  margin-bottom: 0;
 }
 
-.mission-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+.mission .what-header h2 {
+  margin: 0 0 0.6rem 0;
 
-  color: #7a2e1d;
+  font-size: 2rem;
+  font-weight: 550;
 
-  margin-bottom: 1rem;
+  letter-spacing: -0.03em;
+
+  color: #171717;
 }
 
-.mission p {
-  margin: 0;
+.mission .what-header p {
+  max-width: 900px;
+  margin: 0 auto;
 
-  font-size: 1.2rem;
-  line-height: 1.8;
+  color: #667085;
 
-  color: #475467;
+  font-size: 1rem;
+  line-height: 1.7;
 }
-
 
 /* ============================================================
    WHAT WE DO
@@ -528,56 +529,28 @@ main.content {
 <div class="about-hero">
 
 <img
-  src="about_logo.png"
+  src="logo_color.png"
   alt="El Paso Crime Lab"
   class="about-logo"
 >
 
-<h1>
-Evidence. Research. Public Safety.
-</h1>
-
-<p class="about-tagline">
-Independent research on crime and public safety in the borderland.
-</p>
-
-<div class="hero-links">
-
-<a
-  href="dwi_home.html"
-  class="hero-button primary"
->
-Explore Our Research →
-</a>
-
-<a
-  href="contact.html"
-  class="hero-button secondary"
->
-Contact Us
-</a>
-
 </div>
-
-</div>
-
 
 <!-- ============================================================
      MISSION
      ============================================================ -->
 
-<div class="mission">
+::: {.mission}
 
-<div class="mission-label">
-Our Mission
-</div>
+::: {.what-header}
 
-<p>
-The El Paso Crime Lab is an independent research organization focused on crime and public safety in the El Paso region. We produce evidence-based research that increases community capacity to diagnose, understand, and respond to criminal justice-related issues.
-</p>
+## Our Mission
 
-</div>
+The El Paso Crime Lab is an independent research organization focused on understanding crime and public safety in the El Paso region. We conduct and share research that helps communities, organizations, and policymakers better understand local criminal justice issues.
 
+:::
+
+:::
 
 <!-- ============================================================
      WHAT WE DO
