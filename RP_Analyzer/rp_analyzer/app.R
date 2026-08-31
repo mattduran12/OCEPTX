@@ -14,6 +14,7 @@
 # - Contraband validation tied to Searches Conducted = Yes
 # - Contraband description validation
 # - Contraband arrest validation
+# - Reason for Search validation tied to Searches Conducted = Yes
 # - Missing-data validation
 # - Missing required cells highlighted after validation
 # - Error messages optimized for users
@@ -419,6 +420,17 @@ search_sections <- list(
   list(
     title = "Searches Conducted",
     rows = c("Yes", "No")
+  ),
+  
+  list(
+    title = "Reason for Search",
+    rows = c(
+      "Consent",
+      "Contraband in Plain View",
+      "Probable Cause",
+      "Inventory",
+      "Incident to Arrest"
+    )
   ),
   
   list(
@@ -1186,6 +1198,10 @@ ui <- fluidPage(
             ),
             
             tags$li(
+              "Reason for Search categories must equal Searches Conducted = Yes."
+            ),
+            
+            tags$li(
               "Contraband = Yes + Contraband = No must equal Searches Conducted."
             ),
             
@@ -1259,8 +1275,7 @@ ui <- fluidPage(
           
           p(
             "Enter the number of traffic stops and related outcomes for each race/ethnicity category."
-          ),
-          
+          )
           
         ),
         
@@ -1446,6 +1461,10 @@ ui <- fluidPage(
             
             tags$li(
               "Searches Conducted must equal Number of Stops"
+            ),
+            
+            tags$li(
+              "Reason for Search must equal Searches Conducted = Yes"
             ),
             
             tags$li(
@@ -1699,10 +1718,6 @@ server <- function(input, output, session) {
   # SEARCHES CONDUCTED — AUTOMATIC TOTAL
   # ==========================================================
   
-  # ==========================================================
-  # SEARCHES CONDUCTED — AUTOMATIC TOTAL
-  # ==========================================================
-  
   get_search_conducted <- reactive({
     
     yes <- get_search_conducted_yes()
@@ -1740,6 +1755,7 @@ server <- function(input, output, session) {
     result
     
   })
+  
   
   # ==========================================================
   # CONTRABAND HIT-RATE DATA
@@ -2704,6 +2720,191 @@ server <- function(input, output, session) {
     
     
     # --------------------------------------------------------
+    # REASON FOR SEARCH VALIDATION
+    #
+    # Reason for Search must equal Searches Conducted = Yes
+    # for each race/ethnicity category.
+    # --------------------------------------------------------
+    
+    reason_for_search_rows <- c(
+      "Consent",
+      "Contraband in Plain View",
+      "Probable Cause",
+      "Inventory",
+      "Incident to Arrest"
+    )
+    
+    
+    reason_for_search_totals <-
+      rep(
+        0,
+        length(race_cols)
+      )
+    
+    
+    reason_for_search_entered <-
+      rep(
+        FALSE,
+        length(race_cols)
+      )
+    
+    
+    for (
+      row_name in reason_for_search_rows
+    ) {
+      
+      values <-
+        sapply(
+          
+          seq_along(race_cols),
+          
+          function(r) {
+            
+            get_input_value(
+              search_id(
+                "Reason for Search",
+                row_name,
+                r
+              )
+            )
+            
+          }
+          
+        )
+      
+      
+      reason_for_search_entered <-
+        reason_for_search_entered |
+        !is.na(values)
+      
+      
+      values[
+        is.na(values)
+      ] <- 0
+      
+      
+      reason_for_search_totals <-
+        reason_for_search_totals +
+        values
+      
+    }
+    
+    
+    missing_reason_categories <-
+      race_cols[
+        !reason_for_search_entered
+      ]
+    
+    
+    if (
+      length(missing_reason_categories) > 0
+    ) {
+      
+      results[[
+        length(results) + 1
+      ]] <- list(
+        
+        label = "Reason for Search",
+        
+        valid = FALSE,
+        
+        message =
+          paste0(
+            "Enter all Reason for Search values for: ",
+            paste(
+              missing_reason_categories,
+              collapse = ", "
+            ),
+            ". The Reason for Search categories must account for every Search = Yes."
+          )
+        
+      )
+      
+    }
+    
+    
+    reason_mismatches <- character(0)
+    
+    
+    for (
+      r in seq_along(race_cols)
+    ) {
+      
+      if (
+        !is.na(search_yes[r]) &&
+        reason_for_search_entered[r]
+      ) {
+        
+        if (
+          reason_for_search_totals[r] !=
+          search_yes[r]
+        ) {
+          
+          reason_mismatches <-
+            c(
+              reason_mismatches,
+              paste0(
+                race_cols[r],
+                ": Reason for Search total is ",
+                comma(
+                  reason_for_search_totals[r]
+                ),
+                ", but Search = Yes is ",
+                comma(
+                  search_yes[r]
+                ),
+                ". Check the Consent, Contraband in Plain View, Probable Cause, Inventory, and Incident to Arrest entries."
+              )
+            )
+          
+        }
+        
+      }
+      
+    }
+    
+    
+    if (
+      length(reason_mismatches) > 0
+    ) {
+      
+      results[[
+        length(results) + 1
+      ]] <- list(
+        
+        label = "Reason for Search",
+        
+        valid = FALSE,
+        
+        message =
+          paste(
+            reason_mismatches,
+            collapse = " "
+          )
+        
+      )
+      
+    } else if (
+      length(missing_reason_categories) == 0
+    ) {
+      
+      results[[
+        length(results) + 1
+      ]] <- list(
+        
+        label = "Reason for Search",
+        
+        valid = TRUE,
+        
+        message =
+          "Consent + Contraband in Plain View + Probable Cause + Inventory + Incident to Arrest equals Search = Yes for every race/ethnicity category."
+        
+      )
+      
+    }
+    
+    
+    # --------------------------------------------------------
     # CONTRABAND VALIDATION
     # --------------------------------------------------------
     
@@ -3536,6 +3737,154 @@ server <- function(input, output, session) {
               r
             )
           )
+          
+        }
+        
+      }
+      
+    }
+    
+    
+    # --------------------------------------------------------
+    # REASON FOR SEARCH
+    # --------------------------------------------------------
+    
+    reason_for_search_rows <- c(
+      "Consent",
+      "Contraband in Plain View",
+      "Probable Cause",
+      "Inventory",
+      "Incident to Arrest"
+    )
+    
+    
+    reason_for_search_totals <-
+      rep(
+        0,
+        length(race_cols)
+      )
+    
+    
+    reason_for_search_entered <-
+      rep(
+        FALSE,
+        length(race_cols)
+      )
+    
+    
+    for (
+      row_name in reason_for_search_rows
+    ) {
+      
+      values <-
+        sapply(
+          
+          seq_along(race_cols),
+          
+          function(r) {
+            
+            get_input_value(
+              search_id(
+                "Reason for Search",
+                row_name,
+                r
+              )
+            )
+            
+          }
+          
+        )
+      
+      
+      reason_for_search_entered <-
+        reason_for_search_entered |
+        !is.na(values)
+      
+      
+      values[
+        is.na(values)
+      ] <- 0
+      
+      
+      reason_for_search_totals <-
+        reason_for_search_totals +
+        values
+      
+    }
+    
+    
+    for (r in seq_along(race_cols)) {
+      
+      # ------------------------------------------------------
+      # Missing reason-for-search entries
+      # ------------------------------------------------------
+      
+      for (
+        row_name in reason_for_search_rows
+      ) {
+        
+        value <-
+          get_input_value(
+            search_id(
+              "Reason for Search",
+              row_name,
+              r
+            )
+          )
+        
+        
+        if (is.na(value)) {
+          
+          ids <- c(
+            ids,
+            search_id(
+              "Reason for Search",
+              row_name,
+              r
+            )
+          )
+          
+        }
+        
+      }
+      
+      
+      # ------------------------------------------------------
+      # Reason-for-search mismatch
+      # ------------------------------------------------------
+      
+      if (
+        !is.na(search_yes[r]) &&
+        reason_for_search_entered[r] &&
+        reason_for_search_totals[r] != search_yes[r]
+      ) {
+        
+        for (
+          row_name in reason_for_search_rows
+        ) {
+          
+          value <-
+            get_input_value(
+              search_id(
+                "Reason for Search",
+                row_name,
+                r
+              )
+            )
+          
+          
+          if (!is.na(value)) {
+            
+            ids <- c(
+              ids,
+              search_id(
+                "Reason for Search",
+                row_name,
+                r
+              )
+            )
+            
+          }
           
         }
         
@@ -4521,6 +4870,7 @@ server <- function(input, output, session) {
     
   })
   
+  
   # ==========================================================
   # KEEP HIT-RATE OUTPUT REACTIVE ACROSS TAB CHANGES
   # ==========================================================
@@ -5229,7 +5579,7 @@ server <- function(input, output, session) {
         "Population Data Source: 2020 Decennial Census Data (obtained on 08/30/2026)",
         "",
         
-       "Source % shows the share of all traffic stops or searches represented by each group. Census 18+ Population % shows the share of the jurisdiction’s adult population (age 18+) represented by each group. Rate per 1,000 shows the number of traffic stops or searches for each group for every 1,000 adults in that group’s population."
+        "Source % shows the share of all traffic stops or searches represented by each group. Census 18+ Population % shows the share of the jurisdiction’s adult population (age 18+) represented by each group. Rate per 1,000 shows the number of traffic stops or searches for each group for every 1,000 adults in that group’s population."
         
       )
       

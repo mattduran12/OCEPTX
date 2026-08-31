@@ -11,7 +11,7 @@
 <meta name="keywords" content="El Paso Crime Lab, racial profiling, traffic stops, law enforcement, policing, data analysis, beta testing">
 <meta name="description" content="Interactive racial profiling data application currently in beta testing.">
 
-<title>Racial Profiling Data – El Paso Crime Lab</title>
+<title>Texas Racial Profiling Data – El Paso Crime Lab</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -156,7 +156,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Racial Profiling Data</h1>
+<h1 class="title">Texas Racial Profiling Data</h1>
 </div>
 
 <div>
@@ -197,6 +197,11 @@ ul.task-list li input[type="checkbox"] {
 
 
 <style>
+
+/* ============================================================
+   GLOBAL PAGE
+   ============================================================ */
+
 html,
 body {
   margin: 0 !important;
@@ -207,42 +212,57 @@ body {
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 
+
 /* ============================================================
-   HIDE QUARTO TITLE BLOCK
-   Metadata remains in the HTML <head>, but the title is not
-   displayed because the page has its own custom heading.
+   HIDE QUARTO TITLE
    ============================================================ */
 
 header#title-block-header {
   display: none !important;
 }
 
+
 /* ============================================================
-   QUARTO CONTENT
+   REMOVE QUARTO CONTENT CONSTRAINTS
    ============================================================ */
 
 #quarto-content,
-main.content {
+main.content,
+.page-columns,
+.page-full,
+.content {
+  width: 100% !important;
+  max-width: none !important;
   margin: 0 !important;
   padding: 0 !important;
-  max-width: none !important;
-  width: 100% !important;
 }
 
+
 /* ============================================================
-   SPACE BELOW WEBSITE NAVBAR
+   REMOVE SIDEBAR / MARGIN CONSTRAINTS
+   ============================================================ */
+
+#quarto-content > *,
+main.content > * {
+  max-width: none !important;
+}
+
+
+/* ============================================================
+   INTRODUCTION
    ============================================================ */
 
 .beta-intro {
   width: 100%;
   max-width: 1750px;
   margin: 0 auto;
-  padding: 85px 65px 55px 65px;
+  padding: 75px 55px 45px 55px;
   box-sizing: border-box;
 }
+
 
 /* ============================================================
    BETA LABEL
@@ -258,6 +278,7 @@ main.content {
   color: #777777;
 }
 
+
 /* ============================================================
    MAIN HEADING
    ============================================================ */
@@ -271,13 +292,14 @@ main.content {
   color: #252525 !important;
 }
 
+
 /* ============================================================
-   INTRODUCTION
+   INTRODUCTION TEXT
    ============================================================ */
 
 .beta-intro p {
   width: 100%;
-  max-width: 1350px;
+  max-width: 1400px;
   margin: 0 !important;
   padding: 0 !important;
   font-size: 1.12rem;
@@ -285,35 +307,57 @@ main.content {
   color: #555555;
 }
 
+
 /* ============================================================
-   APPLICATION CARD
+   APPLICATION CONTAINER
+   FULL WIDTH
+   ============================================================ */
+
+/* ============================================================
+   APPLICATION CONTAINER
+   MATCH APP WIDTH
    ============================================================ */
 
 .app-card {
-  width: calc(100% - 30px);
-  max-width: 1800px;
-  margin: 0 auto 55px auto;
-  padding: 0;
+  width: 100%;
+  max-width: 1400px;
+
+  margin: 0 auto !important;
+  padding: 0 !important;
+
   background: #ffffff;
-  border: 1px solid #d9d9d9;
-  border-radius: 10px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
+
+  border: 1px solid #ddddda !important;
+  border-radius: 8px !important;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+
   box-sizing: border-box;
+
+  overflow: hidden !important;
 }
+
 
 /* ============================================================
    APPLICATION HEADER
    ============================================================ */
 
 .app-card-header {
+  width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 17px 24px;
+
+  padding: 17px 35px;
+
   background: #f7f7f5;
+  border-top: 1px solid #ddddda;
   border-bottom: 1px solid #ddddda;
+
+  box-sizing: border-box;
 }
+
 
 .app-card-title {
   font-size: 0.92rem;
@@ -321,54 +365,96 @@ main.content {
   color: #444444;
 }
 
+
 .beta-badge {
   display: inline-block;
+
   padding: 5px 11px;
+
   border: 1px solid #cfcfc9;
   border-radius: 20px;
+
   background: #ffffff;
+
   font-size: 0.68rem;
   font-weight: 700;
+
   letter-spacing: 0.08em;
   text-transform: uppercase;
+
   color: #777777;
 }
 
+
 /* ============================================================
-   SHINY APP
+   SHINY APPLICATION FRAME
+   ============================================================ */
+
+/* ============================================================
+   SHINY APPLICATION FRAME
    ============================================================ */
 
 .app-frame {
-  width: 100%;
+  width: 100% !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
   background: #ffffff;
-  padding: 0;
-  margin: 0;
+
+  box-sizing: border-box;
 }
+
+
+/* ============================================================
+   SHINY IFRAME
+   ============================================================ */
+
+/* ============================================================
+   SHINY IFRAME
+   ============================================================ */
 
 .app-frame iframe {
   display: block;
-  width: 100%;
-  height: 100vh;
-  min-height: 1000px;
-  border: 0;
-  margin: 0;
-  padding: 0;
+
+  width: 100% !important;
+  max-width: none !important;
+
+  height: 1100px;
+  min-height: 1100px;
+
+  border: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
 }
+
 
 /* ============================================================
    BETA NOTE
    ============================================================ */
 
 .beta-note {
-  width: calc(100% - 30px);
+  width: 100%;
   max-width: 1750px;
-  margin: -25px auto 60px auto;
-  padding: 0 10px;
+
+  margin: 35px auto 60px auto;
+
+  padding: 0 55px;
+
   box-sizing: border-box;
+
   color: #777777;
+
   font-size: 0.85rem;
   line-height: 1.6;
 }
+
 
 /* ============================================================
    MOBILE
@@ -389,34 +475,58 @@ main.content {
     line-height: 1.65;
   }
 
-  .app-card {
-    width: calc(100% - 10px);
-    margin-bottom: 40px;
-    border-radius: 7px;
-  }
+.app-card {
+  width: calc(100% - 30px) !important;
+  max-width: 1400px !important;
+
+  margin: 0 auto !important;
+
+  left: auto;
+}
 
   .app-card-header {
     padding: 13px 16px;
   }
 
-  .app-frame iframe {
-    min-height: 1150px;
-  }
+.app-frame iframe {
+  width: 100% !important;
+
+  height: 1200px;
+
+  min-height: 1200px;
+}
 
   .beta-note {
-    width: calc(100% - 20px);
+    padding: 0 20px;
+    margin-top: 30px;
   }
+
 }
+
+
+/* ============================================================
+   VERY LARGE SCREENS
+   ============================================================ */
+
+@media (min-width: 1800px) {
+
+  .app-frame iframe {
+    height: calc(100vh - 50px);
+    min-height: 1200px;
+  }
+
+}
+
 </style>
 <div class="beta-intro">
 <div class="beta-label">
 <p>El Paso Crime Lab · Beta Testing</p>
 </div>
 <h1>
-Racial Profiling Data
+TX Racial Profiling Data
 </h1>
 <p>
-The purpose of this tool is to make racial profiling data easier to enter, check, and analyze. It is designed for Texas law enforcement agencies to support the review and analysis of their racial profiling data and to assist agencies with the comparative analysis required under Texas Code of Criminal Procedure, Article 2B.0053. This tool is currently in beta testing. We are asking testers to look for errors, unexpected results, confusing wording, or anything that could be improved or added. <strong>Data entered into the application is not stored or retained.</strong> If you want to keep your work, use the Download button in the application to save a copy to your computer. Please send an <a href="mduran29@asu.edu">email</a> to Matthew Durán with any ideas to make this more useful for your agency. Thank you!
+The purpose of this tool is to make racial profiling data easier to enter, check, and analyze in the state of Texas. It is designed for Texas law enforcement agencies to support the review and analysis of their racial profiling data and to assist agencies with the comparative analysis required under Texas Code of Criminal Procedure, Article 2B.0053. This tool is currently in beta testing. We are asking testers to look for errors, unexpected results, confusing wording, or anything that could be improved or added. <strong>Data entered into the application is not stored or retained.</strong> If you want to keep your work, use the Download button in the application to save a copy to your computer. Please send an <a href="mailto:mduran29@asu.edu">email</a> to Matthew Durán with any ideas to make this more useful for your agency. Thank you!
 </p>
 </div>
 <div class="app-card">

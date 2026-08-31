@@ -5,7 +5,7 @@ account: mattduran
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 17786846
-bundleId: 12485574
+bundleId: 12485777
 url: https://mattduran.shinyapps.io/rp_analyzer/
 version: 1
 asMultiple: FALSE
