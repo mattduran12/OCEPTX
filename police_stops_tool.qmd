@@ -1,0 +1,287 @@
+---
+title: "Racial Profiling Data"
+description: "El Paso Crime Lab beta testing application for entering, checking, and analyzing racial profiling data from traffic stops, searches, and contraband outcomes."
+author: "El Paso Crime Lab"
+date: "2026-08-30"
+keywords:
+  - El Paso Crime Lab
+  - racial profiling
+  - traffic stops
+  - law enforcement
+  - policing
+  - data analysis
+  - beta testing
+format:
+  html:
+    theme: cosmo
+    toc: false
+    page-layout: full
+    self-contained: false
+    metadata:
+      author: "El Paso Crime Lab"
+      description: "Interactive racial profiling data application currently in beta testing."
+---
+
+<style>
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  min-height: 100% !important;
+  background: #ffffff !important;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   HIDE QUARTO TITLE BLOCK
+   Metadata remains in the HTML <head>, but the title is not
+   displayed because the page has its own custom heading.
+   ============================================================ */
+
+header#title-block-header {
+  display: none !important;
+}
+
+/* ============================================================
+   QUARTO CONTENT
+   ============================================================ */
+
+#quarto-content,
+main.content {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+}
+
+/* ============================================================
+   SPACE BELOW WEBSITE NAVBAR
+   ============================================================ */
+
+.beta-intro {
+  width: 100%;
+  max-width: 1750px;
+  margin: 0 auto;
+  padding: 85px 65px 55px 65px;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   BETA LABEL
+   ============================================================ */
+
+.beta-label {
+  display: inline-block;
+  margin-bottom: 18px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #777777;
+}
+
+/* ============================================================
+   MAIN HEADING
+   ============================================================ */
+
+.beta-intro h1 {
+  margin: 0 0 22px 0 !important;
+  padding: 0 !important;
+  font-size: 3rem !important;
+  font-weight: 600 !important;
+  line-height: 1.15 !important;
+  color: #252525 !important;
+}
+
+/* ============================================================
+   INTRODUCTION
+   ============================================================ */
+
+.beta-intro p {
+  width: 100%;
+  max-width: 1350px;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 1.12rem;
+  line-height: 1.75;
+  color: #555555;
+}
+
+/* ============================================================
+   APPLICATION CARD
+   ============================================================ */
+
+.app-card {
+  width: calc(100% - 30px);
+  max-width: 1800px;
+  margin: 0 auto 55px auto;
+  padding: 0;
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   APPLICATION HEADER
+   ============================================================ */
+
+.app-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 24px;
+  background: #f7f7f5;
+  border-bottom: 1px solid #ddddda;
+}
+
+.app-card-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #444444;
+}
+
+.beta-badge {
+  display: inline-block;
+  padding: 5px 11px;
+  border: 1px solid #cfcfc9;
+  border-radius: 20px;
+  background: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #777777;
+}
+
+/* ============================================================
+   SHINY APP
+   ============================================================ */
+
+.app-frame {
+  width: 100%;
+  background: #ffffff;
+  padding: 0;
+  margin: 0;
+}
+
+.app-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  min-height: 1000px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================================
+   BETA NOTE
+   ============================================================ */
+
+.beta-note {
+  width: calc(100% - 30px);
+  max-width: 1750px;
+  margin: -25px auto 60px auto;
+  padding: 0 10px;
+  box-sizing: border-box;
+  color: #777777;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  .beta-intro {
+    padding: 55px 22px 35px 22px;
+  }
+
+  .beta-intro h1 {
+    font-size: 2.15rem !important;
+  }
+
+  .beta-intro p {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .app-card {
+    width: calc(100% - 10px);
+    margin-bottom: 40px;
+    border-radius: 7px;
+  }
+
+  .app-card-header {
+    padding: 13px 16px;
+  }
+
+  .app-frame iframe {
+    min-height: 1150px;
+  }
+
+  .beta-note {
+    width: calc(100% - 20px);
+  }
+}
+</style>
+
+
+<div class="beta-intro">
+
+<div class="beta-label">
+El Paso Crime Lab · Beta Testing
+</div>
+
+<h1>Racial Profiling Data</h1>
+
+<p>
+The purpose of this tool is to make racial profiling data easier to enter, check, and analyze. It is designed for Texas law enforcement agencies to support the review and analysis of their racial profiling data and to assist agencies with the comparative analysis required under Texas Code of Criminal Procedure, Article 2B.0053. This tool is currently in beta testing. We are asking testers to look for errors, unexpected results, confusing wording, or anything that could be improved or added. **Data entered into the application is not stored or retained.** If you want to keep your work, use the Download button in the application to save a copy to your computer. Please send an [email](mduran29@asu.edu) to Matthew Durán with any ideas to make this more useful for your agency. Thank you!
+</p>
+
+</div>
+
+
+<div class="app-card">
+
+<div class="app-card-header">
+
+<div class="app-card-title">
+Interactive Racial Profiling Data Application
+</div>
+
+<div class="beta-badge">
+Beta
+</div>
+
+</div>
+
+<div class="app-frame">
+
+<iframe
+  src="https://mattduran.shinyapps.io/rp_analyzer/"
+  title="El Paso Crime Lab Racial Profiling Data Application"
+  loading="eager"
+  scrolling="yes"
+  allow="fullscreen">
+</iframe>
+
+</div>
+
+</div>
+
+
+<div class="beta-note">
+
+<strong>Beta testing:</strong> This application is under active development. If you encounter an error, unexpected result, or other issue, please report it so the tool can be improved.
+
+</div>

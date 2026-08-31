@@ -579,5 +579,40 @@
     "title": "El Paso Crime Lab",
     "section": "Stay Connected",
     "text": "Stay Connected\nFollow our work, receive updates about new research, or get in touch.\n\nEmail Updates\nContact\nInstagram\nResearch"
+  },
+  {
+    "objectID": "police_stops_tool.html",
+    "href": "police_stops_tool.html",
+    "title": "Racial Profiling Data",
+    "section": "",
+    "text": "El Paso Crime Lab · Beta Testing\n\n\nRacial Profiling Data\n\n\nThe purpose of this tool is to make racial profiling data easier to enter, check, and analyze. It is designed for Texas law enforcement agencies to support the review and analysis of their racial profiling data and to assist agencies with the comparative analysis required under Texas Code of Criminal Procedure, Article 2B.0053. This tool is currently in beta testing. We are asking testers to look for errors, unexpected results, confusing wording, or anything that could be improved or added. Data entered into the application is not stored or retained. If you want to keep your work, use the Download button in the application to save a copy to your computer. Please send an email to Matthew Durán with any ideas to make this more useful for your agency. Thank you!\n\n\n\n\n\nInteractive Racial Profiling Data Application\n\n\nBeta\n\n\n\n\n\n\n\n\nBeta testing: This application is under active development. If you encounter an error, unexpected result, or other issue, please report it so the tool can be improved."
+  },
+  {
+    "objectID": "police_stops_tool.html#about-this-tool",
+    "href": "police_stops_tool.html#about-this-tool",
+    "title": "Racial Profiling Data",
+    "section": "About This Tool",
+    "text": "About This Tool\nThe Racial Profiling Data App provides an interactive way to examine traffic stop, search, and contraband data by race and ethnicity.\nThe tool is designed to support transparent, accessible analysis of racial profiling data reported by law enforcement agencies.\nUsers can examine:\n\nTraffic stops by race and ethnicity\nSearches conducted\nSearch rates\nContraband discoveries\nContraband hit rates\nPopulation distributions\nDifferences between traffic-stop and population distributions\n\nThe application is intended as a descriptive analytical and transparency tool. Results should be interpreted in the context of the underlying data, reporting requirements, population estimates, and other methodological limitations."
+  },
+  {
+    "objectID": "police_stops_tool.html#interactive-racial-profiling-data-app",
+    "href": "police_stops_tool.html#interactive-racial-profiling-data-app",
+    "title": "Racial Profiling Data",
+    "section": "Interactive Racial Profiling Data App",
+    "text": "Interactive Racial Profiling Data App"
+  },
+  {
+    "objectID": "police_stops_tool.html#how-to-interpret-the-data",
+    "href": "police_stops_tool.html#how-to-interpret-the-data",
+    "title": "Racial Profiling Data",
+    "section": "How to Interpret the Data",
+    "text": "How to Interpret the Data\n\nTraffic Stops\nTraffic stops represent the master population of stops entered into the application.\n\n\nSearches\nSearches are evaluated relative to the number of traffic stops. The search rate represents the proportion of traffic stops resulting in a search.\n\n\nContraband\nContraband outcomes are evaluated among searches conducted. The contraband hit rate therefore represents the proportion of searches resulting in a contraband discovery.\n\n\nPopulation Comparison\nTraffic-stop distributions can be compared with available population estimates to identify differences between the racial and ethnic composition of traffic stops and the comparison population.\nThese comparisons are descriptive and should not, by themselves, be interpreted as evidence of intentional racial profiling."
+  },
+  {
+    "objectID": "police_stops_tool.html#data-transparency",
+    "href": "police_stops_tool.html#data-transparency",
+    "title": "Racial Profiling Data",
+    "section": "Data & Transparency",
+    "text": "Data & Transparency\nThe El Paso Crime Lab presents this application as part of its commitment to making public-safety data more accessible, transparent, and understandable.\nData quality, completeness, jurisdictional reporting practices, population estimates, and differences in measurement can affect the interpretation of results."
   }
 ]

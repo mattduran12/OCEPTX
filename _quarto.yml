@@ -5,13 +5,7 @@ project:
 website:
   title: "El Paso Crime Lab"
   favicon: about_logo.png
-  announcement:
-    icon: info-circle
-    dismissable: true
-    
-    content: "**New Publication!** - Can posting DWI arrest photos on social media deter drunk driving? Read the [plain language summary](https://www.epcrimelab.org/dwi_friday_study.pdf) of our recent evaluation."
-    type: primary
-    position: below-navbar
+
   navbar:
     background: primary
     search: false
@@ -25,6 +19,8 @@ website:
           - text: "Driving While Intoxicated"
             href: dwi_home.html
     right:
+      - text: "Racial Profiling Tool (BETA)"
+        href: police_stops_tool.qmd
       - text: "Connect With Us"
         menu:
           - text: "Subscribe for Email Updates"
