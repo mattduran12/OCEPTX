@@ -1,6 +1,6 @@
 ---
 title: "El Paso Crime Lab"
-description: "Advancing the science of public safety in the Borderland."
+description: "An independent public safety research project by Matthew Durán."
 favicon: logo_color.png
 format:
   html:
@@ -63,8 +63,8 @@ main.content {
   color: #7a2e1d;
 }
 
-.hero-mission {
-  max-width: 850px;
+.hero-intro {
+  max-width: 820px;
   margin-top: 3rem;
   padding-left: 1.5rem;
   border-left: 4px solid #7a2e1d;
@@ -73,7 +73,7 @@ main.content {
   line-height: 1.8;
 }
 
-.hero-mission strong {
+.hero-intro strong {
   color: #20252b;
   font-weight: 700;
 }
@@ -133,10 +133,10 @@ main.content {
 
 
 /* ============================================================
-   WHAT WE DO
+   ABOUT THE PROJECT
    ============================================================ */
 
-.what-we-do {
+.about {
   max-width: 1100px;
   margin: 0 auto 7rem auto;
 }
@@ -154,29 +154,88 @@ main.content {
 }
 
 .section-heading p {
-  max-width: 700px;
+  max-width: 750px;
   margin: 0;
   color: #667085;
   font-size: 1rem;
   line-height: 1.7;
 }
 
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.about-main {
+  padding: 2.5rem;
+  background: #f8f9fa;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+}
+
+.about-main p {
+  margin: 0;
+  color: #4b5563;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.about-main p + p {
+  margin-top: 1.2rem;
+}
+
+.about-side {
+  padding: 2.5rem;
+  background: #20252b;
+  border-radius: 14px;
+}
+
+.about-side-label {
+  margin-bottom: 1rem;
+  color: #d9a38f;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.about-side h3 {
+  margin: 0 0 1rem 0;
+  color: #ffffff;
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+
+.about-side p {
+  margin: 0;
+  color: #d1d5db;
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+
 
 /* ============================================================
-   AREAS
+   AREAS OF FOCUS
    ============================================================ */
 
-.areas {
+.focus {
+  max-width: 1100px;
+  margin: 0 auto 7rem auto;
+}
+
+.focus-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
 }
 
-.area {
+.focus-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 280px;
+  min-height: 270px;
   padding: 2rem;
   background: #ffffff;
   border: 1px solid #e1e5e9;
@@ -185,7 +244,7 @@ main.content {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.area::before {
+.focus-card::before {
   position: absolute;
   top: 0;
   left: 2rem;
@@ -196,12 +255,12 @@ main.content {
   border-radius: 0 0 999px 999px;
 }
 
-.area:hover {
+.focus-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 28px rgba(32, 37, 43, 0.09);
 }
 
-.area-number {
+.focus-number {
   margin-bottom: 1.2rem;
   color: #7a2e1d;
   font-size: 0.7rem;
@@ -209,7 +268,7 @@ main.content {
   letter-spacing: 0.1em;
 }
 
-.area h3 {
+.focus-card h3 {
   margin: 0 0 0.8rem 0;
   color: #20252b;
   font-size: 1.35rem;
@@ -217,14 +276,14 @@ main.content {
   letter-spacing: -0.02em;
 }
 
-.area p {
+.focus-card p {
   margin: 0;
   color: #667085;
   font-size: 0.94rem;
   line-height: 1.7;
 }
 
-.area-link {
+.focus-link {
   margin-top: auto;
   padding-top: 1.4rem;
   color: #7a2e1d !important;
@@ -233,28 +292,22 @@ main.content {
   text-decoration: none !important;
 }
 
-.area-link:hover {
+.focus-link:hover {
   text-decoration: underline !important;
 }
 
 
 /* ============================================================
-   CURRENT RESEARCH
+   FEATURED RESEARCH
    ============================================================ */
 
 .feature {
   max-width: 1100px;
   margin: 0 auto 7rem auto;
-  display: flex;
+  padding: 3.5rem;
   background: #20252b;
   border-radius: 18px;
-  overflow: hidden;
   box-shadow: 0 12px 30px rgba(32, 37, 43, 0.12);
-}
-
-.feature-main {
-  flex: 1.5;
-  padding: 3.25rem;
 }
 
 .feature-label {
@@ -266,17 +319,18 @@ main.content {
   letter-spacing: 0.12em;
 }
 
-.feature-main h2 {
+.feature h2 {
+  max-width: 750px;
   margin: 0 0 1rem 0;
   color: #ffffff;
-  font-size: 2.1rem;
+  font-size: 2.2rem;
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: -0.035em;
 }
 
-.feature-main p {
-  max-width: 650px;
+.feature p {
+  max-width: 720px;
   margin: 0;
   color: #d1d5db;
   font-size: 0.98rem;
@@ -299,22 +353,53 @@ main.content {
   background: #f1f3f5;
 }
 
-.feature-aside {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  background: #7a2e1d;
+
+/* ============================================================
+   MATTHEW DURÁN
+   ============================================================ */
+
+.person {
+  max-width: 900px;
+  margin: 0 auto 7rem auto;
+  text-align: center;
 }
 
-.feature-aside p {
-  max-width: 300px;
-  margin: 0;
-  color: #ffffff;
-  text-align: center;
+.person-label {
+  margin-bottom: 1rem;
+  color: #7a2e1d;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.person h2 {
+  margin: 0 0 1rem 0;
+  color: #20252b;
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.person p {
+  max-width: 700px;
+  margin: 0 auto;
+  color: #667085;
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.8;
+}
+
+.person-link {
+  display: inline-block;
+  margin-top: 1.4rem;
+  color: #7a2e1d !important;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none !important;
+}
+
+.person-link:hover {
+  text-decoration: underline !important;
 }
 
 
@@ -381,24 +466,24 @@ main.content {
     font-size: clamp(3.2rem, 10vw, 5rem);
   }
 
-  .hero-mission {
+  .hero-intro {
     font-size: 1.1rem;
   }
 
-  .areas {
+  .about-grid {
     grid-template-columns: 1fr;
   }
 
-  .area {
+  .focus-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .focus-card {
     min-height: 0;
   }
 
   .feature {
-    flex-direction: column;
-  }
-
-  .feature-aside {
-    min-height: 190px;
+    padding: 2.75rem;
   }
 
 }
@@ -423,7 +508,7 @@ main.content {
     line-height: 1;
   }
 
-  .hero-mission {
+  .hero-intro {
     margin-top: 2rem;
     padding-left: 1rem;
     border-left-width: 3px;
@@ -431,17 +516,23 @@ main.content {
     line-height: 1.7;
   }
 
-  .feature-main {
+  .about-main,
+  .about-side {
     padding: 2rem;
   }
 
-  .feature-main h2 {
+  .feature {
+    padding: 2rem;
+  }
+
+  .feature h2 {
     font-size: 1.7rem;
   }
 
 }
 
 </style>
+
 
 ::: {.hero}
 
@@ -451,15 +542,14 @@ EL PASO CRIME LAB
 
 # Advancing the Science of <span class="accent">Public Safety.</span>
 
-::: {.hero-mission}
-The El Paso Crime Lab is an independent research organization advancing the science of **crime, public safety, and criminal justice** through rigorous research, local data, and evidence.
+
+::: {.hero-intro}
+The El Paso Crime Lab is an independent public research project created by <strong>Matthew Durán</strong>. The project brings together research, local data, and public information to better understand crime and public safety in El Paso and the Borderland.
 :::
 
 ::: {.hero-buttons}
 
-[Explore Our Research](dwi_home.html){.hero-button .primary}
-
-[Work With Us](contact.html){.hero-button .secondary}
+[Explore the Research](dwi_home.html){.hero-button .primary}
 
 :::
 
@@ -470,60 +560,100 @@ The El Paso Crime Lab is an independent research organization advancing the scie
 :::
 
 
-::: {.what-we-do}
+::: {.about}
 
 ::: {.section-heading}
 
-## What We Do
+## About the Project
 
-We turn research and local data into evidence that can be understood, examined, and used to improve public safety.
+The El Paso Crime Lab exists to make research and local public safety information more accessible.
+
+:::
+
+::: {.about-grid}
+
+::: {.about-main}
+
+The project focuses on **understanding local public safety problems through evidence**. It brings together publicly available data, academic research, and community information to examine issues affecting El Paso and the surrounding region.
+
+The work is independent and primarily intended as a resource for people who want to better understand crime, policing, and public safety in the Borderland.
+
+Rather than simply presenting statistics, the goal is to provide context, explain what the data can—and cannot—tell us, and make research findings accessible to a broader audience.
 
 :::
 
 
-::: {.areas}
+::: {.about-side}
 
-::: {.area}
+::: {.about-side-label}
+Public Research
+:::
 
-::: {.area-number}
+### Evidence for understanding local public safety.
+
+The El Paso Crime Lab provides research, data, analysis, and public information concerning crime and public safety in the Borderland.
+
+:::
+
+:::
+
+:::
+
+
+::: {.focus}
+
+::: {.section-heading}
+
+## Areas of Focus
+
+Research and information published through the El Paso Crime Lab generally falls into three areas.
+
+:::
+
+
+::: {.focus-grid}
+
+::: {.focus-card}
+
+::: {.focus-number}
 01
 :::
 
 ### Research
 
-Conduct independent research on crime, public safety, and criminal justice issues affecting El Paso and the Borderland.
+Independent research examining crime, policing, and criminal justice issues affecting El Paso and the Borderland.
 
-[Explore research →](dwi_home.html){.area-link}
+[Explore the research →](dwi_home.html){.focus-link}
 
 :::
 
 
-::: {.area}
+::: {.focus-card}
 
-::: {.area-number}
+::: {.focus-number}
 02
 :::
 
-### Data & Technical Assistance
+### Data & Analysis
 
-Develop dashboards, data products, and analytical tools that help organizations understand local public safety problems and make better decisions.
+Local data, dashboards, visualizations, and analytical tools designed to make public safety information easier to explore and understand.
 
-[Explore the data →](crash_dashboard.html){.area-link}
+[Explore the data →](crash_dashboard.html){.focus-link}
 
 :::
 
 
-::: {.area}
+::: {.focus-card}
 
-::: {.area-number}
+::: {.focus-number}
 03
 :::
 
-### Community Information
+### Public Information
 
-Translate research and public safety information into accessible resources for residents, organizations, practitioners, and decision-makers.
+Accessible explanations and resources that connect research and local public safety information with the people and communities they affect.
 
-[Find resources →](dwi_services.html){.area-link}
+[Explore resources →](dwi_services.html){.focus-link}
 
 :::
 
@@ -534,37 +664,41 @@ Translate research and public safety information into accessible resources for r
 
 ::: {.feature}
 
-::: {.feature-main}
-
 ::: {.feature-label}
-Current Research
+Featured Research
 :::
 
 ## Understanding impaired driving in El Paso
 
-Our current research examines alcohol-impaired driving using local crash data, research evidence, and community information. Explore the dashboard, reports, findings, and local resources.
+One area of ongoing research examines alcohol-impaired driving using local crash data, research evidence, and community information.
+
+Explore the data, findings, reports, and resources developed through this project.
 
 [Explore the DWI Research Hub →](dwi_home.html){.feature-action}
 
 :::
 
 
-::: {.feature-aside}
+::: {.person}
 
-**Local problems require local evidence.**
-
-Our goal is to make that evidence open, understandable, and useful.
-
+::: {.person-label}
+Project Lead
 :::
+
+## Matthew Durán
+
+Matthew Durán is the researcher behind the El Paso Crime Lab. His work focuses on crime, policing, public safety, and the use of data and research to better understand local problems.
+
+[Learn more →](about.html){.person-link}
 
 :::
 
 
 ::: {.connect}
 
-## Stay Connected
+## Explore the Project
 
-Follow our work, receive updates about new research, or get in touch.
+Follow the research, explore the data, or get in touch.
 
 ::: {.connect-links}
 
