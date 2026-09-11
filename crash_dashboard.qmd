@@ -16,7 +16,7 @@ editor: source
 
 This dashboard tracks all reported vehicle crashes in El Paso, Texas classified as alcohol-related. Data for the year 2025 and 2026 is updated monthly. Note that counts may change as additional crash reports are submitted and processed.
 
-<b>Last data update:</b> August 12, 2026
+<b>Last data update:</b> September 10, 2026
 
 :::
 
@@ -43,7 +43,7 @@ suppressMessages(library(leaflet.extras))
 suppressMessages(library(sf))
 
 
-data <- read.csv("C:/Users/Matt/Documents/data/ep_data_(01-01-2016_07-31-2026).csv", header = TRUE)
+data <- read.csv("C:/Users/Matt/Documents/data/ep_data_(01-01-2016 to 8-31-2026).csv", header = TRUE)
 
 data$City <- recode(data$City,
   "EL PASO" = "El Paso"
@@ -2864,7 +2864,13 @@ drivers_clean <- drivers %>%
     Person.Ethnicity = case_when(
       
       # Missing / unknown categories
-      Person.Ethnicity %in% c("No Data", "99 - UNKNOWN", "UNKNOWN", "", NA) ~ NA_character_,
+      Person.Ethnicity %in% c(
+        "No Data", 
+        "99 - UNKNOWN", 
+        "UNKNOWN", 
+        "", 
+        NA
+      ) ~ NA_character_,
       
       # Special cases
       Person.Ethnicity == "95 - AUTONOMOUS" ~ "Autonomous",
@@ -2882,21 +2888,38 @@ drivers_clean <- drivers %>%
     ),
     
     Person.Gender = case_when(
-      Person.Gender %in% c("99 - UNKNOWN", "UNKNOWN", "No Data", "") ~ NA_character_,
+      Person.Gender %in% c(
+        "99 - UNKNOWN", 
+        "UNKNOWN", 
+        "No Data", 
+        ""
+      ) ~ NA_character_,
+      
       Person.Gender == "1 - MALE" ~ "Male",
       Person.Gender == "2 - FEMALE" ~ "Female",
+      
       TRUE ~ NA_character_
     )
   )
 
+
 demo_table <- drivers_clean %>%
   filter(bac_value >= 0.08 & bac_result == 1) %>%
-  filter(!is.na(Person.Ethnicity), !is.na(Person.Gender)) %>%
-    mutate(
-    Person.Gender = factor(Person.Gender, levels = c("Female", "Male")),
+  filter(
+    !is.na(Person.Ethnicity),
+    !is.na(Person.Gender)
+  ) %>%
+  mutate(
+    Person.Gender = factor(
+      Person.Gender,
+      levels = c("Female", "Male")
+    ),
     Person.Age = as.numeric(Person.Age)
   ) %>%
-  group_by(Person.Ethnicity, Person.Gender) %>%
+  group_by(
+    Person.Ethnicity,
+    Person.Gender
+  ) %>%
   summarise(
     avg_bac = mean(bac_value, na.rm = TRUE),
     avg_age = mean(Person.Age, na.rm = TRUE),
@@ -2904,18 +2927,34 @@ demo_table <- drivers_clean %>%
     .groups = "drop"
   ) %>%
   mutate(
-    pct = scales::percent(n / sum(n), accuracy = 0.1),
+    pct = n / sum(n),
     avg_bac = round(avg_bac, 2),
-    avg_age = round(avg_age, 0)
+    avg_age = round(avg_age, 0),
+    
+    # Suppress small cell counts
+    Count_Display = if_else(
+      n < 10,
+      "<10",
+      as.character(n)
+    ),
+    
+    Percent_Display = if_else(
+      n < 10,
+      "Suppressed",
+      scales::percent(pct, accuracy = 0.1)
+    )
   ) %>%
   arrange(desc(n)) %>%
-  rename(
-    "Race/Ethnicity" = Person.Ethnicity,
-    "Sex" = Person.Gender,
-    "Average Age" = avg_age,
-    "Average BAC" = avg_bac,
-    "Count" = n,
-    "Percent" = pct)
+  select(
+    `Race/Ethnicity` = Person.Ethnicity,
+    Sex = Person.Gender,
+    `Average Age` = avg_age,
+    `Average BAC` = avg_bac,
+    Count = Count_Display,
+    Percent = Percent_Display,
+    n
+  )
+
 
 reactable(
   demo_table,
@@ -2924,16 +2963,43 @@ reactable(
   striped = TRUE,
   highlight = TRUE,
   compact = TRUE,
+  
   columns = list(
-    `Average BAC` = colDef(format = colFormat(digits = 2)),
-    `Average Age` = colDef(format = colFormat(digits = 0)),
+    
+    `Average BAC` = colDef(
+      format = colFormat(digits = 2)
+    ),
+    
+    `Average Age` = colDef(
+      format = colFormat(digits = 0)
+    ),
+    
     Count = colDef(
       align = "center"
     ),
+    
     Percent = colDef(
-      align = "center")),
-    defaultSorted = list(Count = "desc"))
+      align = "center"
+    ),
+    
+    n = colDef(
+      show = FALSE
+    )
+  ),
+  
+  defaultSorted = list(
+    n = "desc"
+  )
+)
 
+htmltools::tags$p(
+  style = "
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 8px;
+  ",
+  "Note: Counts and percentages are suppressed for groups with fewer than 10 observations to protect privacy."
+)
 ```
 
 ### Column {.tabset}
@@ -3307,7 +3373,21 @@ pal <- colorNumeric(
 )
 
 leaflet(blocks_map) %>%
-  addProviderTiles(providers$CartoDB.Positron) %>%
+  addTiles(
+    urlTemplate = paste0(
+      "https://{s}.basemaps.cartocdn.com/rastertiles/light_all/",
+      "{z}/{x}/{y}.png?key=cb1_3ghq_1_eae6a323c1bacff5a92b2d7d"
+    ),
+    attribution = paste0(
+      '&copy; <a href="https://www.openstreetmap.org/copyright">',
+      'OpenStreetMap</a> contributors, ',
+      '&copy; <a href="https://carto.com/attributions">CARTO</a>'
+    ),
+    options = tileOptions(
+      subdomains = "abcd",
+      maxZoom = 20
+    )
+  ) %>%
   addPolygons(
     fillColor = ~pal(total_crashes),
     fillOpacity = 0.85,
@@ -3371,7 +3451,21 @@ pal <- colorNumeric(
 )
 
 leaflet(regions_map) %>%
-  addProviderTiles(providers$CartoDB.Positron) %>%
+  addTiles(
+    urlTemplate = paste0(
+      "https://{s}.basemaps.cartocdn.com/rastertiles/light_all/",
+      "{z}/{x}/{y}.png?key=cb1_3ghq_1_eae6a323c1bacff5a92b2d7d"
+    ),
+    attribution = paste0(
+      '&copy; <a href="https://www.openstreetmap.org/copyright">',
+      'OpenStreetMap</a> contributors, ',
+      '&copy; <a href="https://carto.com/attributions">CARTO</a>'
+    ),
+    options = tileOptions(
+      subdomains = "abcd",
+      maxZoom = 20
+    )
+  ) %>%
   
   addPolygons(
     fillColor = ~pal(Crashes),
@@ -3392,14 +3486,15 @@ leaflet(regions_map) %>%
     labFormat = labelFormat(suffix = ""),
     opacity = 1
   ) %>%
-
+  
   addControl(
     html = paste0(
       "<div style='font-size:22px; font-weight:bold; line-height:1.3;'>",
-      "Alcohol-Related Crashes by Police Region (2026 YTD)"),
+      "Alcohol-Related Crashes by Police Region (2026 YTD)",
+      "</div>"
+    ),
     position = "topright"
   )
-
 ```
 
 ``` {r}
@@ -3442,7 +3537,21 @@ pal <- colorNumeric(
 )
 
 leaflet(districts_map) %>%
-  addProviderTiles(providers$CartoDB.Positron) %>%
+  addTiles(
+    urlTemplate = paste0(
+      "https://{s}.basemaps.cartocdn.com/rastertiles/light_all/",
+      "{z}/{x}/{y}.png?key=cb1_3ghq_1_eae6a323c1bacff5a92b2d7d"
+    ),
+    attribution = paste0(
+      '&copy; <a href="https://www.openstreetmap.org/copyright">',
+      'OpenStreetMap</a> contributors, ',
+      '&copy; <a href="https://carto.com/attributions">CARTO</a>'
+    ),
+    options = tileOptions(
+      subdomains = "abcd",
+      maxZoom = 20
+    )
+  ) %>%
   
   addPolygons(
     fillColor = ~pal(Crashes),
@@ -3466,11 +3575,12 @@ leaflet(districts_map) %>%
   
   addControl(
     html = paste0(
-     "<div style='font-size:22px; font-weight:bold; line-height:1.3;'>",
-    "Alcohol-Related Crashes by City District in El Paso (2026 YTD)"),
+      "<div style='font-size:22px; font-weight:bold; line-height:1.3;'>",
+      "Alcohol-Related Crashes by City District in El Paso (2026 YTD)",
+      "</div>"
+    ),
     position = "topright"
   )
-
 ```
 
 ```{r}
@@ -3485,7 +3595,21 @@ map_data <- crash_level %>%
   filter(!is.na(Latitude), !is.na(Longitude))
 
 leaflet(map_data) %>%
-  addProviderTiles(providers$CartoDB.Positron) %>%
+  addTiles(
+    urlTemplate = paste0(
+      "https://{s}.basemaps.cartocdn.com/rastertiles/light_all/",
+      "{z}/{x}/{y}.png?key=cb1_3ghq_1_eae6a323c1bacff5a92b2d7d"
+    ),
+    attribution = paste0(
+      '&copy; <a href="https://www.openstreetmap.org/copyright">',
+      'OpenStreetMap</a> contributors, ',
+      '&copy; <a href="https://carto.com/attributions">CARTO</a>'
+    ),
+    options = tileOptions(
+      subdomains = "abcd",
+      maxZoom = 20
+    )
+  ) %>%
   
   addCircleMarkers(
     lng = ~Longitude,
@@ -3501,10 +3625,13 @@ leaflet(map_data) %>%
     lat = mean(map_data$Latitude, na.rm = TRUE),
     zoom = 11
   ) %>%
+  
   addControl(
     html = paste0(
       "<div style='font-size:22px; font-weight:bold; line-height:1.3;'>",
-      "Alcohol-Related Crashes in El Paso (2026 YTD)"),
+      "Alcohol-Related Crashes in El Paso (2026 YTD)",
+      "</div>"
+    ),
     position = "topright"
   )
 ```
@@ -3522,7 +3649,21 @@ map_data <- crash_level %>%
   filter(!is.na(Latitude), !is.na(Longitude))
 
 leaflet(map_data) %>%
-  addProviderTiles(providers$CartoDB.Positron) %>%
+  addTiles(
+    urlTemplate = paste0(
+      "https://{s}.basemaps.cartocdn.com/rastertiles/light_all/",
+      "{z}/{x}/{y}.png?key=cb1_3ghq_1_eae6a323c1bacff5a92b2d7d"
+    ),
+    attribution = paste0(
+      '&copy; <a href="https://www.openstreetmap.org/copyright">',
+      'OpenStreetMap</a> contributors, ',
+      '&copy; <a href="https://carto.com/attributions">CARTO</a>'
+    ),
+    options = tileOptions(
+      subdomains = "abcd",
+      maxZoom = 20
+    )
+  ) %>%
   
   addCircleMarkers(
     lng = ~Longitude,
@@ -3538,10 +3679,13 @@ leaflet(map_data) %>%
     lat = mean(map_data$Latitude, na.rm = TRUE),
     zoom = 11
   ) %>%
+  
   addControl(
     html = paste0(
       "<div style='font-size:22px; font-weight:bold; line-height:1.3;'>",
-      "Fatal Alcohol-Related Crashes in El Paso (2026 YTD)"),
+      "Fatal Alcohol-Related Crashes in El Paso (2026 YTD)",
+      "</div>"
+    ),
     position = "topright"
   )
 ```
