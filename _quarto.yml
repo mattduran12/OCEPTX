@@ -18,9 +18,15 @@ website:
         menu:
           - text: "Driving While Intoxicated"
             href: dwi_home.html
+          - text: "Animal Cruelty"
+            href: report_animal_cruelty.pdf
     right:
-      - text: "Racial Profiling Tool (BETA)"
-        href: police_stops_tool.qmd
+      - text: "Dashboard & Applications"
+        menu:
+          - text: "Alcohol-Related Crash Dashboard"
+            href: crash_dashboard.html
+          - text: "Racial Profiling Tool (BETA)"
+            href: police_stops_tool.qmd
       - text: "Connect With Us"
         menu:
           - text: "Subscribe for Email Updates"
