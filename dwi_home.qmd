@@ -521,13 +521,13 @@ Research Study
 </div>
 
 <h2>
-Does Public Shaming Deter Drunk Driving?
+Can Posting DWI Arrest Photos on Social Media Reduce Drunk Driving?
 </h2>
 
 <div class="card-content">
 
 <p>
-This study examines whether a social media campaign that publicly shared DWI booking photos was associated with changes in alcohol-related crashes among different age groups.
+Published in [Applied Police Briefings](https://appliedpolicebriefings.com/index.php/APB/article/view/6240), this research brief summarizes a peer-reviewed study in El Paso that evaluated the effectiveness of a social media campaign.
 </p>
 
 </div>
