@@ -21,6 +21,8 @@ website:
           - text: "Animal Cruelty"
             href: report_animal_cruelty.pdf
     right:
+      - text: "Awards Program"
+        href: award_announcement.qmd
       - text: "Dashboard & Applications"
         menu:
           - text: "Alcohol-Related Crash Dashboard"

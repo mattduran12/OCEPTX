@@ -1,0 +1,232 @@
+
+---
+title: "Awards Program"
+subtitle: "Recognizing Excellence in Advancing the Science of Public Safety"
+description: "Nominate an individual advancing research, data, evaluation, and evidence-informed public safety in the El Paso–Borderland region."
+page-layout: full
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+# Customize these settings
+nomination_url <- "https://docs.google.com/forms/d/e/1FAIpQLSfvf88YKpQzoug24wiDRabmWAaj3jVBeFntEsLEKxPTdpIZSA/viewform?usp=header"
+```
+
+::: {.hero-awards}
+# Advancing the Science of Public Safety
+
+The **El Paso Crime Lab (EPCL)** is proud to announce the inaugural **EPCL Public Safety Science Awards**, recognizing individuals whose work advances scientific inquiry, strengthens research and evaluation, and promotes the use of data and evidence in public safety.
+
+Good public safety policy begins with good evidence. These awards celebrate the individuals who help make that possible.
+
+[**SUBMIT A NOMINATION**](https://docs.google.com/forms/d/e/1FAIpQLSfvf88YKpQzoug24wiDRabmWAaj3jVBeFntEsLEKxPTdpIZSA/viewform?usp=header){.btn .btn-primary .btn-lg target="_blank"}
+
+*Nominations open November 1, 2026 — Deadline: December 15, 2026*
+:::
+
+## About the Awards
+
+Public safety challenges require more than assumptions and conventional approaches. They require scientific inquiry, reliable data, thoughtful evaluation, and a willingness to continually improve policies and practices.
+
+The EPCL Public Safety Science Awards recognize individuals throughout the **El Paso–Borderland region** who demonstrate these commitments through their professional work, research, education, or community contributions.
+
+Whether conducting research, improving organizational data systems, evaluating programs, or helping translate scientific findings into practice, award recipients exemplify the importance of evidence-informed public safety.
+
+## 2026 Award Categories
+
+The inaugural awards recognize contributions across six categories.
+
+::: {.award-grid}
+
+::: {.award-card}
+### 01. Dedication to Scientific Inquiry Award
+
+Recognizes an individual who demonstrates exceptional dedication, initiative, and perseverance in pursuing scientific inquiry and advancing research-informed approaches to public safety.
+
+This award recognizes curiosity, intellectual commitment, and the pursuit of scientific knowledge, including research proposals and projects that may still be in development.
+:::
+
+::: {.award-card}
+### 02. Advancing Program Evaluation Award
+
+Recognizes an individual who strengthens the ability to assess and improve programs through better data collection, measurement, evaluation systems, and organizational evaluation capacity.
+
+:::
+
+::: {.award-card}
+### 03. Science in Action Award
+
+Recognizes an individual who translates research, scientific knowledge, or data into practical improvements in public safety policies, programs, or practices.
+
+:::
+
+::: {.award-card}
+### 04. Evidence-Based Practice Advancement Award
+
+Recognizes an individual who promotes the use of scientific research and credible evidence in public safety policies, procedures, and practices.
+
+:::
+
+::: {.award-card}
+### 05. Scientific Leadership Award
+
+Recognizes an individual who demonstrates leadership in advancing scientific thinking, research collaboration, and evidence-informed decision-making within an organization or community.
+
+:::
+
+::: {.award-card}
+### 06. Emerging Researcher Award
+
+Recognizes a student or early-career professional demonstrating exceptional promise, initiative, or contribution to research and the science of public safety.
+
+:::
+
+:::
+
+## Eligibility Requirements
+
+To be considered for a 2026 EPCL Public Safety Science Award, nominees must meet the following requirements:
+
+- **Geographic eligibility:** Nominees must live, work, study, or conduct relevant professional or community activities within the El Paso–Borderland region.
+- **2026 contributions:** The work or contributions being recognized must have occurred between January 1 and December 31, 2026.
+- **Individual recognition:** Awards recognize individuals rather than organizations, agencies, or institutions.
+- **Relevant contributions:** Nominees must demonstrate contributions related to scientific inquiry, research, data, program evaluation, evidence-informed policy, or public safety practice.
+- **Open professional eligibility:** Students, researchers, analysts, public safety professionals, educators, administrators, program managers, and community members are welcome.
+
+Formal research credentials, academic publications, and demonstrated program effectiveness are not required. Contributions may include foundational work such as improving data collection, developing measurement systems, establishing evaluation practices, or advancing research initiatives.
+
+## Nomination Process
+
+Nominations are open to the public. Anyone may nominate an eligible individual, including nominating themselves.
+
+**How to nominate:**
+
+1. Review the six award categories.
+2. Select the category that best reflects the nominee's contributions.
+3. Complete the online nomination form.
+4. Describe the nominee's work and provide an example of their contribution.
+
+You may submit multiple nominations for different individuals or award categories. Please submit a separate nomination for each individual and category.
+
+[**NOMINATE SOMEONE TODAY**](https://docs.google.com/forms/d/e/1FAIpQLSfvf88YKpQzoug24wiDRabmWAaj3jVBeFntEsLEKxPTdpIZSA/viewform?usp=header){.btn .btn-primary .btn-lg target="_blank"}
+
+## Important Dates
+
+::: {.timeline}
+**November 1, 2026**  
+Nominations open.
+
+**December 15, 2026**  
+Nomination submission deadline.
+
+**January–February 2027**  
+Nomination review and recipient selection.
+
+**Early 2027**  
+Award recipients notified and publicly announced.
+:::
+
+## Selection and Recognition
+
+Nominations will be reviewed by the El Paso Crime Lab and an awards selection committee. Submissions will be evaluated based on the nominee's contributions, commitment to scientific inquiry, advancement of evidence-informed approaches, and relevance to the award category.
+
+Recipients will be notified privately before the public announcement.
+
+Award recipients will receive formal recognition from the El Paso Crime Lab, including an official award certificate and acknowledgment through EPCL communication channels.
+
+## Help Advance the Science of Public Safety
+
+The future of public safety depends on individuals who question assumptions, pursue knowledge, strengthen data systems, evaluate programs, and use evidence to improve decision-making.
+
+Help us recognize those individuals.
+
+[**SUBMIT A NOMINATION**](https://docs.google.com/forms/d/e/1FAIpQLSfvf88YKpQzoug24wiDRabmWAaj3jVBeFntEsLEKxPTdpIZSA/viewform?usp=header){.btn .btn-primary .btn-lg target="_blank"}
+
+*El Paso Crime Lab*  
+*Advancing the Science of Public Safety.*
+
+<style>
+.hero-awards {
+  padding: 3rem 2rem;
+  margin: 1.5rem 0 2.5rem 0;
+  background: #263238;
+  color: white;
+  border-left: 6px solid #C9A24A;
+  border-radius: 8px;
+}
+
+.hero-awards h1 {
+  color: white;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.hero-awards p {
+  color: #E8EEF0;
+  max-width: 850px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.hero-awards .btn {
+  margin: 1rem 0;
+  background: #C9A24A;
+  color: #263238;
+  border: none;
+  font-weight: 800;
+  padding: 0.9rem 1.5rem;
+}
+
+.award-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem 0;
+}
+
+.award-card {
+  padding: 1.5rem;
+  border: 1px solid #D5DADD;
+  border-top: 4px solid #6FA8C2;
+  border-radius: 7px;
+  background: var(--bs-body-bg);
+}
+
+.award-card h3 {
+  font-size: 1.15rem;
+  font-weight: 750;
+  color: #263238;
+  margin-top: 0;
+}
+
+.award-card p {
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+
+.timeline {
+  border-left: 3px solid #C9A24A;
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+}
+
+.timeline strong {
+  color: #6B1F2B;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 700px) {
+  .award-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-awards {
+    padding: 2rem 1.25rem;
+  }
+}
+</style>
