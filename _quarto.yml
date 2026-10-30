@@ -9,7 +9,7 @@ website:
   announcement: 
     icon: info-circle
     dismissable: true
-    content: "Nominations are open for the Public Safety Science Awards! Click [here](www.epcrimelab.org/award_announcement.html) for more details"
+    content: "Nominations are open for the **EPCL Public Safety Science Awards!** [Learn more and submit a nomination](award_announcement.html)."
     type: primary
     position: below-navbar
 
