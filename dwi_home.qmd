@@ -133,6 +133,70 @@ main.content {
   border-top-color: var(--terracotta-dark);
 }
 
+/* ============================================================
+   FULL-WIDTH PRESENTATION CARD
+============================================================ */
+
+.research-card.presentation {
+  grid-column: span 2;
+  min-height: auto;
+  padding: 1.75rem;
+}
+
+.presentation-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.presentation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.presentation-viewer {
+  width: 100%;
+  height: 750px;
+  border: 1px solid var(--sand-dark);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.presentation-viewer iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.presentation-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Responsive presentation */
+
+@media (max-width: 900px) {
+  .research-card.presentation {
+    grid-column: span 1;
+  }
+
+  .presentation-viewer {
+    height: 600px;
+  }
+}
+
+@media (max-width: 600px) {
+  .presentation-viewer {
+    height: 450px;
+  }
+}
+
 .feature-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -463,41 +527,78 @@ main.content {
   </div>
 
 
-  <!-- PRESENTATION -->
+<!-- PRESENTATION -->
 
-  <div class="research-card">
+<div class="research-card presentation">
 
-    <div class="card-type">
-      Presentation
+  <div class="presentation-inner">
+
+    <div class="presentation-header">
+
+      <div>
+        <div class="card-type">
+          Conference Presentation
+        </div>
+
+        <h2>Problem-Oriented Policing Conference Presentation</h2>
+
+        <p>
+          Matthew presented at the
+          <a href="https://popcenter.asu.edu/content/2026-pop-conference"
+             target="_blank">
+            34th International Problem-Oriented Policing Conference
+          </a>
+          in Austin, Texas. The presentation highlights three key
+          takeaways from the
+          <a href="https://popcenter.asu.edu/sites/g/files/litvpz3631/files/2026-08/Drunk%20Driving%202nd%20Ed%208.24.26.pdf"
+             target="_blank">
+            2nd edition of the POP Guide on Drunk Driving
+          </a>
+          that he recently updated.
+        </p>
+      </div>
+
     </div>
 
-    <h2>Problem-Oriented Policing Conference Presentation</h2>
+    <!-- EMBEDDED PRESENTATION -->
 
-    <div class="card-content">
+    <div class="presentation-viewer">
 
-      <p>
-        Matthew gave a presentation at the <a href="https://popcenter.asu.edu/content/2026-pop-conference"
-           target="_blank">
-          34th International Problem-Oriented Policing Conference
-        </a> in Austin, Texas. The presentation covers three key takeaways from the <a 
-        href="https://popcenter.asu.edu/sites/g/files/litvpz3631/files/2026-08/Drunk%20Driving%202nd%20Ed%208.24.26.pdf"
-        target="_blank">
-        2nd edition of the POP Guide on Drunk Driving </a> he recently updated.
-      </p>
+      <iframe
+        src="pop_2026_presentation.pdf"
+        title="Problem-Oriented Policing Conference Presentation"
+        loading="lazy">
+      </iframe>
 
     </div>
 
-    <a href="pop_2026_presentation.pdf"
-       class="card-button">
-      View the Presentation
-    </a>
+    <!-- PRESENTATION LINKS -->
 
-    <a href="Austin_Crash_Dashboard_10-2026.html"
-       class="card-button">
-      View the Crash Dashboard created for the City of Austin
-    </a>
+    <div class="presentation-actions">
+
+      <a href="pop_2026_presentation.pdf"
+         target="_blank"
+         class="card-button">
+        Open Presentation in New Tab
+      </a>
+
+      <a href="pop_2026_presentation.pdf"
+         download
+         class="card-button">
+        Download PDF
+      </a>
+
+      <a href="Austin_Crash_Dashboard_10-2026.html"
+         target="_blank"
+         class="card-button">
+        View Austin Crash Dashboard
+      </a>
+
+    </div>
 
   </div>
+
+</div>
 
 
   <!-- DWI FRIDAY STUDY -->
