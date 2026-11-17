@@ -116,6 +116,10 @@ ul.task-list li input[type="checkbox"] {
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./award_announcement.html"> 
+<span class="menu-text">Awards Program</span></a>
+  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-dashboard--applications" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Dashboard &amp; Applications</span>
@@ -157,6 +161,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <div id="quarto-announcement" data-announcement-id="7847dcbf024061e1fb90d05cf387504f" class="alert alert-primary hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Nominations are open for the <strong>EPCL Public Safety Science Awards!</strong> <a href="award_announcement.html">Learn more and submit a nomination</a>.</p>
+</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
@@ -215,7 +222,7 @@ ul.task-list li input[type="checkbox"] {
 
 /* ============================================================
    GLOBAL
-   ============================================================ */
+============================================================ */
 
 body {
   background: var(--page-gradient);
@@ -232,10 +239,9 @@ main.content {
   padding: 2rem 3rem 4rem 3rem;
 }
 
-
 /* ============================================================
    HERO
-   ============================================================ */
+============================================================ */
 
 .research-hero {
   padding: 3rem;
@@ -270,10 +276,9 @@ main.content {
   margin: 0;
 }
 
-
 /* ============================================================
    RESEARCH GRID
-   ============================================================ */
+============================================================ */
 
 .research-grid {
   display: grid;
@@ -282,10 +287,9 @@ main.content {
   align-items: stretch;
 }
 
-
 /* ============================================================
    RESEARCH CARDS
-   ============================================================ */
+============================================================ */
 
 .research-card {
   background: var(--card-bg);
@@ -306,10 +310,9 @@ main.content {
   border-color: var(--terracotta-light);
 }
 
-
 /* ============================================================
    FEATURE CARD
-   ============================================================ */
+============================================================ */
 
 .research-card.feature {
   grid-column: span 2;
@@ -346,10 +349,9 @@ main.content {
   border: 1px solid var(--sand-dark);
 }
 
-
 /* ============================================================
    CARD CONTENT
-   ============================================================ */
+============================================================ */
 
 .card-type {
   font-size: 0.72rem;
@@ -381,10 +383,9 @@ main.content {
   flex: 1;
 }
 
-
 /* ============================================================
    HYPERLINK
-   ============================================================ */
+============================================================ */
 
 .card-button {
   display: inline-flex;
@@ -423,10 +424,9 @@ main.content {
   transform: translateX(4px);
 }
 
-
 /* ============================================================
    ICON / NUMBER
-   ============================================================ */
+============================================================ */
 
 .card-icon {
   width: 38px;
@@ -445,19 +445,17 @@ main.content {
   margin-bottom: 1rem;
 }
 
-
 /* ============================================================
    BOTTOM CARDS
-   ============================================================ */
+============================================================ */
 
 .bottom-card {
   min-height: 190px;
 }
 
-
 /* ============================================================
    MEDIA GRID
-   ============================================================ */
+============================================================ */
 
 .media-grid {
   display: grid;
@@ -466,10 +464,9 @@ main.content {
   margin: 1.25rem 0;
 }
 
-
 /* ============================================================
    MEDIA CARDS
-   ============================================================ */
+============================================================ */
 
 .media-card {
   background: var(--card-bg);
@@ -504,10 +501,9 @@ main.content {
   border-top-color: #b27a20;
 }
 
-
 /* ============================================================
    MEDIA ICON
-   ============================================================ */
+============================================================ */
 
 .media-icon {
   width: 48px;
@@ -526,10 +522,9 @@ main.content {
   margin-bottom: 1rem;
 }
 
-
 /* ============================================================
    RESPONSIVE
-   ============================================================ */
+============================================================ */
 
 @media (max-width: 900px) {
 
@@ -563,7 +558,6 @@ main.content {
 
 }
 
-
 @media (max-width: 600px) {
 
   main.content {
@@ -586,194 +580,340 @@ main.content {
 }
 
 </style>
+
+
 <!-- ============================================================
      HERO
-     ============================================================ -->
+============================================================ -->
+
 <div class="research-hero">
-<div class="hero-kicker">
-<p>El Paso Crime Lab</p>
+
+  <div class="hero-kicker">
+    El Paso Crime Lab
+  </div>
+
+  <h1>Driving While Intoxicated</h1>
+
+  <p>
+    Research, data, and local information about alcohol-impaired driving in El Paso, Texas.
+    Explore the data, read the research, follow local developments, and find community resources.
+  </p>
+
 </div>
-<section id="driving-while-intoxicated" class="level1">
-<h1>Driving While Intoxicated</h1>
-<p>
-Research, data, and local information about alcohol-impaired driving in El Paso, Texas. Explore the data, read the research, follow local developments, and find community resources.
-</p>
-</section>
-</div>
+
+
 <!-- ============================================================
      MAIN RESEARCH GRID
-     ============================================================ -->
+============================================================ -->
+
 <div class="research-grid">
-<!-- ============================================================
-     DASHBOARD
-     ============================================================ -->
-<div class="research-card feature">
-<div class="feature-inner">
-<div class="feature-text">
-<div class="card-type">
-<p>Interactive Data</p>
+
+
+  <!-- DASHBOARD -->
+
+  <div class="research-card feature">
+
+    <div class="feature-inner">
+
+      <div class="feature-text">
+
+        <div class="card-type">
+          Interactive Data
+        </div>
+
+        <h2 class="anchored">Alcohol-Related Crash Dashboard</h2>
+
+        <div class="card-content">
+
+          <p>
+            Explore alcohol-related crash patterns across El Paso. The dashboard includes more than 30 measures describing crash trends, geography, drivers, and vehicles and is updated monthly.
+          </p>
+
+        </div>
+
+        <a href="crash_dashboard.html" target="_blank" class="card-button">
+          View Dashboard
+        </a>
+
+      </div>
+
+
+      <div class="feature-image">
+
+        <img src="screenshot of dashboard.jpg" alt="Alcohol-related crash dashboard">
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- PRESENTATION -->
+
+  <div class="research-card">
+
+    <div class="card-type">
+      Presentation
+    </div>
+
+    <h2 class="anchored">Problem-Oriented Policing Conference Presentation</h2>
+
+    <div class="card-content">
+
+      <p>
+        This presentation provides three recommendations for addressing drunk driving. Presented by Matthew Duran on November 16th 2026 at the
+        <a href="https://popcenter.asu.edu/content/2026-pop-conference" target="_blank">
+          34th International Problem-Oriented Policing Conference
+        </a>
+        in Austin, Texas.
+      </p>
+
+    </div>
+
+    <a href="pop_2026_presentation.pdf" class="card-button">
+      View the Presentation
+    </a>
+
+    <a href="Austin_Crash_Dashboard_10-2026.html" class="card-button">
+      View the Crash Dashboard created for the City of Austin
+    </a>
+
+  </div>
+
+
+  <!-- DWI FRIDAY STUDY -->
+
+  <div class="research-card">
+
+    <div class="card-type">
+      Research Study
+    </div>
+
+    <h2 class="anchored">
+      Can Posting DWI Arrest Photos on Social Media Reduce Drunk Driving?
+    </h2>
+
+    <div class="card-content">
+
+      <p>
+        Published in
+        <a href="https://appliedpolicebriefings.com/index.php/APB/article/view/6240" target="_blank">
+          Applied Police Briefings
+        </a>,
+        this research brief summarizes a peer-reviewed study in El Paso that evaluated the effectiveness of a social media campaign.
+      </p>
+
+    </div>
+
+    <a href="dwi_friday_study.pdf" class="card-button">
+      Read the Plain Language Summary
+    </a>
+
+  </div>
+
+
+  <!-- COMPARISON REPORT -->
+
+  <div class="research-card">
+
+    <div class="card-type">
+      Report
+    </div>
+
+    <h2 class="anchored">Is Drunk Driving Worse in El Paso?</h2>
+
+    <div class="card-content">
+
+      <p>
+        How does El Paso compare with other large Texas cities? This report examines alcohol-related traffic fatalities from 2021–2025 using three approaches to measure the severity of loss of life.
+      </p>
+
+    </div>
+
+    <a href="dwi_report_01.html" class="card-button">
+      Read Report
+    </a>
+
+  </div>
+
 </div>
-<h2 class="anchored">
-Alcohol-Related Crash Dashboard
-</h2>
-<div class="card-content">
-<p>
-Explore alcohol-related crash patterns across El Paso. The dashboard includes more than 30 measures describing crash trends, geography, drivers, and vehicles and is updated monthly.
-</p>
-</div>
-<p><a href="crash_dashboard.html" target="_blank" class="card-button"> View Dashboard </a></p>
-</div>
-<div class="feature-image">
-<p><img src="screenshot of dashboard.jpg" alt="Alcohol-related crash dashboard"></p>
-</div>
-</div>
-</div>
-<!-- ============================================================
-     COMPARISON REPORT
-     ============================================================ -->
-<div class="research-card">
-<div class="card-type">
-<p>Report</p>
-</div>
-<h2 class="anchored">
-Is Drunk Driving Worse in El Paso?
-</h2>
-<div class="card-content">
-<p>
-How does El Paso compare with other large Texas cities? This report examines alcohol-related traffic fatalities from 2021–2025 using three approaches to measure the severity of loss of life.
-</p>
-</div>
-<p><a href="dwi_report_01.html" class="card-button"> Read Report </a></p>
-</div>
-<!-- ============================================================
-     DWI FRIDAY STUDY
-     ============================================================ -->
-<div class="research-card">
-<div class="card-type">
-<p>Research Study</p>
-</div>
-<h2 class="anchored">
-Can Posting DWI Arrest Photos on Social Media Reduce Drunk Driving?
-</h2>
-<div class="card-content">
-<p>
-Published in <a href="https://appliedpolicebriefings.com/index.php/APB/article/view/6240">Applied Police Briefings</a>, this research brief summarizes a peer-reviewed study in El Paso that evaluated the effectiveness of a social media campaign.
-</p>
-</div>
-<p><a href="dwi_friday_study.pdf" class="card-button"> Read the Plain Language Summary </a></p>
-</div>
-</div>
+
+
 <!-- ============================================================
      MEDIA
-     ============================================================ -->
+============================================================ -->
+
 <div class="media-grid">
-<!-- ============================================================
-     OPINION ARTICLE
-     ============================================================ -->
-<div class="media-card">
-<div class="card-type">
-<p>Op-Ed</p>
+
+
+  <!-- OPINION ARTICLE -->
+
+  <div class="media-card">
+
+    <div class="card-type">
+      Op-Ed
+    </div>
+
+    <h2 class="anchored">Using Research to Solve Drunk Driving in El Paso</h2>
+
+    <div class="card-content">
+
+      <p>
+        An opinion article examining why arrest data can be misleading and why alcohol-involved crash data provide another way to understand the local drunk-driving problem.
+      </p>
+
+    </div>
+
+    <a href="https://elpasomatters.org/2026/02/25/opinion-why-el-paso-needs-better-data-to-solve-drunk-driving-problem/" target="_blank" class="card-button">
+      Read Article
+    </a>
+
+  </div>
+
+
+  <!-- PODCAST -->
+
+  <div class="media-card">
+
+    <div class="card-type">
+      Podcast
+    </div>
+
+    <h2 class="anchored">
+      Conversation with Ashlee from
+      <a href="https://talkinaboutit.com/" target="_blank">
+        Talkin' About It!
+      </a>
+    </h2>
+
+    <div class="card-content">
+
+      <p>
+        Listen to a podcast episode discussing alcohol-impaired driving and the challenges facing the El Paso community.
+      </p>
+
+    </div>
+
+    <a href="https://open.spotify.com/episode/7qRoqOapZSc070pateZQP5?si=7ac5f0e6bf194d77" target="_blank" class="card-button">
+      Listen on Spotify
+    </a>
+
+  </div>
+
+
+  <!-- YOUTUBE / ARTICLE -->
+
+  <div class="media-card">
+
+    <div class="card-type">
+      ARC El Paso Interview
+    </div>
+
+    <h2 class="anchored">Fourth of July Crash Analysis</h2>
+
+    <div class="card-content">
+
+      <p>
+        See the local news story on the
+        <a href="https://www.epcrimelab.org/crash_dashboard.html#holidays">
+          holiday analyses
+        </a>
+        shown on the El Paso Crime Lab's Crash Dashboard.
+      </p>
+
+    </div>
+
+    <a href="https://cbs4local.com/newsletter-daily/el-paso-police-crime-lab-warn-of-july-fourth-spike-in-alcohol-related-crashes?fbclid=IwY2xjawTsVQFwZG9mBWV4dG4DYWVtAjEwAGJyaWQRMWNEU1hwWHpGTHdqT3pyazZzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeIQogoKh6z-u8IW23UnOyZkjVW7_4LRPMSnDizfTS5A20CrzrWXKEaLa19oY_aem__fmqyxlKwustkQzD4jPObQ" target="_blank" class="card-button">
+      Read Article
+    </a>
+
+  </div>
+
 </div>
-<h2 class="anchored">
-Using Research to Solve Drunk Driving in El Paso
-</h2>
-<div class="card-content">
-<p>
-An opinion article examining why arrest data can be misleading and why alcohol-involved crash data provide another way to understand the local drunk-driving problem.
-</p>
-</div>
-<p><a href="https://elpasomatters.org/2026/02/25/opinion-why-el-paso-needs-better-data-to-solve-drunk-driving-problem/" target="_blank" class="card-button"> Read Article </a></p>
-</div>
-<!-- ============================================================
-     PODCAST
-     ============================================================ -->
-<div class="media-card">
-<div class="card-type">
-<p>Podcast</p>
-</div>
-<h2 class="anchored">
-Conversation with Ashlee from <a href="https://talkinaboutit.com/">Talkin’ About It!</a>
-</h2>
-<div class="card-content">
-<p>
-Listen to a podcast episode discussing alcohol-impaired driving and the challenges facing the El Paso community.
-</p>
-</div>
-<p><a href="https://open.spotify.com/episode/7qRoqOapZSc070pateZQP5?si=7ac5f0e6bf194d77" target="_blank" class="card-button"> Listen on Spotify </a></p>
-</div>
-<!-- ============================================================
-     YOUTUBE/Article
-     ============================================================ -->
-<div class="media-card">
-<div class="card-type">
-<p>ARC El Paso Interview</p>
-</div>
-<h2 class="anchored">
-Fourth of July Crash Analysis
-</h2>
-<div class="card-content">
-<p>
-See the local news story on the <a href="https://www.epcrimelab.org/crash_dashboard.html#holidays">holiday analyses</a> shown on the El Paso Crime Lab’s Crash Dashboard.
-</p>
-</div>
-<p><a href="https://cbs4local.com/newsletter-daily/el-paso-police-crime-lab-warn-of-july-fourth-spike-in-alcohol-related-crashes?fbclid=IwY2xjawTsVQFwZG9mBWV4dG4DYWVtAjEwAGJyaWQRMWNEU1hwWHpGTHdqT3pyazZzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeIQogoKh6z-u8IW23UnOyZkjVW7_4LRPMSnDizfTS5A20CrzrWXKEaLa19oY_aem__fmqyxlKwustkQzD4jPObQ" target="_blank" class="card-button"> Read Article </a></p>
-</div>
-</div>
+
+
 <!-- ============================================================
      ADDITIONAL RESEARCH AND RESOURCES
-     ============================================================ -->
+============================================================ -->
+
 <div class="research-grid">
-<!-- ============================================================
-     LOCAL RESEARCH
-     ============================================================ -->
-<div class="research-card">
-<div class="card-type">
-<p>Ongoing Research</p>
-</div>
-<h2 class="anchored">
-Local Research on Impaired Driving
-</h2>
-<div class="card-content">
-<p>
-A comprehensive review of local research on impaired driving is underway. The project will identify what is known, where evidence is limited, and where additional research is needed.
-</p>
-</div>
-<p><a href="dwi_protocol.html" target="_blank" class="card-button"> View Protocol </a></p>
-</div>
-<!-- ============================================================
-     NEWS
-     ============================================================ -->
-<div class="research-card bottom-card">
-<div class="card-type">
-<p>Local News</p>
-</div>
-<h2 class="anchored">
-Latest News on DWI in El Paso
-</h2>
-<div class="card-content">
-<p>
-Recent reporting on crashes, arrests, enforcement, and policy changes related to impaired driving in El Paso.
-</p>
-</div>
-<p><a href="dwi_news.html" target="_blank" class="card-button"> View News </a></p>
-</div>
-<!-- ============================================================
-     SERVICE PROVIDERS
-     ============================================================ -->
-<div class="research-card bottom-card">
-<div class="card-type">
-<p>Community Resources</p>
-</div>
-<h2 class="anchored">
-Local Service Provider Directory
-</h2>
-<div class="card-content">
-<p>
-Find local organizations providing counseling, advocacy, legal assistance, and other support services for individuals and families affected by alcohol-related crashes.
-</p>
-</div>
-<p><a href="dwi_services.html" target="_blank" class="card-button"> View Directory </a></p>
-</div>
+
+
+  <!-- LOCAL RESEARCH -->
+
+  <div class="research-card">
+
+    <div class="card-type">
+      Ongoing Research
+    </div>
+
+    <h2 class="anchored">Local Research on Impaired Driving</h2>
+
+    <div class="card-content">
+
+      <p>
+        A comprehensive review of local research on impaired driving is underway. The project will identify what is known, where evidence is limited, and where additional research is needed.
+      </p>
+
+    </div>
+
+    <a href="dwi_protocol.html" target="_blank" class="card-button">
+      View Protocol
+    </a>
+
+  </div>
+
+
+  <!-- NEWS -->
+
+  <div class="research-card bottom-card">
+
+    <div class="card-type">
+      Local News
+    </div>
+
+    <h2 class="anchored">Latest News on DWI in El Paso</h2>
+
+    <div class="card-content">
+
+      <p>
+        Recent reporting on crashes, arrests, enforcement, and policy changes related to impaired driving in El Paso.
+      </p>
+
+    </div>
+
+    <a href="dwi_news.html" target="_blank" class="card-button">
+      View News
+    </a>
+
+  </div>
+
+
+  <!-- SERVICE PROVIDERS -->
+
+  <div class="research-card bottom-card">
+
+    <div class="card-type">
+      Community Resources
+    </div>
+
+    <h2 class="anchored">Local Service Provider Directory</h2>
+
+    <div class="card-content">
+
+      <p>
+        Find local organizations providing counseling, advocacy, legal assistance, and other support services for individuals and families affected by alcohol-related crashes.
+      </p>
+
+    </div>
+
+    <a href="dwi_services.html" target="_blank" class="card-button">
+      View Directory
+    </a>
+
+  </div>
+
 </div>
 
 
