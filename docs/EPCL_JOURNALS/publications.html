@@ -828,6 +828,65 @@ document.addEventListener("DOMContentLoaded", async function () {
 .epcl-publications .editorial-team-table em { font-style:italic; color:var(--muted); }
 .epcl-publications .epcl-submit-link { display:inline-block; background:#315e70; color:#fff; padding:.75rem 1.2rem; border-radius:3px; font-weight:600; text-decoration:none; }
 .epcl-publications .epcl-submit-link:hover { background:#244e60; color:#fff; }
+
+/* Refined editorial finish — visual changes only */
+.epcl-publications { --gold:#a98242; --line:#dce3e6; --wash:#f5f7f8; }
+.epcl-publications .publications-hero {
+  background:var(--wash); border:1px solid var(--line); border-top:3px solid var(--gold);
+  border-radius:8px; padding:clamp(1.5rem,4vw,3.5rem); margin:1rem 0 2.5rem;
+}
+.epcl-publications .epcl-kicker {display:flex; align-items:center; gap:.7rem;}
+.epcl-publications .epcl-kicker::before {content:""; width:24px; height:2px; background:var(--gold); flex-shrink:0;}
+.epcl-publications .publications-hero h1 {letter-spacing:-.045em;}
+.epcl-publications .publications-hero .btn,
+.epcl-publications .epcl-submit-link {background:#284b5b; border:1px solid #284b5b; color:#fff; border-radius:6px; transition:background-color .18s ease,box-shadow .18s ease;}
+.epcl-publications .publications-hero .btn:hover,
+.epcl-publications .epcl-submit-link:hover {background:#1d3947; color:#fff; box-shadow:0 3px 10px #00000015;}
+.epcl-publications .panel-tabset .nav-tabs {gap:.4rem; padding-bottom:.75rem;}
+.epcl-publications .panel-tabset .nav-tabs .nav-link {border-radius:6px; border-bottom:2px solid transparent !important; padding:.7rem .95rem;}
+.epcl-publications .panel-tabset .nav-tabs .nav-link.active,
+.epcl-publications .panel-tabset .nav-tabs .nav-link[aria-selected="true"] {background:#e8eff2 !important; color:#284b5b !important; border-bottom-color:#a98242 !important;}
+.epcl-publications .panel-tabset .nav-tabs .nav-link.active:hover {background:#dbe8ee !important; color:#284b5b !important;}
+.epcl-publications .archive-toolbar {border:1px solid var(--line); border-radius:8px; padding:1.35rem;}
+.epcl-publications .archive-control input,.epcl-publications .archive-control select {border-radius:5px;}
+.epcl-publications .archive-control label {font-size:.72rem; letter-spacing:.065em;}
+.epcl-publications .archive-table th {background:var(--wash); border-top:0; border-bottom:1px solid var(--line);}
+.epcl-publications .archive-table td {padding:1.25rem .85rem;}
+.epcl-publications .archive-table a {font-weight:650; letter-spacing:-.015em;}
+.epcl-publications .article-format {color:var(--accent);}
+.epcl-publications .archive-table-wrap {border:1px solid var(--line); border-radius:7px;}
+.epcl-publications .archive-table tbody tr:last-child td {border-bottom:0;}
+.epcl-publications .contribution-card {border:1px solid var(--line); border-top:3px solid var(--gold); border-radius:6px; padding:1.35rem; background:var(--paper);}
+.epcl-publications .content-notice {border-radius:0 6px 6px 0;}
+.epcl-publications .editorial-team-table {border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+.epcl-publications .editorial-team-table thead th {padding-top:14px; padding-bottom:14px;}
+.epcl-publications .editorial-team-table td {padding-top:14px; padding-bottom:14px;}
+.epcl-publications .editorial-team-table .editorial-group th {letter-spacing:.07em; text-transform:uppercase;}
+.epcl-publications .publications-footer {border-top:1px solid var(--line); padding-top:1.8rem;}
+[data-bs-theme="dark"] .epcl-publications {--line:#46535a; --wash:#2a353b;}
+[data-bs-theme="dark"] .epcl-publications .panel-tabset .nav-tabs .nav-link.active,
+[data-bs-theme="dark"] .epcl-publications .panel-tabset .nav-tabs .nav-link[aria-selected="true"] {background:#354b57 !important; color:#e7ecee !important;}
+[data-bs-theme="dark"] .epcl-publications .panel-tabset .nav-tabs .nav-link.active:hover {background:#405b69 !important; color:#fff !important;}
+@media(prefers-reduced-motion:reduce){.epcl-publications .publications-hero .btn,.epcl-publications .epcl-submit-link{transition:none;}}
+
+
+/* Higher-contrast editorial surfaces */
+.epcl-publications { --wash:#dce6eb; --line:#a4bac6; }
+.epcl-publications .panel-tabset .nav-tabs .nav-link.active,
+.epcl-publications .panel-tabset .nav-tabs .nav-link[aria-selected="true"] {background:#315e70 !important; color:#fff !important;}
+.epcl-publications .panel-tabset .nav-tabs .nav-link.active:hover {background:#244e60 !important; color:#fff !important;}
+.epcl-publications .archive-toolbar {background:var(--wash); border-color:var(--line);}
+.epcl-publications .archive-control label {color:var(--ink);}
+.epcl-publications .contribution-card {background:#e8eff3; border-color:var(--line); border-top-color:var(--gold);}
+.epcl-publications .content-notice {background:var(--wash);}
+[data-bs-theme="dark"] .epcl-publications {--wash:#354b57; --line:#607986;}
+[data-bs-theme="dark"] .epcl-publications .contribution-card {background:#304550;}
+[data-bs-theme="dark"] .epcl-publications .panel-tabset .nav-tabs .nav-link.active,
+[data-bs-theme="dark"] .epcl-publications .panel-tabset .nav-tabs .nav-link[aria-selected="true"] {background:#426678 !important; color:#fff !important;}
+
+/* Restore the original light hero independently of the archive palette. */
+.epcl-publications .publications-hero {background:#f5f7f8; border-color:#dce3e6; border-top-color:var(--gold);}
+[data-bs-theme="dark"] .epcl-publications .publications-hero {background:#2a353b; border-color:#46535a; border-top-color:var(--gold);}
 </style>
 
 
