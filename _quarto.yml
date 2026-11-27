@@ -9,10 +9,9 @@ website:
   navbar:
     background: "#263238"
     foreground: "#FFFFFF"
-    search: true
+    search: false
 
     left:
-
       - text: "Research"
         menu:
           - text: "Impaired Driving"

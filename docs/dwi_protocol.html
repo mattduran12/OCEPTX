@@ -2,18 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2026-05-02">
 
-<title>Protocol: A Scoping Review of Impaired Driving Research in El Paso, Texas – El Paso Crime Lab</title>
+<title>Protocol: A Scoping Review of Impaired Driving Research in El Paso, Texas – EPCL</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -25,7 +31,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -54,15 +59,14 @@ div.csl-indent {
 <link href="./about_logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ad298448e446d3af87b0979c66574169.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-adde6c8a4801655ea8342bd26d89f2e2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -93,6 +97,7 @@ div.csl-indent {
 
 
 <link rel="stylesheet" href="styles2.css">
+<link rel="stylesheet" href="EPCL_JOURNALS/styles/journal.scss">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -103,7 +108,7 @@ div.csl-indent {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">El Paso Crime Lab</span>
+    <span class="navbar-title">EPCL</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -111,14 +116,6 @@ div.csl-indent {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-research" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Research</span>
@@ -126,7 +123,7 @@ div.csl-indent {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-research">    
         <li>
     <a class="dropdown-item" href="./dwi_home.html">
- <span class="dropdown-text">Driving While Intoxicated</span></a>
+ <span class="dropdown-text">Impaired Driving</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./report_animal_cruelty.pdf">
@@ -134,44 +131,55 @@ div.csl-indent {
   </li>  
     </ul>
   </li>
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./award_announcement.html"> 
-<span class="menu-text">Awards Program</span></a>
+    <a class="nav-link" href="./EPCL_JOURNALS/publications.html"> 
+<span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-dashboard--applications" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Dashboard &amp; Applications</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data--tools" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Data &amp; Tools</span>
     </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-dashboard--applications">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data--tools">    
         <li>
     <a class="dropdown-item" href="./crash_dashboard.html">
  <span class="dropdown-text">Alcohol-Related Crash Dashboard</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./police_stops_tool.html">
- <span class="dropdown-text">Racial Profiling Tool (BETA)</span></a>
+ <span class="dropdown-text">Traffic Data Analysis</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-connect-with-us" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Connect With Us</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-initiatives" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Initiatives</span>
     </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-connect-with-us">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-initiatives">    
         <li>
-    <a class="dropdown-item" href="./subscribe.html">
- <span class="dropdown-text">Subscribe for Email Updates</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./contact.html">
- <span class="dropdown-text">Contact the El Paso Crime Lab</span></a>
+    <a class="dropdown-item" href="./award_announcement.html">
+ <span class="dropdown-text">Public Safety Science Awards</span></a>
   </li>  
     </ul>
   </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
+        <li>
+    <a class="dropdown-item" href="./about.html">
+ <span class="dropdown-text">About EPCL</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./contact.html">
+ <span class="dropdown-text">Contact</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.instagram.com/epcrimelab/"> <i class="bi bi-instagram" role="img" aria-label="Instagram">
+    <a class="nav-link" href="./subscribe.html"> <i class="bi bi-envelope" role="img" aria-label="Subscribe for email updates">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -181,9 +189,6 @@ div.csl-indent {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <div id="quarto-announcement" data-announcement-id="7847dcbf024061e1fb90d05cf387504f" class="alert alert-primary hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
-<p>Nominations are open for the <strong>EPCL Public Safety Science Awards!</strong> <a href="award_announcement.html">Learn more and submit a nomination</a>.</p>
-</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
@@ -279,23 +284,23 @@ div.csl-indent {
 <p>This review will be conducted by a research team at the El Paso Crime Lab. The search will cover a comprehensive range of sources to ensure inclusion of both published and unpublished research. Peer-reviewed literature will be searched using the search strings reported in Table 1.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="uqfvwmamzg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uqfvwmamzg table {
+<div id="ssgzjhsvou" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ssgzjhsvou table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uqfvwmamzg thead, #uqfvwmamzg tbody, #uqfvwmamzg tfoot, #uqfvwmamzg tr, #uqfvwmamzg td, #uqfvwmamzg th {
+#ssgzjhsvou thead, #ssgzjhsvou tbody, #ssgzjhsvou tfoot, #ssgzjhsvou tr, #ssgzjhsvou td, #ssgzjhsvou th {
   border-style: none;
 }
 
-#uqfvwmamzg p {
+#ssgzjhsvou p {
   margin: 0;
   padding: 0;
 }
 
-#uqfvwmamzg .gt_table {
+#ssgzjhsvou .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -321,12 +326,12 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-#uqfvwmamzg .gt_caption {
+#ssgzjhsvou .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uqfvwmamzg .gt_title {
+#ssgzjhsvou .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -338,7 +343,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-#uqfvwmamzg .gt_subtitle {
+#ssgzjhsvou .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -350,7 +355,7 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-#uqfvwmamzg .gt_heading {
+#ssgzjhsvou .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -362,13 +367,13 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#uqfvwmamzg .gt_bottom_border {
+#ssgzjhsvou .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uqfvwmamzg .gt_col_headings {
+#ssgzjhsvou .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -383,7 +388,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#uqfvwmamzg .gt_col_heading {
+#ssgzjhsvou .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -403,7 +408,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-#uqfvwmamzg .gt_column_spanner_outer {
+#ssgzjhsvou .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -415,15 +420,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-#uqfvwmamzg .gt_column_spanner_outer:first-child {
+#ssgzjhsvou .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uqfvwmamzg .gt_column_spanner_outer:last-child {
+#ssgzjhsvou .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uqfvwmamzg .gt_column_spanner {
+#ssgzjhsvou .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -435,11 +440,11 @@ div.csl-indent {
   width: 100%;
 }
 
-#uqfvwmamzg .gt_spanner_row {
+#ssgzjhsvou .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uqfvwmamzg .gt_group_heading {
+#ssgzjhsvou .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -465,7 +470,7 @@ div.csl-indent {
   text-align: left;
 }
 
-#uqfvwmamzg .gt_empty_group_heading {
+#ssgzjhsvou .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -480,15 +485,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-#uqfvwmamzg .gt_from_md > :first-child {
+#ssgzjhsvou .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uqfvwmamzg .gt_from_md > :last-child {
+#ssgzjhsvou .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uqfvwmamzg .gt_row {
+#ssgzjhsvou .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -507,7 +512,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-#uqfvwmamzg .gt_stub {
+#ssgzjhsvou .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -520,7 +525,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#uqfvwmamzg .gt_stub_row_group {
+#ssgzjhsvou .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -534,15 +539,15 @@ div.csl-indent {
   vertical-align: top;
 }
 
-#uqfvwmamzg .gt_row_group_first td {
+#ssgzjhsvou .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uqfvwmamzg .gt_row_group_first th {
+#ssgzjhsvou .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uqfvwmamzg .gt_summary_row {
+#ssgzjhsvou .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -552,16 +557,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#uqfvwmamzg .gt_first_summary_row {
+#ssgzjhsvou .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uqfvwmamzg .gt_first_summary_row.thick {
+#ssgzjhsvou .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uqfvwmamzg .gt_last_summary_row {
+#ssgzjhsvou .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -571,7 +576,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#uqfvwmamzg .gt_grand_summary_row {
+#ssgzjhsvou .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -581,7 +586,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#uqfvwmamzg .gt_first_grand_summary_row {
+#ssgzjhsvou .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -591,7 +596,7 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-#uqfvwmamzg .gt_last_grand_summary_row_top {
+#ssgzjhsvou .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -601,11 +606,11 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#uqfvwmamzg .gt_striped {
+#ssgzjhsvou .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uqfvwmamzg .gt_table_body {
+#ssgzjhsvou .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -614,7 +619,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#uqfvwmamzg .gt_footnotes {
+#ssgzjhsvou .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -628,7 +633,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#uqfvwmamzg .gt_footnote {
+#ssgzjhsvou .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -637,7 +642,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#uqfvwmamzg .gt_sourcenotes {
+#ssgzjhsvou .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -651,7 +656,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#uqfvwmamzg .gt_sourcenote {
+#ssgzjhsvou .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -659,72 +664,72 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#uqfvwmamzg .gt_left {
+#ssgzjhsvou .gt_left {
   text-align: left;
 }
 
-#uqfvwmamzg .gt_center {
+#ssgzjhsvou .gt_center {
   text-align: center;
 }
 
-#uqfvwmamzg .gt_right {
+#ssgzjhsvou .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uqfvwmamzg .gt_font_normal {
+#ssgzjhsvou .gt_font_normal {
   font-weight: normal;
 }
 
-#uqfvwmamzg .gt_font_bold {
+#ssgzjhsvou .gt_font_bold {
   font-weight: bold;
 }
 
-#uqfvwmamzg .gt_font_italic {
+#ssgzjhsvou .gt_font_italic {
   font-style: italic;
 }
 
-#uqfvwmamzg .gt_super {
+#ssgzjhsvou .gt_super {
   font-size: 65%;
 }
 
-#uqfvwmamzg .gt_footnote_marks {
+#ssgzjhsvou .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uqfvwmamzg .gt_asterisk {
+#ssgzjhsvou .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uqfvwmamzg .gt_indent_1 {
+#ssgzjhsvou .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uqfvwmamzg .gt_indent_2 {
+#ssgzjhsvou .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uqfvwmamzg .gt_indent_3 {
+#ssgzjhsvou .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uqfvwmamzg .gt_indent_4 {
+#ssgzjhsvou .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uqfvwmamzg .gt_indent_5 {
+#ssgzjhsvou .gt_indent_5 {
   text-indent: 25px;
 }
 
-#uqfvwmamzg .katex-display {
+#ssgzjhsvou .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#uqfvwmamzg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ssgzjhsvou div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -786,7 +791,7 @@ div.csl-indent {
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Baumberg2006" class="csl-entry" role="listitem">
 Baumberg, Ben. 2006. <span>“The Global Economic Burden of Alcohol: A Review and Some Suggestions.”</span> <em>Drug and Alcohol Review</em> 25 (6): 537–51.
 </div>
@@ -794,7 +799,7 @@ Baumberg, Ben. 2006. <span>“The Global Economic Burden of Alcohol: A Review an
 Elder, R. W., R. A. Shults, D. A. Sleet, J. L. Nichols, R. S. Thompson, and W. Rajab. 2004. <span>“Effectiveness of Mass Media Campaigns for Reducing Drinking and Driving.”</span> <em>American Journal of Preventive Medicine</em> 27 (1): 57–65.
 </div>
 <div id="ref-NHTSA2023" class="csl-entry" role="listitem">
-National Highway Traffic Safety Administration. 2023. <span>“Traffic Safety Facts 2023 Data.”</span> U.S. Department of Transportation.
+National Highway Traffic Safety Administration. 2023. <em>Traffic Safety Facts 2023 Data</em>. U.S. Department of Transportation.
 </div>
 <div id="ref-Rezapour2022" class="csl-entry" role="listitem">
 Rezapour, M., and K. Ksaibati. 2022. <span>“Identification of Factors Associated with Various Types of Impaired Driving.”</span> <em>Humanities and Social Sciences Communications</em> 9 (1): 1–11.
@@ -1204,6 +1209,27 @@ Wagenaar, A. C., T. S. Zobeck, G. D. Williams, and R. Hingson. 1995. <span>“Me
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><strong>El Paso Crime Lab</strong></p>
+<p>Advancing the Science of Public Safety</p>
+</div>   
+    <div class="nav-footer-center">
+<p><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="subscribe.html">Subscribe</a></p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.instagram.com/epcrimelab/">
+      <i class="bi bi-instagram" role="img" aria-label="Instagram">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
 
 
 
