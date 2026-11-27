@@ -3,37 +3,15 @@ title: "Moving Beyond Activity"
 subtitle: "Why Police Agencies Should Evaluate Problem-Solving Efforts"
 
 author:
-  - name: Matthew J. Durán
+  - name: Sample Author
     affiliations:
-      - name: El Paso Crime Lab
-      - name: Arizona State University
-        department: School of Criminology and Criminal Justice
-
-  - name: Jane A. Smith
-    affiliations:
-      - name: University of Texas at El Paso
-        department: Department of Criminal Justice
-
-  - name: Robert B. Johnson
-    affiliations:
-      - name: University of New Mexico
-        department: Department of Sociology
-
-  - name: Sarah L. Williams
-    affiliations:
-      - name: Arizona State University
-        department: School of Criminology and Criminal Justice
-
-  - name: David R. Brown
-    affiliations:
-      - name: University of Texas at El Paso
-        department: Department of Criminal Justice
+      - name: Example Organization
 
 date: November 2026
 
 journal_name: "The Police Journal"
 submission_type: "Research & Education"
-article_id: "PJ-2026-001"
+article_id: "PJ-SAMPLE"
 volume: 1
 publication_year: 2026
 
@@ -56,7 +34,7 @@ format:
     toc: false
     lof: false
     lot: false
-    number-sections: true
+    number-sections: false
 
     # Hyperlinks
     colorlinks: true
@@ -170,7 +148,7 @@ format:
         }
 
         \fancyhead[R]{
-          \small\sffamily\textsc{Research \& Education}
+          \small\sffamily\textsc{Sample publication}
         }
 
         \fancyfoot[C]{\thepage}
@@ -240,7 +218,7 @@ execute:
 % ============================================================
 
 {\large\bfseries\color{EPCLTerracotta}
-RESEARCH \& EDUCATION
+RESEARCH \& EDUCATION | SAMPLE PUBLICATION
 \par}
 
 \vspace{0in}
@@ -270,11 +248,7 @@ Why Police Agencies Should Evaluate Problem-Solving Efforts
 % ============================================================
 
 {\large\bfseries\color{EPCLCharcoal}
-\EPCLAuthor{Matthew J. Durán}{1,2},
-\EPCLAuthor{Jane A. Smith}{3},
-\EPCLAuthor{Robert B. Johnson}{4},
-\EPCLAuthor{Sarah L. Williams}{2},
-\EPCLAuthor{David R. Brown}{3}
+\EPCLAuthor{Sample Author}{1}
 \par}
 
 \vspace{0.12in}
@@ -286,25 +260,7 @@ Why Police Agencies Should Evaluate Problem-Solving Efforts
 {\small\color{EPCLCharcoal}
 \setlength{\parskip}{3pt}
 
-\EPCLAffiliation{1}{
-  El Paso Crime Lab
-}
-
-\EPCLAffiliation{2}{
-  School of Criminology and Criminal Justice,
-  Arizona State University
-}
-
-\EPCLAffiliation{3}{
-  Department of Criminal Justice,
-  University of Texas at El Paso
-}
-
-\EPCLAffiliation{4}{
-  Department of Sociology,
-  University of New Mexico
-}
-
+\EPCLAffiliation{1}{Example Organization}
 }
 
 \vspace{0.24in}
@@ -332,8 +288,8 @@ PUBLICATION INFORMATION
 \begin{tabular}{@{}ll}
 \textbf{Journal} & The Police Journal \\
 \textbf{Volume} & Volume 1 \\
-\textbf{Publication date} & November 2026 \\
-\textbf{Article ID} & PJ-2026-001 \\
+\textbf{Publication date} & Not published (sample) \\
+\textbf{Article ID} & PJ-SAMPLE \\
 \textbf{Publication series} & Research \& Education \\
 \end{tabular}
 }
@@ -352,12 +308,10 @@ RECOMMENDED CITATION
 
 {\small
 \noindent
-Durán, M. J., Smith, J. A., Johnson, R. B.,
-Williams, S. L., \& Brown, D. R. (2026).
-Moving beyond activity: Why police agencies should evaluate
-problem-solving efforts.
-\textit{The Police Journal, 1}, Article PJ-2026-001.
+Sample Author. (2026). Moving beyond activity: Why police agencies should evaluate problem-solving efforts. \textit{The Police Journal}. [Sample publication; not for citation.]
 \par}
+
+{\small\color{EPCLTerracotta}\textbf{DISPLAY SAMPLE ONLY.} Prepared to demonstrate the format of EPCL Publications. Author information and data are illustrative. This is not a published or editorially reviewed article.\par}
 
 \vfill
 
@@ -380,67 +334,28 @@ An EPCL Publication \hfill El Paso, Texas
 
 ```
 
-# Introduction
+# Are we making a difference?
 
-Police agencies routinely collect information about their activities. They count calls for service, arrests, citations, traffic stops, reports, and other operational outputs. These measures are useful for understanding what an agency does, but they do not necessarily tell us whether those activities produce meaningful improvements in public safety.
+Police departments track calls, arrests, traffic stops and patrol hours. These numbers tell us how much work is being done. But they do not always tell us whether a community is becoming safer.
 
-This distinction is important. An agency can increase enforcement activity without reducing the underlying problem it is attempting to address. Similarly, a department can implement a new strategy without knowing whether the strategy worked, for whom it worked, or under what circumstances it was effective.
+Imagine a department increases patrols in a neighborhood experiencing vehicle burglaries. Officers spend more time in the area and make several arrests. Has the problem improved? To answer that question, the department needs to look beyond activity and examine what happened to the burglaries themselves.
 
-Evaluation provides a way to answer these questions. Rather than treating implementation as the endpoint of a policing initiative, agencies can use evaluation to determine whether their efforts produce the intended outcomes.
+# Measuring what matters
 
-This article introduces the importance of evaluating police problem-solving efforts and outlines several practical considerations for agencies seeking to improve their use of evidence.
+Activity measures are useful for managing staff and resources. Outcome measures help us understand whether an effort is achieving its purpose. Both belong in the conversation about police performance.
 
-# From Activity to Effectiveness
-
-Police performance is often described through measures of activity. These measures are relatively easy to collect and communicate. However, activity and effectiveness are different concepts.
-
-Consider a department that introduces a targeted enforcement initiative to address recurring vehicle burglaries in a particular neighborhood. The department might report the number of patrol hours devoted to the initiative, the number of vehicle stops conducted, or the number of arrests made.
-
-These figures describe implementation. They do not independently establish whether vehicle burglaries declined because of the initiative.
-
-A more complete assessment would examine the underlying problem, establish a baseline, measure outcomes over time, and consider whether observed changes can reasonably be attributed to the intervention.
-
-## The distinction between outputs and outcomes
-
-| Measure type | Example | What it tells us |
+| What we measure | Example | What it tells us |
 |:--|:--|:--|
-| Input | Officer hours assigned | Resources invested |
-| Activity | Directed patrols conducted | Work performed |
-| Output | Stops or arrests made | Immediate operational production |
-| Outcome | Reduction in vehicle burglaries | Change in the underlying problem |
-| Impact | Sustained improvement in neighborhood safety | Broader public safety benefit |
+| Resources | Officer hours | What we invested |
+| Activity | Directed patrols | What we did |
+| Output | Stops or arrests | Immediate results |
+| Outcome | Vehicle burglaries | Whether the problem changed |
 
-Table: Examples of police performance measures. The categories are illustrative and are not intended to represent a universal performance framework.
+: Examples of performance measures.
 
-The distinction matters because agencies may otherwise reward activity without understanding whether that activity contributes to meaningful outcomes.
+# A closer look
 
-# Why Evaluation Matters
-
-Evaluation is not simply an academic exercise. It can help agencies make better operational decisions.
-
-## 1. Identifying what works
-
-Without evaluation, agencies may continue strategies because they are familiar, politically popular, or perceived to be effective. These explanations are not substitutes for evidence.
-
-Evaluation allows departments to examine whether an intervention is associated with measurable improvements and whether those improvements are consistent with the strategy's intended goals.
-
-## 2. Identifying what does not work
-
-Not every intervention will produce the expected result. Some strategies may have no measurable effect, while others may produce unintended consequences.
-
-Identifying ineffective approaches is valuable. It allows agencies to redirect limited resources toward strategies with stronger evidence of effectiveness.
-
-## 3. Improving implementation
-
-Even an effective strategy can fail when it is poorly implemented.
-
-Evaluation can help identify whether an intervention was delivered as intended, whether officers had the necessary resources, and whether organizational barriers affected implementation.
-
-# A Practical Example
-
-Consider a hypothetical police department that introduces a directed patrol initiative to address vehicle burglaries.
-
-The following figure illustrates how a department might examine monthly incidents before and after implementation.
+Suppose a department begins a directed patrol initiative in July. The chart below uses fictional numbers to show how monthly burglary reports might be tracked before and after the initiative.
 
 ```{r}
 #| label: fig-example
@@ -469,112 +384,57 @@ abline(v = 6.5, lty = 2, lwd = 2)
 
 text(
   6.5,
-  max(incidents) + 3,
+  max(incidents) - 1,
   "Initiative begins",
   pos = 4,
   cex = 0.8
 )
 ```
 
-Figure @fig-example presents a hypothetical pattern in which reported vehicle burglaries decline following the introduction of a directed patrol initiative.
+The number of reported burglaries falls after the initiative begins. That is encouraging, but it does not prove that the patrols caused the decline. Seasonal changes, reporting patterns or other efforts may also have played a role.
 
-The pattern is encouraging, but it does not establish that the initiative caused the reduction. Other factors, including seasonal patterns, changes in reporting, and broader crime trends, could explain some or all of the observed difference.
-
-A stronger evaluation would incorporate additional information, such as a comparison area, historical trends, and measures of implementation.
-
-## Moving beyond descriptive comparisons
-
-A basic before-and-after comparison can be a useful starting point. However, agencies should be cautious about interpreting changes as evidence of effectiveness.
-
-For example, a department might compare the number of incidents in the six months before an intervention with the number recorded during the six months afterward.
-
-| Evaluation period | Reported incidents |
+| Period | Reported burglaries |
 |:--|--:|
 | Six months before | 249 |
-| Six months after | 181 |
-| Difference | -68 |
-| Percentage change | -27.3% |
+| Six months after | 191 |
+| Change | -23.3% |
 
-Table: Hypothetical before-and-after comparison. Values are illustrative and do not represent actual agency data.
+: Illustrative figures only; not actual agency data.
 
-Although the comparison indicates a decline, it does not account for other explanations. More rigorous approaches can help distinguish the effects of an intervention from changes that would have occurred anyway.
+A useful next step would be to compare the results with previous years or with a similar neighborhood where the initiative was not introduced.
 
-# Practical Considerations for Police Agencies
+# Putting it into practice
 
-Evaluation does not have to begin with a complex research design. Agencies can take several practical steps to improve their ability to assess initiatives.
+Agencies can start with a few straightforward questions:
 
-1. **Define the problem.** Identify the specific public safety problem the initiative is intended to address.
+- What specific problem are we trying to solve?
+- What would improvement look like?
+- What information do we have from before the effort began?
+- Did we carry out the plan as intended?
+- What changed, and what else might explain that change?
 
-2. **Establish measurable objectives.** Determine what meaningful improvement would look like and how it will be measured.
+The answers can help leaders decide whether to continue, adjust or reconsider an initiative.
 
-3. **Collect baseline information.** Document conditions before implementation so that subsequent changes can be assessed.
+# The takeaway
 
-4. **Monitor implementation.** Record whether the intervention is being delivered as intended.
-
-5. **Measure outcomes.** Examine whether the underlying problem changes over time.
-
-6. **Use findings to inform decisions.** Continue, modify, expand, or discontinue initiatives based on the available evidence.
-
-These steps can help make evaluation a routine part of police operations rather than an activity reserved exclusively for academic researchers.
-
-# Conclusion
-
-Police agencies should not have to choose between operational experience and scientific evidence. Both are important to effective policing.
-
-Operational experience helps agencies identify problems, develop strategies, and understand local conditions. Evaluation provides a way to determine whether those strategies produce the intended results.
-
-Ultimately, the goal should not be to measure how much activity an agency produces, but to understand whether its activities contribute to meaningful improvements in public safety.
-
-Progress requires more than implementing new strategies. It requires learning from them.
+Counting activity is important, but understanding results is equally important. Evaluation helps connect the work officers do each day with the public safety outcomes their communities care about.
 
 # About the Author
 
-**Matthew J. Durán** is a criminologist and founder of the El Paso Crime Lab. His work focuses on policing, program evaluation, and the application of social science to public safety policy and practice. He is a doctoral student in the School of Criminology and Criminal Justice at Arizona State University.
+**Sample Author** is a placeholder demonstrating how a contributor's professional background would appear in an EPCL publication.
 
 # Publication Information and Disclosures
 
-## Acknowledgments {.unnumbered .unlisted}
+**Sample status:** This document is for display purposes only. It has not undergone editorial review and is not an official publication.
 
-The author thanks the individuals and organizations whose work contributes to the continued development of evidence-informed policing. Any errors or omissions remain the responsibility of the author.
+**Funding and conflicts of interest:** Placeholder for author disclosures.
 
-## Funding {.unnumbered .unlisted}
+**Author contributions:** Placeholder for contributor roles.
 
-No external funding was received for the preparation of this article.
+**Disclaimer:** All data and author information in this sample are illustrative.
 
-## Conflict of Interest {.unnumbered .unlisted}
+**Copyright and license:** Publication terms would appear here in an accepted article.
 
-The author declares no conflicts of interest relevant to the content of this article.
-
-## Author Contributions {.unnumbered .unlisted}
-
-The author was responsible for the conceptualization, preparation, writing, and final approval of this article.
-
-## Disclaimer {.unnumbered .unlisted}
-
-The views and opinions expressed in this publication belong to the author and do not necessarily reflect the official policies, positions, or opinions of the El Paso Crime Lab, Arizona State University, or any affiliated organization.
-
-## Copyright and License {.unnumbered .unlisted}
-
-Copyright © 2026 by the author.
-
-This article is published under the Creative Commons Attribution-NoDerivatives 4.0 International License (CC BY-ND 4.0).
-
-You are free to share, copy, redistribute, and use this article in any medium or format, including for commercial purposes, provided that appropriate credit is given to the author, a link to the license is provided, and any changes to the original article are not distributed.
-
-The article must be distributed in its original, unmodified form. No additional restrictions may be applied that would prevent others from exercising the rights granted by this license.
-
-License: https://creativecommons.org/licenses/by-nd/4.0/
-
-## Publication Details {.unnumbered .unlisted}
-
-**The Police Journal**
-
+**The Police Journal**  
 An EPCL Publication  
-El Paso Crime Lab  
 El Paso, Texas, United States
-
-Article ID: PJ-2026-001  
-Volume 1, Issue 1  
-November 2026
-
-*Research • Innovation • Practice*
