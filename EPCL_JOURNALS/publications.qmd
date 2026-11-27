@@ -464,9 +464,12 @@ Share practical advice, professional experiences, or lessons learned.
 ### How to get published
 
 1. Submit a short proposal describing your idea.
-2. If approved, write and submit your article.
-3. Editors review your article and may ask for changes.
-4. If accepted, your article is prepared for publication.
+2. Two editors independently review your proposal without knowing your identity.
+3. If approved, write and submit your article.
+4. Two editors independently review your blinded article and may request changes.
+5. If accepted, your article is prepared for publication.
+
+All proposals and articles undergo blinded editorial review to promote fairness and reduce bias.
 
 You do not need a finished article to submit a proposal.
 
