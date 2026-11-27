@@ -9,27 +9,29 @@ toc: false
 
 :::::: {.epcl-publications}
 
-::: {.publications-hero}
+::::: {.publications-hero}
 
-::: {.epcl-kicker}
-EL PASO CRIME LAB / PUBLICATIONS
-:::
+::: {.publications-hero-copy}
 
 # EPCL Publications {.unnumbered .unlisted}
 
 ::: {.epcl-tagline}
-Research. Practice. Public Safety.
+Open Access Journals in Justice and Public Safety
 :::
 
-The **El Paso Crime Lab (EPCL)** publishes research, professional perspectives, and practical contributions that advance the science of public safety.
+The **El Paso Crime Lab** publishes four journals featuring research briefs, professional perspectives, and lessons from practice across policing, corrections, courts, and community safety.
 
-Our publications connect scientific inquiry with professional experience, translating knowledge into more informed policies, practices, and decisions.
-
-<a href="https://forms.gle/ToVe8zXd8xBU9hkd8" class="btn btn-primary btn-lg">
-  SUBMIT A PROPOSAL
-</a>
+<a href="https://forms.gle/ToVe8zXd8xBU9hkd8" class="epcl-submit-link">Submit a proposal</a>
 
 :::
+
+::: {.publications-hero-art}
+
+![](assets/journal_covers_epcl_fan_nobg.png){fig-alt="Artwork for the four EPCL journals on policing, corrections, courts, and community safety"}
+
+:::
+
+:::::
 
 ---
 
@@ -43,7 +45,7 @@ Explore published contributions, learn about submitting your work, and discover 
 
 Explore the complete archive of published contributions across EPCL's journals.
 
-Search the archive and filter publications by journal or contribution category.
+Search by article title or author name, or filter by journal or contribution category.
 
 ```{=html}
 <div class="archive-toolbar">
@@ -53,7 +55,7 @@ Search the archive and filter publications by journal or contribution category.
     <input
       id="archive-search"
       type="search"
-      placeholder="Search by article title..."
+      placeholder="Article title or author name"
     />
   </div>
 
@@ -165,9 +167,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   }
 
+  function normalizeSearch(value) {
+    return value.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
+  }
+
   function getFilteredPublications() {
 
-    const search = searchInput.value.trim().toLowerCase();
+    const search = normalizeSearch(searchInput.value.trim());
     const journal = journalFilter.value;
     const type = typeFilter.value;
     const sort = sortFilter.value;
@@ -175,7 +181,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     let results = publications.filter(article => {
 
       const matchesSearch = !search ||
-        (article.title || "").toLowerCase().includes(search);
+        normalizeSearch(article.title || "").includes(search) ||
+        normalizeSearch(article.authors || "").includes(search);
 
       const matchesJournal = !journal ||
         article.journal === journal;
@@ -315,6 +322,14 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
 
       titleCell.appendChild(link);
+
+      if (article.authors?.trim()) {
+        const byline = document.createElement("span");
+        byline.className = "article-authors";
+        byline.textContent = article.authors.trim();
+        titleCell.appendChild(byline);
+      }
+
       if (article.pdf_url) {
         const format = document.createElement("span");
         format.className = "article-format";
@@ -475,21 +490,86 @@ You do not need a finished article to submit a proposal.
 
 [Submit a proposal](https://forms.gle/ToVe8zXd8xBU9hkd8){.epcl-submit-link}
 
+## For Editors
+
+### Become an editor
+
+Help make practical public safety knowledge easier to find and use. If you have experience in policing, corrections, courts, or community safety through your work or research, we’d like to hear from you.
+
+To express interest, [send a message](www.epcrimelab.org/contact.html. Tell him which journal interests you and share a few sentences about your background.
+
+### How a review works
+
+Editors review short proposals and full articles. Each assignment arrives by email and has its own review link.
+
+```{=html}
+<ol class="editor-review-steps">
+  <li><strong>Open the email</strong><span>You’ll get a link to your assignment.</span></li>
+  <li><strong>Read the submission</strong><span>Review the work and answer a few questions.</span></li>
+  <li><strong>Submit your decision</strong><span>Send your decision and any feedback in the same form.</span></li>
+</ol>
+```
+
+### Editorial policies
+
+#### Editorial Independence
+
+Publication decisions are based on the relevance, quality, and suitability of contributions. Authors' professional affiliations and institutional positions do not guarantee acceptance.
+
+#### Editorial Review
+
+Two editors independently review each proposal and each article. Reviews are blinded to help editors focus on the work. EPCL resolves split decisions.
+
+#### Publication Ethics
+
+Authors are responsible for the accuracy and integrity of their submissions, appropriate acknowledgment of sources, and disclosure of relevant conflicts of interest.
+
+#### Conflicts of Interest
+
+Authors and editors should disclose relationships or interests that could reasonably be perceived as influencing the preparation, review, or publication of a contribution.
+
+#### Corrections and Retractions
+
+EPCL may issue corrections, expressions of concern, or retractions when necessary to maintain the accuracy and integrity of its publications.
+
+#### Copyright and Permissions
+
+Publication and reuse conditions will be communicated to contributors during the submission and acceptance process.
+
 ## Editorial Leadership
 
 ```{=html}
-<div class="editorial-table-wrap" tabindex="0" role="region" aria-label="Editorial leadership by journal">
-<table class="editorial-team-table" aria-label="Current and past editors by journal">
-<thead><tr><th scope="col">The Community Safety Journal</th><th scope="col">The Police Journal</th><th scope="col">The Corrections Journal</th><th scope="col">The Courts Journal</th></tr></thead>
-<tbody>
-<tr class="editorial-group"><th colspan="4" scope="rowgroup">Current Editors</th></tr>
-<tr><td><ul><li><strong>Editor Name</strong>, <em>Affiliation</em></li></ul></td><td><ul><li><strong>Editor Name</strong>, <em>Affiliation</em></li></ul></td><td><ul><li><strong>Editor Name</strong>, <em>Affiliation</em></li></ul></td><td><ul><li><strong>Editor Name</strong>, <em>Affiliation</em></li></ul></td></tr>
-</tbody>
-<tbody>
-<tr class="editorial-group"><th colspan="4" scope="rowgroup">Past Editors</th></tr>
-<tr><td><ul><li><strong>Former Editor Name</strong>, <em>Affiliation</em></li></ul></td><td><ul><li><strong>Former Editor Name</strong>, <em>Affiliation</em></li></ul></td><td><ul><li><strong>Former Editor Name</strong>, <em>Affiliation</em></li></ul></td><td><ul><li><strong>Former Editor Name</strong>, <em>Affiliation</em></li></ul></td></tr>
-</tbody>
-</table>
+<div class="editorial-roster-scroll" tabindex="0" role="region" aria-label="Editorial leadership by journal">
+  <div class="editorial-roster">
+    <section>
+      <h3>The Community Safety Journal</h3>
+      <h4>Current Editors</h4>
+      <ul><li><strong>Editor Name</strong>, <em>Affiliation</em></li></ul>
+      <h4>Past Editors</h4>
+      <ul><li><strong>Editor Name</strong>, <em>Affiliation</em></li></ul>
+    </section>
+    <section>
+      <h3>The Police Journal</h3>
+      <h4>Current Editors</h4>
+      <ul><li><strong>Editor Name</strong>, <em>Affiliation</em></li></ul>
+      <h4>Past Editors</h4>
+      <ul><li><strong>Editor Name</strong>, <em>Affiliation</em></li></ul>
+    </section>
+    <section>
+      <h3>The Corrections Journal</h3>
+      <h4>Current Editors</h4>
+      <ul><li><strong>Editor Name</strong>, <em>Affiliation</em></li></ul>
+      <h4>Past Editors</h4>
+      <ul><li><strong>Editor Name</strong>, <em>Affiliation</em></li></ul>
+    </section>
+    <section>
+      <h3>The Courts Journal</h3>
+      <h4>Current Editors</h4>
+      <ul><li><strong>Editor Name</strong>, <em>Affiliation</em></li></ul>
+      <h4>Past Editors</h4>
+      <ul><li><strong>Editor Name</strong>, <em>Affiliation</em></li></ul>
+    </section>
+  </div>
 </div>
 ```
 
@@ -504,34 +584,6 @@ Share your idea using our [proposal form](https://forms.gle/ToVe8zXd8xBU9hkd8).
 :::
 
 No themed collections are currently open for submissions.
-
-## Editorial Policies
-
-EPCL Publications seeks to maintain transparent and consistent editorial practices. The following policies describe the principles guiding publication decisions and the handling of submitted work.
-
-### Editorial Independence
-
-Publication decisions are based on the relevance, quality, and suitability of contributions. Authors' professional affiliations and institutional positions do not guarantee acceptance.
-
-### Editorial Review
-
-All submissions undergo editorial assessment. Additional review may be requested depending on the nature, scope, and intended contribution of the manuscript.
-
-### Publication Ethics
-
-Authors are responsible for the accuracy and integrity of their submissions, appropriate acknowledgment of sources, and disclosure of relevant conflicts of interest.
-
-### Conflicts of Interest
-
-Authors and editors should disclose relationships or interests that could reasonably be perceived as influencing the preparation, review, or publication of a contribution.
-
-### Corrections and Retractions
-
-EPCL may issue corrections, expressions of concern, or retractions when necessary to maintain the accuracy and integrity of its publications.
-
-### Copyright and Permissions
-
-Publication and reuse conditions will be communicated to contributors during the submission and acceptance process.
 
 :::
 
@@ -566,13 +618,6 @@ Good policy begins with good evidence.
 .epcl-publications p {max-width:82ch;}
 .epcl-publications a {color:var(--accent);}
 .epcl-publications a:focus-visible,.epcl-publications button:focus-visible {outline:2px solid var(--accent); outline-offset:4px;}
-.epcl-publications .publications-hero {border-top:5px solid var(--ink); border-bottom:1px solid var(--line); padding:2.8rem 0 2.5rem; margin:1rem 0 2rem; position:relative;}
-.epcl-publications .epcl-kicker {font-size:.75rem; font-weight:700; letter-spacing:.16em; color:var(--accent); margin-bottom:1rem;}
-.epcl-publications .publications-hero h1 {font-size:clamp(2.8rem,6vw,5rem); font-weight:700; line-height:1.02; margin:0 0 .8rem;}
-.epcl-publications .epcl-tagline {font-size:clamp(1.1rem,2vw,1.5rem); font-weight:500; color:var(--muted); margin-bottom:1.5rem;}
-.epcl-publications .publications-hero p {font-size:1.06rem; max-width:76ch;}
-.epcl-publications .publications-hero .btn {background:var(--ink); color:white; border:1px solid var(--ink); border-radius:2px; padding:.8rem 1.25rem; font-size:.78rem; letter-spacing:.07em; font-weight:650; margin-top:.8rem;}
-.epcl-publications .publications-hero .btn:hover {background:var(--accent); border-color:var(--accent);}
 .epcl-publications .panel-tabset {margin:1.5rem 0 3rem;}
  .epcl-publications .panel-tabset .nav-tabs {
   display:flex; flex-wrap:wrap; gap:.35rem; padding:0 0 .45rem;
@@ -635,36 +680,16 @@ Good policy begins with good evidence.
 .epcl-publications .publications-footer strong {color:var(--ink); font-size:1.2rem;}
 .epcl-publications .publications-footer p {margin:.25rem 0;}
 @media(max-width:900px){.epcl-publications .archive-toolbar{grid-template-columns:repeat(2,minmax(0,1fr));}.epcl-publications .contribution-grid{grid-template-columns:1fr;gap:.75rem;}}
-@media(max-width:560px){.epcl-publications{padding:0 12px;}.epcl-publications .archive-toolbar{grid-template-columns:1fr;}.epcl-publications .publications-hero{padding:1.8rem 0;}.epcl-publications .panel-tabset .nav-tabs{gap:.25rem;}.epcl-publications .panel-tabset .nav-tabs .nav-link{font-size:.85rem;padding:.65rem .75rem;}}
+@media(max-width:560px){.epcl-publications{padding:0 12px;}.epcl-publications .archive-toolbar{grid-template-columns:1fr;}.epcl-publications .panel-tabset .nav-tabs{gap:.25rem;}.epcl-publications .panel-tabset .nav-tabs .nav-link{font-size:.85rem;padding:.65rem .75rem;}}
 [data-bs-theme="dark"] .epcl-publications {--ink:#e7ecee;--muted:#b3c0c6;--line:#46535a;--paper:#20282d;--wash:#2a353b;--accent:#a0c9da;}
-[data-bs-theme="dark"] .epcl-publications .publications-hero .btn {color:#20282d;}
 
 
-/* Compact academic editorial directory */
-.epcl-publications .editorial-table-wrap { overflow-x:auto; margin:1rem 0 2rem; max-width:100%; }
-.epcl-publications .editorial-team-table { width:100%; min-width:max-content; table-layout:auto; border-collapse:collapse; font-size:12px; border-top:2px solid var(--ink); border-bottom:1px solid var(--ink); }
-.epcl-publications .editorial-team-table th, .epcl-publications .editorial-team-table td { white-space:nowrap !important; overflow-wrap:normal !important; word-break:normal !important; text-align:left; vertical-align:top; padding:10px 14px; }
-.epcl-publications .editorial-team-table thead th { font-size:13px; font-weight:600; color:var(--accent); }
-.epcl-publications .editorial-team-table .editorial-group th { background:var(--wash); color:var(--ink); font-size:11px; font-weight:600; padding:7px 14px; }
-.epcl-publications .editorial-team-table ul { list-style:none; margin:0; padding:0; }
-.epcl-publications .editorial-team-table li { padding:3px 0; white-space:nowrap; }
-.epcl-publications .editorial-team-table strong { font-weight:700; }
-.epcl-publications .editorial-team-table em { font-style:italic; color:var(--muted); }
 .epcl-publications .epcl-submit-link { display:inline-block; background:#315e70; color:#fff; padding:.75rem 1.2rem; border-radius:3px; font-weight:600; text-decoration:none; }
 .epcl-publications .epcl-submit-link:hover { background:#244e60; color:#fff; }
 
 /* Refined editorial finish — visual changes only */
 .epcl-publications { --gold:#a98242; --line:#dce3e6; --wash:#f5f7f8; }
-.epcl-publications .publications-hero {
-  background:var(--wash); border:1px solid var(--line); border-top:3px solid var(--gold);
-  border-radius:8px; padding:clamp(1.5rem,4vw,3.5rem); margin:1rem 0 2.5rem;
-}
-.epcl-publications .epcl-kicker {display:flex; align-items:center; gap:.7rem;}
-.epcl-publications .epcl-kicker::before {content:""; width:24px; height:2px; background:var(--gold); flex-shrink:0;}
-.epcl-publications .publications-hero h1 {letter-spacing:-.045em;}
-.epcl-publications .publications-hero .btn,
 .epcl-publications .epcl-submit-link {background:#284b5b; border:1px solid #284b5b; color:#fff; border-radius:6px; transition:background-color .18s ease,box-shadow .18s ease;}
-.epcl-publications .publications-hero .btn:hover,
 .epcl-publications .epcl-submit-link:hover {background:#1d3947; color:#fff; box-shadow:0 3px 10px #00000015;}
 .epcl-publications .panel-tabset .nav-tabs {gap:.4rem; padding-bottom:.75rem;}
 .epcl-publications .panel-tabset .nav-tabs .nav-link {border-radius:6px; border-bottom:2px solid transparent !important; padding:.7rem .95rem;}
@@ -682,16 +707,12 @@ Good policy begins with good evidence.
 .epcl-publications .archive-table tbody tr:last-child td {border-bottom:0;}
 .epcl-publications .contribution-card {border:1px solid var(--line); border-top:3px solid var(--gold); border-radius:6px; padding:1.35rem; background:var(--paper);}
 .epcl-publications .content-notice {border-radius:0 6px 6px 0;}
-.epcl-publications .editorial-team-table {border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
-.epcl-publications .editorial-team-table thead th {padding-top:14px; padding-bottom:14px;}
-.epcl-publications .editorial-team-table td {padding-top:14px; padding-bottom:14px;}
-.epcl-publications .editorial-team-table .editorial-group th {letter-spacing:.07em; text-transform:uppercase;}
 .epcl-publications .publications-footer {border-top:1px solid var(--line); padding-top:1.8rem;}
 [data-bs-theme="dark"] .epcl-publications {--line:#46535a; --wash:#2a353b;}
 [data-bs-theme="dark"] .epcl-publications .panel-tabset .nav-tabs .nav-link.active,
 [data-bs-theme="dark"] .epcl-publications .panel-tabset .nav-tabs .nav-link[aria-selected="true"] {background:#354b57 !important; color:#e7ecee !important;}
 [data-bs-theme="dark"] .epcl-publications .panel-tabset .nav-tabs .nav-link.active:hover {background:#405b69 !important; color:#fff !important;}
-@media(prefers-reduced-motion:reduce){.epcl-publications .publications-hero .btn,.epcl-publications .epcl-submit-link{transition:none;}}
+@media(prefers-reduced-motion:reduce){.epcl-publications .epcl-submit-link{transition:none;}}
 
 
 /* Higher-contrast editorial surfaces */
@@ -708,8 +729,137 @@ Good policy begins with good evidence.
 [data-bs-theme="dark"] .epcl-publications .panel-tabset .nav-tabs .nav-link.active,
 [data-bs-theme="dark"] .epcl-publications .panel-tabset .nav-tabs .nav-link[aria-selected="true"] {background:#426678 !important; color:#fff !important;}
 
-/* Restore the original light hero independently of the archive palette. */
-.epcl-publications .publications-hero {background:#f5f7f8; border-color:#dce3e6; border-top-color:var(--gold);}
-[data-bs-theme="dark"] .epcl-publications .publications-hero {background:#2a353b; border-color:#46535a; border-top-color:var(--gold);}
+
+
+.epcl-publications .editorial-roster-scroll {
+  overflow-x: auto;
+  margin: 1.25rem 0 2rem;
+}
+.epcl-publications .editorial-roster {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(max-content, 1fr));
+  gap: 1.5rem;
+  font-size: .8rem;
+}
+.epcl-publications .editorial-roster :is(h3, h4) {
+  color: inherit;
+  letter-spacing: normal;
+  white-space: nowrap;
+}
+.epcl-publications .editorial-roster h3 {
+  font-size: .88rem;
+  margin: 0 0 .8rem;
+}
+.epcl-publications .editorial-roster h4 {
+  font-size: inherit;
+  font-weight: 600;
+  margin: .85rem 0 .25rem;
+}
+.epcl-publications .editorial-roster ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+.epcl-publications .editor-review-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.75rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 2rem;
+}
+.epcl-publications .editor-review-steps li {
+  position: relative;
+  border-top: 2px solid var(--gold);
+  padding-top: .65rem;
+}
+.epcl-publications .editor-review-steps span {
+  display: block;
+  margin-top: .2rem;
+}
+.epcl-publications .editor-review-steps li + li::before {
+  content: "→" / "";
+  position: absolute;
+  right: calc(100% + .45rem);
+  color: var(--muted);
+}
+@media (max-width: 620px) {
+  .epcl-publications .editor-review-steps {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .epcl-publications .editor-review-steps li + li::before {
+    content: "↓" / "";
+    right: auto;
+    top: -1.45rem;
+  }
+}
+
+/* Stacked masthead for the wide, transparent journal-cover artwork. */
+.epcl-publications .publications-hero {
+  display: grid;
+  justify-items: center;
+  gap: clamp(1.4rem, 3.5vw, 2.5rem);
+  padding-block: clamp(1.5rem, 4vw, 3.25rem) clamp(1.25rem, 3vw, 2.5rem);
+  text-align: center;
+}
+.epcl-publications .publications-hero h1 {
+  margin: 0 0 .55rem;
+  font: 600 clamp(2.4rem, 6vw, 5rem)/1.04 Georgia, "Times New Roman", serif;
+  letter-spacing: -.045em;
+}
+.epcl-publications .epcl-tagline {
+  font-size: clamp(1rem, 2vw, 1.28rem);
+  font-weight: 600;
+  color: var(--accent);
+}
+.epcl-publications .publications-hero-copy p {
+  max-width: 60ch;
+  margin-inline: auto;
+}
+.epcl-publications .publications-hero-copy > p:last-child {
+  margin-bottom: 0;
+}
+.epcl-publications .publications-hero .epcl-submit-link {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+.epcl-publications .publications-hero .epcl-submit-link:hover {
+  box-shadow: none;
+}
+.epcl-publications .publications-hero .epcl-submit-link::after {
+  content: " →" / "";
+  display: inline-block;
+  margin-left: .35em;
+}
+.epcl-publications .publications-hero-art {
+  width: min(100%, 51rem);
+}
+.epcl-publications .publications-hero-art :is(p, figure) {
+  max-width: none;
+  margin: 0;
+}
+.epcl-publications .publications-hero-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Crop the transparent margin above and below the covers. */
+  aspect-ratio: 2048 / 908;
+  object-fit: cover;
+  object-position: center 59%;
+}
+
+.epcl-publications .article-authors {
+  display: block;
+  margin-top: .35rem;
+  color: var(--ink);
+  font-size: .89rem;
+  overflow-wrap: anywhere;
+}
 </style>
 ```
