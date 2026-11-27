@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,16 @@
 
 <title>Comparing Alcohol-Related Traffic Fatalities Across Major Texas Cities – El Paso Crime Lab</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -35,15 +41,26 @@ ul.task-list li input[type="checkbox"] {
 <link href="./about_logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dec27a635df3619fee3abd01ce5a42f4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b978b5a48b788a4339b89597eba50e38.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b978b5a48b788a4339b89597eba50e38.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b978b5a48b788a4339b89597eba50e38.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-dashboard/quarto-dashboard.js"></script>
+<script src="site_libs/quarto-dashboard/stickythead.js"></script>
+
+
+
+<script src="site_libs/quarto-dashboard/web-components.js" type="module"></script>
+<script src="site_libs/quarto-dashboard/components.js"></script>
+
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,11 +88,11 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<link href="site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
 
 <script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 
-<script src="site_libs/plotly-binding-4.12.0/plotly.js"></script>
+<script src="site_libs/plotly-binding-4.12.1/plotly.js"></script>
 
 <script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
 
@@ -97,16 +114,16 @@ ul.task-list li input[type="checkbox"] {
 
 <script src="site_libs/reactwidget-2.0.0/react-tools.js"></script>
 
-<link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
+<link href="site_libs/reactable-0.4.5/reactable.css" rel="stylesheet">
 
-<script src="site_libs/reactable-binding-0.4.4/reactable.js"></script>
+<script src="site_libs/reactable-binding-0.4.5/reactable.js"></script>
 
 
 
-<link rel="stylesheet" href="styles2.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="quarto-dashboard nav-fixed dashboard-fill fullcontent quarto-light">
+
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -139,10 +156,33 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="./dwi_home.html">
  <span class="dropdown-text">Driving While Intoxicated</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./report_animal_cruelty.pdf">
+ <span class="dropdown-text">Animal Cruelty</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./award_announcement.html"> 
+<span class="menu-text">Awards Program</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-dashboard--applications" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Dashboard &amp; Applications</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-dashboard--applications">    
+        <li>
+    <a class="dropdown-item" href="./crash_dashboard.html">
+ <span class="dropdown-text">Alcohol-Related Crash Dashboard</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./police_stops_tool.html">
+ <span class="dropdown-text">Racial Profiling Tool (BETA)</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-connect-with-us" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Connect With Us</span>
@@ -158,57 +198,54 @@ ul.task-list li input[type="checkbox"] {
   </li>  
     </ul>
   </li>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.instagram.com/epcrimelab/"> <i class="bi bi-instagram" role="img" aria-label="Instagram">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-</header>
+  <div id="quarto-announcement" data-announcement-id="7847dcbf024061e1fb90d05cf387504f" class="alert alert-primary hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Nominations are open for the <strong>EPCL Public Safety Science Awards!</strong> <a href="award_announcement.html">Learn more and submit a nomination</a>.</p>
+</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
+<header id="quarto-dashboard-header">
+<nav class="navbar navbar-expand-md slim" data-bs-theme="dark">
+  <div class="navbar-container container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-controls="dashboard-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>    
+
+
+    <div class="navbar-brand-container">
+
+
+      <div class="navbar-title">
+        <div class="navbar-title-text"><a href="#">Comparing Alcohol-Related Traffic Fatalities Across Major Texas Cities</a></div>
+        
+        <div class="navbar-author">Matthew Durán</div>
+      </div>
+    </div>
+<div id="dashboard-collapse" class="navbar-collapse collapse"><ul class="navbar-nav navbar-nav-scroll me-auto" role="tablist"><li class="nav-item" role="presentation"><a id="tab-final-takeaway" class="nav-link active" data-bs-toggle="tab" role="tab" data-bs-target="#final-takeaway" data-scrolling="false" href="#final-takeaway" aria-controls="final-takeaway" aria-selected="true"><span class="nav-link-text">Final Takeaway</span></a></li><li class="nav-item" role="presentation"><a id="tab-technical-details" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#technical-details" data-scrolling="false" href="#technical-details" aria-controls="technical-details" aria-selected="false"><span class="nav-link-text">Technical Details</span></a></li></ul></div></div>
+</nav>
+</header></header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-layout-custom page-navbar quarto-dashboard-content bslib-gap-spacing html-fill-container bslib-page-fill quarto-dashboard-pages">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
 <!-- main -->
-<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Comparing Alcohol-Related Traffic Fatalities Across Major Texas Cities</h1>
-</div>
-
-
-
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Matthew Durán </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">May 19, 2026</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<div style="height: 50px;">
+<div style="height: 50px;" class="bslib-grid-item html-fill-item">
 
 </div>
-<section id="is-drunk-driving-worse-in-el-paso" class="level2">
-<h2 class="anchored" data-anchor-id="is-drunk-driving-worse-in-el-paso">Is Drunk Driving Worse in El Paso?</h2>
+<div class="bslib-grid-item html-fill-item tab-content bslib-grid" data-layout="fill" style="display: grid; grid-template-rows: minmax(3em, 1fr) minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card bslib-card html-fill-container" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
 <p>A community facing a social problem such as drunk driving often wonders about it’s severity. Members of the community may ask, <em>“Is it worse here than in other places?”</em> To answer that question, we used three measurement strategies to assess the severity of loss of life from drunk driving. This report examines how El Paso compares to other large Texas cities in alcohol-related traffic fatalities between the years 2021 and 2025.</p>
 <p>The findings show that:</p>
 <ul>
@@ -229,23 +266,37 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>Together, these measures provide a clearer picture of how severe the problem is across communities of different sizes.</p>
 <hr>
-<div class="cell">
-<div class="cell-output-display">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-23f84d56711093ba3cb3" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-23f84d56711093ba3cb3">{"x":{"data":[{"x":[2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025],"y":[6.2800000000000002,3.0099999999999998,3.0099999999999998,3.27,1.76,null,4.5700000000000003,5.2999999999999998,3.6400000000000001,3.1200000000000001,2.8100000000000001,null,1.0900000000000001,0.55000000000000004,0.55000000000000004,0,0.55000000000000004,null,1.46,0.72999999999999998,2.9100000000000001,2.1800000000000002,0.72999999999999998,null,4.5899999999999999,4.29,3.98,7.6600000000000001,3.98,null,6.9199999999999999,7.6699999999999999,6.7000000000000002,7.2199999999999998,4.1699999999999999,null,2.0299999999999998,1.3500000000000001,3.3799999999999999,0,2.0299999999999998,null,2.5,2.29,2.8300000000000001,2.0699999999999998,2.29,null,2.9900000000000002,0.5,1,1,2,null,3.3599999999999999,5.04,2.9399999999999999,3.3599999999999999,2.1000000000000001,null,2.5699999999999998,4.6299999999999999,5.1399999999999997,4.1100000000000003,6.1699999999999999,null,6.29,6.29,5.2599999999999998,5.7800000000000002,5.04,null,5,4.1699999999999999,3.3399999999999999,2.0899999999999999,2.5,null,3.27,3.27,3.27,3.9199999999999999,1.96,null,0.76000000000000001,1.53,1.53,1.1499999999999999,0.38,null,0.93999999999999995,3.7599999999999998,0.93999999999999995,2.8199999999999998,0.93999999999999995,null,0,0,0,0,0,null,2.79,2.79,3.48,4.1799999999999997,5.5800000000000001,null,2.7599999999999998,7.7300000000000004,2.7599999999999998,1.6599999999999999,2.7599999999999998,null,12.9,9.6799999999999997,5.6399999999999997,6.4500000000000002,4.8399999999999999,null,0.65000000000000002,3.2400000000000002,1.3,1.3,0,null,0,1.5900000000000001,1.5900000000000001,1.5900000000000001,1.5900000000000001,null,1.75,2.7999999999999998,2.4500000000000002,2.7999999999999998,3.1499999999999999,null,2.52,3.3700000000000001,2.52,7.5700000000000003,1.6799999999999999,null,5.4299999999999997,5.8799999999999999,3.1000000000000001,4.3300000000000001,3.2999999999999998,null,0.83999999999999997,0.83999999999999997,2.5299999999999998,1.6899999999999999,1.6899999999999999,null,1.2,3.6099999999999999,7.21,8.4199999999999999,3.6099999999999999,null,0,0,0,0,0,null,2.8599999999999999,0.94999999999999996,0.94999999999999996,3.8100000000000001,0.94999999999999996],"text":["Year: 2021<br>City: Arlington<br>Rate: 6.3","Year: 2022<br>City: Arlington<br>Rate: 3","Year: 2023<br>City: Arlington<br>Rate: 3","Year: 2024<br>City: Arlington<br>Rate: 3.3","Year: 2025<br>City: Arlington<br>Rate: 1.8",null,"Year: 2021<br>City: Austin<br>Rate: 4.6","Year: 2022<br>City: Austin<br>Rate: 5.3","Year: 2023<br>City: Austin<br>Rate: 3.6","Year: 2024<br>City: Austin<br>Rate: 3.1","Year: 2025<br>City: Austin<br>Rate: 2.8",null,"Year: 2021<br>City: Brownsville<br>Rate: 1.1","Year: 2022<br>City: Brownsville<br>Rate: 0.6","Year: 2023<br>City: Brownsville<br>Rate: 0.6","Year: 2024<br>City: Brownsville<br>Rate: 0","Year: 2025<br>City: Brownsville<br>Rate: 0.6",null,"Year: 2021<br>City: Carrollton<br>Rate: 1.5","Year: 2022<br>City: Carrollton<br>Rate: 0.7","Year: 2023<br>City: Carrollton<br>Rate: 2.9","Year: 2024<br>City: Carrollton<br>Rate: 2.2","Year: 2025<br>City: Carrollton<br>Rate: 0.7",null,"Year: 2021<br>City: Corpus Christi<br>Rate: 4.6","Year: 2022<br>City: Corpus Christi<br>Rate: 4.3","Year: 2023<br>City: Corpus Christi<br>Rate: 4","Year: 2024<br>City: Corpus Christi<br>Rate: 7.7","Year: 2025<br>City: Corpus Christi<br>Rate: 4",null,"Year: 2021<br>City: Dallas<br>Rate: 6.9","Year: 2022<br>City: Dallas<br>Rate: 7.7","Year: 2023<br>City: Dallas<br>Rate: 6.7","Year: 2024<br>City: Dallas<br>Rate: 7.2","Year: 2025<br>City: Dallas<br>Rate: 4.2",null,"Year: 2021<br>City: Denton<br>Rate: 2","Year: 2022<br>City: Denton<br>Rate: 1.4","Year: 2023<br>City: Denton<br>Rate: 3.4","Year: 2024<br>City: Denton<br>Rate: 0","Year: 2025<br>City: Denton<br>Rate: 2",null,"Year: 2021<br>City: Fort Worth<br>Rate: 2.5","Year: 2022<br>City: Fort Worth<br>Rate: 2.3","Year: 2023<br>City: Fort Worth<br>Rate: 2.8","Year: 2024<br>City: Fort Worth<br>Rate: 2.1","Year: 2025<br>City: Fort Worth<br>Rate: 2.3",null,"Year: 2021<br>City: Frisco<br>Rate: 3","Year: 2022<br>City: Frisco<br>Rate: 0.5","Year: 2023<br>City: Frisco<br>Rate: 1","Year: 2024<br>City: Frisco<br>Rate: 1","Year: 2025<br>City: Frisco<br>Rate: 2",null,"Year: 2021<br>City: Garland<br>Rate: 3.4","Year: 2022<br>City: Garland<br>Rate: 5","Year: 2023<br>City: Garland<br>Rate: 2.9","Year: 2024<br>City: Garland<br>Rate: 3.4","Year: 2025<br>City: Garland<br>Rate: 2.1",null,"Year: 2021<br>City: Grand Prairie<br>Rate: 2.6","Year: 2022<br>City: Grand Prairie<br>Rate: 4.6","Year: 2023<br>City: Grand Prairie<br>Rate: 5.1","Year: 2024<br>City: Grand Prairie<br>Rate: 4.1","Year: 2025<br>City: Grand Prairie<br>Rate: 6.2",null,"Year: 2021<br>City: Houston<br>Rate: 6.3","Year: 2022<br>City: Houston<br>Rate: 6.3","Year: 2023<br>City: Houston<br>Rate: 5.3","Year: 2024<br>City: Houston<br>Rate: 5.8","Year: 2025<br>City: Houston<br>Rate: 5",null,"Year: 2021<br>City: Irving<br>Rate: 5","Year: 2022<br>City: Irving<br>Rate: 4.2","Year: 2023<br>City: Irving<br>Rate: 3.3","Year: 2024<br>City: Irving<br>Rate: 2.1","Year: 2025<br>City: Irving<br>Rate: 2.5",null,"Year: 2021<br>City: Killeen<br>Rate: 3.3","Year: 2022<br>City: Killeen<br>Rate: 3.3","Year: 2023<br>City: Killeen<br>Rate: 3.3","Year: 2024<br>City: Killeen<br>Rate: 3.9","Year: 2025<br>City: Killeen<br>Rate: 2",null,"Year: 2021<br>City: Laredo<br>Rate: 0.8","Year: 2022<br>City: Laredo<br>Rate: 1.5","Year: 2023<br>City: Laredo<br>Rate: 1.5","Year: 2024<br>City: Laredo<br>Rate: 1.1","Year: 2025<br>City: Laredo<br>Rate: 0.4",null,"Year: 2021<br>City: Lewisville<br>Rate: 0.9","Year: 2022<br>City: Lewisville<br>Rate: 3.8","Year: 2023<br>City: Lewisville<br>Rate: 0.9","Year: 2024<br>City: Lewisville<br>Rate: 2.8","Year: 2025<br>City: Lewisville<br>Rate: 0.9",null,"Year: 2021<br>City: McAllen<br>Rate: 0","Year: 2022<br>City: McAllen<br>Rate: 0","Year: 2023<br>City: McAllen<br>Rate: 0","Year: 2024<br>City: McAllen<br>Rate: 0","Year: 2025<br>City: McAllen<br>Rate: 0",null,"Year: 2021<br>City: Mesquite<br>Rate: 2.8","Year: 2022<br>City: Mesquite<br>Rate: 2.8","Year: 2023<br>City: Mesquite<br>Rate: 3.5","Year: 2024<br>City: Mesquite<br>Rate: 4.2","Year: 2025<br>City: Mesquite<br>Rate: 5.6",null,"Year: 2021<br>City: Midland<br>Rate: 2.8","Year: 2022<br>City: Midland<br>Rate: 7.7","Year: 2023<br>City: Midland<br>Rate: 2.8","Year: 2024<br>City: Midland<br>Rate: 1.7","Year: 2025<br>City: Midland<br>Rate: 2.8",null,"Year: 2021<br>City: Odessa<br>Rate: 12.9","Year: 2022<br>City: Odessa<br>Rate: 9.7","Year: 2023<br>City: Odessa<br>Rate: 5.6","Year: 2024<br>City: Odessa<br>Rate: 6.4","Year: 2025<br>City: Odessa<br>Rate: 4.8",null,"Year: 2021<br>City: Pasadena<br>Rate: 0.7","Year: 2022<br>City: Pasadena<br>Rate: 3.2","Year: 2023<br>City: Pasadena<br>Rate: 1.3","Year: 2024<br>City: Pasadena<br>Rate: 1.3","Year: 2025<br>City: Pasadena<br>Rate: 0",null,"Year: 2021<br>City: Pearland<br>Rate: 0","Year: 2022<br>City: Pearland<br>Rate: 1.6","Year: 2023<br>City: Pearland<br>Rate: 1.6","Year: 2024<br>City: Pearland<br>Rate: 1.6","Year: 2025<br>City: Pearland<br>Rate: 1.6",null,"Year: 2021<br>City: Plano<br>Rate: 1.8","Year: 2022<br>City: Plano<br>Rate: 2.8","Year: 2023<br>City: Plano<br>Rate: 2.5","Year: 2024<br>City: Plano<br>Rate: 2.8","Year: 2025<br>City: Plano<br>Rate: 3.1",null,"Year: 2021<br>City: Richardson<br>Rate: 2.5","Year: 2022<br>City: Richardson<br>Rate: 3.4","Year: 2023<br>City: Richardson<br>Rate: 2.5","Year: 2024<br>City: Richardson<br>Rate: 7.6","Year: 2025<br>City: Richardson<br>Rate: 1.7",null,"Year: 2021<br>City: San Antonio<br>Rate: 5.4","Year: 2022<br>City: San Antonio<br>Rate: 5.9","Year: 2023<br>City: San Antonio<br>Rate: 3.1","Year: 2024<br>City: San Antonio<br>Rate: 4.3","Year: 2025<br>City: San Antonio<br>Rate: 3.3",null,"Year: 2021<br>City: Sugar Land<br>Rate: 0.8","Year: 2022<br>City: Sugar Land<br>Rate: 0.8","Year: 2023<br>City: Sugar Land<br>Rate: 2.5","Year: 2024<br>City: Sugar Land<br>Rate: 1.7","Year: 2025<br>City: Sugar Land<br>Rate: 1.7",null,"Year: 2021<br>City: Temple<br>Rate: 1.2","Year: 2022<br>City: Temple<br>Rate: 3.6","Year: 2023<br>City: Temple<br>Rate: 7.2","Year: 2024<br>City: Temple<br>Rate: 8.4","Year: 2025<br>City: Temple<br>Rate: 3.6",null,"Year: 2021<br>City: The Woodlands<br>Rate: 0","Year: 2022<br>City: The Woodlands<br>Rate: 0","Year: 2023<br>City: The Woodlands<br>Rate: 0","Year: 2024<br>City: The Woodlands<br>Rate: 0","Year: 2025<br>City: The Woodlands<br>Rate: 0",null,"Year: 2021<br>City: Tyler<br>Rate: 2.9","Year: 2022<br>City: Tyler<br>Rate: 0.9","Year: 2023<br>City: Tyler<br>Rate: 0.9","Year: 2024<br>City: Tyler<br>Rate: 3.8","Year: 2025<br>City: Tyler<br>Rate: 0.9"],"type":"scatter","mode":"lines","line":{"width":3.0236220472440949,"color":"rgba(211,211,211,0.7)","dash":"solid"},"hoveron":"points","name":"Other Texas Cities","legendgroup":"Other Texas Cities","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null,"hovertemplate":"%{text}<extra><\/extra>"},{"x":[2021,2022,2023,2024,2025],"y":[3.8300000000000001,2.6499999999999999,4.4199999999999999,3.2400000000000002,3.2400000000000002],"text":["Year: 2021<br>City: El Paso<br>Rate: 3.8","Year: 2022<br>City: El Paso<br>Rate: 2.6","Year: 2023<br>City: El Paso<br>Rate: 4.4","Year: 2024<br>City: El Paso<br>Rate: 3.2","Year: 2025<br>City: El Paso<br>Rate: 3.2"],"type":"scatter","mode":"lines","line":{"width":5.6692913385826778,"color":"rgba(176,48,96,1)","dash":"solid"},"hoveron":"points","name":"El Paso","legendgroup":"El Paso","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null,"hovertemplate":"%{text}<extra><\/extra>"}],"layout":{"margin":{"t":100,"r":26.567040265670411,"b":100,"l":56.521378165213804},"paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"<b>Alcohol-Related Traffic Fatalities Rate per 100,000 People<\/b><br><sup>Large Texas Cities, 2021-2025 | Data aggregated yearly<\/sup>","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0.5,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2020.8,2025.2],"tickmode":"array","ticktext":["2021","2022","2023","2024","2025"],"tickvals":[2021,2022,2023,2024,2025],"categoryorder":"array","categoryarray":["2021","2022","2023","2024","2025"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.75,15.75],"tickmode":"array","ticktext":["0","3","6","9","12","15"],"tickvals":[0,3,6,9,12,15],"categoryorder":"array","categoryarray":["0","3","6","9","12","15"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Deaths per 100,000 people","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":13.283520132835198},"orientation":"h","x":0.5,"y":0.96999999999999997,"xanchor":"center","yanchor":"bottom","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative","hoverlabel":{"bgcolor":"white","font":{"size":12,"color":"black"},"bordercolor":"#CCCCCC"},"annotations":[{"x":0,"y":-0.22,"text":"Data source: Texas Department of Transportation | Figure created by <a href=\"https://www.epcrimelab.org\" target=\"_blank\">El Paso Crime Lab<\/a>","showarrow":false,"xref":"paper","yref":"paper","xanchor":"left","yanchor":"top","font":{"size":10},"align":"left"}]},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"f3743feb669c":{"x":{},"y":{},"colour":{},"text":{},"type":"scatter"},"f37423ec52c5":{"x":{},"y":{},"colour":{},"text":{}}},"cur_data":"f3743feb669c","visdat":{"f3743feb669c":["function (y) ","x"],"f37423ec52c5":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card cell bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="plotly html-widget html-fill-item html-fill-container" id="htmlwidget-1b6467035f679663bc80" style="width:100%;height:406px;"></div>
+<script type="application/json" data-for="htmlwidget-1b6467035f679663bc80">{"x":{"data":[{"x":[2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025,null,2021,2022,2023,2024,2025],"y":[6.2800000000000002,3.0099999999999998,3.0099999999999998,3.27,1.76,null,4.5700000000000003,5.2999999999999998,3.6400000000000001,3.1200000000000001,2.8100000000000001,null,1.0900000000000001,0.55000000000000004,0.55000000000000004,0,0.55000000000000004,null,1.46,0.72999999999999998,2.9100000000000001,2.1800000000000002,0.72999999999999998,null,4.5899999999999999,4.29,3.98,7.6600000000000001,3.98,null,6.9199999999999999,7.6699999999999999,6.7000000000000002,7.2199999999999998,4.1699999999999999,null,2.0299999999999998,1.3500000000000001,3.3799999999999999,0,2.0299999999999998,null,2.5,2.29,2.8300000000000001,2.0699999999999998,2.29,null,2.9900000000000002,0.5,1,1,2,null,3.3599999999999999,5.04,2.9399999999999999,3.3599999999999999,2.1000000000000001,null,2.5699999999999998,4.6299999999999999,5.1399999999999997,4.1100000000000003,6.1699999999999999,null,6.29,6.29,5.2599999999999998,5.7800000000000002,5.04,null,5,4.1699999999999999,3.3399999999999999,2.0899999999999999,2.5,null,3.27,3.27,3.27,3.9199999999999999,1.96,null,0.76000000000000001,1.53,1.53,1.1499999999999999,0.38,null,0.93999999999999995,3.7599999999999998,0.93999999999999995,2.8199999999999998,0.93999999999999995,null,0,0,0,0,0,null,2.79,2.79,3.48,4.1799999999999997,5.5800000000000001,null,2.7599999999999998,7.7300000000000004,2.7599999999999998,1.6599999999999999,2.7599999999999998,null,12.9,9.6799999999999997,5.6399999999999997,6.4500000000000002,4.8399999999999999,null,0.65000000000000002,3.2400000000000002,1.3,1.3,0,null,0,1.5900000000000001,1.5900000000000001,1.5900000000000001,1.5900000000000001,null,1.75,2.7999999999999998,2.4500000000000002,2.7999999999999998,3.1499999999999999,null,2.52,3.3700000000000001,2.52,7.5700000000000003,1.6799999999999999,null,5.4299999999999997,5.8799999999999999,3.1000000000000001,4.3300000000000001,3.2999999999999998,null,0.83999999999999997,0.83999999999999997,2.5299999999999998,1.6899999999999999,1.6899999999999999,null,1.2,3.6099999999999999,7.21,8.4199999999999999,3.6099999999999999,null,0,0,0,0,0,null,2.8599999999999999,0.94999999999999996,0.94999999999999996,3.8100000000000001,0.94999999999999996],"text":["Year: 2021<br>City: Arlington<br>Rate: 6.3","Year: 2022<br>City: Arlington<br>Rate: 3","Year: 2023<br>City: Arlington<br>Rate: 3","Year: 2024<br>City: Arlington<br>Rate: 3.3","Year: 2025<br>City: Arlington<br>Rate: 1.8",null,"Year: 2021<br>City: Austin<br>Rate: 4.6","Year: 2022<br>City: Austin<br>Rate: 5.3","Year: 2023<br>City: Austin<br>Rate: 3.6","Year: 2024<br>City: Austin<br>Rate: 3.1","Year: 2025<br>City: Austin<br>Rate: 2.8",null,"Year: 2021<br>City: Brownsville<br>Rate: 1.1","Year: 2022<br>City: Brownsville<br>Rate: 0.6","Year: 2023<br>City: Brownsville<br>Rate: 0.6","Year: 2024<br>City: Brownsville<br>Rate: 0","Year: 2025<br>City: Brownsville<br>Rate: 0.6",null,"Year: 2021<br>City: Carrollton<br>Rate: 1.5","Year: 2022<br>City: Carrollton<br>Rate: 0.7","Year: 2023<br>City: Carrollton<br>Rate: 2.9","Year: 2024<br>City: Carrollton<br>Rate: 2.2","Year: 2025<br>City: Carrollton<br>Rate: 0.7",null,"Year: 2021<br>City: Corpus Christi<br>Rate: 4.6","Year: 2022<br>City: Corpus Christi<br>Rate: 4.3","Year: 2023<br>City: Corpus Christi<br>Rate: 4","Year: 2024<br>City: Corpus Christi<br>Rate: 7.7","Year: 2025<br>City: Corpus Christi<br>Rate: 4",null,"Year: 2021<br>City: Dallas<br>Rate: 6.9","Year: 2022<br>City: Dallas<br>Rate: 7.7","Year: 2023<br>City: Dallas<br>Rate: 6.7","Year: 2024<br>City: Dallas<br>Rate: 7.2","Year: 2025<br>City: Dallas<br>Rate: 4.2",null,"Year: 2021<br>City: Denton<br>Rate: 2","Year: 2022<br>City: Denton<br>Rate: 1.4","Year: 2023<br>City: Denton<br>Rate: 3.4","Year: 2024<br>City: Denton<br>Rate: 0","Year: 2025<br>City: Denton<br>Rate: 2",null,"Year: 2021<br>City: Fort Worth<br>Rate: 2.5","Year: 2022<br>City: Fort Worth<br>Rate: 2.3","Year: 2023<br>City: Fort Worth<br>Rate: 2.8","Year: 2024<br>City: Fort Worth<br>Rate: 2.1","Year: 2025<br>City: Fort Worth<br>Rate: 2.3",null,"Year: 2021<br>City: Frisco<br>Rate: 3","Year: 2022<br>City: Frisco<br>Rate: 0.5","Year: 2023<br>City: Frisco<br>Rate: 1","Year: 2024<br>City: Frisco<br>Rate: 1","Year: 2025<br>City: Frisco<br>Rate: 2",null,"Year: 2021<br>City: Garland<br>Rate: 3.4","Year: 2022<br>City: Garland<br>Rate: 5","Year: 2023<br>City: Garland<br>Rate: 2.9","Year: 2024<br>City: Garland<br>Rate: 3.4","Year: 2025<br>City: Garland<br>Rate: 2.1",null,"Year: 2021<br>City: Grand Prairie<br>Rate: 2.6","Year: 2022<br>City: Grand Prairie<br>Rate: 4.6","Year: 2023<br>City: Grand Prairie<br>Rate: 5.1","Year: 2024<br>City: Grand Prairie<br>Rate: 4.1","Year: 2025<br>City: Grand Prairie<br>Rate: 6.2",null,"Year: 2021<br>City: Houston<br>Rate: 6.3","Year: 2022<br>City: Houston<br>Rate: 6.3","Year: 2023<br>City: Houston<br>Rate: 5.3","Year: 2024<br>City: Houston<br>Rate: 5.8","Year: 2025<br>City: Houston<br>Rate: 5",null,"Year: 2021<br>City: Irving<br>Rate: 5","Year: 2022<br>City: Irving<br>Rate: 4.2","Year: 2023<br>City: Irving<br>Rate: 3.3","Year: 2024<br>City: Irving<br>Rate: 2.1","Year: 2025<br>City: Irving<br>Rate: 2.5",null,"Year: 2021<br>City: Killeen<br>Rate: 3.3","Year: 2022<br>City: Killeen<br>Rate: 3.3","Year: 2023<br>City: Killeen<br>Rate: 3.3","Year: 2024<br>City: Killeen<br>Rate: 3.9","Year: 2025<br>City: Killeen<br>Rate: 2",null,"Year: 2021<br>City: Laredo<br>Rate: 0.8","Year: 2022<br>City: Laredo<br>Rate: 1.5","Year: 2023<br>City: Laredo<br>Rate: 1.5","Year: 2024<br>City: Laredo<br>Rate: 1.1","Year: 2025<br>City: Laredo<br>Rate: 0.4",null,"Year: 2021<br>City: Lewisville<br>Rate: 0.9","Year: 2022<br>City: Lewisville<br>Rate: 3.8","Year: 2023<br>City: Lewisville<br>Rate: 0.9","Year: 2024<br>City: Lewisville<br>Rate: 2.8","Year: 2025<br>City: Lewisville<br>Rate: 0.9",null,"Year: 2021<br>City: McAllen<br>Rate: 0","Year: 2022<br>City: McAllen<br>Rate: 0","Year: 2023<br>City: McAllen<br>Rate: 0","Year: 2024<br>City: McAllen<br>Rate: 0","Year: 2025<br>City: McAllen<br>Rate: 0",null,"Year: 2021<br>City: Mesquite<br>Rate: 2.8","Year: 2022<br>City: Mesquite<br>Rate: 2.8","Year: 2023<br>City: Mesquite<br>Rate: 3.5","Year: 2024<br>City: Mesquite<br>Rate: 4.2","Year: 2025<br>City: Mesquite<br>Rate: 5.6",null,"Year: 2021<br>City: Midland<br>Rate: 2.8","Year: 2022<br>City: Midland<br>Rate: 7.7","Year: 2023<br>City: Midland<br>Rate: 2.8","Year: 2024<br>City: Midland<br>Rate: 1.7","Year: 2025<br>City: Midland<br>Rate: 2.8",null,"Year: 2021<br>City: Odessa<br>Rate: 12.9","Year: 2022<br>City: Odessa<br>Rate: 9.7","Year: 2023<br>City: Odessa<br>Rate: 5.6","Year: 2024<br>City: Odessa<br>Rate: 6.4","Year: 2025<br>City: Odessa<br>Rate: 4.8",null,"Year: 2021<br>City: Pasadena<br>Rate: 0.7","Year: 2022<br>City: Pasadena<br>Rate: 3.2","Year: 2023<br>City: Pasadena<br>Rate: 1.3","Year: 2024<br>City: Pasadena<br>Rate: 1.3","Year: 2025<br>City: Pasadena<br>Rate: 0",null,"Year: 2021<br>City: Pearland<br>Rate: 0","Year: 2022<br>City: Pearland<br>Rate: 1.6","Year: 2023<br>City: Pearland<br>Rate: 1.6","Year: 2024<br>City: Pearland<br>Rate: 1.6","Year: 2025<br>City: Pearland<br>Rate: 1.6",null,"Year: 2021<br>City: Plano<br>Rate: 1.8","Year: 2022<br>City: Plano<br>Rate: 2.8","Year: 2023<br>City: Plano<br>Rate: 2.5","Year: 2024<br>City: Plano<br>Rate: 2.8","Year: 2025<br>City: Plano<br>Rate: 3.1",null,"Year: 2021<br>City: Richardson<br>Rate: 2.5","Year: 2022<br>City: Richardson<br>Rate: 3.4","Year: 2023<br>City: Richardson<br>Rate: 2.5","Year: 2024<br>City: Richardson<br>Rate: 7.6","Year: 2025<br>City: Richardson<br>Rate: 1.7",null,"Year: 2021<br>City: San Antonio<br>Rate: 5.4","Year: 2022<br>City: San Antonio<br>Rate: 5.9","Year: 2023<br>City: San Antonio<br>Rate: 3.1","Year: 2024<br>City: San Antonio<br>Rate: 4.3","Year: 2025<br>City: San Antonio<br>Rate: 3.3",null,"Year: 2021<br>City: Sugar Land<br>Rate: 0.8","Year: 2022<br>City: Sugar Land<br>Rate: 0.8","Year: 2023<br>City: Sugar Land<br>Rate: 2.5","Year: 2024<br>City: Sugar Land<br>Rate: 1.7","Year: 2025<br>City: Sugar Land<br>Rate: 1.7",null,"Year: 2021<br>City: Temple<br>Rate: 1.2","Year: 2022<br>City: Temple<br>Rate: 3.6","Year: 2023<br>City: Temple<br>Rate: 7.2","Year: 2024<br>City: Temple<br>Rate: 8.4","Year: 2025<br>City: Temple<br>Rate: 3.6",null,"Year: 2021<br>City: The Woodlands<br>Rate: 0","Year: 2022<br>City: The Woodlands<br>Rate: 0","Year: 2023<br>City: The Woodlands<br>Rate: 0","Year: 2024<br>City: The Woodlands<br>Rate: 0","Year: 2025<br>City: The Woodlands<br>Rate: 0",null,"Year: 2021<br>City: Tyler<br>Rate: 2.9","Year: 2022<br>City: Tyler<br>Rate: 0.9","Year: 2023<br>City: Tyler<br>Rate: 0.9","Year: 2024<br>City: Tyler<br>Rate: 3.8","Year: 2025<br>City: Tyler<br>Rate: 0.9"],"type":"scatter","mode":"lines","line":{"width":3.0236220472440949,"color":"rgba(211,211,211,0.7)","dash":"solid"},"hoveron":"points","name":"Other Texas Cities","legendgroup":"Other Texas Cities","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null,"hovertemplate":"%{text}<extra><\/extra>"},{"x":[2021,2022,2023,2024,2025],"y":[3.8300000000000001,2.6499999999999999,4.4199999999999999,3.2400000000000002,3.2400000000000002],"text":["Year: 2021<br>City: El Paso<br>Rate: 3.8","Year: 2022<br>City: El Paso<br>Rate: 2.6","Year: 2023<br>City: El Paso<br>Rate: 4.4","Year: 2024<br>City: El Paso<br>Rate: 3.2","Year: 2025<br>City: El Paso<br>Rate: 3.2"],"type":"scatter","mode":"lines","line":{"width":5.6692913385826778,"color":"rgba(176,48,96,1)","dash":"solid"},"hoveron":"points","name":"El Paso","legendgroup":"El Paso","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null,"hovertemplate":"%{text}<extra><\/extra>"}],"layout":{"margin":{"t":100,"r":26.567040265670411,"b":100,"l":56.521378165213804},"paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"<b>Alcohol-Related Traffic Fatalities Rate per 100,000 People<\/b><br><sup>Large Texas Cities, 2021-2025 | Data aggregated yearly<\/sup>","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0.5,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2020.8,2025.2],"tickmode":"array","ticktext":["2021","2022","2023","2024","2025"],"tickvals":[2021,2022,2023,2024,2025],"categoryorder":"array","categoryarray":["2021","2022","2023","2024","2025"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.75,15.75],"tickmode":"array","ticktext":["0","3","6","9","12","15"],"tickvals":[0,3,6,9,12,15],"categoryorder":"array","categoryarray":["0","3","6","9","12","15"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716894984},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Deaths per 100,000 people","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":13.283520132835198},"orientation":"h","x":0.5,"y":0.96999999999999997,"xanchor":"center","yanchor":"bottom","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative","hoverlabel":{"bgcolor":"white","font":{"size":12,"color":"black"},"bordercolor":"#CCCCCC"},"annotations":[{"x":0,"y":-0.22,"text":"Data source: Texas Department of Transportation | Figure created by <a href=\"https://www.epcrimelab.org\" target=\"_blank\">El Paso Crime Lab<\/a>","showarrow":false,"xref":"paper","yref":"paper","xanchor":"left","yanchor":"top","font":{"size":10},"align":"left"}]},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"97846d52e61":{"x":{},"y":{},"colour":{},"text":{},"type":"scatter"},"97851812c0a":{"x":{},"y":{},"colour":{},"text":{}}},"cur_data":"97846d52e61","visdat":{"97846d52e61":["function (y) ","x"],"97851812c0a":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card bslib-card html-fill-container" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
 <hr>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
+<div class="callout-header d-flex align-content-center html-fill-item html-fill-container">
+<div class="callout-icon-container html-fill-item html-fill-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-title-container flex-fill html-fill-item html-fill-container">
 <span class="screen-reader-only">Note</span>Key Findings
 </div>
 </div>
-<div class="callout-body-container callout-body">
+<div class="callout-body-container callout-body html-fill-item html-fill-container">
 <ul>
 <li>El Paso recorded <strong>118 alcohol-related traffic fatalities</strong> between 2021 and 2025.</li>
 <li>Approximately <strong>33.9%</strong> of all traffic fatalities in El Paso involved alcohol.</li>
@@ -259,33 +310,78 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <hr>
-<div class="cell">
-<div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-3e961f5cea279ac7e540" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-3e961f5cea279ac7e540">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"City":["Plano","Odessa","Grand Prairie","Garland","Houston","Mesquite","Irving","Corpus Christi","Dallas","Richardson","San Antonio","Arlington","Austin","Killeen","Temple","El Paso","Midland","Frisco","Pearland","Carrollton","Lewisville","Sugar Land","Pasadena","Denton","Fort Worth","Laredo","Tyler","Brownsville","The Woodlands","McAllen"],"total_fatalities":[77,105,102,94,1597,65,100,196,1085,55,932,192,535,69,58,348,100,47,26,45,48,45,51,70,603,94,80,63,1,0],"alc_fatalities":[37,49,44,40,665,27,41,80,439,21,341,69,187,24,20,118,32,15,8,11,10,9,10,13,110,14,10,5,0,0],"pct_alc":[48.1,46.7,43.1,42.6,41.6,41.5,41,40.8,40.5,38.2,36.6,35.9,35,34.8,34.5,33.9,32,31.9,30.8,24.4,20.8,20,19.6,18.6,18.2,14.9,12.5,7.9,0,"NaN"],"pop2020":[285494,124009,194543,238002,2320268,143484,239798,326554,1343573,118858,1547253,398112,961855,153095,83177,678815,181170,200490,125828,137436,106427,118467,154193,147995,918915,261639,105000,182781,105000,142210],"per_capita_rate":[13,39.5,22.6,16.8,28.7,18.8,17.1,24.5,32.7,17.7,22,17.3,19.4,15.7,24,17.4,17.7,7.5,6.4,8,9.4,7.6,6.5,8.8,12,5.4,9.5,2.7,0,0]},"columns":[{"id":"City","name":"City","type":"character","align":"left"},{"id":"total_fatalities","name":"Total Traffic Fatalities","type":"numeric","align":"center"},{"id":"alc_fatalities","name":"Total Alcohol-Related Traffic Fatalities","type":"numeric","align":"center"},{"id":"pct_alc","name":"Percentage of Traffic Fatalities that were Alcohol-Related","type":"numeric","cell":["48.1%","46.7%","43.1%","42.6%","41.6%","41.5%","41.0%","40.8%","40.5%","38.2%","36.6%","35.9%","35.0%","34.8%","34.5%","33.9%","32.0%","31.9%","30.8%","24.4%","20.8%","20.0%","19.6%","18.6%","18.2%","14.9%","12.5%","7.9%","0.0%","NaN%"],"align":"center"},{"id":"pop2020","name":"2020 Census Population Count","type":"numeric","cell":["285,494","124,009","194,543","238,002","2,320,268","143,484","239,798","326,554","1,343,573","118,858","1,547,253","398,112","961,855","153,095","83,177","678,815","181,170","200,490","125,828","137,436","106,427","118,467","154,193","147,995","918,915","261,639","105,000","182,781","105,000","142,210"],"align":"center"},{"id":"per_capita_rate","name":"Per Capita Rate (Alcohol-Related Traffic Fatalities per 100,000 people)","type":"numeric","cell":["13.0","39.5","22.6","16.8","28.7","18.8","17.1","24.5","32.7","17.7","22.0","17.3","19.4","15.7","24.0","17.4","17.7","7.5","6.4","8.0","9.4","7.6","6.5","8.8","12.0","5.4","9.5","2.7","0.0","0.0"],"align":"center"}],"defaultPageSize":30,"highlight":true,"bordered":true,"striped":true,"theme":{"borderColor":"#dfe2e5","stripedColor":"#f6f8fa","highlightColor":"#f0f7ff","cellPadding":"8px 12px","style":{"fontFamily":"-apple-system, BlinkMacSystemFont, sans-serif","fontSize":"14px"}},"dataKey":"1255229f140462d686af1c1bb544f8b4"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card cell bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="reactable html-widget html-fill-item html-fill-container" id="htmlwidget-014fdfe43fa29b79431d" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-014fdfe43fa29b79431d">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"City":["Plano","Odessa","Grand Prairie","Garland","Houston","Mesquite","Irving","Corpus Christi","Dallas","Richardson","San Antonio","Arlington","Austin","Killeen","Temple","El Paso","Midland","Frisco","Pearland","Carrollton","Lewisville","Sugar Land","Pasadena","Denton","Fort Worth","Laredo","Tyler","Brownsville","The Woodlands","McAllen"],"total_fatalities":[77,105,102,94,1597,65,100,196,1085,55,932,192,535,69,58,348,100,47,26,45,48,45,51,70,603,94,80,63,1,0],"alc_fatalities":[37,49,44,40,665,27,41,80,439,21,341,69,187,24,20,118,32,15,8,11,10,9,10,13,110,14,10,5,0,0],"pct_alc":[48.1,46.7,43.1,42.6,41.6,41.5,41,40.8,40.5,38.2,36.6,35.9,35,34.8,34.5,33.9,32,31.9,30.8,24.4,20.8,20,19.6,18.6,18.2,14.9,12.5,7.9,0,"NaN"],"pop2020":[285494,124009,194543,238002,2320268,143484,239798,326554,1343573,118858,1547253,398112,961855,153095,83177,678815,181170,200490,125828,137436,106427,118467,154193,147995,918915,261639,105000,182781,105000,142210],"per_capita_rate":[13,39.5,22.6,16.8,28.7,18.8,17.1,24.5,32.7,17.7,22,17.3,19.4,15.7,24,17.4,17.7,7.5,6.4,8,9.4,7.6,6.5,8.8,12,5.4,9.5,2.7,0,0]},"columns":[{"id":"City","name":"City","type":"character","align":"left"},{"id":"total_fatalities","name":"Total Traffic Fatalities","type":"numeric","align":"center"},{"id":"alc_fatalities","name":"Total Alcohol-Related Traffic Fatalities","type":"numeric","align":"center"},{"id":"pct_alc","name":"Percentage of Traffic Fatalities that were Alcohol-Related","type":"numeric","cell":["48.1%","46.7%","43.1%","42.6%","41.6%","41.5%","41.0%","40.8%","40.5%","38.2%","36.6%","35.9%","35.0%","34.8%","34.5%","33.9%","32.0%","31.9%","30.8%","24.4%","20.8%","20.0%","19.6%","18.6%","18.2%","14.9%","12.5%","7.9%","0.0%","NaN%"],"align":"center"},{"id":"pop2020","name":"2020 Census Population Count","type":"numeric","cell":["285,494","124,009","194,543","238,002","2,320,268","143,484","239,798","326,554","1,343,573","118,858","1,547,253","398,112","961,855","153,095","83,177","678,815","181,170","200,490","125,828","137,436","106,427","118,467","154,193","147,995","918,915","261,639","105,000","182,781","105,000","142,210"],"align":"center"},{"id":"per_capita_rate","name":"Per Capita Rate (Alcohol-Related Traffic Fatalities per 100,000 people)","type":"numeric","cell":["13.0","39.5","22.6","16.8","28.7","18.8","17.1","24.5","32.7","17.7","22.0","17.3","19.4","15.7","24.0","17.4","17.7","7.5","6.4","8.0","9.4","7.6","6.5","8.8","12.0","5.4","9.5","2.7","0.0","0.0"],"align":"center"}],"defaultPageSize":30,"highlight":true,"bordered":true,"striped":true,"theme":{"borderColor":"#dfe2e5","stripedColor":"#f6f8fa","highlightColor":"#f0f7ff","cellPadding":"8px 12px","style":{"fontFamily":"-apple-system, BlinkMacSystemFont, sans-serif","fontSize":"14px"}},"dataKey":"1255229f140462d686af1c1bb544f8b4"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card bslib-card html-fill-container" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
 <hr>
-</section>
-<section id="final-takeaway" class="level1">
-<h1>Final Takeaway</h1>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+<div id="final-takeaway" class="dashboard-page tab-pane show active html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-final-takeaway">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
 <p>Alcohol-related traffic fatalities remain a substantial public safety issue across Texas.</p>
 <p>While El Paso does not report the highest per-capita rates in the state, the data show that alcohol contributes to approximately one-third of all traffic fatalities in the city. This places El Paso near the middle of large Texas cities in proportional terms, but among the highest cities in total alcohol-related deaths.</p>
 <p>The findings suggest that impaired driving continues to play a major role in fatal crashes and remains an important area for prevention, enforcement, and public awareness efforts.</p>
 <hr>
-</section>
-<section id="technical-details" class="level1">
-<h1>Technical Details</h1>
-<p><strong>Measurement strategy</strong></p>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+<div id="technical-details" class="dashboard-page tab-pane grid-skip html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-technical-details">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<strong>Measurement strategy</strong>
 <p><strong><em>Counts.</em></strong> The total count of traffic fatalities and the total count of traffic fatalities that involved alcohol are both important values for understanding precisely how much loss of life occurs in a city. These totals are particularly critical for service providers and law enforcement agencies, as they must ensure enough staff or resources are available.</p>
 <p><strong><em>Rates.</em></strong> Large counts in a jurisdiction, however, may be the result of having a large population. That is, what may seem high in one city may be low in another. To account for this, standardizing total counts as a per capita rate is a useful way to generate comparisons across cities with various population sizes. The idea is to take the total count, divide it by the population count in the jurisdiction, and then multiply that value by a set number (e.g., 100,000). This results in a statement such as “1.4 deaths per 100,000 residents”. While these statements are not as intuitive, they aid in making comparisons across cities of varying population sizes.</p>
 <p><strong><em>Percentage of Traffic Fatalities that were Alcohol-Related.</em></strong> Similar to the logic of calculating a rate, using the total number of traffic fatalities as the denominator for the total number of alcohol-involved traffic fatalities is a useful way to compare cities to one another. For example, if in one city 90 out of 100 traffic fatalities involved alcohol (90%), and in another city 30 out of 120 traffic fatalities involved alcohol (25%), it would seem that alcohol is by far a more serious problem in the first city because nearly every fatality involves a driver under the influence.</p>
 <p><strong><em>Data Sources.</em></strong>Crash data were downloaded from the <a href="https://cris.dot.state.tx.us">Transportation Crash Records Information System (CRIS)</a> on May 19, 2026. Data preparation was conducted in two steps. First, all alcohol-related crashes occurring in Texas between 2021 and 2025 were extracted using the TxDOT-defined alcohol-related crash filter. Second, a separate query was performed to obtain all traffic fatalities in Texas during the same period. This second dataset was person-level and included crash-level identifiers. The alcohol-related crash dataset from the first step was then matched to the person-level fatality dataset using the shared crash identifiers. Fatalities linked to a matched alcohol-related crash were subsequently classified as alcohol-related fatalities. To obtain per capita rates, total population counts fron the 2020 census were obtained for all large Texas cities (those with over 100,000 residents).</p>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
 
 
-</section>
+<div id="3ade8a4a-fb1d-4a6c-8409-ac45482d5fc9" class="hidden html-fill-item html-fill-container">
 
-</main> <!-- /main -->
+</div>
+</div>
+</div>
+</div>
+
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -688,6 +784,14 @@ ul.task-list li input[type="checkbox"] {
   </script>
 </div> <!-- /content -->
 
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (_event) {
+  if (window.bslib.Card) {
+    window.bslib.Card.initializeAllCards();
+  }
+}); 
+</script>
+  
 
 
 

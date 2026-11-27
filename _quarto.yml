@@ -3,55 +3,75 @@ project:
   output-dir: docs
 
 website:
-  title: "El Paso Crime Lab"
+  title: "EPCL"
   favicon: about_logo.png
-  
-  announcement: 
-    icon: info-circle
-    dismissable: true
-    content: "Nominations are open for the **EPCL Public Safety Science Awards!** [Learn more and submit a nomination](award_announcement.html)."
-    type: primary
-    position: below-navbar
 
   navbar:
-    background: primary
-    search: false
+    background: "#263238"
+    foreground: "#FFFFFF"
+    search: true
+
     left:
-      - text: "Home"
-        href: index.html
-      - text: "About"
-        href: about.html
+
       - text: "Research"
         menu:
-          - text: "Driving While Intoxicated"
+          - text: "Impaired Driving"
             href: dwi_home.html
           - text: "Animal Cruelty"
             href: report_animal_cruelty.pdf
-    right:
-      - text: "Awards Program"
-        href: award_announcement.qmd
-      - text: "Dashboard & Applications"
+
+      - text: "Publications"
+        href: EPCL_JOURNALS/publications.qmd
+
+      - text: "Data & Tools"
         menu:
           - text: "Alcohol-Related Crash Dashboard"
             href: crash_dashboard.html
-          - text: "Racial Profiling Tool (BETA)"
+          - text: "Traffic Data Analysis"
             href: police_stops_tool.qmd
-      - text: "Connect With Us"
+
+      - text: "Initiatives"
         menu:
-          - text: "Subscribe for Email Updates"
-            href: subscribe.html
-          - text: "Contact the El Paso Crime Lab"
+          - text: "Public Safety Science Awards"
+            href: award_announcement.qmd
+
+      - text: "About"
+        menu:
+          - text: "About EPCL"
+            href: about.qmd
+          - text: "Contact"
             href: contact.html
+
+    right:
+      - icon: envelope
+        href: subscribe.html
+        aria-label: Subscribe for email updates
+
+  page-footer:
+    background: "#263238"
+    foreground: "#FFFFFF"
+
+    left: |
+      **El Paso Crime Lab**
+
+      Advancing the Science of Public Safety
+
+    center: |
+      [About](about.html) ·
+      [Contact](contact.html) ·
+      [Subscribe](subscribe.html)
+
+    right:
       - icon: instagram
         href: https://www.instagram.com/epcrimelab/
         aria-label: Instagram
+
 format:
   html:
     theme: default
-    css: styles2.css
+    css:
+      - styles2.css
+      - EPCL_JOURNALS/styles/journal.scss
     toc: false
-    
 
 editor: source
-
-  

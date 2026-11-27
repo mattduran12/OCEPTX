@@ -1,0 +1,810 @@
+
+---
+title: "Journal Submissions"
+subtitle: "Contributing to the science and practice of criminal justice"
+description: "Explore EPCL publications and submit a contribution proposal."
+page-layout: article
+toc: false
+---
+
+<style>
+:root {
+  --epcl-blue: #6FA8C2;
+  --epcl-charcoal: #263238;
+  --epcl-gold: #C9A24A;
+  --epcl-burgundy: #6B1F2B;
+  --epcl-muted: #667085;
+  --epcl-cream: #F7F7F4;
+}
+
+.submission-page {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.hero {
+  padding: 3rem 0 3.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 3rem;
+}
+
+.hero-label {
+  color: var(--epcl-burgundy);
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  font-size: .75rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  color: var(--epcl-charcoal);
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1.12;
+  max-width: 780px;
+  margin-bottom: 1.2rem;
+}
+
+.hero p {
+  color: #59666d;
+  font-size: 1.12rem;
+  line-height: 1.8;
+  max-width: 760px;
+}
+
+.hero-button {
+  display: inline-block;
+  background: var(--epcl-charcoal);
+  color: white !important;
+  padding: .85rem 1.4rem;
+  border-radius: 3px;
+  text-decoration: none !important;
+  font-weight: 600;
+  margin-top: .7rem;
+}
+
+.hero-button:hover {
+  background: var(--epcl-burgundy);
+}
+
+.section-heading {
+  margin-bottom: .6rem;
+  color: var(--epcl-charcoal);
+}
+
+.section-description {
+  color: var(--epcl-muted);
+  max-width: 750px;
+  line-height: 1.7;
+  margin-bottom: 1.8rem;
+}
+
+.publications {
+  margin: 2rem 0 4rem;
+}
+
+.publication-card {
+  height: 100%;
+  background: white;
+  border: 1px solid #e3e6e8;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.publication-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(38,50,56,.10);
+}
+
+.publication-image {
+  background: #f1f1ed;
+  padding: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.publication-image img {
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 4 / 5;
+  object-fit: contain;
+  display: block;
+}
+
+.publication-content {
+  padding: 1.35rem;
+}
+
+.publication-content h3 {
+  color: var(--epcl-charcoal);
+  font-size: 1.3rem;
+  margin-top: 0;
+  margin-bottom: .65rem;
+}
+
+.publication-content p {
+  color: #59666d;
+  line-height: 1.65;
+  font-size: .95rem;
+}
+
+.publication-topics {
+  font-size: .84rem;
+  color: var(--epcl-muted);
+  line-height: 1.65;
+  border-top: 1px solid #e8eaec;
+  padding-top: .8rem;
+  margin-top: .8rem;
+}
+
+.publication-number {
+  color: var(--epcl-gold);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.philosophy {
+  background: var(--epcl-cream);
+  border-left: 4px solid var(--epcl-gold);
+  padding: 1.5rem 1.7rem;
+  margin: 3rem 0;
+}
+
+.philosophy p {
+  color: #59666d;
+  line-height: 1.75;
+  margin-bottom: 0;
+}
+
+.contribution-card {
+  padding: 1.5rem;
+  height: 100%;
+  background: white;
+  border: 1px solid #e3e6e8;
+  border-top: 3px solid var(--epcl-blue);
+  border-radius: 3px;
+}
+
+.contribution-card h3 {
+  color: var(--epcl-charcoal);
+  font-size: 1.15rem;
+}
+
+.contribution-card p {
+  color: #59666d;
+  line-height: 1.7;
+  font-size: .93rem;
+}
+
+.contribution-card ul {
+  color: #59666d;
+  font-size: .9rem;
+  line-height: 1.8;
+  padding-left: 1.2rem;
+}
+
+.process {
+  margin: 2rem 0 3rem;
+}
+
+.process-item {
+  display: flex;
+  gap: 1.2rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.process-number {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--epcl-charcoal);
+  color: white;
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+.process-item h3 {
+  color: var(--epcl-charcoal);
+  font-size: 1.05rem;
+  margin: .1rem 0 .4rem;
+}
+
+.process-item p {
+  color: #59666d;
+  font-size: .93rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.quick-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 2rem 0 3rem;
+}
+
+.fact {
+  background: var(--epcl-cream);
+  padding: 1.3rem;
+  text-align: center;
+  border-radius: 3px;
+}
+
+.fact strong {
+  display: block;
+  color: var(--epcl-charcoal);
+  font-size: 1.45rem;
+  margin-bottom: .3rem;
+}
+
+.fact span {
+  color: var(--epcl-muted);
+  font-size: .85rem;
+}
+
+.template-box {
+  border: 1px solid #dfe4e8;
+  padding: 1.6rem;
+  border-radius: 4px;
+  margin: 2rem 0;
+}
+
+.template-box h3 {
+  color: var(--epcl-charcoal);
+}
+
+.template-box p {
+  color: #59666d;
+  line-height: 1.7;
+}
+
+.template-link {
+  display: inline-block;
+  background: var(--epcl-gold);
+  color: var(--epcl-charcoal) !important;
+  padding: .7rem 1rem;
+  border-radius: 3px;
+  font-weight: 700;
+  text-decoration: none !important;
+}
+
+.guidelines {
+  margin: 2rem 0 3rem;
+}
+
+.guidelines details {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem .2rem;
+}
+
+.guidelines summary {
+  color: var(--epcl-charcoal);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.guidelines details p,
+.guidelines details ul {
+  color: #59666d;
+  line-height: 1.75;
+  font-size: .93rem;
+  margin-top: .8rem;
+}
+
+.final-cta {
+  background: var(--epcl-charcoal);
+  color: white;
+  padding: 2.5rem;
+  border-radius: 4px;
+  margin: 3rem 0;
+}
+
+.final-cta h2 {
+  color: white;
+  font-size: 1.8rem;
+}
+
+.final-cta p {
+  color: #e0e5e8;
+  line-height: 1.75;
+  max-width: 720px;
+}
+
+.final-cta a {
+  display: inline-block;
+  background: var(--epcl-gold);
+  color: var(--epcl-charcoal) !important;
+  padding: .85rem 1.25rem;
+  text-decoration: none !important;
+  font-weight: 700;
+  border-radius: 3px;
+  margin-top: .5rem;
+}
+
+.footer-note {
+  text-align: center;
+  color: var(--epcl-muted);
+  font-size: .88rem;
+  margin: 3rem 0 1rem;
+}
+
+@media(max-width: 600px) {
+  .hero {
+    padding: 2rem 0;
+  }
+
+  .quick-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .final-cta {
+    padding: 1.5rem;
+  }
+}
+</style>
+
+<div class="submission-page">
+
+<div class="hero">
+
+<div class="hero-label">EL PASO CRIME LAB · PUBLICATIONS</div>
+
+# Advancing knowledge. Improving practice.
+
+EPCL publications bring together researchers, criminal justice professionals, educators, and students to examine important issues, communicate evidence, and share ideas that move the field forward.
+
+Whether you work in criminal justice, study it, or are interested in improving it, there is a place for your contribution.
+
+<a href="#publications" class="hero-button">Explore our publications ↓</a>
+
+</div>
+
+## Our Publications
+
+<div class="section-description">
+
+Four publications. Four areas of focus. One shared commitment to advancing the science and practice of criminal justice.
+
+Select a publication to explore its subject matter and determine where your proposed contribution belongs.
+
+</div>
+
+<div id="publications" class="publications">
+<div class="grid">
+
+<div class="g-col-12 g-col-md-6">
+<div class="publication-card">
+<div class="publication-image">
+
+<img src="images/police_journal.png" alt="The Policing Journal cover">
+
+</div>
+<div class="publication-content">
+
+<div class="publication-number">01 · POLICING</div>
+
+### The Policing Journal
+
+Examining policing, police organizations, leadership, officer development, and evidence-based approaches to public safety.
+
+<div class="publication-topics">
+**Areas of interest**
+
+Police management · Problem-oriented policing · Organizational culture · Officer training · Crime analysis · Accountability · Police-community relationships
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="g-col-12 g-col-md-6">
+<div class="publication-card">
+<div class="publication-image">
+
+<img src="images/corrections_journal.png" alt="The Corrections Journal cover">
+
+</div>
+<div class="publication-content">
+
+<div class="publication-number">02 · CORRECTIONS</div>
+
+### The Corrections Journal
+
+Examining correctional institutions, detention, incarceration, rehabilitation, reentry, and correctional administration.
+
+<div class="publication-topics">
+**Areas of interest**
+
+Institutional management · Correctional officer development · Rehabilitation · Inmate programming · Recidivism · Reentry · Correctional policy
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="g-col-12 g-col-md-6">
+<div class="publication-card">
+<div class="publication-image">
+
+<img src="images/courts_journal.png" alt="The Courts Journal cover">
+
+</div>
+<div class="publication-content">
+
+<div class="publication-number">03 · COURTS</div>
+
+### The Courts Journal
+
+Examining judicial administration, prosecution, defense, adjudication, and the broader administration of justice.
+
+<div class="publication-topics">
+**Areas of interest**
+
+Court efficiency · Case processing · Judicial decision-making · Diversion · Sentencing · Procedural justice · Access to justice
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="g-col-12 g-col-md-6">
+<div class="publication-card">
+<div class="publication-image">
+
+<img src="images/community_journal.png" alt="The Community Safety Journal cover">
+
+</div>
+<div class="publication-content">
+
+<div class="publication-number">04 · COMMUNITY SAFETY</div>
+
+### The Community Safety Journal
+
+Examining public safety beyond traditional criminal justice institutions, including prevention, community partnerships, and local government.
+
+<div class="publication-topics">
+**Areas of interest**
+
+Crime prevention · Community interventions · Public health approaches · Neighborhood conditions · Local policy · Interagency collaboration
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="philosophy">
+
+**Our editorial philosophy**
+
+Meaningful progress requires collaboration between those who study criminal justice and those who work within it.
+
+EPCL seeks contributions that are intellectually rigorous, accessible to professional audiences, and relevant to the communities and institutions served by the criminal justice system.
+
+</div>
+
+## What Can You Contribute?
+
+<div class="section-description">
+
+EPCL welcomes different forms of professional and scholarly contributions. You do not need to be an academic researcher or have previous publication experience.
+
+</div>
+
+<div class="grid">
+
+<div class="g-col-12 g-col-md-4">
+<div class="contribution-card">
+
+<div class="publication-number">CATEGORY 01</div>
+
+### Research & Education
+
+Communicating research and expanding professional knowledge.
+
+- Original research
+- Literature reviews
+- Research summaries
+- Educational explainers
+- Program evaluations
+- Evidence-based practice reviews
+- Methodological discussions
+
+</div>
+</div>
+
+<div class="g-col-12 g-col-md-4">
+<div class="contribution-card">
+
+<div class="publication-number">CATEGORY 02</div>
+
+### Perspectives & Debate
+
+Examining ideas, challenging assumptions, and encouraging informed discussion.
+
+- Policy analyses
+- Professional commentary
+- Evidence-based opinion essays
+- Ethical discussions
+- Institutional critiques
+- Emerging criminal justice issues
+
+</div>
+</div>
+
+<div class="g-col-12 g-col-md-4">
+<div class="contribution-card">
+
+<div class="publication-number">CATEGORY 03</div>
+
+### Practice & Experience
+
+Sharing professional knowledge and practical experience.
+
+- Case studies
+- Innovative practices
+- Implementation experiences
+- Lessons from the field
+- Professional interviews
+- Operational problem-solving
+- Agency initiatives
+
+</div>
+</div>
+
+</div>
+
+## How the Submission Process Works
+
+<div class="section-description">
+
+EPCL uses a proposal-first process. You do not need to prepare a complete manuscript before receiving an initial editorial decision.
+
+</div>
+
+<div class="process">
+
+<div class="process-item">
+<div class="process-number">01</div>
+<div>
+
+### Submit a proposal
+
+Choose a publication and contribution category. Describe your proposed topic, its purpose, and its anticipated contribution.
+
+</div>
+</div>
+
+<div class="process-item">
+<div class="process-number">02</div>
+<div>
+
+### Editorial review
+
+Two editors assigned to the selected publication independently review the proposal for relevance, originality, potential contribution, and suitability.
+
+</div>
+</div>
+
+<div class="process-item">
+<div class="process-number">03</div>
+<div>
+
+### Receive a decision
+
+You will receive an approval, denial, or request for modification. Approval is an invitation to develop a manuscript, not a guarantee of publication.
+
+</div>
+</div>
+
+<div class="process-item">
+<div class="process-number">04</div>
+<div>
+
+### Develop your manuscript
+
+Approved contributors receive the universal EPCL manuscript template and submission instructions. The standard development period is 30 days, subject to approved extensions.
+
+</div>
+</div>
+
+<div class="process-item">
+<div class="process-number">05</div>
+<div>
+
+### Manuscript evaluation
+
+Editors assess the completed manuscript for quality, clarity, accuracy, relevance, and suitability. Revisions may be requested.
+
+</div>
+</div>
+
+<div class="process-item">
+<div class="process-number">06</div>
+<div>
+
+### Publication preparation
+
+Accepted manuscripts proceed to final editorial preparation and publication.
+
+</div>
+</div>
+
+</div>
+
+<div class="quick-facts">
+
+<div class="fact">
+<strong>30 Days</strong>
+<span>Standard manuscript development period</span>
+</div>
+
+<div class="fact">
+<strong>2 Editors</strong>
+<span>Assigned to each publication proposal</span>
+</div>
+
+<div class="fact">
+<strong>$0</strong>
+<span>Submission fee</span>
+</div>
+
+</div>
+
+## Manuscript Preparation
+
+Approved contributors will receive instructions for developing their full manuscripts.
+
+<div class="template-box">
+
+<div class="publication-number">CONTRIBUTOR RESOURCE</div>
+
+### EPCL Universal Manuscript Template
+
+A standardized Microsoft Word template designed for all four EPCL publications and three contribution categories.
+
+Includes:
+
+- Author information and title page.
+- Instructions for blinded editorial review.
+- Suggested manuscript structures.
+- Abstract and keyword sections.
+- APA-formatted references.
+- Tables, figures, and appendices guidance.
+
+**Formatting standard:** APA 7th edition · Times New Roman · 12-point · Double-spaced · 1-inch margins.
+
+<a href="EPCL_Universal_Manuscript_Submission_Template.docx" class="template-link" download>↓ Download Manuscript Template</a>
+
+</div>
+
+## Submission Guidelines
+
+<div class="section-description">
+
+A few important requirements to understand before submitting your proposal.
+
+</div>
+
+<div class="guidelines">
+
+<details>
+<summary>Who is eligible to contribute?</summary>
+
+EPCL welcomes criminal justice practitioners, researchers, academic faculty, undergraduate and graduate students, administrators, policymakers, retired professionals, and other individuals with relevant knowledge or experience.
+
+Institutional affiliation, academic credentials, and previous publication experience are not prerequisites.
+
+</details>
+
+<details>
+<summary>Originality and intellectual property</summary>
+
+Contributions should represent original work and must not infringe upon the intellectual property rights of others.
+
+Contributors are responsible for appropriately acknowledging sources. Previously published material, manuscripts under consideration elsewhere, and substantially overlapping submissions must be disclosed.
+
+</details>
+
+<details>
+<summary>Professional and ethical standards</summary>
+
+Contributors must:
+
+- Properly attribute sources and intellectual contributions.
+- Disclose relevant conflicts of interest.
+- Identify applicable funding and material support.
+- Obtain permissions for copyrighted materials.
+- Protect confidential and personally identifiable information.
+- Obtain appropriate authorization for research involving human participants when required.
+
+EPCL may request clarification regarding research ethics, institutional approvals, or data permissions.
+
+</details>
+
+<details>
+<summary>Manuscript formatting requirements</summary>
+
+Full manuscripts must follow APA Publication Manual, Seventh Edition, unless otherwise instructed.
+
+| Element | Requirement |
+|:--|:--|
+| Citation style | APA 7th edition |
+| Font | Times New Roman, 12-point |
+| Spacing | Double-spaced |
+| Margins | 1 inch |
+| Alignment | Left-aligned |
+| Indentation | 0.5 inch |
+| Page numbering | Upper-right corner |
+| File format | Microsoft Word (.docx) |
+
+Additional publication-specific instructions may be provided by the editorial team.
+
+</details>
+
+<details>
+<summary>How does editorial review work?</summary>
+
+Proposals are reviewed by two editors assigned to the selected publication.
+
+Completed manuscripts undergo editorial evaluation for relevance, quality, accuracy, clarity, and suitability.
+
+This process should not be interpreted as external, independent scholarly peer review unless a particular publication explicitly identifies it as such.
+
+</details>
+
+<details>
+<summary>Does approval guarantee publication?</summary>
+
+No. Proposal approval is an invitation to develop a full manuscript. The completed manuscript must undergo editorial evaluation before a final publication decision is made.
+
+</details>
+
+<details>
+<summary>Can I submit to multiple publications?</summary>
+
+Contributors should select the publication most closely aligned with their subject matter.
+
+If a proposed contribution could reasonably fit multiple publications, indicate this in the proposal description so the editorial team can consider its placement.
+
+</details>
+
+</div>
+
+<div class="final-cta">
+
+<div class="publication-number" style="color:#C9A24A;">CONTRIBUTE TO EPCL PUBLICATIONS</div>
+
+## Have an idea worth sharing?
+
+The advancement of criminal justice depends on research, professional experience, critical discussion, and the willingness to explore better approaches.
+
+Whether you are a researcher, practitioner, educator, or student, we welcome your perspective.
+
+**Start with an idea. We will help guide you through the process.**
+
+<a href="YOUR_GOOGLE_APPS_SCRIPT_SUBMISSION_URL" target="_blank" rel="noopener">Submit a Contribution Proposal →</a>
+
+</div>
+
+<div class="footer-note">
+
+**El Paso Crime Lab**
+
+Advancing the science of public safety.
+
+[EPCL Website](https://epcrimelab.org)
+
+</div>
+
+</div>

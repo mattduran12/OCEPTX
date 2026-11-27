@@ -637,7 +637,7 @@ library(htmltools)
 # ============================================================
 
 providers <- read_excel(
-  "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/OCEPTX/service_providers/service_providers_list_ep.xlsx"
+  "service_providers/service_providers_list_ep.xlsx"
 )
 
 # Create an ID automatically

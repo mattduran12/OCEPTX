@@ -43,7 +43,17 @@ suppressMessages(library(leaflet.extras))
 suppressMessages(library(sf))
 
 
-data <- read.csv("C:/Users/Matt/Documents/data/ep_data_(01-01-2016 to 10-31-2026).csv", header = TRUE)
+file1 <- "C:/Users/Matt/Documents/data/ep_data_(01-01-2016 to 10-31-2026).csv"
+file2 <- "C:/Users/mduran29/Documents/Crash Data/ep_data_(01-01-2016 to 10-31-2026).csv"
+
+if (file.exists(file1)) {
+  data <- read.csv(file1, header = TRUE)
+} else if (file.exists(file2)) {
+  data <- read.csv(file2, header = TRUE)
+} else {
+  stop("CSV file not found in either location.")
+}
+
 
 data$City <- recode(data$City,
   "EL PASO" = "El Paso"
@@ -3299,7 +3309,7 @@ crash_2026 <- crash_level %>%
   filter(!is.na(Latitude), !is.na(Longitude))
 
 blocks <- st_read(
-  "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/OCEPTX/shape files/Census Block Groups/tl_2025_48_bg.shp",
+  "C:/Users/mduran29/Documents/EPCL/shape files/Census Block Groups/tl_2025_48_bg.shp",
   quiet = TRUE
 ) %>%
   st_make_valid()
@@ -3415,7 +3425,7 @@ leaflet(blocks_map) %>%
 #| echo: false
 
 regions <- st_read(
-  "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/OCEPTX/shape files/Police Regions/PoliceRegions.shp",   quiet = TRUE
+  "C:/Users/mduran29/Documents/EPCL/shape files/Police Regions/PoliceRegions.shp",   quiet = TRUE
 ) %>%
   st_make_valid()
 
@@ -3502,7 +3512,7 @@ leaflet(regions_map) %>%
 #| echo: false
 
 districts <- st_read(
-  "C:/Users/Matt/ASU Dropbox/Matthew Duran/Professional Development/Website/OCEPTX/shape files/City Districts/RepresentativeDistricts.shp",   quiet = TRUE) %>%
+  "C:/Users/mduran29/Documents/EPCL/shape files/City Districts/RepresentativeDistricts.shp",   quiet = TRUE) %>%
   st_make_valid()
 
 crash_pts <- crash_level %>%

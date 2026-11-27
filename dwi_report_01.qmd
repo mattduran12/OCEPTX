@@ -29,8 +29,6 @@ library(zoo)
 library(plotly)
 library(reactable)
 
-# Folder path
-folder_path <- "C:/Users/Matt/ASU Dropbox/Matthew Duran/Personal Documents/Consulting business/El Paso Crime Lab/Drunk Driving/data"
 
 # Major Texas cities >100k population (2020 Census)
 major_cities <- c(
@@ -79,8 +77,8 @@ city_pop2020 <- data.frame(
 )
 
 # Read datasets
-combined_data <- read.csv(file.path(folder_path, "combined_alc_related_crashes_2021_2025.csv"), stringsAsFactors = FALSE)
-fatalities_data <- read.csv(file.path(folder_path, "report-01-statewide_fatalities_05192026_2021-2025.csv"), stringsAsFactors = FALSE)
+combined_data <- read.csv("data/combined_alc_related_crashes_2021_2025.csv", stringsAsFactors = FALSE)
+fatalities_data <- read.csv("data/report-01-statewide_fatalities_05192026_2021-2025.csv", stringsAsFactors = FALSE)
 
 # Create alcohol-related indicator
 fatalities_data <- fatalities_data %>%

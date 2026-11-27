@@ -2,18 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="description" content="Public research on impaired driving and alcohol-related crashes in El Paso, Texas.">
 
-<title>Research - Driving While Intoxicated – El Paso Crime Lab</title>
+<title>Research - Driving While Intoxicated – EPCL</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -34,15 +40,14 @@ ul.task-list li input[type="checkbox"] {
 <link href="./about_logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dec27a635df3619fee3abd01ce5a42f4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9e870e5a74becbd885e83507ec572ec6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,6 +78,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="styles2.css">
+<link rel="stylesheet" href="EPCL_JOURNALS/styles/journal.scss">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -83,22 +89,15 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">El Paso Crime Lab</span>
+    <span class="navbar-title">EPCL</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-research" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Research</span>
@@ -106,7 +105,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-research">    
         <li>
     <a class="dropdown-item" href="./dwi_home.html">
- <span class="dropdown-text">Driving While Intoxicated</span></a>
+ <span class="dropdown-text">Impaired Driving</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./report_animal_cruelty.pdf">
@@ -114,44 +113,55 @@ ul.task-list li input[type="checkbox"] {
   </li>  
     </ul>
   </li>
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./award_announcement.html"> 
-<span class="menu-text">Awards Program</span></a>
+    <a class="nav-link" href="./EPCL_JOURNALS/publications.html"> 
+<span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-dashboard--applications" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Dashboard &amp; Applications</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data--tools" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Data &amp; Tools</span>
     </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-dashboard--applications">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data--tools">    
         <li>
     <a class="dropdown-item" href="./crash_dashboard.html">
  <span class="dropdown-text">Alcohol-Related Crash Dashboard</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./police_stops_tool.html">
- <span class="dropdown-text">Racial Profiling Tool (BETA)</span></a>
+ <span class="dropdown-text">Racial Profiling Tool (Beta)</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-connect-with-us" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Connect With Us</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-initiatives" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Initiatives</span>
     </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-connect-with-us">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-initiatives">    
         <li>
-    <a class="dropdown-item" href="./subscribe.html">
- <span class="dropdown-text">Subscribe for Email Updates</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./contact.html">
- <span class="dropdown-text">Contact the El Paso Crime Lab</span></a>
+    <a class="dropdown-item" href="./award_announcement.html">
+ <span class="dropdown-text">Public Safety Science Awards</span></a>
   </li>  
     </ul>
   </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
+        <li>
+    <a class="dropdown-item" href="./about.html">
+ <span class="dropdown-text">About EPCL</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./contact.html">
+ <span class="dropdown-text">Contact</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.instagram.com/epcrimelab/"> <i class="bi bi-instagram" role="img" aria-label="Instagram">
+    <a class="nav-link" href="./subscribe.html"> <i class="bi bi-envelope" role="img" aria-label="Subscribe for email updates">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -161,9 +171,6 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <div id="quarto-announcement" data-announcement-id="7847dcbf024061e1fb90d05cf387504f" class="alert alert-primary hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
-<p>Nominations are open for the <strong>EPCL Public Safety Science Awards!</strong> <a href="award_announcement.html">Learn more and submit a nomination</a>.</p>
-</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
@@ -1414,6 +1421,27 @@ main.content {
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><strong>El Paso Crime Lab</strong></p>
+<p>Advancing the Science of Public Safety</p>
+</div>   
+    <div class="nav-footer-center">
+<p><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="subscribe.html">Subscribe</a></p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.instagram.com/epcrimelab/">
+      <i class="bi bi-instagram" role="img" aria-label="Instagram">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
 
 
 

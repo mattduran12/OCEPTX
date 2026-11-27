@@ -2,18 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="An independent public safety research project by Matthew Durán.">
+<meta name="description" content="Independent research, publications, data and tools for public safety.">
 
-<title>El Paso Crime Lab</title>
+<title>El Paso Crime Lab – EPCL</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -34,15 +40,14 @@ ul.task-list li input[type="checkbox"] {
 <link href="./about_logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dec27a635df3619fee3abd01ce5a42f4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9e870e5a74becbd885e83507ec572ec6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,6 +78,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="styles2.css">
+<link rel="stylesheet" href="EPCL_JOURNALS/styles/journal.scss">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -83,22 +89,15 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">El Paso Crime Lab</span>
+    <span class="navbar-title">EPCL</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-research" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Research</span>
@@ -106,7 +105,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-research">    
         <li>
     <a class="dropdown-item" href="./dwi_home.html">
- <span class="dropdown-text">Driving While Intoxicated</span></a>
+ <span class="dropdown-text">Impaired Driving</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./report_animal_cruelty.pdf">
@@ -114,44 +113,55 @@ ul.task-list li input[type="checkbox"] {
   </li>  
     </ul>
   </li>
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./award_announcement.html"> 
-<span class="menu-text">Awards Program</span></a>
+    <a class="nav-link" href="./EPCL_JOURNALS/publications.html"> 
+<span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-dashboard--applications" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Dashboard &amp; Applications</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data--tools" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Data &amp; Tools</span>
     </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-dashboard--applications">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data--tools">    
         <li>
     <a class="dropdown-item" href="./crash_dashboard.html">
  <span class="dropdown-text">Alcohol-Related Crash Dashboard</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./police_stops_tool.html">
- <span class="dropdown-text">Racial Profiling Tool (BETA)</span></a>
+ <span class="dropdown-text">Racial Profiling Tool (Beta)</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-connect-with-us" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Connect With Us</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-initiatives" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Initiatives</span>
     </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-connect-with-us">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-initiatives">    
         <li>
-    <a class="dropdown-item" href="./subscribe.html">
- <span class="dropdown-text">Subscribe for Email Updates</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./contact.html">
- <span class="dropdown-text">Contact the El Paso Crime Lab</span></a>
+    <a class="dropdown-item" href="./award_announcement.html">
+ <span class="dropdown-text">Public Safety Science Awards</span></a>
   </li>  
     </ul>
   </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
+        <li>
+    <a class="dropdown-item" href="./about.html">
+ <span class="dropdown-text">About EPCL</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./contact.html">
+ <span class="dropdown-text">Contact</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.instagram.com/epcrimelab/"> <i class="bi bi-instagram" role="img" aria-label="Instagram">
+    <a class="nav-link" href="./subscribe.html"> <i class="bi bi-envelope" role="img" aria-label="Subscribe for email updates">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -161,9 +171,6 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <div id="quarto-announcement" data-announcement-id="7847dcbf024061e1fb90d05cf387504f" class="alert alert-primary hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
-<p>Nominations are open for the <strong>EPCL Public Safety Science Awards!</strong> <a href="award_announcement.html">Learn more and submit a nomination</a>.</p>
-</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
@@ -180,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    An independent public safety research project by Matthew Durán.
+    Independent research, publications, data and tools for public safety.
   </div>
 </div>
 
@@ -226,7 +233,7 @@ main.content {
 .hero {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 8rem 2rem 7rem 2rem;
+  padding: 5rem 0 4rem 0;
 }
 
 .hero-kicker {
@@ -316,7 +323,7 @@ main.content {
 .section-divider {
   max-width: 1100px;
   height: 1px;
-  margin: 0 auto 6rem auto;
+  margin: 0 auto 3rem auto;
   background: #e5e7eb;
 }
 
@@ -327,7 +334,7 @@ main.content {
 
 .about {
   max-width: 1100px;
-  margin: 0 auto 7rem auto;
+  margin: 0 auto 4rem auto;
 }
 
 .section-heading {
@@ -411,12 +418,12 @@ main.content {
 
 .focus {
   max-width: 1100px;
-  margin: 0 auto 7rem auto;
+  margin: 0 auto 4rem auto;
 }
 
 .focus-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
 }
 
@@ -424,7 +431,7 @@ main.content {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 270px;
+  min-height: 210px;
   padding: 2rem;
   background: #ffffff;
   border: 1px solid #e1e5e9;
@@ -492,7 +499,7 @@ main.content {
 
 .feature {
   max-width: 1100px;
-  margin: 0 auto 7rem auto;
+  margin: 0 auto 4rem auto;
   padding: 3.5rem;
   background: #20252b;
   border-radius: 18px;
@@ -549,7 +556,7 @@ main.content {
 
 .person {
   max-width: 900px;
-  margin: 0 auto 7rem auto;
+  margin: 0 auto 4rem auto;
   text-align: center;
 }
 
@@ -720,6 +727,15 @@ main.content {
 
 }
 
+
+/* Homepage publication feature */
+.home-journals { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.8rem; margin:1.5rem 0; }
+.home-journal { padding:1rem; border:1px solid #637078; border-radius:8px; color:white; font-weight:600; }
+.feature-label { color:#e0b75d; }
+.home-research { margin:0 auto 4rem; max-width:1100px; }
+.home-research .focus-card { min-height:180px; }
+.hero h1 { overflow-wrap:break-word; }
+@media(max-width:600px){ .home-journals {grid-template-columns:1fr;} .hero h1 {font-size:clamp(2.5rem,10vw,3.2rem);} }
 </style>
 <div class="hero">
 <div class="hero-kicker">
@@ -728,105 +744,106 @@ main.content {
 <section id="advancing-the-science-of-public-safety." class="level1">
 <h1>Advancing the Science of <span class="accent">Public Safety.</span></h1>
 <div class="hero-intro">
-<p>The El Paso Crime Lab is an independent public research project created by <strong>Matthew Durán</strong>. The project brings together research, local data, and public information to better understand crime and public safety in El Paso and the Borderland.</p>
+<p>The El Paso Crime Lab is an independent initiative connecting research, data, and professional experience to improve our understanding of crime and public safety. Rooted in El Paso and the Borderland, our work aims to make public safety knowledge accessible to everyone.</p>
 </div>
 <div class="hero-buttons">
-<p><a href="dwi_home.html" class="hero-button primary">Explore the Research</a></p>
+<p><a href="#explore-epcl" class="hero-button primary">Explore Our Work</a> <a href="about.html" class="hero-button secondary">About EPCL</a></p>
 </div>
 </section>
 </div>
 <div class="section-divider">
 
 </div>
-<div class="about">
-<section id="about-the-project" class="level2 section-heading">
-<h2 class="anchored" data-anchor-id="about-the-project">About the Project</h2>
-<p>The El Paso Crime Lab exists to make research and local public safety information more accessible.</p>
-</section>
-<div class="about-grid">
-<div class="about-main">
-<p>The project focuses on <strong>understanding local public safety problems through evidence</strong>. It brings together publicly available data, academic research, and community information to examine issues affecting El Paso and the surrounding region.</p>
-<p>The work is independent and primarily intended as a resource for people who want to better understand crime, policing, and public safety in the Borderland.</p>
-<p>Rather than simply presenting statistics, the goal is to provide context, explain what the data can—and cannot—tell us, and make research findings accessible to a broader audience.</p>
-</div>
-<div class="about-side">
-<div class="about-side-label">
-<p>Public Research</p>
-</div>
-<section id="evidence-for-understanding-local-public-safety." class="level3">
-<h3 class="anchored" data-anchor-id="evidence-for-understanding-local-public-safety.">Evidence for understanding local public safety.</h3>
-<p>The El Paso Crime Lab provides research, data, analysis, and public information concerning crime and public safety in the Borderland.</p>
-</section>
-</div>
-</div>
-</div>
-<div class="focus">
-<section id="areas-of-focus" class="level2 section-heading">
-<h2 class="anchored" data-anchor-id="areas-of-focus">Areas of Focus</h2>
-<p>Research and information published through the El Paso Crime Lab generally falls into three areas.</p>
+<div id="explore-epcl" class="focus">
+<section id="explore-epcl" class="level2 section-heading">
+<h2 class="anchored" data-anchor-id="explore-epcl">Explore EPCL</h2>
+<p>Discover research, publications, practical tools, and initiatives that connect knowledge with public safety practice.</p>
 </section>
 <div class="focus-grid">
 <div class="focus-card">
 <div class="focus-number">
-<p>01</p>
+<p>01 / RESEARCH</p>
 </div>
 <section id="research" class="level3">
 <h3 class="anchored" data-anchor-id="research">Research</h3>
-<p>Independent research examining crime, policing, and criminal justice issues affecting El Paso and the Borderland.</p>
-<p><a href="dwi_home.html" class="focus-link">Explore the research →</a></p>
+<p>Independent research examining crime, policing, and public safety, with an emphasis on El Paso and the Borderland.</p>
+<p><a href="dwi_home.html" class="focus-link">Impaired driving research →</a> <a href="report_animal_cruelty.pdf" class="focus-link">Animal cruelty report →</a></p>
 </section>
 </div>
 <div class="focus-card">
 <div class="focus-number">
-<p>02</p>
+<p>02 / PUBLICATIONS</p>
 </div>
-<section id="data-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="data-analysis">Data &amp; Analysis</h3>
-<p>Local data, dashboards, visualizations, and analytical tools designed to make public safety information easier to explore and understand.</p>
-<p><a href="crash_dashboard.html" class="focus-link">Explore the data →</a></p>
+<section id="publications" class="level3">
+<h3 class="anchored" data-anchor-id="publications">Publications</h3>
+<p>Open-access journals that bring together useful evidence, professional experience, and practical ideas across the criminal justice system.</p>
+<p><a href="EPCL_JOURNALS/publications.html" class="focus-link">Explore EPCL Publications →</a></p>
 </section>
 </div>
 <div class="focus-card">
 <div class="focus-number">
-<p>03</p>
+<p>03 / DATA &amp; TOOLS</p>
 </div>
-<section id="public-information" class="level3">
-<h3 class="anchored" data-anchor-id="public-information">Public Information</h3>
-<p>Accessible explanations and resources that connect research and local public safety information with the people and communities they affect.</p>
-<p><a href="dwi_services.html" class="focus-link">Explore resources →</a></p>
+<section id="data-tools" class="level3">
+<h3 class="anchored" data-anchor-id="data-tools">Data &amp; Tools</h3>
+<p>Interactive resources designed to make public safety data easier to explore, interpret, and use.</p>
+<p><a href="crash_dashboard.html" class="focus-link">Alcohol-related crash dashboard →</a> <a href="police_stops_tool.html" class="focus-link">Racial profiling tool (Beta) →</a></p>
+</section>
+</div>
+<div class="focus-card">
+<div class="focus-number">
+<p>04 / INITIATIVES</p>
+</div>
+<section id="initiatives" class="level3">
+<h3 class="anchored" data-anchor-id="initiatives">Initiatives</h3>
+<p>Efforts to recognize contributions to public safety and encourage the exchange of knowledge and ideas.</p>
+<p><a href="award_announcement.html" class="focus-link">Public Safety Science Awards →</a></p>
 </section>
 </div>
 </div>
 </div>
 <div class="feature">
 <div class="feature-label">
-<p>Featured Research</p>
+<p>EPCL PUBLICATIONS</p>
 </div>
-<section id="understanding-impaired-driving-in-el-paso" class="level2">
-<h2 class="anchored" data-anchor-id="understanding-impaired-driving-in-el-paso">Understanding impaired driving in El Paso</h2>
-<p>One area of ongoing research examines alcohol-impaired driving using local crash data, research evidence, and community information.</p>
-<p>Explore the data, findings, reports, and resources developed through this project.</p>
-<p><a href="dwi_home.html" class="feature-action">Explore the DWI Research Hub →</a></p>
+<section id="four-journals.-one-shared-purpose." class="level2">
+<h2 class="anchored" data-anchor-id="four-journals.-one-shared-purpose.">Four journals. One shared purpose.</h2>
+<p>Good ideas and lessons from the field deserve to be shared. EPCL Publications provides a space for researchers, practitioners, and other contributors to share knowledge that can inform public safety practice.</p>
+<div class="home-journals">
+<div class="home-journal">
+<p>The Police Journal</p>
+</div>
+<div class="home-journal">
+<p>The Corrections Journal</p>
+</div>
+<div class="home-journal">
+<p>The Courts Journal</p>
+</div>
+<div class="home-journal">
+<p>The Community Safety Journal</p>
+</div>
+</div>
+<p><a href="EPCL_JOURNALS/publications.html" class="feature-action">Discover EPCL Publications →</a></p>
 </section>
 </div>
-<div class="person">
-<div class="person-label">
-<p>Project Lead</p>
-</div>
-<section id="matthew-durán" class="level2">
-<h2 class="anchored" data-anchor-id="matthew-durán">Matthew Durán</h2>
-<p>Matthew Durán is the researcher behind the El Paso Crime Lab. His work focuses on crime, policing, public safety, and the use of data and research to better understand local problems.</p>
-<p><a href="about.html" class="person-link">Learn more →</a></p>
+<div class="home-research">
+<section id="featured-research" class="level2 section-heading">
+<h2 class="anchored" data-anchor-id="featured-research">Featured research</h2>
+</section>
+<section id="understanding-impaired-driving-in-el-paso" class="level3 focus-card">
+<h3 class="anchored" data-anchor-id="understanding-impaired-driving-in-el-paso">Understanding impaired driving in El Paso</h3>
+<p>Explore local crash data, research findings, reports, and community resources related to alcohol-impaired driving.</p>
+<p><a href="dwi_home.html" class="focus-link">Explore the DWI Research Hub →</a></p>
 </section>
 </div>
-<section id="explore-the-project" class="level2 connect">
-<h2 class="anchored" data-anchor-id="explore-the-project">Explore the Project</h2>
-<p>Follow the research, explore the data, or get in touch.</p>
-<div class="connect-links">
-<p><a href="subscribe.html" class="connect-link">Email Updates</a></p>
-<p><a href="contact.html" class="connect-link">Contact</a></p>
-<p><a href="https://www.instagram.com/epcrimelab/" class="connect-link" target="_blank">Instagram</a></p>
-<p><a href="dwi_home.html" class="connect-link">Research</a></p>
+<div class="section-divider">
+
+</div>
+<section id="stay-connected" class="level2 connect">
+<h2 class="anchored" data-anchor-id="stay-connected">Stay connected</h2>
+<p>Receive updates on research, publications, and new initiatives from the El Paso Crime Lab.</p>
+<div class="hero-buttons" style="justify-content:center; margin-top:1.5rem;">
+<p><a href="subscribe.html" class="hero-button primary">Subscribe for Email Updates</a> <a href="contact.html" class="hero-button secondary">Contact EPCL</a></p>
 </div>
 </section>
 
@@ -1234,6 +1251,27 @@ main.content {
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><strong>El Paso Crime Lab</strong></p>
+<p>Advancing the Science of Public Safety</p>
+</div>   
+    <div class="nav-footer-center">
+<p><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="subscribe.html">Subscribe</a></p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.instagram.com/epcrimelab/">
+      <i class="bi bi-instagram" role="img" aria-label="Instagram">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
 
 
 

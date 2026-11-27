@@ -1,79 +1,65 @@
 ---
-title: "Texas Racial Profiling Data"
-description: "El Paso Crime Lab beta testing application for entering, checking, and analyzing racial profiling data from traffic stops, searches, and contraband outcomes."
+title: "Traffic Data Analysis"
+description: "Interactive application for entering, checking, and analyzing Texas traffic stop, search, and contraband data."
 author: "El Paso Crime Lab"
 date: "2026-08-30"
+
 keywords:
   - El Paso Crime Lab
-  - racial profiling
+  - traffic data analysis
   - traffic stops
+  - racial profiling
   - law enforcement
   - policing
+  - Texas
   - data analysis
-  - beta testing
+
 format:
   html:
-    theme: cosmo
     toc: false
     page-layout: full
     self-contained: false
-    metadata:
-      author: "El Paso Crime Lab"
-      description: "Interactive racial profiling data application currently in beta testing."
 ---
 
 <style>
 
 /* ============================================================
-   GLOBAL PAGE
+   DESIGN VARIABLES
    ============================================================ */
 
-html,
-body {
-  margin: 0 !important;
-  padding: 0 !important;
-  width: 100% !important;
-  min-height: 100% !important;
-  background: #ffffff !important;
-}
-
-body {
-  overflow-x: hidden !important;
+:root {
+  --epcl-charcoal: #263238;
+  --epcl-terracotta: #7A2E1D;
+  --epcl-gold: #B8862F;
+  --epcl-gray: #667085;
+  --epcl-border: #E2E5E7;
+  --epcl-light: #F7F8F9;
+  --epcl-white: #FFFFFF;
 }
 
 
 /* ============================================================
-   HIDE QUARTO TITLE
+   PAGE LAYOUT
    ============================================================ */
 
 header#title-block-header {
   display: none !important;
 }
 
-
-/* ============================================================
-   REMOVE QUARTO CONTENT CONSTRAINTS
-   ============================================================ */
-
 #quarto-content,
-main.content,
-.page-columns,
-.page-full,
-.content {
+main.content {
   width: 100% !important;
   max-width: none !important;
   margin: 0 !important;
   padding: 0 !important;
 }
 
-
-/* ============================================================
-   REMOVE SIDEBAR / MARGIN CONSTRAINTS
-   ============================================================ */
-
-#quarto-content > *,
-main.content > * {
-  max-width: none !important;
+.traffic-page {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 55px 40px 65px;
+  box-sizing: border-box;
 }
 
 
@@ -81,260 +67,252 @@ main.content > * {
    INTRODUCTION
    ============================================================ */
 
-.beta-intro {
-  width: 100%;
-  max-width: 1750px;
-  margin: 0 auto;
-  padding: 75px 55px 45px 55px;
-  box-sizing: border-box;
+.traffic-intro {
+  margin-bottom: 35px;
 }
 
-
-/* ============================================================
-   BETA LABEL
-   ============================================================ */
-
-.beta-label {
-  display: inline-block;
-  margin-bottom: 18px;
+.traffic-eyebrow {
+  display: block;
+  margin-bottom: 12px;
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #777777;
+  color: var(--epcl-terracotta);
 }
 
-
-/* ============================================================
-   MAIN HEADING
-   ============================================================ */
-
-.beta-intro h1 {
-  margin: 0 0 22px 0 !important;
+.traffic-intro h1 {
+  margin: 0 0 18px !important;
   padding: 0 !important;
-  font-size: 3rem !important;
-  font-weight: 600 !important;
-  line-height: 1.15 !important;
-  color: #252525 !important;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--epcl-charcoal);
+  border: none !important;
 }
 
-
-/* ============================================================
-   INTRODUCTION TEXT
-   ============================================================ */
-
-.beta-intro p {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 !important;
-  padding: 0 !important;
-  font-size: 1.12rem;
+.traffic-intro p {
+  max-width: 1100px;
+  margin: 0 0 14px;
+  font-size: 1.06rem;
   line-height: 1.75;
-  color: #555555;
+  color: var(--epcl-gray);
+}
+
+.traffic-divider {
+  width: 65px;
+  height: 3px;
+  margin: 22px 0;
+  background: var(--epcl-gold);
+}
+
+
+/* ============================================================
+   APPLICATION FEATURES
+   ============================================================ */
+
+.traffic-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 30px 0;
+}
+
+.traffic-feature {
+  padding: 20px;
+  background: var(--epcl-light);
+  border: 1px solid var(--epcl-border);
+  border-radius: 6px;
+}
+
+.traffic-feature h3 {
+  margin: 0 0 8px !important;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--epcl-charcoal);
+}
+
+.traffic-feature p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--epcl-gray);
+}
+
+
+/* ============================================================
+   DATA PRIVACY NOTICE
+   ============================================================ */
+
+.traffic-privacy {
+  margin: 25px 0 30px;
+  padding: 16px 20px;
+  background: #F8F6F2;
+  border-left: 3px solid var(--epcl-gold);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--epcl-charcoal);
 }
 
 
 /* ============================================================
    APPLICATION CONTAINER
-   FULL WIDTH
-   ============================================================ */
-
-/* ============================================================
-   APPLICATION CONTAINER
-   MATCH APP WIDTH
    ============================================================ */
 
 .app-card {
   width: 100%;
-  max-width: 1400px;
-
-  margin: 0 auto !important;
-  padding: 0 !important;
-
-  background: #ffffff;
-
-  border: 1px solid #ddddda !important;
-  border-radius: 8px !important;
-
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
-
+  margin: 0 auto;
+  background: #FFFFFF;
+  border: 1px solid #E2E5E7;
+  border-radius: 8px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
   box-sizing: border-box;
-
-  overflow: hidden !important;
 }
 
 
 /* ============================================================
-   APPLICATION HEADER
+   APPLICATION HEADER — LIGHT BACKGROUND
    ============================================================ */
 
 .app-card-header {
-  width: 100%;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  padding: 17px 35px;
-
-  background: #f7f7f5;
-  border-top: 1px solid #ddddda;
-  border-bottom: 1px solid #ddddda;
-
-  box-sizing: border-box;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 18px 24px;
+  background: #F7F8F9 !important;
+  border-bottom: 1px solid #E2E5E7;
 }
-
 
 .app-card-title {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  color: #444444;
+  color: #263238 !important;
 }
 
-
-.beta-badge {
+.app-open-link {
   display: inline-block;
+  padding: 8px 14px;
+  background: #FFFFFF;
+  border: 1px solid #D0D5DD;
+  border-radius: 4px;
+  color: #263238 !important;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none !important;
+  transition: background 0.2s ease;
+}
 
-  padding: 5px 11px;
-
-  border: 1px solid #cfcfc9;
-  border-radius: 20px;
-
-  background: #ffffff;
-
-  font-size: 0.68rem;
-  font-weight: 700;
-
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-
-  color: #777777;
+.app-open-link:hover {
+  background: #EAECEF;
+  color: #263238 !important;
 }
 
 
 /* ============================================================
-   SHINY APPLICATION FRAME
-   ============================================================ */
-
-/* ============================================================
-   SHINY APPLICATION FRAME
+   SHINY APPLICATION
    ============================================================ */
 
 .app-frame {
-  width: 100% !important;
-  max-width: none !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  background: #ffffff;
-
-  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #FFFFFF;
 }
-
-
-/* ============================================================
-   SHINY IFRAME
-   ============================================================ */
-
-/* ============================================================
-   SHINY IFRAME
-   ============================================================ */
 
 .app-frame iframe {
   display: block;
-
   width: 100% !important;
   max-width: none !important;
-
   height: 1100px;
   min-height: 1100px;
-
-  border: 0 !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  box-sizing: border-box;
-
-  background: #ffffff;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: #FFFFFF;
 }
 
 
 /* ============================================================
-   BETA NOTE
+   FEEDBACK SECTION
    ============================================================ */
 
-.beta-note {
-  width: 100%;
-  max-width: 1750px;
+.traffic-feedback {
+  margin-top: 30px;
+  padding-top: 22px;
+  border-top: 1px solid var(--epcl-border);
+}
 
-  margin: 35px auto 60px auto;
+.traffic-feedback h3 {
+  margin: 0 0 10px !important;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--epcl-charcoal);
+}
 
-  padding: 0 55px;
+.traffic-feedback p {
+  max-width: 1000px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--epcl-gray);
+}
 
-  box-sizing: border-box;
-
-  color: #777777;
-
-  font-size: 0.85rem;
-  line-height: 1.6;
+.traffic-feedback a {
+  color: var(--epcl-terracotta);
+  font-weight: 600;
 }
 
 
 /* ============================================================
-   MOBILE
+   MOBILE DEVICES
    ============================================================ */
 
 @media (max-width: 768px) {
 
-  .beta-intro {
-    padding: 55px 22px 35px 22px;
+  .traffic-page {
+    padding: 35px 18px 45px;
   }
 
-  .beta-intro h1 {
-    font-size: 2.15rem !important;
+  .traffic-intro {
+    margin-bottom: 25px;
   }
 
-  .beta-intro p {
+  .traffic-intro p {
     font-size: 1rem;
-    line-height: 1.65;
   }
 
-.app-card {
-  width: calc(100% - 30px) !important;
-  max-width: 1400px !important;
+  .traffic-features {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 
-  margin: 0 auto !important;
-
-  left: auto;
-}
+  .traffic-feature {
+    padding: 16px;
+  }
 
   .app-card-header {
-    padding: 13px 16px;
+    padding: 15px;
   }
 
-.app-frame iframe {
-  width: 100% !important;
-
-  height: 1200px;
-
-  min-height: 1200px;
-}
-
-  .beta-note {
-    padding: 0 20px;
-    margin-top: 30px;
+  .app-frame iframe {
+    height: 1200px;
+    min-height: 1200px;
   }
 
 }
 
 
 /* ============================================================
-   VERY LARGE SCREENS
+   LARGE SCREENS
    ============================================================ */
 
 @media (min-width: 1800px) {
+
+  .traffic-page {
+    max-width: 1650px;
+  }
 
   .app-frame iframe {
     height: calc(100vh - 50px);
@@ -346,32 +324,105 @@ main.content > * {
 </style>
 
 
-<div class="beta-intro">
+<div class="traffic-page">
 
-<div class="beta-label">
-El Paso Crime Lab · Beta Testing
-</div>
 
-<h1>TX Racial Profiling Data</h1>
+<!-- INTRODUCTION -->
+
+<div class="traffic-intro">
+
+<span class="traffic-eyebrow">
+El Paso Crime Lab / Data &amp; Tools
+</span>
+
+<h1>Traffic Data Analysis</h1>
+
+<div class="traffic-divider"></div>
 
 <p>
-The purpose of this tool is to make racial profiling data easier to enter, check, and analyze in the state of Texas. It is designed for Texas law enforcement agencies to support the review and analysis of their racial profiling data and to assist agencies with the comparative analysis required under Texas Code of Criminal Procedure, Article 2B.0053. This tool is currently in beta testing. We are asking testers to look for errors, unexpected results, confusing wording, or anything that could be improved or added. <strong>Data entered into the application is not stored or retained.</strong> If you want to keep your work, use the Download button in the application to save a copy to your computer. Please send an <a href="mailto:mduran29@asu.edu">email</a> to Matthew Durán with any ideas to make this more useful for your agency. Thank you!
+An interactive application designed to help Texas law enforcement
+agencies enter, review, and analyze traffic stop data.
+</p>
+
+<p>
+The application supports the examination of traffic stops,
+searches, and contraband outcomes, including the comparative
+analysis required under Texas Code of Criminal Procedure,
+Article 2B.0053.
 </p>
 
 </div>
 
+
+<!-- APPLICATION FEATURES -->
+
+<div class="traffic-features">
+
+<div class="traffic-feature">
+
+<h3>Enter Data</h3>
+
+<p>
+Organize traffic stop, search, and contraband data in one
+interactive application.
+</p>
+
+</div>
+
+<div class="traffic-feature">
+
+<h3>Review Data</h3>
+
+<p>
+Check entered information and identify potential errors
+or inconsistencies.
+</p>
+
+</div>
+
+<div class="traffic-feature">
+
+<h3>Analyze Data</h3>
+
+<p>
+Explore patterns and comparisons to support agency
+reporting and informed decision-making.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- DATA PRIVACY -->
+
+<div class="traffic-privacy">
+
+<strong>Data privacy:</strong>
+Data entered into this application is not stored or retained.
+Use the Download button within the application to save a copy
+of your work to your computer.
+
+</div>
+
+
+<!-- APPLICATION -->
 
 <div class="app-card">
 
 <div class="app-card-header">
 
 <div class="app-card-title">
-Interactive Racial Profiling Data Application
+Traffic Data Analysis Application
 </div>
 
-<div class="beta-badge">
-Beta
-</div>
+<a
+  class="app-open-link"
+  href="https://mattduran.shinyapps.io/rp_analyzer/"
+  target="_blank"
+  rel="noopener noreferrer">
+  Open in New Tab ↗
+</a>
 
 </div>
 
@@ -379,9 +430,8 @@ Beta
 
 <iframe
   src="https://mattduran.shinyapps.io/rp_analyzer/"
-  title="El Paso Crime Lab Racial Profiling Data Application"
+  title="El Paso Crime Lab Traffic Data Analysis Application"
   loading="eager"
-  scrolling="yes"
   allow="fullscreen">
 </iframe>
 
@@ -390,9 +440,24 @@ Beta
 </div>
 
 
-<div class="beta-note">
+<!-- FEEDBACK -->
 
-<strong>Beta testing:</strong>
-This application is under active development. If you encounter an error, unexpected result, or other issue, please report it so the tool can be improved.
+<div class="traffic-feedback">
+
+<h3>Help Improve This Tool</h3>
+
+<p>
+This application is under active development. Feedback from
+law enforcement professionals and other users helps us improve
+its accuracy, usability, and functionality.
+</p>
+
+<p>
+If you encounter an error, have a suggestion, or would like
+to recommend an additional feature, please
+<a href="mailto:mduran29@asu.edu">contact Matthew Durán</a>.
+</p>
+
+</div>
 
 </div>

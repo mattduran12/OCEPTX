@@ -1,6 +1,6 @@
 ---
 title: "El Paso Crime Lab"
-description: "An independent public safety research project by Matthew Durán."
+description: "Independent research, publications, data and tools for public safety."
 favicon: logo_color.png
 format:
   html:
@@ -37,7 +37,7 @@ main.content {
 .hero {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 8rem 2rem 7rem 2rem;
+  padding: 5rem 0 4rem 0;
 }
 
 .hero-kicker {
@@ -127,7 +127,7 @@ main.content {
 .section-divider {
   max-width: 1100px;
   height: 1px;
-  margin: 0 auto 6rem auto;
+  margin: 0 auto 3rem auto;
   background: #e5e7eb;
 }
 
@@ -138,7 +138,7 @@ main.content {
 
 .about {
   max-width: 1100px;
-  margin: 0 auto 7rem auto;
+  margin: 0 auto 4rem auto;
 }
 
 .section-heading {
@@ -222,12 +222,12 @@ main.content {
 
 .focus {
   max-width: 1100px;
-  margin: 0 auto 7rem auto;
+  margin: 0 auto 4rem auto;
 }
 
 .focus-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
 }
 
@@ -235,7 +235,7 @@ main.content {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 270px;
+  min-height: 210px;
   padding: 2rem;
   background: #ffffff;
   border: 1px solid #e1e5e9;
@@ -303,7 +303,7 @@ main.content {
 
 .feature {
   max-width: 1100px;
-  margin: 0 auto 7rem auto;
+  margin: 0 auto 4rem auto;
   padding: 3.5rem;
   background: #20252b;
   border-radius: 18px;
@@ -360,7 +360,7 @@ main.content {
 
 .person {
   max-width: 900px;
-  margin: 0 auto 7rem auto;
+  margin: 0 auto 4rem auto;
   text-align: center;
 }
 
@@ -531,185 +531,136 @@ main.content {
 
 }
 
+
+/* Homepage publication feature */
+.home-journals { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.8rem; margin:1.5rem 0; }
+.home-journal { padding:1rem; border:1px solid #637078; border-radius:8px; color:white; font-weight:600; }
+.feature-label { color:#e0b75d; }
+.home-research { margin:0 auto 4rem; max-width:1100px; }
+.home-research .focus-card { min-height:180px; }
+.hero h1 { overflow-wrap:break-word; }
+@media(max-width:600px){ .home-journals {grid-template-columns:1fr;} .hero h1 {font-size:clamp(2.5rem,10vw,3.2rem);} }
 </style>
 
-
 ::: {.hero}
-
 ::: {.hero-kicker}
 EL PASO CRIME LAB
 :::
 
 # Advancing the Science of <span class="accent">Public Safety.</span>
 
-
 ::: {.hero-intro}
-The El Paso Crime Lab is an independent public research project created by <strong>Matthew Durán</strong>. The project brings together research, local data, and public information to better understand crime and public safety in El Paso and the Borderland.
+The El Paso Crime Lab is an independent initiative connecting research, data, and professional experience to improve our understanding of crime and public safety. Rooted in El Paso and the Borderland, our work aims to make public safety knowledge accessible to everyone.
 :::
 
 ::: {.hero-buttons}
-
-[Explore the Research](dwi_home.html){.hero-button .primary}
-
+[Explore Our Work](#explore-epcl){.hero-button .primary}
+[About EPCL](about.html){.hero-button .secondary}
 :::
-
 :::
-
 
 ::: {.section-divider}
 :::
 
-
-::: {.about}
-
+::: {#explore-epcl .focus}
 ::: {.section-heading}
+## Explore EPCL
 
-## About the Project
-
-The El Paso Crime Lab exists to make research and local public safety information more accessible.
-
+Discover research, publications, practical tools, and initiatives that connect knowledge with public safety practice.
 :::
-
-::: {.about-grid}
-
-::: {.about-main}
-
-The project focuses on **understanding local public safety problems through evidence**. It brings together publicly available data, academic research, and community information to examine issues affecting El Paso and the surrounding region.
-
-The work is independent and primarily intended as a resource for people who want to better understand crime, policing, and public safety in the Borderland.
-
-Rather than simply presenting statistics, the goal is to provide context, explain what the data can—and cannot—tell us, and make research findings accessible to a broader audience.
-
-:::
-
-
-::: {.about-side}
-
-::: {.about-side-label}
-Public Research
-:::
-
-### Evidence for understanding local public safety.
-
-The El Paso Crime Lab provides research, data, analysis, and public information concerning crime and public safety in the Borderland.
-
-:::
-
-:::
-
-:::
-
-
-::: {.focus}
-
-::: {.section-heading}
-
-## Areas of Focus
-
-Research and information published through the El Paso Crime Lab generally falls into three areas.
-
-:::
-
 
 ::: {.focus-grid}
-
 ::: {.focus-card}
-
 ::: {.focus-number}
-01
+01 / RESEARCH
 :::
-
 ### Research
+Independent research examining crime, policing, and public safety, with an emphasis on El Paso and the Borderland.
 
-Independent research examining crime, policing, and criminal justice issues affecting El Paso and the Borderland.
-
-[Explore the research →](dwi_home.html){.focus-link}
-
+[Impaired driving research →](dwi_home.html){.focus-link}
+[Animal cruelty report →](report_animal_cruelty.pdf){.focus-link}
 :::
-
 
 ::: {.focus-card}
-
 ::: {.focus-number}
-02
+02 / PUBLICATIONS
 :::
+### Publications
+Open-access journals that bring together useful evidence, professional experience, and practical ideas across the criminal justice system.
 
-### Data & Analysis
-
-Local data, dashboards, visualizations, and analytical tools designed to make public safety information easier to explore and understand.
-
-[Explore the data →](crash_dashboard.html){.focus-link}
-
+[Explore EPCL Publications →](EPCL_JOURNALS/publications.html){.focus-link}
 :::
-
 
 ::: {.focus-card}
-
 ::: {.focus-number}
-03
+03 / DATA & TOOLS
+:::
+### Data & Tools
+Interactive resources designed to make public safety data easier to explore, interpret, and use.
+
+[Alcohol-related crash dashboard →](crash_dashboard.html){.focus-link}
+[Racial profiling tool (Beta) →](police_stops_tool.html){.focus-link}
 :::
 
-### Public Information
-
-Accessible explanations and resources that connect research and local public safety information with the people and communities they affect.
-
-[Explore resources →](dwi_services.html){.focus-link}
-
+::: {.focus-card}
+::: {.focus-number}
+04 / INITIATIVES
 :::
+### Initiatives
+Efforts to recognize contributions to public safety and encourage the exchange of knowledge and ideas.
 
+[Public Safety Science Awards →](award_announcement.html){.focus-link}
 :::
-
 :::
-
+:::
 
 ::: {.feature}
-
 ::: {.feature-label}
-Featured Research
+EPCL PUBLICATIONS
+:::
+## Four journals. One shared purpose.
+
+Good ideas and lessons from the field deserve to be shared. EPCL Publications provides a space for researchers, practitioners, and other contributors to share knowledge that can inform public safety practice.
+
+::: {.home-journals}
+::: {.home-journal}
+The Police Journal
+:::
+::: {.home-journal}
+The Corrections Journal
+:::
+::: {.home-journal}
+The Courts Journal
+:::
+::: {.home-journal}
+The Community Safety Journal
+:::
 :::
 
-## Understanding impaired driving in El Paso
-
-One area of ongoing research examines alcohol-impaired driving using local crash data, research evidence, and community information.
-
-Explore the data, findings, reports, and resources developed through this project.
-
-[Explore the DWI Research Hub →](dwi_home.html){.feature-action}
-
+[Discover EPCL Publications →](EPCL_JOURNALS/publications.html){.feature-action}
 :::
 
+::: {.home-research}
+::: {.section-heading}
+## Featured research
+:::
+::: {.focus-card}
+### Understanding impaired driving in El Paso
+Explore local crash data, research findings, reports, and community resources related to alcohol-impaired driving.
 
-::: {.person}
-
-::: {.person-label}
-Project Lead
+[Explore the DWI Research Hub →](dwi_home.html){.focus-link}
+:::
 :::
 
-## Matthew Durán
-
-Matthew Durán is the researcher behind the El Paso Crime Lab. His work focuses on crime, policing, public safety, and the use of data and research to better understand local problems.
-
-[Learn more →](about.html){.person-link}
-
+::: {.section-divider}
 :::
-
 
 ::: {.connect}
+## Stay connected
+Receive updates on research, publications, and new initiatives from the El Paso Crime Lab.
 
-## Explore the Project
-
-Follow the research, explore the data, or get in touch.
-
-::: {.connect-links}
-
-[Email Updates](subscribe.html){.connect-link}
-
-[Contact](contact.html){.connect-link}
-
-[Instagram](https://www.instagram.com/epcrimelab/){.connect-link target="_blank"}
-
-[Research](dwi_home.html){.connect-link}
-
+::: {.hero-buttons style="justify-content:center; margin-top:1.5rem;"}
+[Subscribe for Email Updates](subscribe.html){.hero-button .primary}
+[Contact EPCL](contact.html){.hero-button .secondary}
 :::
-
 :::

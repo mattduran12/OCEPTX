@@ -2,21 +2,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="El Paso Crime Lab">
 <meta name="dcterms.date" content="2026-08-30">
-<meta name="keywords" content="El Paso Crime Lab, racial profiling, traffic stops, law enforcement, policing, data analysis, beta testing">
-<meta name="description" content="Interactive racial profiling data application currently in beta testing.">
+<meta name="keywords" content="El Paso Crime Lab, traffic data analysis, traffic stops, racial profiling, law enforcement, policing, Texas, data analysis">
+<meta name="description" content="Interactive application for entering, checking, and analyzing Texas traffic stop, search, and contraband data.">
 
-<title>Texas Racial Profiling Data – El Paso Crime Lab</title>
+<title>Traffic Data Analysis – EPCL</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -37,15 +43,14 @@ ul.task-list li input[type="checkbox"] {
 <link href="./about_logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-029b10fc0dc652dab2ec1ac156c1a037.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9e870e5a74becbd885e83507ec572ec6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,6 +81,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="styles2.css">
+<link rel="stylesheet" href="EPCL_JOURNALS/styles/journal.scss">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -86,22 +92,15 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">El Paso Crime Lab</span>
+    <span class="navbar-title">EPCL</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-research" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Research</span>
@@ -109,33 +108,63 @@ ul.task-list li input[type="checkbox"] {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-research">    
         <li>
     <a class="dropdown-item" href="./dwi_home.html">
- <span class="dropdown-text">Driving While Intoxicated</span></a>
+ <span class="dropdown-text">Impaired Driving</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./report_animal_cruelty.pdf">
+ <span class="dropdown-text">Animal Cruelty</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./EPCL_JOURNALS/publications.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data--tools" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Data &amp; Tools</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data--tools">    
+        <li>
+    <a class="dropdown-item" href="./crash_dashboard.html">
+ <span class="dropdown-text">Alcohol-Related Crash Dashboard</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./police_stops_tool.html">
+ <span class="dropdown-text">Traffic Data Analysis</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-initiatives" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Initiatives</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-initiatives">    
+        <li>
+    <a class="dropdown-item" href="./award_announcement.html">
+ <span class="dropdown-text">Public Safety Science Awards</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
+        <li>
+    <a class="dropdown-item" href="./about.html">
+ <span class="dropdown-text">About EPCL</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./contact.html">
+ <span class="dropdown-text">Contact</span></a>
   </li>  
     </ul>
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link active" href="./police_stops_tool.html" aria-current="page"> 
-<span class="menu-text">Racial Profiling Tool (BETA)</span></a>
-  </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-connect-with-us" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Connect With Us</span>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-connect-with-us">    
-        <li>
-    <a class="dropdown-item" href="./subscribe.html">
- <span class="dropdown-text">Subscribe for Email Updates</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./contact.html">
- <span class="dropdown-text">Contact the El Paso Crime Lab</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.instagram.com/epcrimelab/"> <i class="bi bi-instagram" role="img" aria-label="Instagram">
+    <a class="nav-link" href="./subscribe.html"> <i class="bi bi-envelope" role="img" aria-label="Subscribe for email updates">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -156,12 +185,12 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Texas Racial Profiling Data</h1>
+<h1 class="title">Traffic Data Analysis</h1>
 </div>
 
 <div>
   <div class="description">
-    Interactive racial profiling data application currently in beta testing.
+    Interactive application for entering, checking, and analyzing Texas traffic stop, search, and contraband data.
   </div>
 </div>
 
@@ -189,7 +218,7 @@ ul.task-list li input[type="checkbox"] {
 <div>
   <div class="keywords">
     <div class="block-title">Keywords</div>
-    <p>El Paso Crime Lab, racial profiling, traffic stops, law enforcement, policing, data analysis, beta testing</p>
+    <p>El Paso Crime Lab, traffic data analysis, traffic stops, racial profiling, law enforcement, policing, Texas, data analysis</p>
   </div>
 </div>
 
@@ -199,55 +228,42 @@ ul.task-list li input[type="checkbox"] {
 <style>
 
 /* ============================================================
-   GLOBAL PAGE
+   DESIGN VARIABLES
    ============================================================ */
 
-html,
-body {
-  margin: 0 !important;
-  padding: 0 !important;
-  width: 100% !important;
-  min-height: 100% !important;
-  background: #ffffff !important;
-}
-
-body {
-  overflow-x: hidden !important;
+:root {
+  --epcl-charcoal: #263238;
+  --epcl-terracotta: #7A2E1D;
+  --epcl-gold: #B8862F;
+  --epcl-gray: #667085;
+  --epcl-border: #E2E5E7;
+  --epcl-light: #F7F8F9;
+  --epcl-white: #FFFFFF;
 }
 
 
 /* ============================================================
-   HIDE QUARTO TITLE
+   PAGE LAYOUT
    ============================================================ */
 
 header#title-block-header {
   display: none !important;
 }
 
-
-/* ============================================================
-   REMOVE QUARTO CONTENT CONSTRAINTS
-   ============================================================ */
-
 #quarto-content,
-main.content,
-.page-columns,
-.page-full,
-.content {
+main.content {
   width: 100% !important;
   max-width: none !important;
   margin: 0 !important;
   padding: 0 !important;
 }
 
-
-/* ============================================================
-   REMOVE SIDEBAR / MARGIN CONSTRAINTS
-   ============================================================ */
-
-#quarto-content > *,
-main.content > * {
-  max-width: none !important;
+.traffic-page {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 55px 40px 65px;
+  box-sizing: border-box;
 }
 
 
@@ -255,260 +271,252 @@ main.content > * {
    INTRODUCTION
    ============================================================ */
 
-.beta-intro {
-  width: 100%;
-  max-width: 1750px;
-  margin: 0 auto;
-  padding: 75px 55px 45px 55px;
-  box-sizing: border-box;
+.traffic-intro {
+  margin-bottom: 35px;
 }
 
-
-/* ============================================================
-   BETA LABEL
-   ============================================================ */
-
-.beta-label {
-  display: inline-block;
-  margin-bottom: 18px;
+.traffic-eyebrow {
+  display: block;
+  margin-bottom: 12px;
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #777777;
+  color: var(--epcl-terracotta);
 }
 
-
-/* ============================================================
-   MAIN HEADING
-   ============================================================ */
-
-.beta-intro h1 {
-  margin: 0 0 22px 0 !important;
+.traffic-intro h1 {
+  margin: 0 0 18px !important;
   padding: 0 !important;
-  font-size: 3rem !important;
-  font-weight: 600 !important;
-  line-height: 1.15 !important;
-  color: #252525 !important;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--epcl-charcoal);
+  border: none !important;
 }
 
-
-/* ============================================================
-   INTRODUCTION TEXT
-   ============================================================ */
-
-.beta-intro p {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 !important;
-  padding: 0 !important;
-  font-size: 1.12rem;
+.traffic-intro p {
+  max-width: 1100px;
+  margin: 0 0 14px;
+  font-size: 1.06rem;
   line-height: 1.75;
-  color: #555555;
+  color: var(--epcl-gray);
+}
+
+.traffic-divider {
+  width: 65px;
+  height: 3px;
+  margin: 22px 0;
+  background: var(--epcl-gold);
+}
+
+
+/* ============================================================
+   APPLICATION FEATURES
+   ============================================================ */
+
+.traffic-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 30px 0;
+}
+
+.traffic-feature {
+  padding: 20px;
+  background: var(--epcl-light);
+  border: 1px solid var(--epcl-border);
+  border-radius: 6px;
+}
+
+.traffic-feature h3 {
+  margin: 0 0 8px !important;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--epcl-charcoal);
+}
+
+.traffic-feature p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--epcl-gray);
+}
+
+
+/* ============================================================
+   DATA PRIVACY NOTICE
+   ============================================================ */
+
+.traffic-privacy {
+  margin: 25px 0 30px;
+  padding: 16px 20px;
+  background: #F8F6F2;
+  border-left: 3px solid var(--epcl-gold);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--epcl-charcoal);
 }
 
 
 /* ============================================================
    APPLICATION CONTAINER
-   FULL WIDTH
-   ============================================================ */
-
-/* ============================================================
-   APPLICATION CONTAINER
-   MATCH APP WIDTH
    ============================================================ */
 
 .app-card {
   width: 100%;
-  max-width: 1400px;
-
-  margin: 0 auto !important;
-  padding: 0 !important;
-
-  background: #ffffff;
-
-  border: 1px solid #ddddda !important;
-  border-radius: 8px !important;
-
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
-
+  margin: 0 auto;
+  background: #FFFFFF;
+  border: 1px solid #E2E5E7;
+  border-radius: 8px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
   box-sizing: border-box;
-
-  overflow: hidden !important;
 }
 
 
 /* ============================================================
-   APPLICATION HEADER
+   APPLICATION HEADER — LIGHT BACKGROUND
    ============================================================ */
 
 .app-card-header {
-  width: 100%;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  padding: 17px 35px;
-
-  background: #f7f7f5;
-  border-top: 1px solid #ddddda;
-  border-bottom: 1px solid #ddddda;
-
-  box-sizing: border-box;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 18px 24px;
+  background: #F7F8F9 !important;
+  border-bottom: 1px solid #E2E5E7;
 }
-
 
 .app-card-title {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  color: #444444;
+  color: #263238 !important;
 }
 
-
-.beta-badge {
+.app-open-link {
   display: inline-block;
+  padding: 8px 14px;
+  background: #FFFFFF;
+  border: 1px solid #D0D5DD;
+  border-radius: 4px;
+  color: #263238 !important;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none !important;
+  transition: background 0.2s ease;
+}
 
-  padding: 5px 11px;
-
-  border: 1px solid #cfcfc9;
-  border-radius: 20px;
-
-  background: #ffffff;
-
-  font-size: 0.68rem;
-  font-weight: 700;
-
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-
-  color: #777777;
+.app-open-link:hover {
+  background: #EAECEF;
+  color: #263238 !important;
 }
 
 
 /* ============================================================
-   SHINY APPLICATION FRAME
-   ============================================================ */
-
-/* ============================================================
-   SHINY APPLICATION FRAME
+   SHINY APPLICATION
    ============================================================ */
 
 .app-frame {
-  width: 100% !important;
-  max-width: none !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  background: #ffffff;
-
-  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #FFFFFF;
 }
-
-
-/* ============================================================
-   SHINY IFRAME
-   ============================================================ */
-
-/* ============================================================
-   SHINY IFRAME
-   ============================================================ */
 
 .app-frame iframe {
   display: block;
-
   width: 100% !important;
   max-width: none !important;
-
   height: 1100px;
   min-height: 1100px;
-
-  border: 0 !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  box-sizing: border-box;
-
-  background: #ffffff;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: #FFFFFF;
 }
 
 
 /* ============================================================
-   BETA NOTE
+   FEEDBACK SECTION
    ============================================================ */
 
-.beta-note {
-  width: 100%;
-  max-width: 1750px;
+.traffic-feedback {
+  margin-top: 30px;
+  padding-top: 22px;
+  border-top: 1px solid var(--epcl-border);
+}
 
-  margin: 35px auto 60px auto;
+.traffic-feedback h3 {
+  margin: 0 0 10px !important;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--epcl-charcoal);
+}
 
-  padding: 0 55px;
+.traffic-feedback p {
+  max-width: 1000px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--epcl-gray);
+}
 
-  box-sizing: border-box;
-
-  color: #777777;
-
-  font-size: 0.85rem;
-  line-height: 1.6;
+.traffic-feedback a {
+  color: var(--epcl-terracotta);
+  font-weight: 600;
 }
 
 
 /* ============================================================
-   MOBILE
+   MOBILE DEVICES
    ============================================================ */
 
 @media (max-width: 768px) {
 
-  .beta-intro {
-    padding: 55px 22px 35px 22px;
+  .traffic-page {
+    padding: 35px 18px 45px;
   }
 
-  .beta-intro h1 {
-    font-size: 2.15rem !important;
+  .traffic-intro {
+    margin-bottom: 25px;
   }
 
-  .beta-intro p {
+  .traffic-intro p {
     font-size: 1rem;
-    line-height: 1.65;
   }
 
-.app-card {
-  width: calc(100% - 30px) !important;
-  max-width: 1400px !important;
+  .traffic-features {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 
-  margin: 0 auto !important;
-
-  left: auto;
-}
+  .traffic-feature {
+    padding: 16px;
+  }
 
   .app-card-header {
-    padding: 13px 16px;
+    padding: 15px;
   }
 
-.app-frame iframe {
-  width: 100% !important;
-
-  height: 1200px;
-
-  min-height: 1200px;
-}
-
-  .beta-note {
-    padding: 0 20px;
-    margin-top: 30px;
+  .app-frame iframe {
+    height: 1200px;
+    min-height: 1200px;
   }
 
 }
 
 
 /* ============================================================
-   VERY LARGE SCREENS
+   LARGE SCREENS
    ============================================================ */
 
 @media (min-width: 1800px) {
+
+  .traffic-page {
+    max-width: 1650px;
+  }
 
   .app-frame iframe {
     height: calc(100vh - 50px);
@@ -518,33 +526,79 @@ main.content > * {
 }
 
 </style>
-<div class="beta-intro">
-<div class="beta-label">
-<p>El Paso Crime Lab · Beta Testing</p>
-</div>
+<div class="traffic-page">
+<!-- INTRODUCTION -->
+<div class="traffic-intro">
+<p><span class="traffic-eyebrow"> El Paso Crime Lab / Data &amp; Tools </span></p>
 <h1>
-TX Racial Profiling Data
+Traffic Data Analysis
 </h1>
+<div class="traffic-divider">
+
+</div>
 <p>
-The purpose of this tool is to make racial profiling data easier to enter, check, and analyze in the state of Texas. It is designed for Texas law enforcement agencies to support the review and analysis of their racial profiling data and to assist agencies with the comparative analysis required under Texas Code of Criminal Procedure, Article 2B.0053. This tool is currently in beta testing. We are asking testers to look for errors, unexpected results, confusing wording, or anything that could be improved or added. <strong>Data entered into the application is not stored or retained.</strong> If you want to keep your work, use the Download button in the application to save a copy to your computer. Please send an <a href="mailto:mduran29@asu.edu">email</a> to Matthew Durán with any ideas to make this more useful for your agency. Thank you!
+An interactive application designed to help Texas law enforcement agencies enter, review, and analyze traffic stop data.
+</p>
+<p>
+The application supports the examination of traffic stops, searches, and contraband outcomes, including the comparative analysis required under Texas Code of Criminal Procedure, Article 2B.0053.
 </p>
 </div>
+<!-- APPLICATION FEATURES -->
+<div class="traffic-features">
+<div class="traffic-feature">
+<h3 class="anchored">
+Enter Data
+</h3>
+<p>
+Organize traffic stop, search, and contraband data in one interactive application.
+</p>
+</div>
+<div class="traffic-feature">
+<h3 class="anchored">
+Review Data
+</h3>
+<p>
+Check entered information and identify potential errors or inconsistencies.
+</p>
+</div>
+<div class="traffic-feature">
+<h3 class="anchored">
+Analyze Data
+</h3>
+<p>
+Explore patterns and comparisons to support agency reporting and informed decision-making.
+</p>
+</div>
+</div>
+<!-- DATA PRIVACY -->
+<div class="traffic-privacy">
+<p><strong>Data privacy:</strong> Data entered into this application is not stored or retained. Use the Download button within the application to save a copy of your work to your computer.</p>
+</div>
+<!-- APPLICATION -->
 <div class="app-card">
 <div class="app-card-header">
 <div class="app-card-title">
-<p>Interactive Racial Profiling Data Application</p>
+<p>Traffic Data Analysis Application</p>
 </div>
-<div class="beta-badge">
-<p>Beta</p>
-</div>
+<p><a class="app-open-link" href="https://mattduran.shinyapps.io/rp_analyzer/" target="_blank" rel="noopener noreferrer"> Open in New Tab ↗ </a></p>
 </div>
 <div class="app-frame">
-<iframe src="https://mattduran.shinyapps.io/rp_analyzer/" title="El Paso Crime Lab Racial Profiling Data Application" loading="eager" scrolling="yes" allow="fullscreen">
+<iframe src="https://mattduran.shinyapps.io/rp_analyzer/" title="El Paso Crime Lab Traffic Data Analysis Application" loading="eager" allow="fullscreen">
 </iframe>
 </div>
 </div>
-<div class="beta-note">
-<p><strong>Beta testing:</strong> This application is under active development. If you encounter an error, unexpected result, or other issue, please report it so the tool can be improved.</p>
+<!-- FEEDBACK -->
+<div class="traffic-feedback">
+<h3 class="anchored">
+Help Improve This Tool
+</h3>
+<p>
+This application is under active development. Feedback from law enforcement professionals and other users helps us improve its accuracy, usability, and functionality.
+</p>
+<p>
+If you encounter an error, have a suggestion, or would like to recommend an additional feature, please <a href="mailto:mduran29@asu.edu">contact Matthew Durán</a>.
+</p>
+</div>
 </div>
 
 
@@ -951,6 +1005,27 @@ The purpose of this tool is to make racial profiling data easier to enter, check
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><strong>El Paso Crime Lab</strong></p>
+<p>Advancing the Science of Public Safety</p>
+</div>   
+    <div class="nav-footer-center">
+<p><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="subscribe.html">Subscribe</a></p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.instagram.com/epcrimelab/">
+      <i class="bi bi-instagram" role="img" aria-label="Instagram">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
 
 
 
