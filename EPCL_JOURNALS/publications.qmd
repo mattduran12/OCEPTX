@@ -46,9 +46,6 @@ Explore published contributions, learn about submitting your work, and discover 
 
 ## Published Articles
 
-Explore the complete archive of published contributions across EPCL's journals.
-
-Search by article title or author name, or filter by journal or contribution category.
 
 ```{=html}
 <div class="archive-toolbar">

@@ -15,7 +15,7 @@ author:
     affiliations:
       - name: Sample City Office of Community Safety
 
-date: November 2026
+date: "2026-11-27"
 
 journal_name: "The Police Journal"
 submission_type: "Practice & Experience"

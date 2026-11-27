@@ -5,7 +5,7 @@ author:
   - name: "Dana Example"
     affiliations:
       - name: "Example County Department of Corrections"
-date: November 2026
+date: "2026-11-27"
 journal_name: "The Corrections Journal"
 submission_type: "Perspectives & Debate"
 article_id: "CJ-2026-000"

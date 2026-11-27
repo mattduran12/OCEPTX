@@ -5,7 +5,7 @@ author:
   - name: "Morgan Sample"
     affiliations:
       - name: "Sample County Court Administration Office"
-date: November 2026
+date: "2026-11-27"
 journal_name: "The Courts Journal"
 submission_type: "Research & Education"
 article_id: "CT-2026-000"

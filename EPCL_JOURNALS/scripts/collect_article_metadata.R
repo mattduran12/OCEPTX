@@ -1,0 +1,83 @@
+articles_dir <- "C:/Users/mduran29/Documents/EPCL/EPCL_JOURNALS/articles"
+
+journal_prefixes <- c(
+  "Community Safety" = "CS",
+  "Corrections" = "CJ",
+  "Courts" = "CT",
+  "Police" = "PJ"
+)
+
+required_text <- function(value, field, file) {
+  if (length(value) != 1L || is.na(value) ||
+      !nzchar(trimws(as.character(value)))) {
+    stop(sprintf("Missing %s in %s.", field, basename(file)), call. = FALSE)
+  }
+  
+  trimws(as.character(value))
+}
+
+records <- list()
+
+for (journal in names(journal_prefixes)) {
+  journal_dir <- file.path(articles_dir, journal)
+  if (!dir.exists(journal_dir)) {
+    stop("Folder not found: ", journal_dir, call. = FALSE)
+  }
+  
+  prefix <- journal_prefixes[[journal]]
+  files <- list.files(
+    journal_dir,
+    pattern = paste0("^", prefix, "-[0-9]{4}-[0-9]{3}\\.qmd$"),
+    full.names = TRUE,
+    ignore.case = TRUE
+  )
+  files <- files[!dir.exists(files)]
+  
+  for (file in files) {
+    meta <- rmarkdown::yaml_front_matter(file)
+    id <- tools::file_path_sans_ext(basename(file))
+    declared_id <- required_text(meta$article_id, "article_id", file)
+    
+    if (declared_id != id) {
+      stop("The article ID must match the filename in ", basename(file),
+           call. = FALSE)
+    }
+    
+    if (!length(meta$author)) {
+      stop("No authors listed in ", basename(file), call. = FALSE)
+    }
+    authors <- vapply(meta$author, function(author) {
+      required_text(author$name, "author name", file)
+    }, character(1))
+    
+    date <- required_text(meta$date, "date", file)
+    parsed_date <- as.Date(date, format = "%Y-%m-%d")
+    if (!grepl("^[0-9]{4}-[0-9]{2}-[0-9]{2}$", date) ||
+        is.na(parsed_date) || format(parsed_date, "%Y-%m-%d") != date) {
+      stop("Use a publication date in YYYY-MM-DD format in ", basename(file),
+           call. = FALSE)
+    }
+    
+    records[[length(records) + 1L]] <- data.frame(
+      article_id = id,
+      title = required_text(meta$title, "title", file),
+      authors = paste(authors, collapse = ", "),
+      journal = required_text(meta$journal_name, "journal_name", file),
+      article_type = required_text(meta$submission_type, "submission_type", file),
+      publication_date = date,
+      pdf_url = paste0("articles/", id, ".pdf")
+    )
+  }
+}
+
+if (!length(records)) stop("No article .qmd files found.", call. = FALSE)
+
+archive <- do.call(rbind, records)
+if (anyDuplicated(archive$article_id)) {
+  stop("Duplicate article IDs found.", call. = FALSE)
+}
+
+archive <- archive[order(archive$publication_date, archive$article_id), ]
+csv_path <- file.path(articles_dir, "article_metadata.csv")
+write.csv(archive, csv_path, row.names = FALSE, fileEncoding = "UTF-8")
+message("Wrote ", nrow(archive), " article records to ", csv_path)

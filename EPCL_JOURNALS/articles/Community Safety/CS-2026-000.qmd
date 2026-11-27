@@ -5,7 +5,7 @@ author:
   - name: "Riley Placeholder"
     affiliations:
       - name: "Fictional City Office of Community Safety"
-date: November 2026
+date: "2026-11-27"
 journal_name: "The Community Safety Journal"
 submission_type: "Research & Education"
 article_id: "CS-2026-000"
