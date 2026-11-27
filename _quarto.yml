@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - "EPCL_JOURNALS/articles/*.pdf"
 
 website:
   title: "EPCL"
