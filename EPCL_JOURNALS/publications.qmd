@@ -5,7 +5,10 @@ description: "Explore research, professional perspectives, and evidence-informed
 page-layout: full
 title-block-style: none
 toc: false
+resources:
+  - assets/EPCL_Publications_Editor_Quick_Guide.pdf
 ---
+
 
 :::::: {.epcl-publications}
 
@@ -496,7 +499,7 @@ You do not need a finished article to submit a proposal.
 
 Help make practical public safety knowledge easier to find and use. If you have experience in policing, corrections, courts, or community safety through your work or research, we’d like to hear from you.
 
-To express interest, [send a message](www.epcrimelab.org/contact.html. Tell him which journal interests you and share a few sentences about your background.
+[Send a message](https://www.epcrimelab.org/contact.html) letting us know which journal interests you and share a few sentences about your background.
 
 ### How a review works
 
@@ -510,31 +513,20 @@ Editors review short proposals and full articles. Each assignment arrives by ema
 </ol>
 ```
 
+[Open the Editor Quick Guide (PDF)](assets/EPCL_Publications_Editor_Quick_Guide.pdf)
+
+```{=html}
+<iframe
+  class="editor-quick-guide"
+  src="assets/EPCL_Publications_Editor_Quick_Guide.pdf"
+  title="EPCL Publications Editor Quick Guide"
+  loading="lazy">
+</iframe>
+```
+
 ### Editorial policies
 
-#### Editorial Independence
-
-Publication decisions are based on the relevance, quality, and suitability of contributions. Authors' professional affiliations and institutional positions do not guarantee acceptance.
-
-#### Editorial Review
-
-Two editors independently review each proposal and each article. Reviews are blinded to help editors focus on the work. EPCL resolves split decisions.
-
-#### Publication Ethics
-
-Authors are responsible for the accuracy and integrity of their submissions, appropriate acknowledgment of sources, and disclosure of relevant conflicts of interest.
-
-#### Conflicts of Interest
-
-Authors and editors should disclose relationships or interests that could reasonably be perceived as influencing the preparation, review, or publication of a contribution.
-
-#### Corrections and Retractions
-
-EPCL may issue corrections, expressions of concern, or retractions when necessary to maintain the accuracy and integrity of its publications.
-
-#### Copyright and Permissions
-
-Publication and reuse conditions will be communicated to contributors during the submission and acceptance process.
+EPCL bases publication decisions on the quality, relevance, and fit of each submission. Two editors independently review each proposal and article without seeing the author’s identity, and EPCL resolves split decisions. Authors are responsible for the accuracy of their work and for crediting their sources. Authors and editors should disclose any interests or relationships that could influence their work or judgment. EPCL explains copyright and reuse terms during submission and acceptance and may issue a correction, expression of concern, or retraction when needed.
 
 ## Editorial Leadership
 
@@ -563,7 +555,7 @@ Themed collections bring together articles on a shared public safety topic.
 ::: {.content-notice}
 **Have an idea for a collection? Let us know.**
 
-Share your idea using our [proposal form](https://forms.gle/Dn8UZbmUbnepcMeW7).
+Send your idea using our [contact page](https://www.epcrimelab.org/contact.html).
 :::
 
 No themed collections are currently open for submissions.
@@ -843,6 +835,13 @@ Good policy begins with good evidence.
   color: var(--ink);
   font-size: .89rem;
   overflow-wrap: anywhere;
+}
+.epcl-publications .editor-quick-guide {
+  display: block;
+  width: 100%;
+  height: clamp(22rem, 70vh, 46rem);
+  border: 1px solid var(--line);
+  margin: .75rem 0 2rem;
 }
 </style>
 ```
