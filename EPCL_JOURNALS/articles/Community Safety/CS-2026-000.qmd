@@ -1,33 +1,22 @@
 ---
-title: "Small Changes, Safer Neighborhoods: A Fictional Case Study"
-subtitle: "Lessons from a Neighborhood Problem-Solving Program"
-
+title: "Closing the Loop After a Neighborhood Walk"
+subtitle: "How to turn resident observations into a follow-up plan"
 author:
-  - name: Alex Example
+  - name: "Riley Placeholder"
     affiliations:
-      - name: Sample City Police Department
-
-  - name: Jordan Sample
-    affiliations:
-      - name: Sample City Police Department
-
-  - name: Taylor Placeholder
-    affiliations:
-      - name: Sample City Office of Community Safety
-
+      - name: "Fictional City Office of Community Safety"
 date: November 2026
-
-journal_name: "The Police Journal"
-submission_type: "Practice & Experience"
-article_id: "PJ-2026-002"
+journal_name: "The Community Safety Journal"
+submission_type: "Research & Education"
+article_id: "CS-2026-000"
 volume: 1
+number: "000"
 publication_year: 2026
-
+output-file: "CS-2026-000.pdf"
 keywords:
-  - Community policing
-  - Problem-oriented policing
-  - Program implementation
-  - Neighborhood safety
+  - "Community engagement"
+  - "Neighborhood walks"
+  - "Resident follow-up"
 
 format:
   titlepage-pdf:
@@ -152,7 +141,7 @@ format:
         \fancyhf{}
 
         \fancyhead[L]{
-          \small\sffamily\textsc{The Police Journal}
+          \small\sffamily\textsc{The Community Safety Journal}
         }
 
         \fancyhead[R]{
@@ -205,7 +194,7 @@ execute:
     width=\paperwidth,
     trim=0 0 0 0.30in,
     clip
-  ]{C:/Users/mduran29/Documents/EPCL/EPCL_JOURNALS/assets/police_journal_header.png}%
+  ]{C:/Users/mduran29/Documents/EPCL/EPCL_JOURNALS/assets/header_communitysafety.PNG}%
 }
 
 \AddToShipoutPictureBG*{%
@@ -226,7 +215,7 @@ execute:
 % ============================================================
 
 {\large\bfseries\color{EPCLTerracotta}
-PRACTICE \& EXPERIENCE | SAMPLE PUBLICATION
+RESEARCH \& EDUCATION | SAMPLE PUBLICATION
 \par}
 
 \vspace{0in}
@@ -236,7 +225,7 @@ PRACTICE \& EXPERIENCE | SAMPLE PUBLICATION
 % ============================================================
 
 {\Huge\bfseries\color{EPCLCharcoal}
-Small Changes, Safer Neighborhoods: A Fictional Case Study
+Closing the Loop After a Neighborhood Walk
 \par}
 
 \vspace{0.12in}
@@ -246,7 +235,7 @@ Small Changes, Safer Neighborhoods: A Fictional Case Study
 % ============================================================
 
 {\Large\color{EPCLGray}
-Lessons from a Neighborhood Problem-Solving Program
+How to turn resident observations into a follow-up plan
 \par}
 
 \vspace{0.30in}
@@ -256,7 +245,7 @@ Lessons from a Neighborhood Problem-Solving Program
 % ============================================================
 
 {\large\bfseries\color{EPCLCharcoal}
-\EPCLAuthor{Alex Example}{1}, \EPCLAuthor{Jordan Sample}{1}, \EPCLAuthor{Taylor Placeholder}{2}
+\EPCLAuthor{Riley Placeholder}{1}
 \par}
 
 \vspace{0.12in}
@@ -268,8 +257,7 @@ Lessons from a Neighborhood Problem-Solving Program
 {\small\color{EPCLCharcoal}
 \setlength{\parskip}{3pt}
 
-\EPCLAffiliation{1}{Sample City Police Department}
-\EPCLAffiliation{2}{Sample City Office of Community Safety}
+\EPCLAffiliation{1}{Fictional City Office of Community Safety}
 }
 
 \vspace{0.24in}
@@ -295,11 +283,12 @@ PUBLICATION INFORMATION
 
 {\small
 \begin{tabular}{@{}ll}
-\textbf{Journal} & The Police Journal \\
+\textbf{Journal} & The Community Safety Journal \\
 \textbf{Volume} & Volume 1 \\
+\textbf{Number} & Number 000 \\
 \textbf{Publication date} & November 2026 (display sample) \\
-\textbf{Article ID} & PJ-2026-002 \\
-\textbf{Publication series} & Practice \& Experience \\
+\textbf{Article ID} & CS-2026-000 \\
+\textbf{Publication series} & Research \& Education \\
 \end{tabular}
 }
 
@@ -317,10 +306,10 @@ RECOMMENDED CITATION
 
 {\small
 \noindent
-Example, A., Sample, J., \& Placeholder, T. (2026). Small changes, safer neighborhoods: A fictional case study---Lessons from a neighborhood problem-solving program. \textit{The Police Journal, 1}, Article PJ-2026-002.
+Placeholder, R. (2026). Closing the loop after a neighborhood walk: how to turn resident observations into a follow-up plan. \textit{The Community Safety Journal, 1}, Number 000 (Article CS-2026-000).
 \par}
 
-{\small\color{EPCLTerracotta}\textbf{DISPLAY SAMPLE ONLY.} Prepared to demonstrate the format of EPCL Publications. All people, agencies, events and results are fictional. This is not a published or editorially reviewed article.\par}
+{\small\color{EPCLTerracotta}\textbf{DISPLAY SAMPLE ONLY.} Prepared to demonstrate the format of EPCL Publications. The author, agency, and examples are fictional. This is an unpublished format sample.\par}
 
 \vfill
 
@@ -343,84 +332,26 @@ An EPCL Publication \hfill El Paso, Texas
 
 ```
 
-# A recurring neighborhood problem
+*Fictional example for EPCL Publications. The author, agency, and experiences described are invented.*
 
-*This fictional case study demonstrates the Practice & Experience publication category. All events, people, organizations and figures are invented.*
+# Give the walk a clear purpose
 
-At the fictional Sample City Police Department, our team was responding to repeated complaints about vehicle burglaries in a residential neighborhood. Residents were frustrated, and officers were returning to the same locations week after week. We wanted to try something beyond responding to individual reports.
+Over 25 years in a city community safety office, I helped organize neighborhood walks with residents and staff from several departments. People often pointed out details we would have missed on our own. What mattered after the walk was whether people could find out what happened to the concern they raised.
 
-Our goal was straightforward: reduce reported vehicle burglaries and improve communication with residents without creating a major new demand on patrol resources.
+Before inviting residents, choose a short route and explain what the group is there to observe. A walk might focus on how people get to a public building or which signs are hard to read from the sidewalk. Give people who can’t attend a way to share observations, and explain how you’ll report back.
 
-# Starting small
+# Record what people can follow up on
 
-We launched a six-month Neighborhood Partnership Pilot. Rather than creating a new unit, we assigned two existing officers to coordinate the effort alongside their regular duties. A crime analyst helped identify recurring locations, while neighborhood representatives shared concerns about lighting and parking areas.
+For each observation, write down the location, what the group saw, who will check it, and when residents can expect an update. For example, a group might notice that the sign for a community center entrance is hard to see from the sidewalk. The follow-up could be to ask facilities staff to inspect the sign and report whether it can be repositioned. That gives the concern a next step without committing to a repair before anyone has checked it.
 
-The program combined three activities:
+Keep the shared summary focused on the location and the proposed follow-up. It rarely needs a resident’s name or contact details. If the office needs to contact someone individually, use its usual process for keeping that information private.
 
-- Short, targeted patrols informed by recent incident reports.
-- Meetings with residents and property managers to address recurring safety concerns.
-- Monthly reviews of incident reports and progress on environmental improvements.
+# Send the update you promised
 
-We also worked with property managers to repair broken lighting and improve visibility around shared parking areas. Residents received practical reminders about securing vehicles and reporting incidents.
+Set the update date before the group leaves. If a request is still open on that date, tell residents who has it and when you expect to know more. If another department is responsible, say where you sent it. Even a short update gives people a way to see that the observation was heard.
 
-# What we learned along the way
+When I train new staff, I suggest starting with a route they can cover comfortably and a follow-up schedule they can keep. It’s easier to run a second walk when the people who joined the first one know how to check what came of it.
 
-Our first meetings attracted few residents. Holding them at more convenient times and sharing brief updates through existing neighborhood communication channels helped improve participation.
+# About the Author
 
-We also learned that assigning responsibility mattered. Early requests for lighting repairs were not consistently followed up. A simple shared action log, with a named person responsible for each task, helped keep the work moving.
-
-# Results after six months
-
-By the end of the pilot, reported vehicle burglaries had fallen from 60 in the preceding six months to 36 during the program. The team also completed 12 of 15 identified environmental improvements.
-
-| Measure | Before pilot | During pilot |
-|:--|--:|--:|
-| Reported vehicle burglaries | 60 | 36 |
-| Neighborhood meetings | 0 | 6 |
-| Environmental improvements completed | 0 | 12 |
-
-: Fictional program results for demonstration only.
-
-```{r}
-#| label: fig-pilot
-#| fig-cap: "Fictional monthly vehicle burglary reports before and during the pilot."
-#| fig-width: 7
-#| fig-height: 3.5
-incidents <- c(11, 9, 12, 10, 8, 10, 8, 7, 6, 5, 6, 4)
-barplot(incidents, names.arg = month.abb, col = rep(c("#667085", "#7A2E1D"), each = 6), border = NA, ylab = "Reported burglaries", ylim = c(0, 15))
-legend("topright", legend = c("Before pilot", "During pilot"), fill = c("#667085", "#7A2E1D"), bty = "n", cex = 0.85)
-```
-
-The 40% decline met our fictional program goal. However, the comparison alone could not establish that the program caused the improvement. Seasonal changes and other factors may have contributed. We recommended continuing the pilot while monitoring longer-term trends and comparing results with similar neighborhoods.
-
-# Lessons for other agencies
-
-The most useful lesson was that a new program does not necessarily require a new unit or a large budget. Clear responsibilities, regular communication and a manageable set of goals can help an agency turn an idea into a workable initiative.
-
-Start with one problem, involve the people affected by it, and keep track of both the work performed and the results. Make adjustments when something is not working.
-
-# Looking ahead
-
-In this fictional scenario, the department decided to continue the program for another six months before considering expansion. The experience illustrates how a small pilot can provide a practical starting point for improving neighborhood safety.
-
-# About the Authors
-
-**Alex Example** is a police practitioner at the Sample City Police Department whose work focuses on neighborhood safety and community partnerships.
-
-**Jordan Sample** is a patrol supervisor at the Sample City Police Department with experience coordinating neighborhood problem-solving initiatives.
-
-**Taylor Placeholder** is a program coordinator at the Sample City Office of Community Safety who supports resident engagement and interagency partnerships.
-
-# Publication Information and Disclosures
-
-**Sample status:** Prepared by EPCL for display purposes only. This fictional case study has not undergone editorial review and is not an official journal article.
-
-**Funding and conflicts of interest:** Not applicable to this fictional example.
-
-**Disclaimer:** All program activities, results, people and organizations are invented. Nothing in this article constitutes evidence of an actual program's effectiveness.
-
-**Copyright and license:** Publication terms would appear here in an accepted article.
-
-**The Police Journal**  
-An EPCL Publication  
-El Paso, Texas, United States
+**Riley Placeholder** is a fictional practitioner with 25 years of experience at the Fictional City Office of Community Safety.

@@ -19,9 +19,11 @@ date: November 2026
 
 journal_name: "The Police Journal"
 submission_type: "Practice & Experience"
-article_id: "PJ-2026-002"
+article_id: "PJ-2026-000"
 volume: 1
+number: "000"
 publication_year: 2026
+output-file: "PJ-2026-000.pdf"
 
 keywords:
   - Community policing
@@ -205,7 +207,7 @@ execute:
     width=\paperwidth,
     trim=0 0 0 0.30in,
     clip
-  ]{C:/Users/mduran29/Documents/EPCL/EPCL_JOURNALS/assets/police_journal_header.png}%
+  ]{C:/Users/mduran29/Documents/EPCL/EPCL_JOURNALS/assets/header_police.PNG}%
 }
 
 \AddToShipoutPictureBG*{%
@@ -297,8 +299,9 @@ PUBLICATION INFORMATION
 \begin{tabular}{@{}ll}
 \textbf{Journal} & The Police Journal \\
 \textbf{Volume} & Volume 1 \\
+\textbf{Number} & Number 000 \\
 \textbf{Publication date} & November 2026 (display sample) \\
-\textbf{Article ID} & PJ-2026-002 \\
+\textbf{Article ID} & PJ-2026-000 \\
 \textbf{Publication series} & Practice \& Experience \\
 \end{tabular}
 }
@@ -317,7 +320,7 @@ RECOMMENDED CITATION
 
 {\small
 \noindent
-Example, A., Sample, J., \& Placeholder, T. (2026). Small changes, safer neighborhoods: A fictional case study---Lessons from a neighborhood problem-solving program. \textit{The Police Journal, 1}, Article PJ-2026-002.
+Example, A., Sample, J., \& Placeholder, T. (2026). Small changes, safer neighborhoods: A fictional case study---Lessons from a neighborhood problem-solving program. \textit{The Police Journal, 1}, Number 000 (Article PJ-2026-000).
 \par}
 
 {\small\color{EPCLTerracotta}\textbf{DISPLAY SAMPLE ONLY.} Prepared to demonstrate the format of EPCL Publications. All people, agencies, events and results are fictional. This is not a published or editorially reviewed article.\par}
@@ -451,8 +454,8 @@ License: https://creativecommons.org/licenses/by-nd/4.0/
 An EPCL Publication  
 El Paso, Texas, United States
 
-Article ID: PJ-2026-002  
-Volume 1  
+Article ID: PJ-2026-000  
+Volume 1, Number 000  
 November 2026
 
 *Research • Innovation • Practice*

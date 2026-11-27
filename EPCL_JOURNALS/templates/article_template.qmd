@@ -1,25 +1,24 @@
 ---
-title: "Moving Beyond Activity"
-subtitle: "Why Police Agencies Should Evaluate Problem-Solving Efforts"
-
+# Match the article ID and PDF filename suffix to the publication number.
+# Enter article metadata here. Then update the matching cover fields below.
+# Journal headers: PJ = header_police.PNG, CJ = header_corrections.PNG
+# CT = header_courts.PNG, CS = header_communitysafety.PNG
+# Change the header path in the cover block and the running journal name below.
+title: "Article Title"
+subtitle: "Optional subtitle"
 author:
-  - name: Sample Author
+  - name: "First Last"
     affiliations:
-      - name: Example Organization
-
-date: November 2026
-
-journal_name: "The Police Journal"
+      - name: "Author Affiliation"
+date: "YYYY-MM-DD"
+journal_name: "Journal Name"
 submission_type: "Research & Education"
-article_id: "PJ-SAMPLE"
+article_id: "XX-YYYY-NNN"
 volume: 1
-publication_year: 2026
-
-keywords:
-  - Police effectiveness
-  - Problem-oriented policing
-  - Program evaluation
-  - Evidence-based policing
+number: "000"
+publication_year: YYYY
+output-file: "XX-YYYY-NNN.pdf"
+keywords: []
 
 format:
   titlepage-pdf:
@@ -144,11 +143,11 @@ format:
         \fancyhf{}
 
         \fancyhead[L]{
-          \small\sffamily\textsc{The Police Journal}
+          \small\sffamily\textsc{Journal Name}
         }
 
         \fancyhead[R]{
-          \small\sffamily\textsc{Sample publication}
+          \small\sffamily\textsc{EPCL Publications}
         }
 
         \fancyfoot[C]{\thepage}
@@ -197,7 +196,7 @@ execute:
     width=\paperwidth,
     trim=0 0 0 0.30in,
     clip
-  ]{C:/Users/mduran29/Documents/EPCL/EPCL_JOURNALS/assets/police_journal_header.png}%
+  ]{C:/Users/mduran29/Documents/EPCL/EPCL_JOURNALS/assets/header_police.PNG}%
 }
 
 \AddToShipoutPictureBG*{%
@@ -218,7 +217,7 @@ execute:
 % ============================================================
 
 {\large\bfseries\color{EPCLTerracotta}
-RESEARCH \& EDUCATION | SAMPLE PUBLICATION
+RESEARCH \& EDUCATION
 \par}
 
 \vspace{0in}
@@ -228,7 +227,7 @@ RESEARCH \& EDUCATION | SAMPLE PUBLICATION
 % ============================================================
 
 {\Huge\bfseries\color{EPCLCharcoal}
-Moving Beyond Activity
+Article Title
 \par}
 
 \vspace{0.12in}
@@ -238,7 +237,7 @@ Moving Beyond Activity
 % ============================================================
 
 {\Large\color{EPCLGray}
-Why Police Agencies Should Evaluate Problem-Solving Efforts
+Optional subtitle
 \par}
 
 \vspace{0.30in}
@@ -248,7 +247,7 @@ Why Police Agencies Should Evaluate Problem-Solving Efforts
 % ============================================================
 
 {\large\bfseries\color{EPCLCharcoal}
-\EPCLAuthor{Sample Author}{1}
+\EPCLAuthor{First Last}{1}
 \par}
 
 \vspace{0.12in}
@@ -260,7 +259,7 @@ Why Police Agencies Should Evaluate Problem-Solving Efforts
 {\small\color{EPCLCharcoal}
 \setlength{\parskip}{3pt}
 
-\EPCLAffiliation{1}{Example Organization}
+\EPCLAffiliation{1}{Author Affiliation}
 }
 
 \vspace{0.24in}
@@ -286,10 +285,11 @@ PUBLICATION INFORMATION
 
 {\small
 \begin{tabular}{@{}ll}
-\textbf{Journal} & The Police Journal \\
+\textbf{Journal} & Journal Name \\
 \textbf{Volume} & Volume 1 \\
-\textbf{Publication date} & Not published (sample) \\
-\textbf{Article ID} & PJ-SAMPLE \\
+\textbf{Number} & Number 000 \\
+\textbf{Publication date} & Month YYYY \\
+\textbf{Article ID} & XX-YYYY-NNN \\
 \textbf{Publication series} & Research \& Education \\
 \end{tabular}
 }
@@ -308,10 +308,9 @@ RECOMMENDED CITATION
 
 {\small
 \noindent
-Sample Author. (2026). Moving beyond activity: Why police agencies should evaluate problem-solving efforts. \textit{The Police Journal}. [Sample publication; not for citation.]
+Last, F. (YYYY). Article title. \textit{Journal Name, 1}, Number 000 (Article XX-YYYY-NNN).
 \par}
 
-{\small\color{EPCLTerracotta}\textbf{DISPLAY SAMPLE ONLY.} Prepared to demonstrate the format of EPCL Publications. Author information and data are illustrative. This is not a published or editorially reviewed article.\par}
 
 \vfill
 
@@ -334,107 +333,22 @@ An EPCL Publication \hfill El Paso, Texas
 
 ```
 
-# Are we making a difference?
+# Opening section
 
-Police departments track calls, arrests, traffic stops and patrol hours. These numbers tell us how much work is being done. But they do not always tell us whether a community is becoming safer.
+[Replace with the article opening.]
 
-Imagine a department increases patrols in a neighborhood experiencing vehicle burglaries. Officers spend more time in the area and make several arrests. Has the problem improved? To answer that question, the department needs to look beyond activity and examine what happened to the burglaries themselves.
+# Section heading
 
-# Measuring what matters
+[Add or remove sections as needed.]
 
-Activity measures are useful for managing staff and resources. Outcome measures help us understand whether an effort is achieving its purpose. Both belong in the conversation about police performance.
+# References
 
-| What we measure | Example | What it tells us |
-|:--|:--|:--|
-| Resources | Officer hours | What we invested |
-| Activity | Directed patrols | What we did |
-| Output | Stops or arrests | Immediate results |
-| Outcome | Vehicle burglaries | Whether the problem changed |
-
-: Examples of performance measures.
-
-# A closer look
-
-Suppose a department begins a directed patrol initiative in July. The chart below uses fictional numbers to show how monthly burglary reports might be tracked before and after the initiative.
-
-```{r}
-#| label: fig-example
-#| fig-cap: "Illustrative monthly vehicle burglary counts before and after a directed patrol initiative."
-#| fig-width: 7
-#| fig-height: 4
-
-months <- 1:12
-incidents <- c(42, 39, 44, 41, 43, 40, 38, 35, 32, 30, 29, 27)
-
-plot(
-  months,
-  incidents,
-  type = "b",
-  pch = 19,
-  lwd = 2,
-  xaxt = "n",
-  xlab = "Month",
-  ylab = "Reported vehicle burglaries",
-  main = "Illustrative Change in Vehicle Burglaries"
-)
-
-axis(1, at = months, labels = month.abb)
-
-abline(v = 6.5, lty = 2, lwd = 2)
-
-text(
-  6.5,
-  max(incidents) - 1,
-  "Initiative begins",
-  pos = 4,
-  cex = 0.8
-)
-```
-
-The number of reported burglaries falls after the initiative begins. That is encouraging, but it does not prove that the patrols caused the decline. Seasonal changes, reporting patterns or other efforts may also have played a role.
-
-| Period | Reported burglaries |
-|:--|--:|
-| Six months before | 249 |
-| Six months after | 191 |
-| Change | -23.3% |
-
-: Illustrative figures only; not actual agency data.
-
-A useful next step would be to compare the results with previous years or with a similar neighborhood where the initiative was not introduced.
-
-# Putting it into practice
-
-Agencies can start with a few straightforward questions:
-
-- What specific problem are we trying to solve?
-- What would improvement look like?
-- What information do we have from before the effort began?
-- Did we carry out the plan as intended?
-- What changed, and what else might explain that change?
-
-The answers can help leaders decide whether to continue, adjust or reconsider an initiative.
-
-# The takeaway
-
-Counting activity is important, but understanding results is equally important. Evaluation helps connect the work officers do each day with the public safety outcomes their communities care about.
+[Include sources cited in the article, if applicable.]
 
 # About the Author
 
-**Sample Author** is a placeholder demonstrating how a contributor's professional background would appear in an EPCL publication.
+[Add a short author bio, if applicable.]
 
-# Publication Information and Disclosures
+# Disclosures
 
-**Sample status:** This document is for display purposes only. It has not undergone editorial review and is not an official publication.
-
-**Funding and conflicts of interest:** Placeholder for author disclosures.
-
-**Author contributions:** Placeholder for contributor roles.
-
-**Disclaimer:** All data and author information in this sample are illustrative.
-
-**Copyright and license:** Publication terms would appear here in an accepted article.
-
-**The Police Journal**  
-An EPCL Publication  
-El Paso, Texas, United States
+[Add the approved disclosures and license information for this article.]

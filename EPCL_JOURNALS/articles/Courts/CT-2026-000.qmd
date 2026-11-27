@@ -1,0 +1,357 @@
+---
+title: "Writing Court Notices People Can Follow"
+subtitle: "A plain-language guide for routine court communications"
+author:
+  - name: "Morgan Sample"
+    affiliations:
+      - name: "Sample County Court Administration Office"
+date: November 2026
+journal_name: "The Courts Journal"
+submission_type: "Research & Education"
+article_id: "CT-2026-000"
+volume: 1
+number: "000"
+publication_year: 2026
+output-file: "CT-2026-000.pdf"
+keywords:
+  - "Plain language"
+  - "Court administration"
+  - "Public notices"
+
+format:
+  titlepage-pdf:
+    documentclass: scrartcl
+    pdf-engine: xelatex
+
+    # Disable automatically generated title and cover pages.
+    titlepage: false
+    coverpage: false
+
+    # Table of contents and section numbering
+    toc: false
+    lof: false
+    lot: false
+    number-sections: false
+
+    # Hyperlinks
+    colorlinks: true
+    linkcolor: EPCLTerracotta
+    urlcolor: EPCLTerracotta
+    citecolor: EPCLTerracotta
+
+    # Page dimensions
+    geometry:
+      - top=0.85in
+      - bottom=0.85in
+      - left=0.9in
+      - right=0.9in
+
+    fontsize: 11pt
+    linestretch: 1.2
+
+    include-in-header:
+      text: |
+        % =====================================================
+        % COLORS
+        % =====================================================
+
+        \usepackage{xcolor}
+
+        \definecolor{EPCLTerracotta}{HTML}{7A2E1D}
+        \definecolor{EPCLCharcoal}{HTML}{263238}
+        \definecolor{EPCLGold}{HTML}{B8862F}
+        \definecolor{EPCLGray}{HTML}{667085}
+
+        % =====================================================
+        % TYPOGRAPHY
+        % =====================================================
+
+        \usepackage{fontspec}
+
+        \setmainfont{Segoe UI}
+        \setsansfont{Segoe UI}
+
+        % =====================================================
+        % SUPPORTING PACKAGES
+        % =====================================================
+
+        \usepackage{graphicx}
+        \usepackage{microtype}
+        \usepackage{booktabs}
+        \usepackage{array}
+        \usepackage{caption}
+        \usepackage{setspace}
+        \usepackage{fancyhdr}
+        \usepackage{needspace}
+        \usepackage{eso-pic}
+
+        % =====================================================
+        % SECTION TYPOGRAPHY
+        % =====================================================
+
+        \setkomafont{section}{
+          \sffamily
+          \Large
+          \bfseries
+          \color{EPCLCharcoal}
+        }
+
+        \setkomafont{subsection}{
+          \sffamily
+          \large
+          \bfseries
+          \color{EPCLCharcoal}
+        }
+
+        \setkomafont{subsubsection}{
+          \sffamily
+          \normalsize
+          \bfseries
+          \color{EPCLCharcoal}
+        }
+
+        % Section spacing
+        \RedeclareSectionCommand[
+          beforeskip=2.0ex plus 0.5ex minus 0.2ex,
+          afterskip=1.0ex plus 0.2ex
+        ]{section}
+
+        \RedeclareSectionCommand[
+          beforeskip=1.5ex plus 0.4ex minus 0.2ex,
+          afterskip=0.7ex plus 0.2ex
+        ]{subsection}
+
+        % =====================================================
+        % FIGURE AND TABLE CAPTIONS
+        % =====================================================
+
+        \captionsetup{
+          font=small,
+          labelfont=bf,
+          justification=raggedright,
+          singlelinecheck=false
+        }
+
+        % =====================================================
+        % RUNNING HEADERS AND FOOTERS
+        % =====================================================
+
+        \pagestyle{fancy}
+
+        \fancyhf{}
+
+        \fancyhead[L]{
+          \small\sffamily\textsc{The Courts Journal}
+        }
+
+        \fancyhead[R]{
+          \small\sffamily\textsc{Sample publication}
+        }
+
+        \fancyfoot[C]{\thepage}
+
+        \renewcommand{\headrulewidth}{0.4pt}
+        \renewcommand{\footrulewidth}{0pt}
+
+        \setlength{\headheight}{15pt}
+
+        % =====================================================
+        % AUTHOR AND AFFILIATION FORMATTING
+        % =====================================================
+
+        \newcommand{\EPCLAuthor}[2]{%
+          #1\textsuperscript{\normalfont #2}%
+        }
+
+        \newcommand{\EPCLAffiliation}[2]{%
+          \noindent
+          \hangindent=1.2em
+          \hangafter=1
+          \makebox[1.2em][l]{\textsuperscript{#1}}%
+          #2\par
+        }
+
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{=latex}
+
+% ============================================================
+% PAGE 1: CUSTOM COVER
+% ============================================================
+
+\thispagestyle{empty}
+\pagenumbering{gobble}
+
+% Full-width masthead
+\newsavebox{\mastheadbox}
+
+\sbox{\mastheadbox}{%
+  \includegraphics[
+    width=\paperwidth,
+    trim=0 0 0 0.30in,
+    clip
+  ]{C:/Users/mduran29/Documents/EPCL/EPCL_JOURNALS/assets/header_courts.PNG}%
+}
+
+\AddToShipoutPictureBG*{%
+  \AtPageUpperLeft{%
+    \raisebox{-\ht\mastheadbox}{%
+      \hspace*{0pt}%
+      \copy\mastheadbox
+    }%
+  }%
+}
+
+% Reserve masthead height
+\vspace*{\dimexpr\ht\mastheadbox+\dp\mastheadbox-0.85in\relax}
+\vspace{0.22in}
+
+% ============================================================
+% ARTICLE CATEGORY
+% ============================================================
+
+{\large\bfseries\color{EPCLTerracotta}
+RESEARCH \& EDUCATION | SAMPLE PUBLICATION
+\par}
+
+\vspace{0in}
+
+% ============================================================
+% ARTICLE TITLE
+% ============================================================
+
+{\Huge\bfseries\color{EPCLCharcoal}
+Writing Court Notices People Can Follow
+\par}
+
+\vspace{0.12in}
+
+% ============================================================
+% ARTICLE SUBTITLE
+% ============================================================
+
+{\Large\color{EPCLGray}
+A plain-language guide for routine court communications
+\par}
+
+\vspace{0.30in}
+
+% ============================================================
+% AUTHORS
+% ============================================================
+
+{\large\bfseries\color{EPCLCharcoal}
+\EPCLAuthor{Morgan Sample}{1}
+\par}
+
+\vspace{0.12in}
+
+% ============================================================
+% AUTHOR AFFILIATIONS
+% ============================================================
+
+{\small\color{EPCLCharcoal}
+\setlength{\parskip}{3pt}
+
+\EPCLAffiliation{1}{Sample County Court Administration Office}
+}
+
+\vspace{0.24in}
+
+% ============================================================
+% PUBLICATION METADATA DIVIDER
+% ============================================================
+
+\noindent
+{\color{EPCLGold}\rule{\textwidth}{1.2pt}}
+
+\vspace{0.14in}
+
+% ============================================================
+% PUBLICATION INFORMATION
+% ============================================================
+
+{\small\bfseries\color{EPCLCharcoal}
+PUBLICATION INFORMATION
+\par}
+
+\vspace{0.10in}
+
+{\small
+\begin{tabular}{@{}ll}
+\textbf{Journal} & The Courts Journal \\
+\textbf{Volume} & Volume 1 \\
+\textbf{Number} & Number 000 \\
+\textbf{Publication date} & November 2026 (display sample) \\
+\textbf{Article ID} & CT-2026-000 \\
+\textbf{Publication series} & Research \& Education \\
+\end{tabular}
+}
+
+\vspace{0.20in}
+
+% ============================================================
+% RECOMMENDED CITATION
+% ============================================================
+
+{\small\bfseries\color{EPCLCharcoal}
+RECOMMENDED CITATION
+\par}
+
+\vspace{0.08in}
+
+{\small
+\noindent
+Sample, M. (2026). Writing court notices people can follow: a plain-language guide for routine court communications. \textit{The Courts Journal, 1}, Number 000 (Article CT-2026-000).
+\par}
+
+{\small\color{EPCLTerracotta}\textbf{DISPLAY SAMPLE ONLY.} Prepared to demonstrate the format of EPCL Publications. The author, agency, and examples are fictional. This is an unpublished format sample.\par}
+
+\vfill
+
+% ============================================================
+% PUBLISHER FOOTER
+% ============================================================
+
+{\small\color{EPCLGray}
+An EPCL Publication \hfill El Paso, Texas
+}
+
+% ============================================================
+% PAGE 2: BEGIN ARTICLE
+% ============================================================
+
+\clearpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+```
+
+*Fictional example for EPCL Publications. The author, agency, and experiences described are invented.*
+
+# Start with the reader’s next step
+
+In 23 years of court administration, I’ve answered many calls from people who had a notice in front of them and still couldn’t tell what to do next. One caller could find the hearing date but was unsure which building to go to. The address was on the notice, several lines below the courtroom name. Both fields were accurate, but a person unfamiliar with the court had to work out how they fit together.
+
+When reviewing a notice, I start with a simple question. What should the reader be able to do after reading the first few lines? For a routine appointment notice, that might be finding the date, time, location, and the office to contact with questions. Put those details together where the reader can find them quickly.
+
+# Group related information
+
+Headings such as **Date and time**, **Location**, and **Questions** help readers scan the page. Use the same names for buildings and offices that appear on signs and on the court website. If an appointment can take place remotely, make it clear which instructions apply to an online appointment and which apply to an in-person one.
+
+Some notices contain required wording. Keep the approved language and ask the appropriate office to review any proposed changes. A short explanation next to an approved notice can help readers find their next step while leaving the official wording in place.
+
+# Try a quick read-through
+
+Give a draft to a colleague who rarely uses that notice. Ask them to point to the location, say when they would arrive, and find the number they would call with a question. Watch where they hesitate. If two people look in the same wrong place, try moving or relabeling the information and repeat the exercise.
+
+At the counter, I learned that a question asked repeatedly often points to something we can make easier to find. A read-through gives staff a simple way to catch that problem before a notice goes out.
+
+# About the Author
+
+**Morgan Sample** is a fictional practitioner with 23 years of experience at the Sample County Court Administration Office.
