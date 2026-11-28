@@ -22,9 +22,9 @@ resources:
 Open-Access Journals in Justice and Public Safety
 :::
 
-The **El Paso Crime Lab** publishes four journals featuring research briefs, professional perspectives, and lessons from practice across policing, corrections, courts, and community safety.
+The **El Paso Crime Lab** publishes peer-reviewed articles in four journals. Each journal features research briefs, professional perspectives, and lessons from practice in policing, corrections, courts, and community safety.
 
-<a href="https://forms.gle/65KEVJZxT6PZ4Yfv8" class="epcl-submit-link">Submit a proposal</a>
+<a href="https://forms.gle/65KEVJZxT6PZ4Yfv8" class="epcl-submit-link">Submit your article proposal</a>
 
 :::
 
@@ -51,7 +51,7 @@ Explore published contributions, learn about submitting your work, and discover 
 <div class="archive-toolbar">
 
   <div class="archive-control">
-    <label for="archive-search">Search publications</label>
+    <label for="archive-search">Search articles</label>
     <input
       id="archive-search"
       type="search"
@@ -536,7 +536,7 @@ EPCL bases publication decisions on the quality, relevance, and fit of each subm
         <li><strong>Editor Name</strong>, <em>Affiliation</em></li>
       </ul>
 
-      <h3>Past Editors</h3>
+      <h3 style="margin-top: 1rem;">Past Editors</h3>
       <ul>
         <li><strong>Editor Name</strong>, <em>Affiliation</em></li>
       </ul>
